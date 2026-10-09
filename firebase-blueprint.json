@@ -1,0 +1,246 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile containing personal information and membership tier",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Unique user identifier matching Firebase Auth UID",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Full display name of the customer",
+          "maxLength": 100
+        },
+        "email": {
+          "type": "string",
+          "description": "Primary email address of the customer",
+          "maxLength": 150
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number for deliveries",
+          "maxLength": 20
+        },
+        "address": {
+          "type": "string",
+          "description": "Default shipping delivery address",
+          "maxLength": 300
+        },
+        "tier": {
+          "type": "string",
+          "description": "Alps customer loyalty membership tier",
+          "maxLength": 50
+        },
+        "points": {
+          "type": "number",
+          "description": "Loyalty privilege points balance"
+        },
+        "avatarInitials": {
+          "type": "string",
+          "description": "Initials used for profile emblem avatar",
+          "maxLength": 10
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Avatar image URL from auth provider",
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Account registration timestamp",
+          "maxLength": 60
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Profile last updated timestamp",
+          "maxLength": 60
+        }
+      },
+      "required": ["userId", "name", "email"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer purchase order records",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Order unique document id",
+          "maxLength": 128
+        },
+        "orderNumber": {
+          "type": "string",
+          "description": "Human-readable order reference number (e.g. ALPS-12345)",
+          "maxLength": 30
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of customer who placed the order",
+          "maxLength": 128
+        },
+        "buyerName": {
+          "type": "string",
+          "description": "Recipient full name",
+          "maxLength": 100
+        },
+        "phone": {
+          "type": "string",
+          "description": "Recipient phone number",
+          "maxLength": 20
+        },
+        "shippingAddress": {
+          "type": "string",
+          "description": "Shipping address for order delivery",
+          "maxLength": 300
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Order creation date string",
+          "maxLength": 60
+        },
+        "totalAmount": {
+          "type": "number",
+          "description": "Total order amount in VND"
+        },
+        "status": {
+          "type": "string",
+          "description": "Fulfillment status of the order",
+          "enum": ["processing", "shipping", "delivered", "completed"]
+        },
+        "statusLabel": {
+          "type": "string",
+          "description": "Localized status text",
+          "maxLength": 50
+        },
+        "paymentMethod": {
+          "type": "string",
+          "description": "Payment method title",
+          "maxLength": 80
+        },
+        "paymentMethodType": {
+          "type": "string",
+          "description": "Method identifier",
+          "enum": ["cod", "vietqr", "bank_transfer", "card"]
+        },
+        "shippingCarrier": {
+          "type": "string",
+          "description": "Carrier name",
+          "maxLength": 50
+        },
+        "shippingFee": {
+          "type": "number",
+          "description": "Shipping fee charged"
+        },
+        "discountAmount": {
+          "type": "number",
+          "description": "Discount applied"
+        },
+        "note": {
+          "type": "string",
+          "description": "Optional customer delivery instructions",
+          "maxLength": 500
+        }
+      },
+      "required": ["id", "orderNumber", "userId", "createdAt", "totalAmount", "status"]
+    },
+    "Review": {
+      "title": "Review",
+      "description": "Customer feedback and product rating review",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique review id",
+          "maxLength": 128
+        },
+        "productId": {
+          "type": "string",
+          "description": "Target product ID being reviewed",
+          "maxLength": 50
+        },
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID of reviewer",
+          "maxLength": 128
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Public author name",
+          "maxLength": 100
+        },
+        "rating": {
+          "type": "number",
+          "description": "Star rating from 1 to 5"
+        },
+        "comment": {
+          "type": "string",
+          "description": "Review text content",
+          "maxLength": 1500
+        },
+        "skinType": {
+          "type": "string",
+          "description": "Skin type tag of reviewer",
+          "maxLength": 50
+        },
+        "title": {
+          "type": "string",
+          "description": "Review headline title",
+          "maxLength": 150
+        },
+        "date": {
+          "type": "string",
+          "description": "Formatted date string",
+          "maxLength": 50
+        },
+        "isVerifiedBuyer": {
+          "type": "boolean",
+          "description": "Whether reviewer purchased product"
+        },
+        "helpfulCount": {
+          "type": "number",
+          "description": "Number of helpful upvotes"
+        }
+      },
+      "required": ["id", "productId", "userId", "authorName", "rating", "comment", "date"]
+    },
+    "Cart": {
+      "title": "Cart",
+      "description": "User shopping cart containing items array",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of cart items with product info and quantity"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Last modified timestamp",
+          "maxLength": 60
+        }
+      },
+      "required": ["items"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores private user account information, address, and membership details"
+    },
+    "/users/{userId}/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Stores user purchase orders scoped under user document"
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Public product ratings and customer feedback"
+    },
+    "/carts/{userId}": {
+      "schema": "Cart",
+      "description": "User-specific shopping cart document keyed by auth UID"
+    }
+  }
+}

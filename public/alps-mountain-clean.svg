@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 84" width="640" height="336" fill="none">
+  <!-- 1. HAI NGỌN NÚI VÀNG CÁT PHÍA SAU (NÉT DÀY) -->
+  <path d="M20 63 L42 24 L48 35" stroke="#c89f65" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M42 24 L31 63" stroke="#c89f65" stroke-width="1.8" stroke-linecap="round" />
+
+  <path d="M112 35 L118 24 L140 63" stroke="#c89f65" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M118 24 L129 63" stroke="#c89f65" stroke-width="1.8" stroke-linecap="round" />
+
+  <!-- 2. HAI NGỌN NÚI VIỀN XANH LÁ HAI BÊN (TRONG SUỐT LẤY MÀU NỀN WEBSITE) -->
+  <polygon
+    points="32,63 54,23 76,63"
+    fill="none"
+    stroke="#173823"
+    stroke-width="2.6"
+    stroke-linejoin="round"
+  />
+
+  <polygon
+    points="84,63 106,23 128,63"
+    fill="none"
+    stroke="#173823"
+    stroke-width="2.6"
+    stroke-linejoin="round"
+  />
+
+  <!-- 3. ĐỈNH NÚI BĂNG HÀ TRUNG TÂM (NÉT DÀY, RÕ TỪNG ĐƯỜNG NÉT) -->
+  <path d="M80 10 L50 63 L80 63 Z" fill="#d2dce2" stroke="#1c1c19" stroke-width="2.8" stroke-linejoin="round" />
+  <path d="M80 10 L80 63 L110 63 Z" fill="none" stroke="#1c1c19" stroke-width="2.8" stroke-linejoin="round" />
+  <path d="M80 10 L80 63" stroke="#1c1c19" stroke-width="3.0" stroke-linecap="round" />
+
+  <!-- VÂN NÚI VÀ ĐƯỜNG NỨT BĂNG ĐỈNH GIỮA (NÉT ĐẬM RÕ) -->
+  <path d="M67 43 L80 34" stroke="#1c1c19" stroke-width="1.8" stroke-linecap="round" />
+  <path d="M71 53 L80 47" stroke="#1c1c19" stroke-width="1.8" stroke-linecap="round" />
+  <path d="M93 41 L80 32" stroke="#1c1c19" stroke-width="1.8" stroke-linecap="round" />
+  <path d="M97 51 L80 45" stroke="#1c1c19" stroke-width="1.8" stroke-linecap="round" />
+
+  <!-- 4. RỪNG THÔNG BÁCH ĐẬM CHẤT (DÀY, NÉT ĐẬM SẮC SẢO) -->
+  <g fill="#173823" stroke="#102819" stroke-width="0.6">
+    <!-- Nhóm cây bên trái -->
+    <path d="M33 50 L37 55 L29 55 Z" />
+    <path d="M33 53 L38 59 L28 59 Z" />
+    <path d="M33 57 L40 64 L26 64 Z" />
+
+    <path d="M41 46 L45 52 L37 52 Z" />
+    <path d="M41 50 L46 57 L36 57 Z" />
+    <path d="M41 55 L48 64 L34 64 Z" />
+
+    <path d="M49 49 L53 55 L45 55 Z" />
+    <path d="M49 53 L54 60 L44 60 Z" />
+    <path d="M49 57 L55 64 L43 64 Z" />
+
+    <!-- Nhóm cây bên phải -->
+    <path d="M111 49 L115 55 L107 55 Z" />
+    <path d="M111 53 L116 60 L106 60 Z" />
+    <path d="M111 57 L117 64 L105 64 Z" />
+
+    <path d="M119 46 L123 52 L115 52 Z" />
+    <path d="M119 50 L124 57 L114 57 Z" />
+    <path d="M119 55 L126 64 L112 64 Z" />
+
+    <path d="M127 50 L131 55 L123 55 Z" />
+    <path d="M127 53 L132 59 L122 59 Z" />
+    <path d="M127 57 L134 64 L120 64 Z" />
+  </g>
+
+  <!-- 5. MẦM SỐNG THẢO MỘC TRUNG TÂM (DÀY, NỞ RỘ Y ẢNH MẪU) -->
+  <path d="M80 62 C73 59 71 52 77 49 C82 52 82 58 80 62 Z" fill="#173823" stroke="#102819" stroke-width="1.0" />
+  <path d="M80 62 C87 59 89 52 83 49 C78 52 78 58 80 62 Z" fill="#173823" stroke="#102819" stroke-width="1.0" />
+  <circle cx="80" cy="62" r="1.6" fill="#74584d" />
+
+  <!-- 6. GỢN SÓNG HỒ NƯỚC BĂNG & CHÂN TRỜI (NÉT DÀY UỐN LƯỢN NGHỆ THUẬT) -->
+  <path d="M16 63.5 Q48 64.5 80 63.5 Q112 62.5 144 63.5" stroke="#1c1c19" stroke-width="2.2" stroke-linecap="round" />
+  <path d="M28 68.5 Q54 70.5 80 68.5 Q106 66.5 132 68.5" stroke="#1c1c19" stroke-width="1.8" stroke-linecap="round" opacity="0.9" />
+  <path d="M42 73.5 Q61 75 80 73.5 Q99 72 118 73.5" stroke="#c89f65" stroke-width="1.4" stroke-linecap="round" opacity="0.85" />
+</svg>

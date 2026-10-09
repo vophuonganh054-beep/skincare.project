@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-surface: #fcf9f4;
+  --color-surface-dim: #dcdad5;
+  --color-surface-container: #f0ede9;
+  --color-surface-container-low: #f6f3ee;
+  --color-surface-container-high: #ebe8e3;
+  --color-charcoal: #202022;
+  --color-charcoal-dark: #08080a;
+  --color-rose-gold: #d8b4a6;
+  --color-rose-light: #fed8c9;
+  --color-sage: #8a9a86;
+  --color-sage-light: #d7e7d1;
+}
+
+:root {
+  /* Preset Đỉnh Cao Thẩm Mỹ: Playfair Display (Serif Quý Tộc) & Be Vietnam Pro (Chuẩn Dấu Tuyệt Đối) */
+  --font-serif-custom: "Playfair Display", Georgia, serif;
+  --font-sans-custom: "Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Preset Mặc Định: Playfair Luxury (Đẹp, Sang Trọng, Chống Rớt Chữ) */
+[data-font="playfair_luxury"],
+[data-font="playfair"],
+[data-font="alps_id_vn"],
+[data-font="default"],
+:root:not([data-font]) {
+  --font-serif-custom: "Playfair Display", Georgia, serif;
+  --font-sans-custom: "Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Preset Swiss Quiet Luxury (Cormorant Garamond) */
+[data-font="cormorant"] {
+  --font-serif-custom: "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --font-sans-custom: "Be Vietnam Pro", sans-serif;
+}
+
+/* Preset Noto (Cổ Điển) */
+[data-font="noto"] {
+  --font-serif-custom: "Noto Serif", Georgia, serif;
+  --font-sans-custom: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Preset Modern Minimalist */
+[data-font="modern"] {
+  --font-serif-custom: "Be Vietnam Pro", sans-serif;
+  --font-sans-custom: "Be Vietnam Pro", sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans-custom, "Be Vietnam Pro", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    background-color: #fcf9f4;
+    color: #1c1c19;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Font serif sang trọng, CHỐNG RỚT CHỮ (text-wrap: balance) và bảo toàn dấu tiếng Việt */
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-serif-custom, "Playfair Display", Georgia, serif) !important;
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+  }
+
+  /* Đoạn văn bản chống rớt chữ đơn lẻ (orphans) */
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Font sans cho body text, nút bấm, tags - Chuẩn tiếng Việt 100% không nhảy font */
+  .font-sans {
+    font-family: var(--font-sans-custom, "Be Vietnam Pro", system-ui, -apple-system, sans-serif);
+  }
+
+  /* Chống rớt chữ giữa chừng cho các từ tiếng Việt */
+  .word-keep {
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  /* Numbers in tables and prices */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Custom scrollbar for luxury feel */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #fcf9f4;
+}
+::-webkit-scrollbar-thumb {
+  background: #dcdad5;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8a9a86;
+}
