@@ -18,13 +18,18 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap&subset=vietnamese" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
     <script>
       (function() {
-        const saved = localStorage.getItem('alps_font_preset');
-        const active = (!saved || saved === 'alps_id_vn' || saved === 'noto') ? 'playfair_luxury' : saved;
-        localStorage.setItem('alps_font_preset', active);
-        document.documentElement.setAttribute('data-font', active);
+        try {
+          var saved = localStorage.getItem('alps_font_preset');
+          // Mặc định chuẩn xác là font trong ảnh: Lora & Be Vietnam Pro ('alps_luxury')
+          var active = (!saved || saved === 'playfair' || saved === 'parisian' || saved === 'parisian_editorial' || saved === 'default') ? 'alps_luxury' : saved;
+          localStorage.setItem('alps_font_preset', active);
+          document.documentElement.setAttribute('data-font', active);
+        } catch (e) {
+          document.documentElement.setAttribute('data-font', 'alps_luxury');
+        }
       })();
     </script>
   </head>

@@ -396,11 +396,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               {/* 1. THÔNG TIN NGƯỜI NHẬN */}
               <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#202022]/8 shadow-xs space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-[#202022]/6">
-                  <div className="flex items-center space-x-2 text-xs font-semibold text-[#1c1c19] uppercase tracking-wider">
-                    <User className="w-4 h-4 text-[#74584d]" />
+                  <div className="flex items-center space-x-2 text-xs font-semibold text-[#1c1c19] uppercase tracking-wider whitespace-nowrap">
+                    <User className="w-4 h-4 text-[#74584d] shrink-0" />
                     <span>{cData.step1Title}</span>
                   </div>
-                  <span className="text-[10px] text-[#8a9a86] font-medium flex items-center space-x-1">
+                  <span className="text-[10px] text-[#8a9a86] font-medium flex items-center space-x-1 whitespace-nowrap shrink-0">
                     <CheckCircle2 className="w-3 h-3" />
                     <span>{cData.sslSecureText}</span>
                   </span>
@@ -414,10 +414,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         {user.avatarInitials || (user.name ? user.name[0].toUpperCase() : 'AL')}
                       </div>
                       <div className="min-w-0">
-                        <div className="font-semibold text-[#1c1c19] truncate text-[11px]">
+                        <div className="font-semibold text-[#1c1c19] truncate text-[11px] whitespace-nowrap">
                           Tài khoản: {user.name}
                         </div>
-                        <div className="text-[10px] text-[#77767b] truncate">
+                        <div className="text-[10px] text-[#77767b] truncate whitespace-nowrap">
                           Thông tin nhận hàng lưu riêng theo tài khoản này
                         </div>
                       </div>
@@ -426,7 +426,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       <button
                         type="button"
                         onClick={handleClearSavedShipping}
-                        className="text-[10.5px] text-[#74584d] hover:text-[#ba1a1a] hover:underline shrink-0 ml-2 font-medium"
+                        className="text-[10.5px] text-[#74584d] hover:text-[#ba1a1a] hover:underline shrink-0 ml-2 font-medium whitespace-nowrap"
                         title="Xóa sạch thông tin đã điền của tài khoản này"
                       >
                         Xóa thông tin

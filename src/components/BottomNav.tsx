@@ -83,16 +83,17 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           </span>
         </button>
 
-        {/* Tài khoản */}
+        {/* Tài khoản / Đã mua */}
         <button
           onClick={() => onSelectTab('account')}
           className={`flex flex-col items-center justify-center flex-1 py-1 transition-colors ${
             activeTab === 'account' ? 'text-[#1c1c19]' : 'text-[#77767b] hover:text-[#1c1c19]'
           }`}
+          title={t.nav.orders}
         >
           <User className={`w-5 h-5 ${activeTab === 'account' ? 'stroke-[2.25]' : 'stroke-[1.5]'}`} />
-          <span className="text-[10px] tracking-wider mt-1 font-medium uppercase">
-            {t.nav.orders}
+          <span className="text-[9.5px] sm:text-[10px] tracking-wider mt-1 font-medium uppercase whitespace-nowrap">
+            {t.nav.orders === 'DANH MỤC ĐÃ MUA' ? 'ĐÃ MUA' : t.nav.orders}
           </span>
         </button>
       </div>

@@ -399,20 +399,20 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
 
         {/* Tab Navigation when logged in */}
         {user ? (
-          <div className="bg-white px-4 pt-2 border-b border-[#202022]/8 flex space-x-6">
+          <div className="bg-white px-4 pt-2 border-b border-[#202022]/8 flex space-x-6 overflow-x-auto scrollbar-none">
             <button
               onClick={() => {
                 setActiveSubTab('orders');
                 setIsEditingProfile(false);
               }}
-              className={`pb-3 text-xs font-medium tracking-wider uppercase transition-all relative ${
+              className={`pb-3 text-xs font-medium tracking-wider uppercase transition-all relative whitespace-nowrap shrink-0 flex items-center ${
                 activeSubTab === 'orders'
                   ? 'text-[#1c1c19] font-semibold'
                   : 'text-[#77767b] hover:text-[#1c1c19]'
               }`}
             >
-              <span>Danh Mục Đã Mua</span>
-              <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] bg-[#f0ede9] text-[#1c1c19]">
+              <span className="whitespace-nowrap">Danh Mục Đã Mua</span>
+              <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] bg-[#f0ede9] text-[#1c1c19] whitespace-nowrap font-medium">
                 {orders.length}
               </span>
               {activeSubTab === 'orders' && (
@@ -422,13 +422,13 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
 
             <button
               onClick={() => setActiveSubTab('profile')}
-              className={`pb-3 text-xs font-medium tracking-wider uppercase transition-all relative ${
+              className={`pb-3 text-xs font-medium tracking-wider uppercase transition-all relative whitespace-nowrap shrink-0 flex items-center ${
                 activeSubTab === 'profile'
                   ? 'text-[#1c1c19] font-semibold'
                   : 'text-[#77767b] hover:text-[#1c1c19]'
               }`}
             >
-              <span>Hồ Sơ & Địa Chỉ Giao Hàng</span>
+              <span className="whitespace-nowrap">Hồ Sơ & Địa Chỉ Nhận Hàng</span>
               {activeSubTab === 'profile' && (
                 <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#74584d]" />
               )}
@@ -803,24 +803,26 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                 <button
                   type="button"
                   onClick={() => setOrdersSubView('orders')}
-                  className={`py-2 px-3 rounded-xl font-medium transition-all text-center ${
+                  className={`py-2 px-2.5 rounded-xl font-medium transition-all text-center whitespace-nowrap flex items-center justify-center space-x-1 ${
                     ordersSubView === 'orders'
                       ? 'bg-white text-[#1c1c19] shadow-2xs font-semibold'
                       : 'text-[#77767b] hover:text-[#1c1c19]'
                   }`}
                 >
-                  Theo đơn hàng ({orders.length})
+                  <span className="whitespace-nowrap">Theo đơn hàng</span>
+                  <span className="text-[11px] opacity-75 shrink-0">({orders.length})</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setOrdersSubView('products')}
-                  className={`py-2 px-3 rounded-xl font-medium transition-all text-center ${
+                  className={`py-2 px-2.5 rounded-xl font-medium transition-all text-center whitespace-nowrap flex items-center justify-center space-x-1 ${
                     ordersSubView === 'products'
                       ? 'bg-white text-[#1c1c19] shadow-2xs font-semibold'
                       : 'text-[#77767b] hover:text-[#1c1c19]'
                   }`}
                 >
-                  Sản phẩm đã mua ({purchasedProducts.length})
+                  <span className="whitespace-nowrap">Sản phẩm đã mua</span>
+                  <span className="text-[11px] opacity-75 shrink-0">({purchasedProducts.length})</span>
                 </button>
               </div>
 
@@ -832,15 +834,15 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       <div className="w-12 h-12 rounded-full bg-[#f6f3ee] text-[#74584d] flex items-center justify-center mx-auto">
                         <Package className="w-6 h-6 stroke-[1.5]" />
                       </div>
-                      <h4 className="font-serif text-base font-normal text-[#1c1c19]">
+                      <h4 className="font-serif text-base font-normal text-[#1c1c19] text-balance">
                         Tài khoản chưa có sản phẩm đã mua
                       </h4>
-                      <p className="text-xs text-[#77767b] max-w-xs mx-auto">
+                      <p className="text-xs text-[#77767b] max-w-xs mx-auto leading-relaxed text-pretty">
                         Dữ liệu mua sắm được lưu riêng biệt cho từng tài khoản. Khám phá các tinh chất Thụy Sĩ và mua sắm ngay!
                       </p>
                       <button
                         onClick={onClose}
-                        className="mt-2 px-5 py-2 bg-[#202022] text-white text-xs font-semibold rounded-full hover:bg-black transition-colors"
+                        className="mt-2 px-5 py-2 bg-[#202022] text-white text-xs font-semibold rounded-full hover:bg-black transition-colors whitespace-nowrap"
                       >
                         Khám phá sản phẩm ALPS
                       </button>
@@ -869,8 +871,8 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                             />
                           </div>
-                          <div className="min-w-0 flex-grow">
-                            <div className="text-[10px] uppercase tracking-wider text-[#74584d] font-semibold">
+                          <div className="min-w-0 flex-grow pr-1">
+                            <div className="text-[10px] uppercase tracking-wider text-[#74584d] font-semibold truncate whitespace-nowrap">
                               {product.categoryLabel || 'Alps Pure Essence'}
                             </div>
                             <h5
@@ -878,17 +880,19 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                                 onSelectProduct(product);
                                 onClose();
                               }}
-                              className="font-serif text-xs font-semibold text-[#1c1c19] truncate hover:text-[#74584d] cursor-pointer transition-colors"
+                              className="font-sans text-xs font-semibold text-[#1c1c19] truncate hover:text-[#74584d] cursor-pointer transition-colors leading-snug"
                             >
                               {product.name}
                             </h5>
-                            <div className="text-[11px] text-[#77767b] mt-0.5">
-                              {product.capacity} • <span className="font-semibold text-[#1c1c19]">{product.price.toLocaleString('vi-VN')}₫</span>
+                            <div className="text-[11px] text-[#77767b] mt-0.5 whitespace-nowrap flex items-center space-x-1.5">
+                              <span>{product.capacity}</span>
+                              <span>•</span>
+                              <span className="font-semibold text-[#1c1c19] tabular-nums">{product.price.toLocaleString('vi-VN')}₫</span>
                             </div>
                             <div className="text-[10px] text-[#8a9a86] font-medium mt-1 flex items-center space-x-1.5 flex-wrap">
-                              <span>Đã mua x{totalQuantity}</span>
-                              <span>• {timesPurchased} lần đặt</span>
-                              {lastPurchasedAt && <span>• Gần nhất: {lastPurchasedAt}</span>}
+                              <span className="whitespace-nowrap bg-[#8a9a86]/10 px-1.5 py-0.5 rounded-md">Đã mua x{totalQuantity}</span>
+                              <span className="whitespace-nowrap">• {timesPurchased} lần đặt</span>
+                              {lastPurchasedAt && <span className="whitespace-nowrap">• Gần nhất: {lastPurchasedAt}</span>}
                             </div>
                           </div>
                           <div className="shrink-0 flex flex-col space-y-1.5">
@@ -901,7 +905,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                                   onClose();
                                 }
                               }}
-                              className="px-3 py-1.5 bg-[#202022] hover:bg-black text-white text-[11px] font-semibold rounded-full transition-colors whitespace-nowrap active:scale-95 shadow-2xs"
+                              className="px-3.5 py-1.5 bg-[#202022] hover:bg-black text-white text-[11px] font-semibold rounded-full transition-colors whitespace-nowrap active:scale-95 shadow-2xs"
                             >
                               Mua lại
                             </button>
@@ -1366,13 +1370,13 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                 /* Saved Shipping Info Display Card with Edit Button */
                 <div className="bg-white rounded-3xl p-4 sm:p-5 border border-[#202022]/6 space-y-3 shadow-xs">
                   <div className="flex items-center justify-between pb-2 border-b border-[#f0ede9]">
-                    <div className="flex items-center space-x-2 text-[#1c1c19] font-medium text-xs">
-                      <MapPin className="w-4 h-4 text-[#74584d]" />
-                      <span>Thông Tin Người Nhận & Địa Chỉ Mặc Định</span>
+                    <div className="flex items-center space-x-2 text-[#1c1c19] font-medium text-xs min-w-0">
+                      <MapPin className="w-4 h-4 text-[#74584d] shrink-0" />
+                      <span className="truncate whitespace-nowrap">Thông Tin Người Nhận & Địa Chỉ Mặc Định</span>
                     </div>
                     <button
                       onClick={() => setIsEditingProfile(true)}
-                      className="inline-flex items-center space-x-1 text-xs text-[#74584d] font-semibold hover:underline bg-[#fed8c9]/25 px-2.5 py-1 rounded-full"
+                      className="inline-flex items-center space-x-1 text-xs text-[#74584d] font-semibold hover:underline bg-[#fed8c9]/25 px-2.5 py-1 rounded-full whitespace-nowrap shrink-0 ml-2"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                       <span>Thay đổi</span>
@@ -1381,20 +1385,20 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
 
                   <div className="space-y-2 text-xs">
                     <div className="flex items-start justify-between">
-                      <span className="text-[#77767b] text-[11px] w-28 shrink-0">Họ và tên:</span>
-                      <span className="text-[#1c1c19] font-semibold text-right">{user.name}</span>
+                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">Họ và tên:</span>
+                      <span className="text-[#1c1c19] font-semibold text-right break-words">{user.name}</span>
                     </div>
 
                     <div className="flex items-start justify-between">
-                      <span className="text-[#77767b] text-[11px] w-28 shrink-0">Số điện thoại:</span>
-                      <span className="text-[#1c1c19] font-medium text-right">
+                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">Số điện thoại:</span>
+                      <span className="text-[#1c1c19] font-medium text-right tabular-nums whitespace-nowrap">
                         {user.phone || <span className="text-[#77767b] font-normal italic">Chưa cập nhật</span>}
                       </span>
                     </div>
 
                     <div className="flex items-start justify-between">
-                      <span className="text-[#77767b] text-[11px] w-28 shrink-0">Địa chỉ giao:</span>
-                      <span className="text-[#46464a] text-right max-w-xs leading-relaxed">
+                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">Địa chỉ giao:</span>
+                      <span className="text-[#46464a] text-right max-w-[260px] leading-relaxed break-words">
                         {user.address || <span className="text-[#77767b] font-normal italic">Chưa cập nhật địa chỉ</span>}
                       </span>
                     </div>

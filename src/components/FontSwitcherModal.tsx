@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Type, Check, Sparkles, X } from 'lucide-react';
 
-export type FontPreset = 'alps_luxury' | 'fraunces' | 'playfair' | 'modern' | 'alps_id_vn' | 'cormorant';
+export type FontPreset = 'alps_luxury' | 'playfair' | 'fraunces' | 'modern' | 'alps_id_vn' | 'cormorant' | 'parisian';
 
 interface FontOption {
   id: FontPreset;
@@ -18,14 +18,25 @@ interface FontOption {
 const FONT_OPTIONS: FontOption[] = [
   {
     id: 'alps_luxury',
-    name: 'Alps Quiet Luxury (Khuyên dùng)',
-    subtitle: 'Lora & Be Vietnam Pro',
+    name: 'Alps Quiet Luxury (Mặc định chuẩn)',
+    subtitle: 'Lora & Be Vietnam Pro (Font chuẩn như trong ảnh)',
     serifFont: '"Lora", Georgia, serif',
     sansFont: '"Be Vietnam Pro", sans-serif',
-    previewHeading: 'Alps Gentle Purifying Cleanser',
-    previewBody: 'Purifying Foaming Wash - Bọt mịn dịu nhẹ, sạch sâu.',
-    description: 'Phong cách Quiet Luxury cao cấp: Nét chữ Lora kiêu sa, uyển chuyển kết hợp Be Vietnam Pro chuẩn xác 100% dấu tiếng Việt, không bao giờ bị rớt chữ hay đứt đoạn.',
-    tag: 'HOÀN HẢO • THẨM MỸ CAO CẤP',
+    previewHeading: 'Alps Hydro-Lifting Sheet Mask',
+    previewBody: 'Đúng chuẩn đường nét uốn lượn như trong ảnh, thanh lịch sang trọng & chuẩn 100% tiếng Việt.',
+    description: 'Font chữ chuẩn xác 100% như trong ảnh bạn cung cấp: Nét chữ Lora quý phái, đuôi chữ chữ y và r có chấm tròn đặc trưng, kết hợp Be Vietnam Pro chuẩn 100% tiếng Việt không bao giờ lỗi font hay rớt chữ.',
+    tag: 'MẶC ĐỊNH • CHUẨN XÁC 100% NHƯ ẢNH',
+  },
+  {
+    id: 'playfair',
+    name: 'Parisian Editorial',
+    subtitle: 'Playfair Display & Be Vietnam Pro',
+    serifFont: '"Playfair Display", "Lora", serif',
+    sansFont: '"Be Vietnam Pro", sans-serif',
+    previewHeading: 'Nghi Thức Dưỡng Sáng Parisian Editorial',
+    previewBody: 'Đậm nét cổ điển quý phái, đẳng cấp tạp chí thời trang Paris & chuẩn 100% tiếng Việt.',
+    description: 'Phong cách Parisian Editorial danh giá: Nét chữ Playfair Display thanh lịch kết hợp cùng Be Vietnam Pro chuẩn xác 100% dấu tiếng Việt.',
+    tag: 'EDITORIAL PARIS',
   },
   {
     id: 'fraunces',
@@ -37,17 +48,6 @@ const FONT_OPTIONS: FontOption[] = [
     previewBody: 'Phục hồi rào cản sinh học, nuôi dưỡng làn da căng bóng thuần khiết.',
     description: 'Font chữ nghệ thuật mang đường cong mềm mại, độc bản, đậm dấu ấn thẩm mỹ của các thương hiệu làm đẹp quốc tế cao cấp.',
     tag: 'NGHỆ THUẬT ĐỘC BẢN',
-  },
-  {
-    id: 'playfair',
-    name: 'Parisian Vogue Editorial',
-    subtitle: 'Playfair Display & Be Vietnam Pro',
-    serifFont: '"Playfair Display", Georgia, serif',
-    sansFont: '"Be Vietnam Pro", sans-serif',
-    previewHeading: 'Nghi Thức Dưỡng Sáng Đẳng Cấp Vogue',
-    previewBody: 'Đậm nét cổ điển quý phái như các tạp chí thời trang Paris danh tiếng.',
-    description: 'Tương phản nét thanh nét đậm ấn tượng, quý phái và đậm chất tạp chí thời trang thượng lưu.',
-    tag: 'CỔ ĐIỂN QUÝ PHÁI',
   },
   {
     id: 'modern',
@@ -76,8 +76,13 @@ export const FontSwitcherModal: React.FC<FontSwitcherModalProps> = ({
   const [currentFont, setCurrentFont] = useState<FontPreset>('alps_luxury');
 
   useEffect(() => {
-    const saved = (localStorage.getItem('alps_font_preset') as FontPreset) || 'alps_luxury';
-    setCurrentFont(saved === 'alps_id_vn' ? 'alps_luxury' : saved);
+    const raw = localStorage.getItem('alps_font_preset');
+    let safePreset: FontPreset = 'alps_luxury';
+    if (raw === 'playfair') safePreset = 'playfair';
+    else if (raw === 'fraunces') safePreset = 'fraunces';
+    else if (raw === 'modern') safePreset = 'modern';
+    else safePreset = 'alps_luxury';
+    setCurrentFont(safePreset);
   }, [isOpen]);
 
   if (!isOpen) return null;
