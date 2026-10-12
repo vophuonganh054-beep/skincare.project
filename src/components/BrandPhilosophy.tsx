@@ -558,7 +558,7 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
     >
       {/* Brand Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <div className="inline-flex items-center space-x-2 text-[10px] sm:text-xs font-semibold tracking-[0.32em] text-[#74584d] uppercase">
+        <div className="inline-flex items-center space-x-2 text-[10px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.28em] text-[#74584d] uppercase whitespace-nowrap max-w-full overflow-hidden text-ellipsis">
           <AlpsIcon className="w-5 h-4 text-[#74584d]" color="#74584d" />
           <span>{currentText.badge}</span>
         </div>

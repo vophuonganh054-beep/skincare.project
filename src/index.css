@@ -73,18 +73,28 @@
     overflow-wrap: break-word;
     hyphens: none;
     -webkit-hyphens: none;
+    overflow-x: hidden;
+    max-width: 100vw;
   }
 
-  /* Font serif chuẩn như trong ảnh, CHỐNG RỚT CHỮ (text-wrap: balance) và bảo toàn dấu tiếng Việt 100% */
+  body {
+    overflow-x: hidden;
+    max-width: 100vw;
+    width: 100%;
+  }
+
+  /* Font serif chuẩn, bảo toàn dấu tiếng Việt 100%, CHỐNG RỚT CHỮ (text-wrap: pretty) & CHỐNG TRÀN */
   h1, h2, h3, h4, h5, h6, .font-serif {
     font-family: var(--font-serif-custom, "Lora", Georgia, serif);
-    text-wrap: balance;
+    text-wrap: pretty;
     letter-spacing: normal;
-    line-height: 1.38;
+    line-height: 1.35;
+    word-break: normal;
+    overflow-wrap: break-word;
   }
 
-  /* Đoạn văn bản chống rớt chữ đơn lẻ (orphans / widows) */
-  p {
+  /* Đoạn văn bản chống rớt chữ đơn lẻ (orphans / widows) & chống lệch trang */
+  p, li, blockquote {
     text-wrap: pretty;
     overflow-wrap: break-word;
     word-break: normal;
@@ -95,8 +105,18 @@
     font-family: var(--font-sans-custom, "Be Vietnam Pro", system-ui, -apple-system, sans-serif) !important;
   }
 
-  /* Chống rớt chữ giữa chừng cho các từ tiếng Việt */
-  .word-keep, .no-break, .keep-together {
+  /* Chống rớt chữ cho các badges, thẻ phân loại, giá tiền, nhãn điều hướng */
+  nav button, 
+  nav a, 
+  .action-label, 
+  .badge, 
+  .pill,
+  .tag,
+  .word-keep, 
+  .no-break, 
+  .keep-together, 
+  .price, 
+  .currency {
     white-space: nowrap;
     word-break: keep-all;
   }
@@ -104,6 +124,7 @@
   /* Numbers in tables and prices */
   .tabular-nums {
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
 }
 

@@ -135,6 +135,22 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
             <div className="pt-2 text-[11px] text-[#898789] space-y-1">
               <p><span className="text-[#fed8c9] font-medium">{t.footer.branchLabel}</span> {t.footer.branchAddress}</p>
             </div>
+            {/* Facebook Fanpage link in Brand column */}
+            <div className="pt-1">
+              <a
+                href="https://www.facebook.com/profile.php?id=61595372038444"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 text-[11px] text-[#fed8c9] hover:text-white bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full border border-white/10 transition-colors"
+                title="Ghé thăm Fanpage Facebook Alps Skincare"
+              >
+                <svg className="w-3 h-3 fill-current" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+                <span>Fanpage Facebook</span>
+                <span className="text-[10px]">↗</span>
+              </a>
+            </div>
             {/* Language Selector in Footer */}
             <div className="pt-2">
               <LanguageSelector variant="footer" />
@@ -191,6 +207,18 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
                 <span className="text-[#fed8c9]">{t.footer.websiteLabel}</span>
                 <a href="https://alps.id.vn" target="_blank" rel="noopener noreferrer" className="hover:text-[#fed8c9] text-white font-medium transition-colors">
                   alps.id.vn
+                </a>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="text-[#fed8c9]">Facebook:</span>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61595372038444"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#fed8c9] text-white font-medium transition-colors flex items-center space-x-1"
+                >
+                  <span>Alps Skincare Official</span>
+                  <span className="text-[10px] text-[#fed8c9]">↗</span>
                 </a>
               </li>
               <li

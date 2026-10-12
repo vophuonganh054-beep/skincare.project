@@ -63,7 +63,7 @@ export const PACKAGING_I18N: Record<SupportedLanguage, PackagingSectionTranslati
     philosophyBadge: 'SWISS PURIFYING & RECOVERY PHILOSOPHY',
     duoTitle: 'Alps Essential Care Duo',
     duoDescription:
-      'Two foundational steps to re-awaken skin vitality: our gentle micro-foam cleanser purifies PM2.5 impurities and sebum while preserving the physiological pH 5.5 barrier, followed by the second-skin Bio-Cellulose mask infusing 28ml of concentrated lifting serum in 20 restful minutes.',
+      'Two foundational steps to re-awaken skin vitality: our gentle micro-foam cleanser purifies PM2.5 impurities and sebum while preserving the physiological pH 5.5 barrier, followed by the second-skin Bio-Cellulose mask infusing 20ml of concentrated lifting serum in 20 restful minutes.',
     featuresTitle: 'Essential Duo Distinctions:',
     highlights: [
       'Alps Gentle Purifying Cleanser (120ml): Organic apple amino acid micro-foam and Swiss glacial spring water purify pores without tightness or irritation.',
@@ -123,7 +123,7 @@ export const PACKAGING_I18N: Record<SupportedLanguage, PackagingSectionTranslati
     philosophyBadge: 'FILOSOFÍA SUIZA DE LIMPIEZA Y REPARACIÓN',
     duoTitle: 'Dúo de Cuidado Esencial ALPS',
     duoDescription:
-      'Dos pasos clave para revitalizar el rostro: la microespuma limpiadora purifica impurezas y exceso de grasa protegiendo el pH 5.5 fisiológico; la mascarilla de bio-celulosa aporta 28ml de activos tensores en 20 placenteros minutos.',
+      'Dos pasos clave para revitalizar el rostro: la microespuma limpiadora purifica impurezas y exceso de grasa protegiendo el pH 5.5 fisiológico; la mascarilla de bio-celulosa aporta 20ml de activos tensores en 20 placenteros minutos.',
     featuresTitle: 'Características del Dúo:',
     highlights: [
       'Limpiador Purificante Suave ALPS (120ml): Aminoácidos de manzana orgánica y agua glacial suiza que limpian en profundidad sin sensación tirante.',
@@ -153,7 +153,7 @@ export const PACKAGING_I18N: Record<SupportedLanguage, PackagingSectionTranslati
     philosophyBadge: '瑞士苏黎世精准净澈水润哲学',
     duoTitle: '瑞士 Alps 晨昏核心修护双萃',
     duoDescription:
-      '唤醒原生肌理的两个核心步骤：以苹果氨基酸微细云朵泡沫洗净 PM2.5 与油光，呵护弱酸皮脂膜；紧接着敷上如第二层天然皮脂般的生物纤维面膜，整整 28ml 浓缩紧致安瓶在 20 分钟内深度注入肌底。',
+      '唤醒原生肌理的两个核心步骤：以苹果氨基酸微细云朵泡沫洗净 PM2.5 与油光，呵护弱酸皮脂膜；紧接着敷上如第二层天然皮脂般的生物纤维面膜，整整 20ml 浓缩紧致安瓶在 20 分钟内深度注入肌底。',
     featuresTitle: '核心双萃尊贵配方特质：',
     highlights: [
       'Alps 温和净透洁面乳 (120ml)：有机苹果氨基酸微泡协同古老冰川矿泉水，温和深层清洁毛孔，洗后水润柔滑不紧绷。',

@@ -27,10 +27,10 @@ export const PRODUCTS: Product[] = [
     image: cleanserImg,
     fallbackImage: '/cleanser.jpg',
     keyIngredients: [
-      'Hệ chất hoạt động bề mặt Amino Acid gốc táo hữu cơ',
-      'Nước khoáng sông băng Alpine Thụy Sĩ giàu khoáng chất vi lượng',
       'Chiết xuất hoa nhung tuyết Edelweiss Thụy Sĩ',
-      'Phức hợp Tremella Mushroom + Hyaluronic Acid bảo toàn độ ẩm sinh học'
+      'Hệ chất hoạt động bề mặt Amino Acid gốc táo hữu cơ (nhập tại Việt Nam)',
+      'Nước khoáng tinh khiết giàu khoáng chất vi lượng (nhập tại Việt Nam)',
+      'Phức hợp Tremella Mushroom + Hyaluronic Acid bảo toàn độ ẩm sinh học (nhập tại Việt Nam)'
     ],
     benefits: [
       'Làm sạch sâu bụi mịn và bã nhờn mà không phá vỡ màng ẩm sinh học',
@@ -95,9 +95,9 @@ export const PRODUCTS: Product[] = [
     fallbackImage: '/toner.jpg',
     keyIngredients: [
       'Nước khoáng sông băng Alpine Thụy Sĩ',
-      'Chiết xuất khuynh diệp và thảo mộc tự nhiên',
-      'Chiết xuất hoa cúc La Mã làm dịu sâu',
-      'Panthenol (Pro-Vitamin B5) 5% & Tremella Mushroom + Hyaluronic Acid'
+      'Chiết xuất khuynh diệp và thảo mộc tự nhiên (nhập tại Việt Nam)',
+      'Chiết xuất hoa cúc La Mã làm dịu sâu (nhập tại Việt Nam)',
+      'Panthenol (Pro-Vitamin B5) 5% & Tremella Mushroom + Hyaluronic Acid (nhập tại Việt Nam)'
     ],
     benefits: [
       'Cân bằng độ pH chuẩn 5.5 ngay sau bước rửa mặt',
@@ -161,10 +161,10 @@ export const PRODUCTS: Product[] = [
     image: glowSerumImg,
     fallbackImage: '/glow serum.jpg',
     keyIngredients: [
-      'Bột ngọc trai hữu cơ Akoya tán siêu mịn',
-      'Niacinamide tinh khiết 10% (Vitamin B3)',
-      'Phức hợp Tremella Mushroom + Hyaluronic Acid 5 tầng phân tử (Nấm tuyết sinh học)',
-      'Chiết xuất hoa nhung tuyết Thụy Sĩ (Edelweiss)'
+      'Chiết xuất hoa nhung tuyết Thụy Sĩ (Edelweiss)',
+      'Bột ngọc trai hữu cơ Akoya tán siêu mịn (nhập tại Việt Nam)',
+      'Niacinamide tinh khiết 10% (Vitamin B3) (nhập tại Việt Nam)',
+      'Phức hợp Tremella Mushroom + Hyaluronic Acid 5 tầng phân tử (nhập tại Việt Nam)'
     ],
     benefits: [
       'Làm sáng và đều màu da sau 14 ngày sử dụng',
@@ -228,10 +228,10 @@ export const PRODUCTS: Product[] = [
     image: faceCreamImg,
     fallbackImage: '/face cream.jpg',
     keyIngredients: [
-      'Ceramide Complex 3-6-9 đồng hóa sinh học',
-      'Bơ hạt mỡ hữu cơ lạnh (Shea Butter)',
-      'Tremella Mushroom + Hyaluronic Acid đa tầng tái tạo độ căng mọng',
-      'Squalane thực vật chiết xuất từ quả ô-liu Thụy Sĩ'
+      'Squalane thực vật chiết xuất từ quả ô-liu Thụy Sĩ',
+      'Ceramide Complex 3-6-9 đồng hóa sinh học (nhập tại Việt Nam)',
+      'Bơ hạt mỡ hữu cơ lạnh (Shea Butter) (nhập tại Việt Nam)',
+      'Tremella Mushroom + Hyaluronic Acid đa tầng tái tạo độ căng mọng (nhập tại Việt Nam)'
     ],
     benefits: [
       'Khóa ẩm bền bỉ 72 giờ liên tục',
@@ -295,10 +295,10 @@ export const PRODUCTS: Product[] = [
     image: hydroMaskImg,
     fallbackImage: '/facemask.jpg',
     keyIngredients: [
-      'Màng thạch dừa sinh học Bio-Cellulose Thụy Sĩ',
-      'Tremella Mushroom + Hyaluronic Acid (Nấm tuyết sinh học cấp ẩm gấp 500 lần)',
       'Chiết xuất tảo tuyết đỏ Thụy Sĩ chống lão hóa',
-      'Ceramide NP và Amino Acid tự nhiên'
+      'Màng thạch dừa sinh học Bio-Cellulose lên men tự nhiên (nhập tại Việt Nam)',
+      'Tremella Mushroom + Hyaluronic Acid nấm tuyết sinh học (nhập tại Việt Nam)',
+      'Ceramide NP và Amino Acid tự nhiên (nhập tại Việt Nam)'
     ],
     benefits: [
       'Cấp ẩm chuyên sâu gấp 10 lần mặt nạ giấy thông thường',

@@ -175,7 +175,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
       routine: 'NGHI THỨC',
       story: 'CÂU CHUYỆN',
       packaging: 'BAO BÌ',
-      orders: 'DANH MỤC ĐÃ MUA',
+      orders: 'ĐƠN HÀNG',
       cart: 'GIỎ HÀNG',
       quiz: 'SOI DA AI',
       support: 'CSKH 24/7',
@@ -293,7 +293,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
     },
     footer: {
       brandDesc: 'Thương hiệu dược mỹ phẩm thuần chay tiên phong chưng cất tại Zurich, Thụy Sĩ. Đánh thức vẻ rạng ngời thuần khiết của làn da.',
-      branchLabel: 'Chi nhánh TPHCM:',
+      branchLabel: 'Trụ sở TP.HCM:',
       branchAddress: '30 D. Trịnh Đình Thảo, Tân Phú, Hồ Chí Minh',
       acceptPayment: 'Chấp nhận thẻ & thanh toán nhanh:',
       collectionTitle: 'BỘ SƯU TẬP',

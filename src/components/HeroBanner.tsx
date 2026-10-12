@@ -174,8 +174,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
               </div>
             </div>
 
-            {/* Slide Heading with Anti-Drop balance and balanced proportions */}
-            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-normal text-white tracking-tight leading-snug drop-shadow-sm transition-all text-balance max-w-xl">
+            {/* Slide Heading with Anti-Drop text-pretty and balanced proportions */}
+            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-normal text-white tracking-tight leading-snug drop-shadow-sm transition-all text-pretty max-w-xl">
               {slide.title}
             </h2>
 
@@ -193,7 +193,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 <button
                   id="hero-explore-btn"
                   onClick={() => handleSlideClick(slide)}
-                  className="group inline-flex items-center space-x-2 bg-white text-[#1c1c19] hover:bg-[#fcf9f4] px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all transform active:scale-98 shadow-md cursor-pointer"
+                  className="group inline-flex items-center space-x-2 bg-white text-[#1c1c19] hover:bg-[#fcf9f4] px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all transform active:scale-98 shadow-md cursor-pointer whitespace-nowrap"
                 >
                   <span>{slide.buttonText}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-[#74584d]" />
@@ -202,14 +202,14 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 {onOpenSkinQuiz && (
                   <button
                     onClick={onOpenSkinQuiz}
-                    className="inline-flex items-center space-x-1.5 bg-black/40 hover:bg-black/60 text-white backdrop-blur-xs border border-white/40 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all transform active:scale-98 cursor-pointer shadow-xs"
+                    className="inline-flex items-center space-x-1.5 bg-black/40 hover:bg-black/60 text-white backdrop-blur-xs border border-white/40 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all transform active:scale-98 cursor-pointer shadow-xs whitespace-nowrap"
                   >
                     <Sparkles className="w-3.5 h-3.5 text-[#fed8c9]" />
                     <span>{heroData.quizBtn}</span>
                   </button>
                 )}
 
-                <div className="hidden lg:flex items-center space-x-1.5 text-xs text-white/70">
+                <div className="hidden lg:flex items-center space-x-1.5 text-xs text-white/70 whitespace-nowrap">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                   <span>{heroData.dermatologyBadge}</span>
                 </div>

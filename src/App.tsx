@@ -794,7 +794,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fcf9f4] text-[#1c1c19] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#fcf9f4] text-[#1c1c19] flex flex-col font-sans overflow-x-hidden w-full max-w-[100vw]">
       {/* Full Luxury Responsive Layout */}
       <div className="flex-grow flex flex-col">
         <Header

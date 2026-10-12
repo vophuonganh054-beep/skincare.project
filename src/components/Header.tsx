@@ -161,12 +161,24 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Top Announcement Bar - visible in desktop or wide view */}
       {!isMobileFrame && (
         <div className="bg-[#202022] text-[#fcf9f4] text-xs py-1.5 px-4 hidden md:flex items-center justify-between tracking-wider font-light">
-          <div className="flex items-center space-x-2 text-[11px] mx-auto">
-            <span className="text-[#fed8c9]">✦</span>
-            <span>{t.announcement}</span>
-            <span className="text-[#fed8c9]">✦</span>
+          <div className="flex items-center space-x-2 text-[11px] mx-auto overflow-hidden text-ellipsis whitespace-nowrap px-2">
+            <span className="text-[#fed8c9] shrink-0">✦</span>
+            <span className="truncate max-w-[550px]">{t.announcement}</span>
+            <span className="text-[#fed8c9] shrink-0">✦</span>
           </div>
-          <div className="flex items-center space-x-4 text-[11px]">
+          <div className="flex items-center space-x-4 text-[11px] shrink-0 whitespace-nowrap">
+            <a
+              href="https://www.facebook.com/profile.php?id=61595372038444"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#fed8c9] hover:underline flex items-center space-x-1 transition-colors"
+              title="Fanpage Facebook Alps Skincare"
+            >
+              <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+              <span>Facebook</span>
+            </a>
             {onOpenSupport && (
               <button
                 onClick={onOpenSupport}
@@ -183,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({
       )}
 
       {/* Main Bar */}
-      <div className={`px-4 sm:px-6 ${isMobileFrame ? 'py-2.5' : 'py-3 max-w-7xl mx-auto'} flex items-center justify-between gap-3 lg:gap-6`}>
+      <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-7xl mx-auto'} flex items-center justify-between gap-2 sm:gap-4 lg:gap-6 w-full`}>
         {/* Left: Brand Logo (Anchored, never squished) */}
         <div
           onClick={() => onSelectTab('home')}
@@ -195,7 +207,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center: Desktop Navigation Links */}
         {!isMobileFrame && (
-          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-3.5 xl:space-x-6 text-[11px] xl:text-xs font-medium tracking-wider text-[#46464a] whitespace-nowrap px-2">
+          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-2.5 xl:space-x-5 text-[11px] xl:text-xs font-medium tracking-wider text-[#46464a] whitespace-nowrap px-1 xl:px-2">
             <button
               onClick={() => onSelectTab('home')}
               className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
@@ -235,7 +247,7 @@ export const Header: React.FC<HeaderProps> = ({
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="transition-colors hover:text-[#1c1c19] font-medium py-1 whitespace-nowrap cursor-pointer"
+              className="hidden xl:inline-block transition-colors hover:text-[#1c1c19] font-medium py-1 whitespace-nowrap cursor-pointer"
             >
               {t.nav.story}
             </button>
@@ -244,7 +256,7 @@ export const Header: React.FC<HeaderProps> = ({
                 const el = document.getElementById('minimalist-packaging');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer"
+              className="hidden xl:inline-block transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer"
             >
               {t.nav.packaging}
             </button>
@@ -261,26 +273,10 @@ export const Header: React.FC<HeaderProps> = ({
             >
               {t.nav.orders}
             </button>
-            {onOpenCart && (
-              <button
-                id="header-nav-cart-btn"
-                onClick={onOpenCart}
-                className="transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer flex items-center space-x-1.5"
-                title={headerI18n.cartTitle}
-              >
-                <ShoppingBag className="w-3.5 h-3.5 stroke-[1.5]" />
-                <span>{t.nav.cart}</span>
-                {cartCount > 0 && (
-                  <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-[#1c1c19] text-white font-medium">
-                    {cartCount}
-                  </span>
-                )}
-              </button>
-            )}
             {onOpenSkinQuiz && (
               <button
                 onClick={onOpenSkinQuiz}
-                className="transition-all hover:scale-105 active:scale-95 px-3 py-1 rounded-full bg-[#f4ece3] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-2xs cursor-pointer whitespace-nowrap"
+                className="transition-all hover:scale-105 active:scale-95 px-2.5 xl:px-3 py-1 rounded-full bg-[#f4ece3] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-2xs cursor-pointer whitespace-nowrap"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#74584d] shrink-0" />
                 <span>{t.nav.quiz}</span>
@@ -289,18 +285,18 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
         )}
 
-        {/* Right Side Controls */}
-        <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+        {/* Right Side Controls - Anchored & Overflow Proof */}
+        <div className="flex items-center space-x-1 sm:space-x-1.5 md:space-x-2 shrink-0">
           {/* Search Toggle / Input */}
           {showSearchInput ? (
-            <div className="relative flex items-center">
-              <Search className="w-3.5 h-3.5 text-[#77767b] absolute left-2.5" />
+            <div className="relative flex items-center shrink-0">
+              <Search className="w-3.5 h-3.5 text-[#77767b] absolute left-2.5 pointer-events-none" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
                 placeholder={t.searchPlaceholder}
-                className="pl-8 pr-7 py-1 text-xs bg-[#f0ede9] rounded-full focus:outline-none focus:ring-1 focus:ring-[#74584d] w-36 sm:w-48 transition-all text-[#1c1c19]"
+                className="pl-8 pr-7 py-1 text-xs bg-[#f0ede9] rounded-full focus:outline-none focus:ring-1 focus:ring-[#74584d] w-24 sm:w-36 md:w-44 transition-all text-[#1c1c19]"
                 autoFocus
               />
               <button
@@ -308,7 +304,7 @@ export const Header: React.FC<HeaderProps> = ({
                   setShowSearchInput(false);
                   onSearchChange('');
                 }}
-                className="absolute right-2 text-[#77767b] hover:text-[#1c1c19]"
+                className="absolute right-2 text-[#77767b] hover:text-[#1c1c19] cursor-pointer"
                 title={headerI18n.closeSearch}
               >
                 <X className="w-3.5 h-3.5" />
@@ -318,7 +314,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-search-btn"
               onClick={() => setShowSearchInput(true)}
-              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors"
+              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors shrink-0 cursor-pointer"
               title={headerI18n.searchTitle}
             >
               <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
@@ -333,19 +329,19 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-font-btn"
               onClick={onOpenFontSwitcher}
-              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors hidden sm:flex items-center space-x-1"
+              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors hidden sm:flex items-center space-x-1 shrink-0 cursor-pointer"
               title={headerI18n.fontTitle}
             >
               <Type className="w-4 h-4 text-[#74584d]" />
             </button>
           )}
 
-          {/* Customer Support Button */}
+          {/* Customer Support Button (Desktop/Tablet) */}
           {onOpenSupport && (
             <button
               id="header-support-btn"
               onClick={onOpenSupport}
-              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors relative"
+              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors relative hidden sm:block shrink-0 cursor-pointer"
               title={headerI18n.supportTitle}
             >
               <Headphones className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
@@ -417,12 +413,12 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="header-cart-btn"
               onClick={onOpenCart}
-              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors relative"
+              className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors relative shrink-0 cursor-pointer"
               title={headerI18n.cartTitle}
             >
               <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 min-w-[17px] h-[17px] px-1 bg-[#1c1c19] text-white text-[10px] font-semibold rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 min-w-[17px] h-[17px] px-1 bg-[#1c1c19] text-white text-[10px] font-semibold rounded-full flex items-center justify-center pointer-events-none">
                   {cartCount}
                 </span>
               )}

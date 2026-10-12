@@ -27,7 +27,7 @@ export const SHIPPING_CARRIERS: ShippingCarrier[] = [
     estimatedTime: '1 - 2 giờ',
     price: 45000,
     badge: 'Hỏa tốc 2h',
-    description: 'Giao ngay trong 2 giờ nội thành TP.HCM và Hà Nội bằng thùng giữ nhiệt dược mỹ phẩm chuyên dụng.',
+    description: 'Giao ngay trong 2 giờ nội thành TP.HCM bằng thùng giữ nhiệt dược mỹ phẩm chuyên dụng.',
   },
   {
     id: 'viettel',

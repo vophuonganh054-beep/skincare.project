@@ -420,13 +420,44 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               {/* TAB 3: KEY INGREDIENTS */}
               {activeTab === 'ingredients' && (
                 <div className="space-y-3 animate-fadeIn">
+                  <div className="mb-1 text-xs text-[#74584d] bg-[#fed8c9]/25 p-3 rounded-xl border border-[#fed8c9]/50 flex items-center justify-between">
+                    <span className="font-medium flex items-center gap-1.5">
+                      <span className="text-sm">🇨🇭</span>
+                      <span>Mỗi sản phẩm chuẩn 1 thành phần hoạt chất cốt lõi Thụy Sĩ & các thành phần còn lại nhập tại Việt Nam</span>
+                    </span>
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {displayIngredients.map((ing, idx) => (
-                      <div key={idx} className="p-3 bg-white rounded-xl border border-[#202022]/5">
-                        <div className="text-[10px] text-[#74584d] uppercase font-semibold">#{idx + 1}</div>
-                        <div className="text-xs font-medium text-[#1c1c19] mt-0.5">{ing}</div>
-                      </div>
-                    ))}
+                    {displayIngredients.map((ing, idx) => {
+                      const isSwiss = ing.toLowerCase().includes('thụy sĩ') || ing.toLowerCase().includes('swiss') || ing.toLowerCase().includes('schweiz');
+                      const isVN = ing.toLowerCase().includes('việt nam') || ing.toLowerCase().includes('vietnam');
+                      return (
+                        <div
+                          key={idx}
+                          className={`p-3 rounded-xl border transition-all ${
+                            isSwiss
+                              ? 'bg-[#fcf9f4] border-[#74584d]/40 shadow-xs ring-1 ring-[#74584d]/20'
+                              : 'bg-white border-[#202022]/5'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="text-[10px] text-[#74584d] uppercase font-semibold">#{idx + 1}</span>
+                            {isSwiss && (
+                              <span className="text-[10px] bg-[#74584d] text-white px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                                <span>🇨🇭</span>
+                                <span>Thành phần Thụy Sĩ</span>
+                              </span>
+                            )}
+                            {isVN && !isSwiss && (
+                              <span className="text-[10px] bg-[#eef5ee] text-[#2e6930] px-2 py-0.5 rounded-full font-medium flex items-center gap-1 border border-[#cfe2ce]">
+                                <span>🇻🇳</span>
+                                <span>Nhập tại Việt Nam</span>
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-xs font-medium text-[#1c1c19] mt-1.5 leading-snug">{ing}</div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}

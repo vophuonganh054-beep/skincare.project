@@ -263,45 +263,67 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                     </a>
                   </div>
                 </div>
+
+                {/* Facebook Fanpage Box */}
+                <div className="bg-white rounded-2xl p-4 border border-[#202022]/8 shadow-2xs hover:border-[#1877F2]/30 transition-all flex flex-col justify-between sm:col-span-2">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-[10px] uppercase tracking-wider font-semibold text-[#1877F2] bg-[#1877F2]/10 px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                          </svg>
+                          <span>FACEBOOK FANPAGE CHÍNH THỨC</span>
+                        </span>
+                        <span className="text-[10px] text-[#2e6930] bg-[#eef5ee] px-2 py-0.5 rounded-full font-medium">
+                          Phản hồi nhanh
+                        </span>
+                      </div>
+                      <h4 className="font-serif text-base font-semibold text-[#1c1c19]">
+                        Kênh Fanpage Tư Vấn & CSKH Trực Tuyến
+                      </h4>
+                      <p className="text-xs text-[#77767b]">
+                        Nhắn tin Messenger trực tiếp với chuyên viên để nhận phác đồ chăm sóc da cá nhân hóa
+                      </p>
+                    </div>
+
+                    <a
+                      href="https://www.facebook.com/profile.php?id=61595372038444"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center space-x-1.5 px-4 py-2 bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold rounded-full shadow-xs transition-colors shrink-0"
+                    >
+                      <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                      </svg>
+                      <span>Mở Trang Facebook</span>
+                      <span>↗</span>
+                    </a>
+                  </div>
+                </div>
               </div>
 
-              {/* Showrooms */}
+              {/* Trụ Sở Phân Phối & Văn Phòng Chính Hãng TP.HCM */}
               <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#202022]/8 shadow-2xs space-y-3">
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-[#1c1c19] flex items-center space-x-1.5">
-                  <MapPin className="w-4 h-4 text-[#74584d]" />
-                  <span>Showroom & Chi Nhánh Phân Phối Chính Hãng</span>
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-[#1c1c19] flex items-center space-x-1.5 leading-snug">
+                  <MapPin className="w-4 h-4 text-[#74584d] shrink-0" />
+                  <span>Trụ Sở & Văn Phòng Phân Phối TP.HCM</span>
                 </h4>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 text-xs">
-                  {/* Boutique TP.HCM */}
+                <div className="pt-1 text-xs">
+                  {/* Trụ Sở TP.HCM */}
                   <div className="p-3.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] space-y-1.5">
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-[#1c1c19]">{support.contact.hcmTitle}</span>
-                      <span className="text-[10px] text-[#8a9a86] bg-[#8a9a86]/10 px-2 py-0.5 rounded-full font-medium">
+                      <span className="text-[10px] text-[#8a9a86] bg-[#8a9a86]/10 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
                         TP.HCM
                       </span>
                     </div>
-                    <p className="text-[#46464a] leading-relaxed text-[11px]">
+                    <p className="text-[#46464a] leading-relaxed text-[11px] text-pretty">
                       {support.contact.hcmAddress}
                     </p>
-                    <p className="text-[11px] text-[#77767b] pt-1">
+                    <p className="text-[11px] text-[#77767b] pt-1 text-pretty">
                       {support.contact.hcmDesc}
-                    </p>
-                  </div>
-
-                  {/* Chi Nhánh Hà Nội */}
-                  <div className="p-3.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] space-y-1.5">
-                    <div className="flex items-center justify-between">
-                      <span className="font-semibold text-[#1c1c19]">{support.contact.hanoiTitle}</span>
-                      <span className="text-[10px] text-[#8a9a86] bg-[#8a9a86]/10 px-2 py-0.5 rounded-full font-medium">
-                        Hà Nội
-                      </span>
-                    </div>
-                    <p className="text-[#46464a] leading-relaxed text-[11px]">
-                      {support.contact.hanoiAddress}
-                    </p>
-                    <p className="text-[11px] text-[#77767b] pt-1">
-                      {support.contact.hanoiDesc}
                     </p>
                   </div>
                 </div>
@@ -310,7 +332,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   <span className="flex items-center space-x-1">
                     <span>✨ {support.contact.workingHoursTime}</span>
                   </span>
-                  <span className="text-[#74584d] font-medium hidden sm:inline">ISO 22716 Certified</span>
+                  <span className="text-[#74584d] font-medium hidden sm:inline whitespace-nowrap">ISO 22716 Certified</span>
                 </div>
               </div>
 

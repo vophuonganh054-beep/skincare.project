@@ -41,10 +41,10 @@ const CLEANSER_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     subtitle: 'Purifying Foaming Wash - Bọt mịn dịu nhẹ, sạch sâu',
     description: 'Sữa rửa mặt tạo bọt dịu nhẹ Alps Gentle Purifying Cleanser với lớp bọt bông micro-foam siêu mịn, giúp làm sạch sâu bụi mịn PM2.5, bã nhờn và cặn trang điểm mà vẫn duy trì độ ẩm tự nhiên, không gây cảm giác khô căng sau khi rửa.',
     keyIngredients: [
-      'Hệ chất hoạt động bề mặt Amino Acid gốc táo hữu cơ',
-      'Nước khoáng sông băng Alpine Thụy Sĩ giàu khoáng chất vi lượng',
       'Chiết xuất hoa nhung tuyết Edelweiss Thụy Sĩ',
-      'Phức hợp Tremella Mushroom + Hyaluronic Acid bảo toàn độ ẩm sinh học',
+      'Hệ chất hoạt động bề mặt Amino Acid gốc táo hữu cơ (nhập tại Việt Nam)',
+      'Nước khoáng tinh khiết giàu khoáng chất vi lượng (nhập tại Việt Nam)',
+      'Phức hợp Tremella Mushroom + Hyaluronic Acid bảo toàn độ ẩm sinh học (nhập tại Việt Nam)',
     ],
     benefits: [
       'Làm sạch sâu bụi mịn và bã nhờn mà không phá vỡ màng ẩm sinh học',
@@ -315,9 +315,9 @@ const TONER_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     description: 'Nước hoa hồng cân bằng Alps Botanical Balancing Toner chắt lọc 92% nước khoáng băng hà Thụy Sĩ kết hợp tinh chất hoa nhung tuyết Edelweiss và chiết xuất vỏ thông tuyết, giúp cân bằng độ pH tức thì và mở đường dẫn cho các bước dưỡng tiếp theo.',
     keyIngredients: [
       '92% Nước khoáng sông băng tinh khiết Zermatt Thụy Sĩ',
-      'Chiết xuất hoa tuyết nhung Edelweiss hữu cơ',
-      'Niacinamide 2% tinh khiết đạt chuẩn Dược phẩm',
-      'Ectoin đa tầng bảo vệ tế bào khỏi stress môi trường',
+      'Chiết xuất khuynh diệp và thảo mộc tự nhiên (nhập tại Việt Nam)',
+      'Niacinamide 2% tinh khiết đạt chuẩn Dược phẩm (nhập tại Việt Nam)',
+      'Ectoin đa tầng bảo vệ tế bào khỏi stress môi trường (nhập tại Việt Nam)',
     ],
     benefits: [
       'Cân bằng độ ẩm và độ pH chuẩn 5.5 ngay sau bước rửa mặt',
@@ -563,9 +563,9 @@ const SERUM_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     description: 'Tuyệt tác tinh chất Alps Radiance Glow Serum ứng dụng công nghệ Tế bào gốc thực vật Alpine Plant Stem Cells kết hợp phức hợp làm sáng sinh học Alpha Arbutin 2% và Glutathione hữu cơ, tái sinh làn da rạng ngời từ tầng tế bào mà không gây kích ứng.',
     keyIngredients: [
       'Tế bào gốc thực vật sông băng Thụy Sĩ (Swiss Glacial Plant Stem Cells)',
-      'Alpha Arbutin 2% tinh khiết làm sáng chuẩn y khoa',
-      'Glutathione hữu cơ chống oxy hóa tế bào đỉnh cao',
-      'Hyaluronic Acid đa phân tử 5D cấp ẩm căng bóng đa tầng',
+      'Alpha Arbutin 2% tinh khiết làm sáng chuẩn y khoa (nhập tại Việt Nam)',
+      'Glutathione hữu cơ chống oxy hóa tế bào đỉnh cao (nhập tại Việt Nam)',
+      'Hyaluronic Acid đa phân tử 5D cấp ẩm căng bóng đa tầng (nhập tại Việt Nam)',
     ],
     benefits: [
       'Làm mờ rõ rệt các đốm nâu, sạm nám và vết thâm mụn sau 14-28 ngày',
@@ -800,10 +800,10 @@ const CREAM_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     subtitle: 'Barrier Repair Velvet Cream - Khóa ẩm chuyên sâu, phục hồi màng lipid',
     description: 'Kem dưỡng phục hồi chuyên sâu Alps Regenerating Face Cream với kết cấu nhung mịn màng (Velvet Texture), kết hợp phức hợp 5 loại Ceramide sinh học, bơ hạt mỡ hữu cơ và tế bào gốc Alpine, tạo màng chắn bảo vệ da bền vững suốt 24 giờ.',
     keyIngredients: [
-      'Phức hợp 5 loại Ceramide sinh học (EOP, NP, AP, AS, NS)',
-      'Chiết xuất tế bào gốc thực vật tuyết nhung Edelweiss',
-      'Bơ hạt mỡ hữu cơ tinh chế chuẩn Dược phẩm',
-      'Peptide sinh học Biomimetic kích thích tăng sinh biểu bì',
+      'Chiết xuất tế bào gốc thực vật tuyết nhung Edelweiss Thụy Sĩ',
+      'Phức hợp 5 loại Ceramide sinh học (EOP, NP, AP, AS, NS) (nhập tại Việt Nam)',
+      'Bơ hạt mỡ hữu cơ tinh chế chuẩn Dược phẩm (nhập tại Việt Nam)',
+      'Peptide sinh học Biomimetic kích thích tăng sinh biểu bì (nhập tại Việt Nam)',
     ],
     benefits: [
       'Phục hồi và củng cố hàng rào lipid bảo vệ da tổn thương trong 7 ngày',
@@ -1036,12 +1036,12 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     categoryLabel: 'MẶT NẠ NÂNG CƠ',
     tag: 'NÂNG CƠ CẤP TỐC',
     subtitle: 'Bio-Cellulose Lifting Mask - Liệu trình Spa băng tuyết tại gia',
-    description: 'Mặt nạ sinh học Alps Hydro-Lifting Sheet Mask dệt từ sợi Bio-Cellulose lên men tự nhiên siêu mỏng 0.2mm, ôm khít 100% đường cong gương mặt, truyền dẫn 28ml tinh chất tế bào gốc sông băng chỉ sau 15-20 phút đắp.',
+    description: 'Mặt nạ sinh học Alps Hydro-Lifting Sheet Mask dệt từ sợi Bio-Cellulose lên men tự nhiên siêu mỏng 0.2mm, ôm khít 100% đường cong gương mặt, truyền dẫn 20ml tinh chất tế bào gốc sông băng chỉ sau 15-20 phút đắp.',
     keyIngredients: [
-      'Sợi màng sinh học Bio-Cellulose lên men từ nước dừa tươi',
-      '28ml Tinh chất tế bào gốc sông băng đậm đặc trong mỗi gói',
-      'Chiết xuất tảo băng Swiss Snow Algae chịu lạnh cực hạn',
-      'Peptide Hexapeptide-8 (Argireline) làm mờ nếp nhăn biểu cảm',
+      'Chiết xuất tảo băng Swiss Snow Algae Thụy Sĩ chịu lạnh cực hạn',
+      'Sợi màng sinh học Bio-Cellulose lên men từ nước dừa tươi (nhập tại Việt Nam)',
+      '20ml Tinh chất cô đặc nuôi dưỡng da chuyên sâu (nhập tại Việt Nam)',
+      'Peptide Hexapeptide-8 (Argireline) làm mờ nếp nhăn biểu cảm (nhập tại Việt Nam)',
     ],
     benefits: [
       'Cấp ẩm căng mọng tức thì sau 15 phút, hạ nhiệt độ da xuống 3°C',
@@ -1056,7 +1056,7 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     note: 'Bio-Cellulose & Argireline',
     detailedUsage: {
       timing: '2 - 3 lần mỗi tuần hoặc bất cứ khi nào da cần phục hồi cấp tốc',
-      amount: '1 miếng mặt nạ 29g (chứa trọn 28ml ampoule đậm đặc)',
+      amount: '1 miếng mặt nạ 29g (chứa trọn 20ml ampoule đậm đặc)',
       suitableFor: 'Mọi loại da, da thiếu ẩm khẩn cấp, da chuẩn bị dự tiệc cần căng bóng tức thì',
       steps: [
         {
@@ -1090,10 +1090,10 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     categoryLabel: 'BIOMIMETIC MASK',
     tag: 'INSTANT LIFTING',
     subtitle: 'Bio-Cellulose Lifting Mask - In-home Swiss alpine cryo-spa ritual',
-    description: 'Woven from ultra-fine 0.2mm natural bio-cellulose, Alps Hydro-Lifting Sheet Mask contours seamlessly like a second skin, infusing 28ml of concentrated glacial stem cell serum within 15-20 minutes.',
+    description: 'Woven from ultra-fine 0.2mm natural bio-cellulose, Alps Hydro-Lifting Sheet Mask contours seamlessly like a second skin, infusing 20ml of concentrated glacial stem cell serum within 15-20 minutes.',
     keyIngredients: [
       'Ultra-fine 0.2mm Fermented Bio-Cellulose membrane',
-      '28ml Concentrated Swiss Glacial Stem Cell Ampoule in every sachet',
+      '20ml Concentrated Swiss Glacial Stem Cell Ampoule in every sachet',
       'Swiss Snow Algae extract adapted to sub-zero alpine survival',
       'Acetyl Hexapeptide-8 (Argireline) peptide for expression lines',
     ],
@@ -1110,7 +1110,7 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     note: 'Bio-Cellulose & Argireline',
     detailedUsage: {
       timing: '2-3 times weekly or prior to special events',
-      amount: '1 sachet (28ml concentrated ampoule)',
+      amount: '1 sachet (20ml concentrated ampoule)',
       suitableFor: 'All skin types, tired skin, jet-lagged or dehydrated complexions',
       steps: [
         {
@@ -1144,10 +1144,10 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     categoryLabel: 'TUCHMASKE',
     tag: 'SOFORT-LIFTING',
     subtitle: 'Bio-Cellulose Lifting Mask - Schweizer Alpen-Spa für zu Hause',
-    description: 'Aus 0.2 mm feiner fermentierter Bio-Cellulose gewebt, schmiegt sich die Alps Hydro-Lifting Tuchmaske wie eine zweite Haut an und schleust 28ml reines Gletscher-Stammzellenserum tief ein.',
+    description: 'Aus 0.2 mm feiner fermentierter Bio-Cellulose gewebt, schmiegt sich die Alps Hydro-Lifting Tuchmaske wie eine zweite Haut an und schleust 20ml reines Gletscher-Stammzellenserum tief ein.',
     keyIngredients: [
       'Hochfeine Bio-Cellulose-Membran (0.2 mm)',
-      '28ml Hochkonzentriertes Gletscher-Wirkstoffserum pro Maske',
+      '20ml Hochkonzentriertes Gletscher-Wirkstoffserum pro Maske',
       'Schweizer Schneealgen-Extrakt für zelluläre Langlebigkeit',
       'Hexapeptid-8 Glättungskomplex gegen Mimikfältchen',
     ],
@@ -1164,7 +1164,7 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     note: 'Bio-Cellulose & Argireline',
     detailedUsage: {
       timing: '2-3 Mal wöchentlich',
-      amount: '1 Tuchmaske (28ml Serum)',
+      amount: '1 Tuchmaske (20ml Serum)',
       suitableFor: 'Alle Hauttypen, ideal bei Feuchtigkeitsmangel und vor Anlässen',
       steps: [
         {
@@ -1188,10 +1188,10 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     categoryLabel: 'MASCARILLA',
     tag: 'EFECTO TENSOR',
     subtitle: 'Bio-Cellulose Lifting Mask - Experiencia de spa alpino en casa',
-    description: 'Tejida en bio-celulosa ultrafina de 0.2 mm, Alps Hydro-Lifting Sheet Mask se adapta como una segunda piel e infunde 28ml de sérum concentrado de células madre glaciares en 15-20 minutos.',
+    description: 'Tejida en bio-celulosa ultrafina de 0.2 mm, Alps Hydro-Lifting Sheet Mask se adapta como una segunda piel e infunde 20ml de sérum concentrado de células madre glaciares en 15-20 minutos.',
     keyIngredients: [
       'Membrana de bio-celulosa fermentada ultrafina de 0.2 mm',
-      '28ml de sérum concentrado de células madre glaciares por sobre',
+      '20ml de sérum concentrado de células madre glaciares por sobre',
       'Extracto de alga de las nieves suiza resistente al frío extremo',
       'Hexapéptido-8 tensor suavizante de líneas de expresión',
     ],
@@ -1208,7 +1208,7 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     note: 'Bio-Celulosa y Argireline',
     detailedUsage: {
       timing: '2 a 3 veces por semana',
-      amount: '1 sobre (28ml de ampolla concentrada)',
+      amount: '1 sobre (20ml de ampolla concentrada)',
       suitableFor: 'Todo tipo de piel, piel deshidratada o antes de eventos',
       steps: [
         {
@@ -1232,10 +1232,10 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     categoryLabel: '生物纤维水光膜',
     tag: '紧致提拉修护',
     subtitle: 'Bio-Cellulose Lifting Mask - 居家专享瑞士阿尔卑斯冰川水疗',
-    description: 'Alps 水光提拉生物纤维面膜，精选0.2mm超细天然发酵生物纤维膜布，宛若第二层肌肤紧密贴合面部轮廓。每片承载整整 28ml 浓萃冰川干细胞精华，15-20分钟瞬现水光紧致。',
+    description: 'Alps 水光提拉生物纤维面膜，精选0.2mm超细天然发酵生物纤维膜布，宛若第二层肌肤紧密贴合面部轮廓。每片承载整整 20ml 浓萃冰川干细胞精华，15-20分钟瞬现水光紧致。',
     keyIngredients: [
       '0.2mm 天然椰汁生物发酵超细生物纤维凝胶膜布',
-      '每片奢含整整 28ml 高浓缩瑞士冰川干细胞安瓶精华',
+      '每片奢含整整 20ml 高浓缩瑞士冰川干细胞安瓶精华',
       '瑞士极地雪藻 (Snow Algae) 逆境长寿活性精萃',
       '六胜肽 (Argireline) 表情纹紧致淡化多肽',
     ],
@@ -1252,7 +1252,7 @@ const MASK_DATA: Record<SupportedLanguage, LocalizedProductData> = {
     note: '椰汁生物纤维与六胜肽',
     detailedUsage: {
       timing: '每周2-3次或重要约会前急救',
-      amount: '单片独立装（含整整28ml高定浓缩安瓶）',
+      amount: '单片独立装（含整整20ml高定浓缩安瓶）',
       suitableFor: '所有肤质，特别适合急需补水、松弛垮脸与医美术后泛红干燥',
       steps: [
         {

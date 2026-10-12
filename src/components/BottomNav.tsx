@@ -29,7 +29,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}
         >
           <Home className={`w-5 h-5 ${activeTab === 'home' ? 'stroke-[2.25]' : 'stroke-[1.5]'}`} />
-          <span className="text-[10px] tracking-wider mt-1 font-medium uppercase">
+          <span className="text-[10px] tracking-wider mt-1 font-medium uppercase whitespace-nowrap">
             {t.nav.home}
           </span>
         </button>
@@ -42,7 +42,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}
         >
           <LayoutGrid className={`w-5 h-5 ${activeTab === 'catalog' ? 'stroke-[2.25]' : 'stroke-[1.5]'}`} />
-          <span className="text-[10px] tracking-wider mt-1 font-medium uppercase">
+          <span className="text-[10px] tracking-wider mt-1 font-medium uppercase whitespace-nowrap">
             {t.nav.catalog}
           </span>
         </button>
@@ -64,7 +64,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
                 </span>
               )}
             </div>
-            <span className="text-[10px] tracking-wider mt-1 font-medium uppercase">
+            <span className="text-[10px] tracking-wider mt-1 font-medium uppercase whitespace-nowrap">
               {t.nav.cart}
             </span>
           </button>
@@ -78,7 +78,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           }`}
         >
           <Sparkles className={`w-5 h-5 ${activeTab === 'routine' ? 'stroke-[2.25] text-[#74584d]' : 'stroke-[1.5]'}`} />
-          <span className="text-[10px] tracking-wider mt-1 font-medium uppercase">
+          <span className="text-[10px] tracking-wider mt-1 font-medium uppercase whitespace-nowrap">
             {t.nav.routine}
           </span>
         </button>

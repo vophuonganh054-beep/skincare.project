@@ -106,10 +106,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
         onClick={onClose}
       />
 
-      <div className="absolute inset-y-0 right-0 max-w-full flex pl-6 sm:pl-10">
-        <div className="w-screen max-w-md bg-[#fcf9f4] border-l border-[#202022]/10 shadow-2xl flex flex-col">
+      <div className="absolute inset-y-0 right-0 w-full sm:w-[460px] max-w-full flex justify-end pointer-events-none">
+        <div className="w-full h-full bg-[#fcf9f4] border-l border-[#202022]/10 shadow-2xl flex flex-col pointer-events-auto overflow-hidden">
           {/* Header */}
-          <div className="px-5 py-4.5 bg-white border-b border-[#202022]/8 flex items-center justify-between">
+          <div className="px-5 py-4.5 bg-white border-b border-[#202022]/8 flex items-center justify-between shrink-0">
             <div className="flex items-center space-x-2.5">
               <div className="w-8 h-8 rounded-full bg-[#f6f3ee] text-[#1c1c19] flex items-center justify-center">
                 <ShoppingBag className="w-4 h-4 stroke-[1.75]" />

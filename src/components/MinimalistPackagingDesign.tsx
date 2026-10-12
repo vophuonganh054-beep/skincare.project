@@ -114,29 +114,29 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
                 </div>
               ))}
             </div>
+          </div>
 
-            {/* Actions */}
-            <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
-              {onAddDuoToCart && (
-                <button
-                  onClick={onAddDuoToCart}
-                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-[#74584d] hover:bg-[#5e453c] text-white px-5 py-3 rounded-full text-xs font-medium tracking-wider uppercase transition-all shadow-xs cursor-pointer"
-                >
-                  <ShoppingBag className="w-3.5 h-3.5" />
-                  <span>{pkg.buyDuoBtn}</span>
-                </button>
-              )}
+          {/* Centered Actions across the whole card */}
+          <div className="lg:col-span-12 pt-4 sm:pt-6 border-t border-[#ebe5dc]/80 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            {onAddDuoToCart && (
+              <button
+                onClick={onAddDuoToCart}
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 bg-[#74584d] hover:bg-[#5e453c] text-white px-7 py-3.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all shadow-xs hover:shadow-md active:scale-98 cursor-pointer"
+              >
+                <ShoppingBag className="w-4 h-4 shrink-0" />
+                <span>{pkg.buyDuoBtn}</span>
+              </button>
+            )}
 
-              {onOpenCollection && (
-                <button
-                  onClick={onOpenCollection}
-                  className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-[#1c1c19] text-[#f7f5f0] hover:bg-[#323235] px-5 py-3 rounded-full text-xs font-medium tracking-wider uppercase transition-all shadow-xs cursor-pointer"
-                >
-                  <span>{pkg.exploreProductsBtn}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              )}
-            </div>
+            {onOpenCollection && (
+              <button
+                onClick={onOpenCollection}
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 bg-[#1c1c19] text-[#f7f5f0] hover:bg-[#323235] px-7 py-3.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all shadow-xs hover:shadow-md active:scale-98 cursor-pointer"
+              >
+                <span>{pkg.exploreProductsBtn}</span>
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </button>
+            )}
           </div>
         </div>
       </div>

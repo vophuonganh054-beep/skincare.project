@@ -50,7 +50,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
           desc: 'Quý khách được chuyên viên da liễu theo dõi sát sao, tư vấn phác đồ phục hồi hàng rào ẩm và gửi tặng mẫu thử tương thích hoàn toàn miễn phí.',
         },
       ],
-      note: 'Áp dụng cho mọi đơn hàng đặt trực tiếp trên website chính thức alps.id.vn hoặc các showroom chính hãng.',
+      note: 'Áp dụng cho mọi đơn hàng đặt trực tiếp trên website chính thức alps.id.vn hoặc các kênh phân phối chính hãng.',
     },
     shippingPolicy: {
       title: 'Chính Sách Giao Hàng Chuẩn Phòng Sạch Zurich',
@@ -61,7 +61,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
           desc: 'Áp dụng cho tất cả các tỉnh thành trên toàn lãnh thổ Việt Nam. Đơn hàng dưới 500.000₫ áp dụng mức phí đồng giá ưu đãi chỉ 30.000₫.',
         },
         {
-          title: 'Giao hỏa tốc 2 - 4 giờ tại TP.HCM & Hà Nội',
+          title: 'Giao hỏa tốc 2 - 4 giờ tại TP.HCM & Giao nhanh toàn quốc',
           desc: 'Đội ngũ giao nhận Alps Express bảo quản sản phẩm trong thùng giữ nhiệt chuyên dụng, chống sốc và chống tia cực tím để giữ trọn hoạt tính tế bào gốc sông băng.',
         },
         {

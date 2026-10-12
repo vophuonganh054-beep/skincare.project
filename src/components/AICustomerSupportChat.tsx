@@ -173,6 +173,14 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
       ) {
         fallbackText = supportTexts.fallbackReturns;
       } else if (
+        lower.includes('facebook') ||
+        lower.includes('fb') ||
+        lower.includes('fanpage') ||
+        lower.includes('mạng xã hội') ||
+        lower.includes('social')
+      ) {
+        fallbackText = 'Dạ quý khách có thể ghé thăm và kết nối trực tiếp với Alps qua trang Facebook Fanpage chính thức tại: https://www.facebook.com/profile.php?id=61595372038444 để nhận tin tức, ưu đãi độc quyền và chat Messenger với tư vấn viên nhé ạ!';
+      } else if (
         lower.includes('serum') ||
         lower.includes('sáng da') ||
         lower.includes('thâm') ||

@@ -144,16 +144,16 @@ export const AlpsLogo: React.FC<AlpsLogoProps> = ({
   }
 
   return (
-    <div className={`flex flex-col items-center justify-center select-none text-center ${className}`}>
+    <div className={`flex flex-col items-center justify-center select-none text-center whitespace-nowrap shrink-0 ${className}`}>
       {showIcon && variant !== 'text-only' && (
         <AlpsIcon
-          className="w-11 h-6 sm:w-13 sm:h-7 mb-0.5 transition-transform duration-300 group-hover:scale-105"
+          className="w-11 h-6 sm:w-13 sm:h-7 mb-0.5 transition-transform duration-300 group-hover:scale-105 shrink-0"
           color={iconColor}
           isDarkBackground={isLight}
         />
       )}
       <span
-        className={`font-serif tracking-[0.34em] text-xl sm:text-2xl font-bold uppercase transition-colors ${
+        className={`font-serif tracking-[0.34em] text-xl sm:text-2xl font-bold uppercase transition-colors whitespace-nowrap ${
           isLight ? 'text-white' : textColor
         } leading-tight`}
         style={{ letterSpacing: '0.36em' }}
@@ -162,10 +162,10 @@ export const AlpsLogo: React.FC<AlpsLogoProps> = ({
       </span>
       {subtitle && (
         <span
-          className={`text-[9px] sm:text-[10px] font-semibold uppercase mt-0.5 tracking-[0.4em] transition-colors ${
+          className={`text-[9px] sm:text-[10px] font-semibold uppercase mt-0.5 tracking-[0.3em] sm:tracking-[0.4em] transition-colors whitespace-nowrap ${
             isLight ? 'text-[#fed8c9]' : 'text-[#5a5750]'
           }`}
-          style={{ letterSpacing: '0.4em' }}
+          style={{ letterSpacing: '0.35em' }}
         >
           {subtitle}
         </span>
