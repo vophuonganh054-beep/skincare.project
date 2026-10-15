@@ -19,6 +19,8 @@ interface CartDrawerProps {
   onOpenCheckout: () => void;
   onExploreProducts: () => void;
   onOpenSupport?: () => void;
+  initialVoucher?: string;
+  onVoucherApplied?: (code: string | null) => void;
 }
 
 export const CartDrawer: React.FC<CartDrawerProps> = ({
@@ -31,13 +33,22 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   onClearCart,
   onOpenCheckout,
   onExploreProducts,
+  initialVoucher,
+  onVoucherApplied,
 }) => {
   const { t, language } = useLanguage();
   const cData = CHECKOUT_I18N[language]?.cart || CHECKOUT_I18N.vi.cart;
 
-  const [voucherCode, setVoucherCode] = useState('');
-  const [appliedVoucher, setAppliedVoucher] = useState<string | null>(null);
+  const [voucherCode, setVoucherCode] = useState(initialVoucher || '');
+  const [appliedVoucher, setAppliedVoucher] = useState<string | null>(initialVoucher || null);
   const [voucherError, setVoucherError] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (initialVoucher) {
+      setVoucherCode(initialVoucher);
+      setAppliedVoucher(initialVoucher);
+    }
+  }, [initialVoucher]);
 
   if (!isOpen) return null;
 
@@ -82,19 +93,35 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     0
   );
 
-  const discountAmount = appliedVoucher === 'ALPS2025' ? Math.round(subtotal * 0.1) : 0;
+  const getVoucherDiscountPercent = (code: string | null) => {
+    if (!code) return 0;
+    const upper = code.trim().toUpperCase();
+    if (['PHUNU20', 'WOMEN20', 'VIP20', 'VEGAN20'].includes(upper)) return 20;
+    if (['ALPS2010', 'COMBO20'].includes(upper)) return 15;
+    if (['ALPS2025', 'ALPS10', 'BEAUTY10'].includes(upper)) return 10;
+    return 0;
+  };
+
+  const discountPercent = getVoucherDiscountPercent(appliedVoucher);
+  const discountAmount = Math.round((subtotal * discountPercent) / 100);
   const freeShippingThreshold = 500000;
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
   const shippingFee = subtotal === 0 || subtotal >= freeShippingThreshold ? 0 : 30000;
   const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee);
 
-  const handleApplyVoucher = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (voucherCode.trim().toUpperCase() === 'ALPS2025') {
-      setAppliedVoucher('ALPS2025');
+  const handleApplyVoucher = (e?: React.FormEvent, directCode?: string) => {
+    if (e) e.preventDefault();
+    const target = (directCode || voucherCode).trim().toUpperCase();
+    const pct = getVoucherDiscountPercent(target);
+    if (pct > 0) {
+      setAppliedVoucher(target);
+      setVoucherCode(target);
       setVoucherError(null);
+      if (onVoucherApplied) {
+        onVoucherApplied(target);
+      }
     } else {
-      setVoucherError(cData.voucherInvalid);
+      setVoucherError('Mã không hợp lệ. Hãy thử: PHUNU20 (-20%), ALPS2010 (-15%) hoặc ALPS2025 (-10%)');
     }
   };
 
@@ -304,9 +331,38 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       {cData.voucherApplyBtn}
                     </button>
                   </form>
+                  {/* 20/10 Quick Voucher Suggestions */}
+                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                    <span className="text-[10px] text-[#74584d] font-semibold flex items-center space-x-1">
+                      <span>🌸 Mã 20/10:</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleApplyVoucher(undefined, 'PHUNU20')}
+                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
+                        appliedVoucher === 'PHUNU20'
+                          ? 'bg-[#74584d] text-white border-[#74584d]'
+                          : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
+                      }`}
+                    >
+                      PHUNU20 (-20%)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleApplyVoucher(undefined, 'ALPS2010')}
+                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
+                        appliedVoucher === 'ALPS2010'
+                          ? 'bg-[#74584d] text-white border-[#74584d]'
+                          : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
+                      }`}
+                    >
+                      ALPS2010 (-15%)
+                    </button>
+                  </div>
+
                   {appliedVoucher && (
                     <p className="text-[11px] text-[#2d4a36] font-medium mt-2 flex items-center space-x-1">
-                      <span>✓ {cData.voucherApplied(appliedVoucher)} (-10%)</span>
+                      <span>✓ Đã áp dụng mã {appliedVoucher} (-{discountPercent}%)</span>
                     </p>
                   )}
                   {voucherError && (

@@ -18,8 +18,14 @@ export async function testFirestoreConnection() {
   try {
     await getDocFromServer(doc(db, 'test', 'connection'));
   } catch (error) {
-    if (error instanceof Error && error.message.includes('the client is offline')) {
-      console.warn('Firebase client offline, check configuration:', error);
+    if (error instanceof Error) {
+      if (error.message.includes('the client is offline')) {
+        console.warn('Firebase client offline, check configuration:', error);
+      } else if (error.message.includes('Quota') || error.message.includes('resource-exhausted')) {
+        console.warn(
+          'Firestore daily quota reached on Spark free tier. App is operating smoothly with offline/localStorage fallback.'
+        );
+      }
     }
   }
 }
@@ -53,9 +59,17 @@ export interface FirestoreErrorInfo {
   };
 }
 
-export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null): never {
+export function handleFirestoreError(error: unknown, operationType: OperationType, path: string | null): void {
+  const errMsg = error instanceof Error ? error.message : String(error);
+  const code = (error as { code?: string })?.code;
+  if (code === 'resource-exhausted' || errMsg.includes('Quota') || errMsg.includes('resource-exhausted')) {
+    console.warn(
+      `[Firestore Quota] Spark free-tier daily quota reached on ${operationType} ${path}. App continues with local state fallback.`
+    );
+    return;
+  }
   const errInfo: FirestoreErrorInfo = {
-    error: error instanceof Error ? error.message : String(error),
+    error: errMsg,
     authInfo: {
       userId: auth.currentUser?.uid,
       email: auth.currentUser?.email,

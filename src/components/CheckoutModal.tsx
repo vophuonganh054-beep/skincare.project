@@ -49,6 +49,7 @@ interface CheckoutModalProps {
   onShowToast: (message: string) => void;
   onOpenPolicies?: (tab: PolicyTabType) => void;
   onOpenLogin?: () => void;
+  initialPromoCode?: string;
 }
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({
@@ -60,6 +61,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   onShowToast,
   onOpenPolicies,
   onOpenLogin,
+  initialPromoCode,
 }) => {
   const { language } = useLanguage();
   const cData = CHECKOUT_I18N[language]?.checkout || CHECKOUT_I18N.vi.checkout;
@@ -175,16 +177,53 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   // Generate order number for this session
   const [orderNumber] = useState(() => `ALPS-${Math.floor(10000 + Math.random() * 90000)}`);
 
-  if (!isOpen) return null;
+  const handleApplyPromo = (directCode?: string) => {
+    const code = (directCode || promoCode).trim().toUpperCase();
+    if (!code) return;
+    if (code === 'PHUNU20' || code === 'WOMEN20') {
+      setDiscountPercent(20);
+      setPromoApplied(true);
+      setPromoCode(code);
+      if (onShowToast) onShowToast(`🌸 Đã áp dụng mã 20/10 ${code}: Giảm 20% toàn đơn hàng!`);
+    } else if (code === 'ALPS2010' || code === 'COMBO20') {
+      setDiscountPercent(15);
+      setPromoApplied(true);
+      setPromoCode(code);
+      if (onShowToast) onShowToast(`✨ Đã áp dụng mã ưu đãi ${code}: Giảm 15%!`);
+    } else if (code === 'ALPS10' || code === 'ALPS2025' || code === 'BEAUTY10') {
+      setDiscountPercent(10);
+      setPromoApplied(true);
+      setPromoCode(code);
+      if (onShowToast) onShowToast(`Đã áp dụng mã ưu đãi ${code}: Giảm 10%`);
+    } else if (code === 'VIP20' || code === 'VEGAN20') {
+      setDiscountPercent(20);
+      setPromoApplied(true);
+      setPromoCode(code);
+      if (onShowToast) onShowToast('Đã áp dụng mã đặc quyền VIP: Giảm 20%');
+    } else {
+      if (onShowToast) onShowToast('Mã ưu đãi không hợp lệ. Hãy thử: PHUNU20 (-20%) hoặc ALPS2010 (-15%)');
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen && initialPromoCode && !promoApplied) {
+      handleApplyPromo(initialPromoCode);
+    }
+  }, [isOpen, initialPromoCode, promoApplied]);
 
   // Pricing calculations
-  const subtotal = items.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  const safeItems: CartItem[] = (Array.isArray(items) ? items : []).filter((it) => it && it.product);
+  const subtotal = safeItems.reduce((sum, item) => {
+    const price = typeof item.product?.price === 'number' ? item.product.price : 0;
+    const qty = typeof item.quantity === 'number' && item.quantity > 0 ? item.quantity : 1;
+    return sum + price * qty;
+  }, 0);
 
   const selectedCarrier = SHIPPING_CARRIERS.find((c) => c.id === selectedCarrierId) || SHIPPING_CARRIERS[0];
   
   // Free shipping check (if subtotal >= freeThreshold)
-  const isFreeShipping = selectedCarrier.freeThreshold ? subtotal >= selectedCarrier.freeThreshold : false;
-  const shippingFee = isFreeShipping ? 0 : selectedCarrier.price;
+  const isFreeShipping = selectedCarrier?.freeThreshold ? subtotal >= selectedCarrier.freeThreshold : false;
+  const shippingFee = isFreeShipping ? 0 : (selectedCarrier?.price ?? 30000);
 
   const discountAmount = Math.round((subtotal * discountPercent) / 100);
   const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee);
@@ -237,21 +276,6 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }, 1800);
   };
 
-  const handleApplyPromo = () => {
-    const code = promoCode.trim().toUpperCase();
-    if (code === 'ALPS10' || code === 'ALPS2025') {
-      setDiscountPercent(10);
-      setPromoApplied(true);
-      onShowToast(`Đã áp dụng mã ưu đãi ${code}: Giảm 10%`);
-    } else if (code === 'VIP20' || code === 'VEGAN20') {
-      setDiscountPercent(20);
-      setPromoApplied(true);
-      onShowToast('Đã áp dụng mã đặc quyền VIP: Giảm 20%');
-    } else {
-      onShowToast('Mã ưu đãi không hợp lệ hoặc đã hết lượt dùng');
-    }
-  };
-
   const handleSubmitOrder = (e?: React.SyntheticEvent) => {
     if (e && typeof e.preventDefault === 'function') {
       e.preventDefault();
@@ -262,7 +286,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     const finalPhone = phone.trim() || user?.phone || '0901234567';
     const finalAddress = address.trim() || user?.address || 'Giao tận nơi (Nhân viên ALPS liên hệ giao hàng)';
 
-    if (items.length === 0) {
+    if (safeItems.length === 0) {
       const err = 'Đơn hàng không có sản phẩm nào.';
       setFormError(err);
       if (onShowToast) onShowToast(err);
@@ -280,7 +304,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
         month: '2-digit',
         year: 'numeric',
       }),
-      items: items.map((it) => ({
+      items: safeItems.map((it) => ({
         product: it.product,
         quantity: it.quantity,
         unitPrice: it.product.price,
@@ -328,6 +352,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       onClose();
     }, 350);
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 transition-opacity">
@@ -952,7 +978,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#202022]/8 shadow-xs space-y-4 sticky top-4">
                 <div className="flex items-center justify-between pb-2 border-b border-[#202022]/6">
                   <h3 className="font-serif text-sm font-semibold text-[#1c1c19]">
-                    {cData.orderSummaryTitle} ({items.reduce((s, i) => s + i.quantity, 0)})
+                    {cData.orderSummaryTitle} ({safeItems.reduce((s, i) => s + (i.quantity || 1), 0)})
                   </h3>
                   <span className="text-[10px] text-[#74584d] font-semibold uppercase">
                     ALPS
@@ -961,16 +987,19 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                 {/* Items List */}
                 <div className="space-y-3 max-h-60 overflow-y-auto pr-1">
-                  {items.map((item) => {
-                    const loc = getLocalizedProduct(item.product, language);
-                    const prodName = loc?.name || item.product.name;
+                  {safeItems.map((item, idx) => {
+                    const loc = item.product ? getLocalizedProduct(item.product, language) : undefined;
+                    const prodName = loc?.name || item.product?.name || 'Sản phẩm Alps';
+                    const prodImg = item.product?.image || item.product?.fallbackImage || '';
+                    const prodPrice = item.product?.price || 0;
+                    const prodQty = item.quantity || 1;
                     return (
                       <div
-                        key={item.product.id}
+                        key={`${item.product?.id || 'item'}-${idx}`}
                         className="flex items-center space-x-3 text-xs pb-2 border-b border-[#202022]/5 last:border-0"
                       >
                         <img
-                          src={item.product.image}
+                          src={prodImg}
                           alt={prodName}
                           className="w-12 h-12 object-cover rounded-xl border border-[#202022]/6 bg-[#f6f3ee] shrink-0"
                         />
@@ -979,12 +1008,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                             {prodName}
                           </h4>
                           <div className="text-[10px] text-[#77767b] flex items-center space-x-2">
-                            <span>{item.product.capacity}</span>
+                            <span>{item.product?.capacity || 'Tiêu chuẩn'}</span>
                             <span>•</span>
-                            <span>{language === 'vi' ? 'Số lượng' : language === 'de' ? 'Menge' : language === 'es' ? 'Cantidad' : language === 'zh' ? '数量' : 'Qty'}: {item.quantity}</span>
+                            <span>{language === 'vi' ? 'Số lượng' : language === 'de' ? 'Menge' : language === 'es' ? 'Cantidad' : language === 'zh' ? '数量' : 'Qty'}: {prodQty}</span>
                           </div>
                           <div className="font-medium text-[#1c1c19] text-[11px] mt-0.5">
-                            {(item.product.price * item.quantity).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
+                            {(prodPrice * prodQty).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
                           </div>
                         </div>
                       </div>
@@ -1004,15 +1033,45 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     />
                     <button
                       type="button"
-                      onClick={handleApplyPromo}
+                      onClick={() => handleApplyPromo()}
                       className="px-3 py-2 bg-[#1c1c19] hover:bg-black text-white rounded-xl text-xs font-semibold tracking-wider transition-colors shrink-0 cursor-pointer"
                     >
                       {language === 'vi' ? 'Áp Dụng' : language === 'de' ? 'Anwenden' : language === 'es' ? 'Aplicar' : language === 'zh' ? '应用' : 'Apply'}
                     </button>
                   </div>
+
+                  {/* 20/10 Quick Voucher Suggestions */}
+                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                    <span className="text-[10px] text-[#74584d] font-semibold flex items-center space-x-1">
+                      <span>🌸 Mã 20/10:</span>
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleApplyPromo('PHUNU20')}
+                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
+                        promoApplied && discountPercent === 20
+                          ? 'bg-[#74584d] text-white border-[#74584d]'
+                          : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
+                      }`}
+                    >
+                      PHUNU20 (-20%)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleApplyPromo('ALPS2010')}
+                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
+                        promoApplied && discountPercent === 15
+                          ? 'bg-[#74584d] text-white border-[#74584d]'
+                          : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
+                      }`}
+                    >
+                      ALPS2010 (-15%)
+                    </button>
+                  </div>
+
                   {promoApplied && (
-                    <span className="text-[10px] text-[#8a9a86] font-medium block mt-1">
-                      ✓ {discountPercent}% discount applied
+                    <span className="text-[10px] text-[#2d4a36] font-medium block mt-1.5 flex items-center space-x-1">
+                      <span>✓ Đã áp dụng ưu đãi giảm {discountPercent}% thành công!</span>
                     </span>
                   )}
                 </div>

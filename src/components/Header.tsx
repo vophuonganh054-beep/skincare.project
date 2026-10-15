@@ -171,13 +171,13 @@ export const Header: React.FC<HeaderProps> = ({
               href="https://www.facebook.com/profile.php?id=61595372038444"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#fed8c9] hover:underline flex items-center space-x-1 transition-colors"
-              title="Fanpage Facebook Alps Skincare"
+              className="text-[#fed8c9] hover:underline flex items-center space-x-1.5 transition-colors"
+              title="Chat Fanpage Facebook với Tư Vấn Viên Alps"
             >
               <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
-              <span>Facebook</span>
+              <span>Fanpage Tư Vấn</span>
             </a>
             {onOpenSupport && (
               <button
@@ -272,6 +272,16 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               {t.nav.orders}
+            </button>
+            <button
+              onClick={() => {
+                const el = document.getElementById('campaign-2010');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1 px-3 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1 whitespace-nowrap cursor-pointer shadow-2xs text-[11px]"
+            >
+              <span>🌸</span>
+              <span>Chiến Dịch 20/10</span>
             </button>
             {onOpenSkinQuiz && (
               <button
@@ -425,6 +435,30 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
           )}
         </div>
+      </div>
+
+      {/* 20/10 Campaign Banner Strip across all devices */}
+      <div className="bg-gradient-to-r from-[#8b5545] via-[#9e6353] to-[#74584d] text-white text-[11px] sm:text-xs py-1.5 px-3 flex items-center justify-center space-x-2 tracking-wide font-medium shadow-xs">
+        <span className="text-amber-200 animate-pulse text-xs">🌸</span>
+        <button
+          type="button"
+          onClick={() => {
+            const el = document.getElementById('campaign-2010');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="hover:underline cursor-pointer flex items-center space-x-1.5 truncate max-w-full"
+        >
+          <span className="font-bold text-amber-200 uppercase tracking-wider text-[9px] sm:text-[10px] bg-black/25 px-2 py-0.5 rounded-full shrink-0">
+            20/10 TRI ÂN
+          </span>
+          <span className="truncate text-white/95">
+            Nhập mã <strong className="text-amber-200 underline font-bold">PHUNU20</strong> giảm ngay 20% • Tặng kèm Hộp quà độc quyền của ALPS sang trọng dành tặng phái nữ
+          </span>
+          <span className="text-amber-200 underline underline-offset-2 ml-1 hidden md:inline shrink-0 font-bold">
+            Khám phá 2 Combo →
+          </span>
+        </button>
+        <span className="text-amber-200 animate-pulse text-xs">🌸</span>
       </div>
     </header>
   );

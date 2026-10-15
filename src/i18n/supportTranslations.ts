@@ -120,6 +120,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       welcomeMessage: (name) =>
         `Dạ kính chào ${name || 'quý khách'}! Em là Chuyên viên Tư vấn Da liễu & CSKH Trí Tuệ Nhân Tạo (AI) của Alps Skincare Thụy Sĩ (alps.id.vn).\n\nEm được trang bị toàn bộ cơ sở dữ liệu y khoa từ Viện nghiên cứu Zurich và sẵn sàng giải đáp thông minh mọi câu hỏi của quý khách:\n• Chẩn đoán tình trạng da & lên phác đồ điều trị cá nhân hóa\n• Giải đáp thành phần dược mỹ phẩm tế bào gốc sông băng thuần chay\n• Hướng dẫn đặt hàng nhanh, tra cứu vận chuyển & thanh toán VietQR Napas 247\n• Chính sách bảo chứng đổi trả 30 ngày hoàn tiền 100% không rủi ro\n\nQuý khách đang quan tâm hoặc cần tư vấn về vấn đề gì hôm nay ạ?`,
       quickPrompts: [
+        'Chat Fanpage Facebook cùng chuyên viên tư vấn',
         'Kiểm tra tình trạng da & thiết lập phác đồ cá nhân hóa',
         'Da dầu mụn, bít tắc lỗ chân lông nên dùng sản phẩm nào?',
         'Serum Radiance Glow mờ thâm sáng da có dùng được cho mẹ bầu không?',

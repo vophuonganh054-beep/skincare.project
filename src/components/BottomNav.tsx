@@ -47,6 +47,21 @@ export const BottomNav: React.FC<BottomNavProps> = ({
           </span>
         </button>
 
+        {/* Ưu Đãi 20/10 */}
+        <button
+          onClick={() => {
+            const el = document.getElementById('campaign-2010');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          className="flex flex-col items-center justify-center flex-1 py-1 text-[#8b5545] hover:text-[#ba1a1a] transition-colors cursor-pointer"
+          title="Chiến dịch 20/10"
+        >
+          <span className="text-base leading-none">🌸</span>
+          <span className="text-[9.5px] tracking-wider mt-0.5 font-bold uppercase whitespace-nowrap text-[#8b5545]">
+            20/10
+          </span>
+        </button>
+
         {/* Giỏ hàng (chỉ hiện huy hiệu số lượng khi có sản phẩm > 0) */}
         {onOpenCart && (
           <button

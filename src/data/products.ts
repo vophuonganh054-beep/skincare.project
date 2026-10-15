@@ -1,9 +1,9 @@
 import { Product } from '../types';
-import glowSerumImg from '../assets/images/alps_serum_champagne_1789839140054.jpg';
+import glowSerumImg from '../assets/images/alps_radiance_glow_serum_exclusive.jpg';
 import faceCreamImg from '../assets/images/alps_cream_champagne_1789839152375.jpg';
 import botanicalTonerImg from '../assets/images/alps_toner_champagne_1789839113008.jpg';
 import hydroMaskImg from '../assets/images/alps_mask_champagne_1789839165550.jpg';
-import cleanserImg from '../assets/images/alps_cleanser_official_1790672869073.jpg';
+import cleanserImg from '../assets/images/alps_cleanser_white_official_1792002235984.jpg';
 
 export const PRODUCTS: Product[] = [
   {
@@ -289,8 +289,8 @@ export const PRODUCTS: Product[] = [
     rating: 4.9,
     reviewCount: 0,
     soldCount: '780',
-    price: 165000,
-    originalPrice: 220000,
+    price: 280000,
+    originalPrice: 350000,
     note: 'Premium Hydrogel',
     image: hydroMaskImg,
     fallbackImage: '/facemask.jpg',

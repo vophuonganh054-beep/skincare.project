@@ -22,6 +22,8 @@ import { Footer } from './components/Footer';
 import { FontSwitcherModal } from './components/FontSwitcherModal';
 import { SkinQuizModal } from './components/SkinQuizModal';
 import { BrandStoryModal } from './components/BrandStoryModal';
+import { WomenDayCampaignSection } from './components/WomenDayCampaignSection';
+import { CampaignCombo } from './data/campaign2010';
 import { Sparkles, Type } from 'lucide-react';
 import { auth, onAuthStateChanged } from './firebase';
 import {
@@ -51,6 +53,8 @@ export default function App() {
 
   // Track initial auth check to avoid wiping guest cart on first load
   const isInitialAuthRef = useRef(true);
+  const isRemoteCartUpdateRef = useRef(false);
+  const lastSavedCartJsonRef = useRef('');
 
   // Dynamic User Profile State (Logged out by default, sanitized of demo users)
   const [user, setUser] = useState<UserProfile | null>(() => {
@@ -84,17 +88,29 @@ export default function App() {
     return []; // Empty cart by default
   });
 
-  // Save Cart state to Firestore & local storage
+  // Save Cart state to Firestore & local storage with loop prevention
   useEffect(() => {
     try {
+      const currentCartJson = JSON.stringify(cart);
       const uid = auth.currentUser?.uid || user?.uid;
       if (uid) {
-        localStorage.setItem(`alps_cart_${uid}`, JSON.stringify(cart));
+        localStorage.setItem(`alps_cart_${uid}`, currentCartJson);
+        // Prevent infinite ping-pong loop when state was updated from Firestore snapshot
+        if (isRemoteCartUpdateRef.current) {
+          isRemoteCartUpdateRef.current = false;
+          lastSavedCartJsonRef.current = currentCartJson;
+          return;
+        }
+        // Only trigger Firestore write if contents actually changed
+        if (currentCartJson === lastSavedCartJsonRef.current) {
+          return;
+        }
+        lastSavedCartJsonRef.current = currentCartJson;
         saveCartToFirestore(uid, cart).catch((err) => {
           console.warn('Could not save cart to Firestore:', err);
         });
       } else {
-        localStorage.setItem('alps_active_cart', JSON.stringify(cart));
+        localStorage.setItem('alps_active_cart', currentCartJson);
       }
     } catch {}
   }, [cart, user?.uid]);
@@ -191,7 +207,12 @@ export default function App() {
         // 3. Subscribe to user personalized cart in Cloud Firestore (carts/{user.uid})
         unsubscribeCart = subscribeUserCart(uid, (remoteCartItems) => {
           if (Array.isArray(remoteCartItems)) {
-            setCart(remoteCartItems);
+            const remoteJson = JSON.stringify(remoteCartItems);
+            if (remoteJson !== lastSavedCartJsonRef.current) {
+              isRemoteCartUpdateRef.current = true;
+              lastSavedCartJsonRef.current = remoteJson;
+              setCart(remoteCartItems);
+            }
           }
         });
       } else {
@@ -217,6 +238,7 @@ export default function App() {
 
   // Modals and Drawers
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [activeVoucherCode, setActiveVoucherCode] = useState<string>('');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isRitualModalOpen, setIsRitualModalOpen] = useState(false);
   const [isAccountOpen, setIsAccountOpen] = useState(false);
@@ -643,6 +665,72 @@ export default function App() {
     }
   };
 
+  // Convert CampaignCombo to Product representation for cart & checkout
+  const createComboProduct = (combo: CampaignCombo): Product => ({
+    id: combo.id,
+    name: combo.name,
+    shortName: combo.name,
+    capacity: 'Hộp Quà Cao Cấp 20/10',
+    category: 'all',
+    categoryLabel: 'Set Quà Tặng 20/10',
+    tag: combo.badge,
+    tagType: 'bestseller',
+    subtitle: combo.subTitle,
+    description: `${combo.description} (Quà tặng kèm: ${combo.freeGifts.join(' + ')})`,
+    rating: 5.0,
+    reviewCount: 48,
+    soldCount: '250+ set',
+    price: combo.salePrice,
+    originalPrice: combo.originalPrice,
+    image: combo.image,
+    fallbackImage: combo.image,
+    keyIngredients: [
+      'Chiết xuất tuyết nhung Alps',
+      'Tế bào gốc táo Thụy Sĩ',
+      'Nước khoáng sông băng Matterhorn',
+    ],
+    benefits: combo.includes,
+    usage: 'Sử dụng trọn vẹn quy trình theo các bước ghi trên từng sản phẩm trong set.',
+    routineStepNumber: 1,
+    routineStepTitle: 'Đại Nghi Thức Dưỡng Da 20/10',
+    inStock: true,
+    isFeatured: true,
+  });
+
+  const handleAddComboToCart = (combo: CampaignCombo) => {
+    const comboProduct = createComboProduct(combo);
+    if (!activeVoucherCode) {
+      setActiveVoucherCode('PHUNU20');
+    }
+    setCart((prev) => {
+      const idx = prev.findIndex((item) => item.product.id === comboProduct.id);
+      if (idx > -1) {
+        const next = [...prev];
+        next[idx] = { ...next[idx], quantity: next[idx].quantity + 1 };
+        return next;
+      }
+      return [...prev, { product: comboProduct, quantity: 1 }];
+    });
+    setIsCartOpen(true);
+    showToast(`🌸 Đã thêm "${combo.name}" vào giỏ hàng!`);
+  };
+
+  const handleBuyNowCombo = (combo: CampaignCombo) => {
+    const comboProduct = createComboProduct(combo);
+    if (!activeVoucherCode) {
+      setActiveVoucherCode('PHUNU20');
+    }
+    setCheckoutItems([{ product: comboProduct, quantity: 1 }]);
+    setIsCheckoutOpen(true);
+    showToast(`🌸 Đang mở thanh toán 20/10 cho "${combo.name}"`);
+  };
+
+  const handleApplyVoucherToCart = (code: string) => {
+    setActiveVoucherCode(code);
+    setIsCartOpen(true);
+    showToast(`🌸 Đã lưu mã ưu đãi ${code}! Giảm giá áp dụng ngay khi đặt hàng.`);
+  };
+
   const handleOpenCheckoutFromCart = () => {
     if (cart.length === 0) {
       showToast('Giỏ hàng của bạn đang trống');
@@ -823,6 +911,15 @@ export default function App() {
             isMobileFrame={false}
           />
 
+          {/* CHIẾN DỊCH TRI ÂN 20/10 NGÀY PHỤ NỮ VIỆT NAM */}
+          <WomenDayCampaignSection
+            onAddComboToCart={handleAddComboToCart}
+            onBuyNowCombo={handleBuyNowCombo}
+            onApplyVoucherToCart={handleApplyVoucherToCart}
+            onShowToast={showToast}
+            isMobileFrame={false}
+          />
+
           <RitualCallout
             onOpenRitual={() => setIsRitualModalOpen(true)}
             isMobileFrame={false}
@@ -890,6 +987,8 @@ export default function App() {
         onOpenCheckout={handleOpenCheckoutFromCart}
         onExploreProducts={handleScrollToCatalog}
         onOpenSupport={() => setIsSupportOpen(true)}
+        initialVoucher={activeVoucherCode}
+        onVoucherApplied={(code) => setActiveVoucherCode(code || '')}
       />
 
       {/* Product Detail Modal */}
@@ -916,6 +1015,7 @@ export default function App() {
           setAccountInitialTab('profile');
           setIsAccountOpen(true);
         }}
+        initialPromoCode={activeVoucherCode}
       />
 
       {/* Policies Modal (Đổi trả, Bảo mật, Vận chuyển) */}

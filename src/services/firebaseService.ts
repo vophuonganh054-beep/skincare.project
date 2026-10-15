@@ -21,6 +21,21 @@ import {
 } from '../firebase';
 import { UserProfile, Order, ProductReview, CartItem } from '../types';
 
+let isWriteQuotaExhausted = false;
+
+export function checkIsQuotaExhausted(): boolean {
+  return isWriteQuotaExhausted;
+}
+
+export function markQuotaExhausted(): void {
+  if (!isWriteQuotaExhausted) {
+    isWriteQuotaExhausted = true;
+    console.warn(
+      'Firestore write quota reached for today (Spark free tier limit). Operating in offline fallback mode with localStorage. Quota resets tomorrow. Info: https://firebase.google.com/pricing#cloud-firestore'
+    );
+  }
+}
+
 /**
  * Sign in using Google Provider popup
  */
@@ -35,7 +50,19 @@ export async function loginWithGoogle(): Promise<UserProfile> {
 
     // Check if user profile already exists in Firestore
     const userDocRef = doc(db, 'users', uid);
-    let profileData: UserProfile;
+    const initials = getInitials(displayName);
+    let profileData: UserProfile = {
+      name: displayName,
+      email,
+      uid,
+      photoURL,
+      phone: '',
+      address: '',
+      tier: 'Hội Viên Alps Pure Privileges',
+      points: 100,
+      avatarInitials: initials,
+      isLoggedIn: true,
+    };
 
     try {
       const snap = await getDoc(userDocRef);
@@ -50,25 +77,10 @@ export async function loginWithGoogle(): Promise<UserProfile> {
           address: data.address || '',
           tier: data.tier || 'Hội Viên Alps Pure Privileges',
           points: typeof data.points === 'number' ? data.points : 100,
-          avatarInitials: data.avatarInitials || getInitials(displayName),
+          avatarInitials: data.avatarInitials || initials,
           isLoggedIn: true,
         };
       } else {
-        // Initial profile creation
-        const initials = getInitials(displayName);
-        profileData = {
-          name: displayName,
-          email,
-          uid,
-          photoURL,
-          phone: '',
-          address: '',
-          tier: 'Hội Viên Alps Pure Privileges',
-          points: 100,
-          avatarInitials: initials,
-          isLoggedIn: true,
-        };
-
         const createPayload: Record<string, unknown> = {
           userId: uid,
           name: displayName,
@@ -85,10 +97,26 @@ export async function loginWithGoogle(): Promise<UserProfile> {
           createPayload.photoURL = photoURL;
         }
 
-        await setDoc(userDocRef, createPayload);
+        try {
+          await setDoc(userDocRef, createPayload);
+        } catch (setErr: unknown) {
+          const msg = setErr instanceof Error ? setErr.message : String(setErr);
+          const code = (setErr as { code?: string })?.code;
+          if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+            markQuotaExhausted();
+          } else {
+            console.warn(`Could not save new user profile to users/${uid}:`, setErr);
+          }
+        }
       }
-    } catch (err) {
-      handleFirestoreError(err, OperationType.WRITE, `users/${uid}`);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      const code = (err as { code?: string })?.code;
+      if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+        markQuotaExhausted();
+      } else {
+        console.warn(`Firestore profile read warning for users/${uid}:`, err);
+      }
     }
 
     return profileData;
@@ -114,6 +142,9 @@ export async function updateUserProfileDoc(
   uid: string,
   updates: { name: string; phone?: string; address?: string }
 ): Promise<void> {
+  if (isWriteQuotaExhausted) {
+    return;
+  }
   const path = `users/${uid}`;
   try {
     const userDocRef = doc(db, 'users', uid);
@@ -124,7 +155,13 @@ export async function updateUserProfileDoc(
       updatedAt: new Date().toISOString(),
     };
     await updateDoc(userDocRef, updatePayload);
-  } catch (error) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const code = (error as { code?: string })?.code;
+    if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+      markQuotaExhausted();
+      return;
+    }
     handleFirestoreError(error, OperationType.UPDATE, path);
   }
 }
@@ -161,7 +198,11 @@ export function subscribeUserProfile(
       }
     },
     (error) => {
-      handleFirestoreError(error, OperationType.GET, path);
+      const msg = error?.message || String(error);
+      if (msg.includes('Quota') || msg.includes('resource-exhausted')) {
+        markQuotaExhausted();
+      }
+      console.warn(`Firestore subscribeUserProfile warning for ${path}:`, msg);
     }
   );
 }
@@ -255,6 +296,9 @@ export async function getUserOrdersFromFirestore(uid: string): Promise<Order[]> 
  * Save newly placed order to Firestore under users/{uid}/orders/{orderId}
  */
 export async function saveOrderToFirestore(uid: string, order: Order): Promise<void> {
+  if (isWriteQuotaExhausted) {
+    return;
+  }
   const path = `users/${uid}/orders/${order.id}`;
   try {
     const orderDocRef = doc(db, 'users', uid, 'orders', order.id);
@@ -290,7 +334,13 @@ export async function saveOrderToFirestore(uid: string, order: Order): Promise<v
     };
 
     await setDoc(orderDocRef, orderPayload);
-  } catch (error) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const code = (error as { code?: string })?.code;
+    if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+      markQuotaExhausted();
+      return;
+    }
     console.warn(`Could not save order to ${path}:`, error);
   }
 }
@@ -303,6 +353,9 @@ export async function updateOrderAddressInFirestore(
   orderId: string,
   updates: { buyerName?: string; phone?: string; shippingAddress: string }
 ): Promise<void> {
+  if (isWriteQuotaExhausted) {
+    return;
+  }
   const path = `users/${uid}/orders/${orderId}`;
   try {
     const orderDocRef = doc(db, 'users', uid, 'orders', orderId);
@@ -314,7 +367,13 @@ export async function updateOrderAddressInFirestore(
     if (updates.phone) payload.phone = updates.phone;
 
     await updateDoc(orderDocRef, payload);
-  } catch (error) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const code = (error as { code?: string })?.code;
+    if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+      markQuotaExhausted();
+      return;
+    }
     handleFirestoreError(error, OperationType.UPDATE, path);
   }
 }
@@ -355,7 +414,11 @@ export function subscribeProductReviews(
       onReviewsChange(result);
     },
     (error) => {
-      handleFirestoreError(error, OperationType.GET, path);
+      const msg = error?.message || String(error);
+      if (msg.includes('Quota') || msg.includes('resource-exhausted')) {
+        markQuotaExhausted();
+      }
+      console.warn(`Firestore subscribeProductReviews warning for ${path}:`, msg);
     }
   );
 }
@@ -364,6 +427,9 @@ export function subscribeProductReviews(
  * Add a new product review to Firestore
  */
 export async function addProductReviewToFirestore(review: ProductReview): Promise<void> {
+  if (isWriteQuotaExhausted) {
+    return;
+  }
   const path = `reviews/${review.id}`;
   try {
     const reviewDocRef = doc(db, 'reviews', review.id);
@@ -381,7 +447,13 @@ export async function addProductReviewToFirestore(review: ProductReview): Promis
       helpfulCount: review.helpfulCount || 0,
     };
     await setDoc(reviewDocRef, payload);
-  } catch (error) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const code = (error as { code?: string })?.code;
+    if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+      markQuotaExhausted();
+      return;
+    }
     handleFirestoreError(error, OperationType.WRITE, path);
   }
 }
@@ -393,13 +465,22 @@ export async function voteReviewHelpfulInFirestore(
   reviewId: string,
   newCount: number
 ): Promise<void> {
+  if (isWriteQuotaExhausted) {
+    return;
+  }
   const path = `reviews/${reviewId}`;
   try {
     const reviewDocRef = doc(db, 'reviews', reviewId);
     await updateDoc(reviewDocRef, {
       helpfulCount: newCount,
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const code = (error as { code?: string })?.code;
+    if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+      markQuotaExhausted();
+      return;
+    }
     handleFirestoreError(error, OperationType.UPDATE, path);
   }
 }
@@ -425,6 +506,9 @@ export function getInitials(name: string): string {
  * Data schema: { items: [...], updatedAt: string }
  */
 export async function saveCartToFirestore(uid: string, items: CartItem[]): Promise<void> {
+  if (isWriteQuotaExhausted) {
+    return;
+  }
   const path = `carts/${uid}`;
   try {
     const cartDocRef = doc(db, 'carts', uid);
@@ -451,7 +535,13 @@ export async function saveCartToFirestore(uid: string, items: CartItem[]): Promi
       items: sanitizedItems,
       updatedAt: new Date().toISOString(),
     });
-  } catch (error) {
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : String(error);
+    const code = (error as { code?: string })?.code;
+    if (code === 'resource-exhausted' || msg.includes('Quota') || msg.includes('resource-exhausted')) {
+      markQuotaExhausted();
+      return;
+    }
     console.warn(`Could not save cart to ${path}:`, error);
   }
 }

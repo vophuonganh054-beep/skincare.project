@@ -173,13 +173,20 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
       ) {
         fallbackText = supportTexts.fallbackReturns;
       } else if (
+        lower.includes('tư vấn viên') ||
+        lower.includes('chuyên viên') ||
+        lower.includes('người thật') ||
+        lower.includes('nhân viên') ||
+        lower.includes('gặp người') ||
         lower.includes('facebook') ||
         lower.includes('fb') ||
         lower.includes('fanpage') ||
+        lower.includes('messenger') ||
         lower.includes('mạng xã hội') ||
-        lower.includes('social')
+        lower.includes('social') ||
+        lower.includes('zalo')
       ) {
-        fallbackText = 'Dạ quý khách có thể ghé thăm và kết nối trực tiếp với Alps qua trang Facebook Fanpage chính thức tại: https://www.facebook.com/profile.php?id=61595372038444 để nhận tin tức, ưu đãi độc quyền và chat Messenger với tư vấn viên nhé ạ!';
+        fallbackText = 'Dạ kính thưa quý khách! Quý khách có thể kết nối và nhắn tin Messenger trực tiếp 1-1 với Chuyên viên Tư vấn Da liễu & CSKH Alps qua trang Facebook Fanpage chính thức tại: https://www.facebook.com/profile.php?id=61595372038444.\n\nChuyên viên tư vấn luôn túc trực 24/7 trên Fanpage để soi da, lên phác đồ phục hồi hàng rào ẩm và tư vấn gói quà 20/10 chu đáo nhất ạ!';
       } else if (
         lower.includes('serum') ||
         lower.includes('sáng da') ||

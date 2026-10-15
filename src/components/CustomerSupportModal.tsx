@@ -180,7 +180,37 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
         <div className="overflow-y-auto p-4 sm:p-5 flex-grow text-[#1c1c19] bg-[#fcf9f4]">
           {/* TAB 0: CHAT AI TƯ VẤN KHÁCH HÀNG 24/7 */}
           {activeTab === 'ai_chat' && (
-            <div className="animate-fade-in">
+            <div className="space-y-3 animate-fade-in">
+              {/* Fanpage Direct Chat Callout */}
+              <div className="bg-gradient-to-r from-[#1877F2]/10 via-[#1877F2]/5 to-transparent border border-[#1877F2]/30 rounded-2xl p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                <div className="flex items-center space-x-2.5">
+                  <div className="w-8 h-8 rounded-full bg-[#1877F2] text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-xs text-[#1c1c19] flex items-center gap-1.5">
+                      <span>Chat Trực Tiếp Với Tư Vấn Viên Qua Facebook Fanpage</span>
+                      <span className="text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.2 rounded-full uppercase">Online</span>
+                    </h5>
+                    <p className="text-[11px] text-[#5f5d58] mt-0.5">
+                      Nhắn tin Messenger trực tiếp với chuyên viên để nhận soi da, phác đồ điều trị và tư vấn quà 20/10
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href="https://www.facebook.com/profile.php?id=61595372038444"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center space-x-1.5 px-3.5 py-1.5 bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold rounded-full shadow-xs transition-all shrink-0 cursor-pointer self-start sm:self-auto"
+                >
+                  <span>Chat Messenger Fanpage</span>
+                  <span className="text-[10px]">↗</span>
+                </a>
+              </div>
+
               <AICustomerSupportChat
                 user={user}
                 onOpenLogin={onOpenLogin}
@@ -195,6 +225,47 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
             <div className="space-y-6 animate-fade-in">
               {/* Hotlines Banner */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {/* Facebook Fanpage Tư Vấn Viên 1-1 Box */}
+                <div className="bg-white rounded-2xl p-4 border border-[#1877F2]/30 shadow-2xs hover:border-[#1877F2] transition-all flex flex-col justify-between sm:col-span-2 bg-gradient-to-r from-blue-50/40 via-white to-transparent">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-[10px] uppercase tracking-wider font-bold text-white bg-[#1877F2] px-2 py-0.5 rounded-full flex items-center gap-1 shadow-2xs">
+                          <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                          </svg>
+                          <span>FANPAGE TƯ VẤN VIÊN 1-1</span>
+                        </span>
+                        <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span>Đang trực tuyến 24/7</span>
+                        </span>
+                      </div>
+                      <h4 className="font-serif text-base font-semibold text-[#1c1c19]">
+                        Kênh Fanpage Facebook Tư Vấn Da Liễu &amp; Quà Tặng 20/10
+                      </h4>
+                      <p className="text-xs text-[#5f5d58]">
+                        Nhắn tin Messenger trực tiếp 1-1 để nhận chẩn đoán tình trạng da, phác đồ phục hồi hàng rào ẩm và tư vấn gói quà 20/10
+                      </p>
+                    </div>
+
+                    <div className="flex items-center space-x-3 shrink-0">
+                      <a
+                        href="https://www.facebook.com/profile.php?id=61595372038444"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center space-x-1.5 px-4 py-2 bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold rounded-full shadow-xs transition-colors"
+                      >
+                        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                        <span>Mở Chat Fanpage Messenger</span>
+                        <span>↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Hotline 1 */}
                 <div className="bg-white rounded-2xl p-4 border border-[#202022]/8 shadow-2xs hover:border-[#74584d]/30 transition-all flex flex-col justify-between">
                   <div>

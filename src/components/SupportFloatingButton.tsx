@@ -32,17 +32,18 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
           </button>
         )}
 
+        {/* Nút Chat Fanpage Tư Vấn Viên 24/7 */}
         <a
           href="https://www.facebook.com/profile.php?id=61595372038444"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-3 py-1.5 rounded-full shadow-lg flex items-center space-x-1.5 text-xs transition-all active:scale-95 cursor-pointer"
-          title="Facebook Fanpage"
+          className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-3.5 py-1.5 rounded-full shadow-lg flex items-center space-x-1.5 text-xs transition-all active:scale-95 cursor-pointer border border-white/25"
+          title="Chat Messenger Fanpage với tư vấn viên"
         >
           <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
           </svg>
-          <span className="text-[10px] font-bold">Facebook</span>
+          <span className="text-[11px] font-bold tracking-wide">Chat Fanpage</span>
         </a>
 
         <button
@@ -80,41 +81,50 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
         </button>
       )}
 
+      {/* Nút Chat Trực Tiếp Với Tư Vấn Viên Qua Facebook Fanpage */}
       <a
         href="https://www.facebook.com/profile.php?id=61595372038444"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-3.5 py-2 rounded-full shadow-lg flex items-center space-x-2 border border-blue-400/40 hover:scale-105 active:scale-95 transition-all text-xs cursor-pointer group"
-        title="Fanpage Facebook Alps Skincare"
+        className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-4 py-2.5 rounded-full shadow-2xl flex items-center space-x-2.5 border border-white/30 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
+        title="Chat trực tiếp với tư vấn viên qua Facebook Fanpage"
       >
-        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-        </svg>
-        <span className="text-[11px] font-semibold tracking-wide">Facebook Fanpage</span>
-        <span className="text-[9px] bg-white/20 text-white px-1.5 py-0.5 rounded-full font-bold">↗</span>
+        <div className="w-6 h-6 rounded-full bg-white text-[#1877F2] flex items-center justify-center shrink-0 shadow-xs">
+          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </div>
+        <div className="text-left">
+          <div className="flex items-center space-x-1">
+            <span className="block text-[11px] font-bold tracking-wider uppercase text-white leading-tight">
+              Chat Tư Vấn Fanpage
+            </span>
+            <span className="text-[8px] bg-white text-[#1877F2] px-1 rounded-xs font-black leading-tight">
+              24/7
+            </span>
+          </div>
+          <span className="block text-[9px] text-blue-100 font-medium leading-tight">
+            Messenger 1-1 • Hỗ trợ ngay
+          </span>
+        </div>
       </a>
 
       <button
         id="desktop-floating-support-btn"
         onClick={onOpenSupport}
-        className="bg-[#1c1c19] hover:bg-black text-white px-4 py-2.5 rounded-full shadow-2xl flex items-center space-x-2.5 border border-[#fed8c9]/50 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
+        className="bg-[#1c1c19] hover:bg-black text-white px-4 py-2 rounded-full shadow-xl flex items-center space-x-2 border border-[#fed8c9]/50 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
         title={btnTexts.sublabel}
       >
         <div className="relative flex items-center justify-center">
-          <Sparkles className="w-4 h-4 text-[#fed8c9] group-hover:rotate-12 transition-transform" />
-          <span className="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full ring-2 ring-[#1c1c19] animate-pulse" />
+          <Sparkles className="w-3.5 h-3.5 text-[#fed8c9] group-hover:rotate-12 transition-transform" />
+          <span className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-emerald-400 rounded-full ring-1 ring-[#1c1c19] animate-pulse" />
         </div>
         <div className="text-left">
-          <div className="flex items-center space-x-1">
-            <span className="block text-[11px] font-semibold tracking-wider uppercase text-white leading-tight">
-              {btnTexts.chatLabel}
-            </span>
-            <span className="text-[8px] bg-[#fed8c9] text-[#1c1c19] px-1 rounded-xs font-bold leading-tight">
-              {btnTexts.tag247}
-            </span>
-          </div>
+          <span className="block text-[11px] font-semibold tracking-wider text-white leading-tight">
+            Trợ Lý AI &amp; CSKH
+          </span>
           <span className="block text-[9px] text-[#fed8c9] font-light leading-tight">
-            {btnTexts.sublabel}
+            Giải đáp tự động 24/7
           </span>
         </div>
       </button>
