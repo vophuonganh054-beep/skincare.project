@@ -111,7 +111,8 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
         text: m.text,
       }));
 
-      const res = await fetch('/api/chat', {
+      const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+      const res = await fetch(`${apiBase}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -214,6 +215,16 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
         lower.includes('痘')
       ) {
         fallbackText = supportTexts.fallbackOilyAcne;
+      } else if (
+        lower.includes('sepay') ||
+        lower.includes('mb bank') ||
+        lower.includes('chuyển khoản') ||
+        lower.includes('vietqr') ||
+        lower.includes('thanh toán') ||
+        lower.includes('quét mã') ||
+        lower.includes('napas')
+      ) {
+        fallbackText = 'Dạ Alps Skincare hỗ trợ thanh toán thông minh tự động qua cổng SePay kết nối trực tiếp MB Bank (Ngân hàng TMCP Quân Đội):\n• Quý khách quét mã VietQR Napas 247 trên ứng dụng ngân hàng, số tiền và nội dung chuyển khoản được điền sẵn chính xác 100%.\n• Hệ thống SePay sẽ tự động nhận diện và kích hoạt đơn hàng sau khi backend đối soát thành công mà không cần gửi ảnh biên lai.\n• Nếu chuyển khoản trực tuyến đang bảo trì hoặc chưa sẵn sàng, quý khách có thể chọn phương thức Tiền mặt khi nhận hàng (COD) để đặt hàng an tâm và thuận tiện ạ!';
       }
 
       setMessages((prev) => [

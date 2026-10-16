@@ -261,19 +261,37 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }, 1400);
   };
 
-  const handleCheckPayment = () => {
+  const handleCheckPayment = async () => {
     setIsVerifyingPayment(true);
     setFormError(null);
     if (onShowToast) {
-      onShowToast('Đang kết nối Napas 247 & MB Bank kiểm tra biến động số dư...');
+      onShowToast('Đang kết nối SePay & MB Bank kiểm tra biến động số dư Napas 247...');
     }
-    setTimeout(() => {
-      setIsVerifyingPayment(false);
-      setPaymentReceived(true);
-      if (onShowToast) {
-        onShowToast(`✓ Đã nhận ${totalAmount.toLocaleString('vi-VN')}₫ thành công! Nút đặt hàng đã được kích hoạt.`);
+
+    try {
+      const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+      const res = await fetch(`${apiBase}/api/sepay/payment-status/${encodeURIComponent(orderNumber)}`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.isPaid) {
+          setIsVerifyingPayment(false);
+          setPaymentReceived(true);
+          if (onShowToast) {
+            onShowToast(`✓ Đã nhận ${totalAmount.toLocaleString('vi-VN')}₫ qua MB Bank (SePay) thành công! Nút đặt hàng đã được kích hoạt.`);
+          }
+          return;
+        }
       }
-    }, 1800);
+    } catch (err) {
+      console.warn('SePay check error:', err);
+    }
+
+    setIsVerifyingPayment(false);
+    const msg = 'Hệ thống chưa ghi nhận biến động số dư cho đơn hàng này. (Lưu ý: Thanh toán MB Bank trực tuyến hiện đang tắt, vui lòng chọn phương thức COD để đặt hàng thật).';
+    setFormError(msg);
+    if (onShowToast) {
+      onShowToast(msg);
+    }
   };
 
   const handleSubmitOrder = (e?: React.SyntheticEvent) => {
@@ -281,6 +299,21 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       e.preventDefault();
     }
     setFormError(null);
+
+    // Không cho phép đặt hàng khi chưa nhận được xác thực thẻ Visa hoặc chuyển khoản QR thành công
+    if (paymentMethod === 'card' && !cardAuthSuccess) {
+      const err = 'Chưa nhận được xác thực thẻ Visa / Mastercard. Quý khách vui lòng nhập thông tin thẻ và bấm nút "Xác thực thẻ Visa & Mở khóa đặt hàng" trước khi đặt hàng.';
+      setFormError(err);
+      if (onShowToast) onShowToast(err);
+      return;
+    }
+
+    if ((paymentMethod === 'vietqr' || paymentMethod === 'bank_transfer') && !paymentReceived) {
+      const err = 'Chưa nhận được thanh toán chuyển khoản qua MB Bank. Quý khách vui lòng quét mã VietQR và chờ hệ thống đối soát thành công, hoặc chọn phương thức Tiền mặt khi nhận hàng (COD).';
+      setFormError(err);
+      if (onShowToast) onShowToast(err);
+      return;
+    }
 
     const finalName = buyerName.trim() || user?.name || 'Khách Hàng Thân Thiết';
     const finalPhone = phone.trim() || user?.phone || '0901234567';
@@ -787,6 +820,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         isPaymentReceived={paymentReceived}
                         isVerifying={isVerifyingPayment}
                         onCheckPayment={handleCheckPayment}
+                        onPaymentSuccess={() => {
+                          setPaymentReceived(true);
+                        }}
                       />
                     </div>
                   )}
@@ -966,6 +1002,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         isPaymentReceived={paymentReceived}
                         isVerifying={isVerifyingPayment}
                         onCheckPayment={handleCheckPayment}
+                        onPaymentSuccess={() => {
+                          setPaymentReceived(true);
+                        }}
                       />
                     </div>
                   )}
@@ -1150,7 +1189,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 )}
 
                 {/* Confirm Order Button */}
-                <div className="pt-3 space-y-2">
+                <div className="pt-3 space-y-2 pb-6 sm:pb-2">
                   {formError && (
                     <div className="p-3 bg-red-50 border border-red-200 text-[#ba1a1a] rounded-xl text-xs flex items-center space-x-2 animate-pulse">
                       <AlertCircle className="w-4 h-4 shrink-0" />
@@ -1158,34 +1197,59 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     </div>
                   )}
 
-                  <button
-                    id="checkout-confirm-btn"
-                    type="button"
-                    onClick={handleSubmitOrder}
-                    disabled={isSubmitting}
-                    className="w-full py-4 px-6 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all shadow-lg flex items-center justify-center space-x-2 bg-[#1c1c19] hover:bg-black text-white active:scale-98 ring-2 ring-[#74584d]/40 cursor-pointer"
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center space-x-2">
-                        <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        <span>{cData.processingBtn}</span>
-                      </span>
-                    ) : (
+                  {(() => {
+                    const isPaymentReady =
+                      paymentMethod === 'cod' ||
+                      (paymentMethod === 'card' && cardAuthSuccess) ||
+                      ((paymentMethod === 'vietqr' || paymentMethod === 'bank_transfer') && paymentReceived);
+
+                    return (
                       <>
-                        <Sparkles className="w-4 h-4 text-[#fed8c9]" />
-                        <span>
-                          {paymentMethod === 'card'
-                            ? cardAuthSuccess
-                              ? `✓ ${cData.placeOrderBtn}`
-                              : `VISA / MASTER • ${cData.placeOrderBtn}`
-                            : paymentReceived
-                            ? `✓ ${cData.placeOrderBtn}`
-                            : `${cData.placeOrderBtn} • ${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`}
-                        </span>
-                        <ArrowRight className="w-4 h-4" />
+                        <button
+                          id="checkout-confirm-btn"
+                          type="button"
+                          onClick={handleSubmitOrder}
+                          disabled={isSubmitting || !isPaymentReady}
+                          className={`w-full py-4 px-6 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all shadow-lg flex items-center justify-center space-x-2 ${
+                            !isPaymentReady
+                              ? 'bg-[#5f5d58]/60 text-white cursor-not-allowed opacity-80'
+                              : 'bg-[#1c1c19] hover:bg-black text-white active:scale-98 ring-2 ring-[#74584d]/40 cursor-pointer'
+                          }`}
+                        >
+                          {isSubmitting ? (
+                            <span className="flex items-center space-x-2">
+                              <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                              <span>{cData.processingBtn}</span>
+                            </span>
+                          ) : (
+                            <>
+                              <Sparkles className="w-4 h-4 text-[#fed8c9]" />
+                              <span>
+                                {paymentMethod === 'card'
+                                  ? cardAuthSuccess
+                                    ? `✓ ${cData.placeOrderBtn}`
+                                    : 'Chưa xác thực thẻ Visa (Vui lòng bấm Xác thực thẻ ở trên)'
+                                  : paymentMethod === 'vietqr' || paymentMethod === 'bank_transfer'
+                                  ? paymentReceived
+                                    ? `✓ ${cData.placeOrderBtn}`
+                                    : `Chờ nhận chuyển khoản MB Bank (${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫)`
+                                  : `${cData.placeOrderBtn} • ${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`}
+                              </span>
+                              {isPaymentReady && <ArrowRight className="w-4 h-4" />}
+                            </>
+                          )}
+                        </button>
+
+                        {!isPaymentReady && (
+                          <p className="text-center text-[10.5px] text-[#ba1a1a] font-medium pt-1">
+                            {paymentMethod === 'card'
+                              ? '⚠️ Cần bấm "Xác thực thẻ Visa & Mở khóa đặt hàng" phía trên trước khi hoàn tất.'
+                              : '⚠️ Hệ thống chỉ mở nút đặt hàng sau khi nhận được chuyển khoản thành công từ ngân hàng MB.'}
+                          </p>
+                        )}
                       </>
-                    )}
-                  </button>
+                    );
+                  })()}
 
                   <div className="text-center text-[11px] text-[#77746f]">
                     {cData.policyAgreeText}

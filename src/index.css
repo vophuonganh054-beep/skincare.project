@@ -126,6 +126,15 @@
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
+
+  /* Safe area insets for iOS devices (iPhone with notch/home bar) */
+  .safe-area-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .safe-area-top {
+    padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+  }
 }
 
 /* Custom scrollbar for luxury feel */
@@ -142,4 +151,13 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #8a9a86;
+}
+
+/* Prevent accidental horizontal bounce on mobile iOS/Android */
+html, body {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }

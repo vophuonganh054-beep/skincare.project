@@ -4,6 +4,9 @@ import { AlpsLogo } from './AlpsLogo';
 import { PaymentBadgesGroup, VisaBadge, VisaDebitBadge, MastercardBadge, NapasBadge, VietQRBadge } from './PaymentBadges';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSelector } from './LanguageSelector';
+import { Link } from '../context/RouterContext';
+import { PRODUCTS } from '../data/products';
+import { getProductPath } from '../utils/slugUtils';
 
 interface FooterProps {
   isMobileFrame?: boolean;
@@ -109,29 +112,27 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
   };
 
   return (
-    <footer className={`bg-[#202022] text-[#fcf9f4] border-t border-[#31302d] ${isMobileFrame ? 'pb-24 pt-8 px-4' : 'pt-12 sm:pt-16 pb-12 sm:pb-16 px-4 sm:px-6'}`}>
+    <footer className={`bg-[#202022] text-[#fcf9f4] border-t border-[#31302d] ${isMobileFrame ? 'pb-24 pt-8 px-4' : 'pt-12 sm:pt-16 pb-24 sm:pb-16 px-4 sm:px-6'}`}>
       <div className={`${isMobileFrame ? 'w-full' : 'max-w-7xl mx-auto'}`}>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-[#31302d]">
           {/* Brand Column */}
           <div className="md:col-span-1 space-y-3">
-            <div className="flex items-center space-x-2">
+            <Link to="/" className="inline-block cursor-pointer" title="Alps Skincare • Pure Essence">
               <AlpsLogo
                 isDarkBackground
                 className="items-start text-left"
               />
-            </div>
+            </Link>
             <p className="text-xs text-[#c7c6ca] font-light leading-relaxed">
               {t.footer.brandDesc}
             </p>
-            {onOpenBrandStory && (
-              <button
-                onClick={onOpenBrandStory}
-                className="text-[11px] text-[#fed8c9] hover:underline flex items-center space-x-1 font-medium pt-1 cursor-pointer"
-              >
-                <span>{t.footer.brandStoryLink}</span>
-                <span>→</span>
-              </button>
-            )}
+            <Link
+              to="/ve-alps"
+              className="text-[11px] text-[#fed8c9] hover:underline flex items-center space-x-1 font-medium pt-1 cursor-pointer"
+            >
+              <span>{t.footer.brandStoryLink}</span>
+              <span>→</span>
+            </Link>
             <div className="pt-2 text-[11px] text-[#898789] space-y-1">
               <p><span className="text-[#fed8c9] font-medium">{t.footer.branchLabel}</span> {t.footer.branchAddress}</p>
             </div>
@@ -172,24 +173,35 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
 
           {/* Quick links */}
           <div className="space-y-3">
-            <h4 className="text-xs font-semibold tracking-widest text-[#fed8c9] uppercase">
-              {t.footer.collectionTitle}
-            </h4>
+            <Link
+              to="/san-pham"
+              className="text-xs font-semibold tracking-widest text-[#fed8c9] hover:underline uppercase block"
+            >
+              {t.footer.collectionTitle} →
+            </Link>
             <ul className="space-y-2 text-xs text-[#c7c6ca]">
-              <li className="hover:text-white cursor-pointer transition-colors">Alps Gentle Purifying Cleanser (120ml)</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Alps Botanical Balancing Toner (100ml)</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Alps Radiance Glow Serum (30ml)</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Alps Regenerating Face Cream (50g)</li>
-              <li className="hover:text-white cursor-pointer transition-colors">Alps Hydro-Lifting Sheet Mask (5x29g)</li>
+              {PRODUCTS.map((prod) => (
+                <li key={prod.id}>
+                  <Link
+                    to={getProductPath(prod)}
+                    className="hover:text-[#fed8c9] transition-colors block py-0.5"
+                  >
+                    {prod.name} ({prod.capacity.split('•')[0].trim()})
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Customer Care & Support */}
           <div className="space-y-3">
-            <h4 className="text-xs font-semibold tracking-widest text-[#fed8c9] uppercase flex items-center space-x-1.5">
+            <Link
+              to="/lien-he"
+              className="text-xs font-semibold tracking-widest text-[#fed8c9] hover:underline uppercase flex items-center space-x-1.5"
+            >
               <Headphones className="w-3.5 h-3.5 text-[#fed8c9]" />
-              <span>{t.footer.supportTitle}</span>
-            </h4>
+              <span>{t.footer.supportTitle} →</span>
+            </Link>
             <ul className="space-y-2 text-xs text-[#c7c6ca]">
               <li className="flex items-center space-x-2">
                 <span className="text-[#fed8c9]">{t.footer.hotlineLabel}</span>

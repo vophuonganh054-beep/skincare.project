@@ -377,7 +377,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
           {/* Footer with totals and checkout button (only if has items) */}
           {safeItems.length > 0 && (
-            <div className="p-5 bg-white border-t border-[#202022]/8 space-y-3">
+            <div className="p-4 sm:p-5 bg-white border-t border-[#202022]/8 space-y-3 safe-area-bottom">
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between text-[#77767b]">
                   <span>{t.cart.subtotal}</span>

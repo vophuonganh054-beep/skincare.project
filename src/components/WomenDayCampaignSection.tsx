@@ -283,23 +283,23 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                     <span>Combo giữ giá gốc • Áp mã <strong>PHUNU20</strong> để giảm 20%!</span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2.5 pt-1">
+                  <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-1">
                     <button
                       type="button"
                       onClick={() => onAddComboToCart(combo)}
-                      className="py-3 px-3 bg-[#f6f2eb] hover:bg-[#ebdccf] text-[#1c1c19] rounded-full text-xs font-semibold tracking-wider flex items-center justify-center space-x-1.5 transition-all shadow-2xs active:scale-95 cursor-pointer"
+                      className="py-2.5 sm:py-3 px-2 sm:px-3 bg-[#f6f2eb] hover:bg-[#ebdccf] text-[#1c1c19] rounded-full text-[11px] sm:text-xs font-semibold tracking-wider flex items-center justify-center space-x-1 sm:space-x-1.5 transition-all shadow-2xs active:scale-95 cursor-pointer"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5 text-[#74584d]" />
-                      <span>Thêm Giỏ Hàng</span>
+                      <ShoppingBag className="w-3.5 h-3.5 text-[#74584d] shrink-0" />
+                      <span className="truncate">Thêm Giỏ Hàng</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => onBuyNowCombo(combo)}
-                      className="py-3 px-3 bg-[#1c1c19] hover:bg-black text-white rounded-full text-xs font-semibold tracking-wider flex items-center justify-center space-x-1.5 transition-all shadow-xs active:scale-95 cursor-pointer"
+                      className="py-2.5 sm:py-3 px-2 sm:px-3 bg-[#1c1c19] hover:bg-black text-white rounded-full text-[11px] sm:text-xs font-semibold tracking-wider flex items-center justify-center space-x-1 sm:space-x-1.5 transition-all shadow-xs active:scale-95 cursor-pointer"
                     >
-                      <Zap className="w-3.5 h-3.5 text-amber-300" />
-                      <span>Mua Ngay</span>
+                      <Zap className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+                      <span className="truncate">Mua Ngay</span>
                     </button>
                   </div>
                 </div>

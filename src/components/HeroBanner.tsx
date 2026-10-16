@@ -138,7 +138,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="relative group overflow-hidden rounded-[2rem] shadow-md bg-[#1c1c19] text-[#fcf9f4] aspect-[4/3] sm:aspect-[21/9] md:aspect-[2.3/1] select-none"
+        className="relative group overflow-hidden rounded-[1.75rem] sm:rounded-[2rem] shadow-md bg-[#1c1c19] text-[#fcf9f4] min-h-[360px] sm:min-h-0 aspect-[4/4.5] xs:aspect-[4/3.4] sm:aspect-[21/9] md:aspect-[2.3/1] select-none"
       >
         {/* All Slides Container with Smooth Sliding Effect */}
         <div
@@ -157,54 +157,54 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 className="w-full h-full object-cover object-center scale-105"
               />
               {/* High contrast gradient overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/30" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent hidden sm:block" />
             </div>
           ))}
         </div>
 
         {/* Content Overlay */}
-        <div className="absolute inset-0 z-10 flex flex-col justify-end p-4 sm:p-7 md:p-8 pl-6 sm:pl-12 md:pl-14 pointer-events-none">
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-4 sm:p-7 md:p-8 pl-4.5 sm:pl-12 md:pl-14 pointer-events-none">
           <div className="pointer-events-auto max-w-xl">
             {/* Top Row: Badge */}
             <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-3">
-              <div className="inline-flex items-center space-x-1.5 bg-white/95 backdrop-blur-md text-[#1c1c19] px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase shadow-xs">
+              <div className="inline-flex items-center space-x-1.5 bg-white/95 backdrop-blur-md text-[#1c1c19] px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase shadow-xs">
                 <Sparkles className="w-3 h-3 text-[#74584d]" />
                 <span>{slide.badge}</span>
               </div>
             </div>
 
             {/* Slide Heading with Anti-Drop text-pretty and balanced proportions */}
-            <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-normal text-white tracking-tight leading-snug drop-shadow-sm transition-all text-pretty max-w-xl">
+            <h2 className="font-serif text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-normal text-white tracking-tight leading-snug drop-shadow-sm transition-all text-pretty max-w-xl">
               {slide.title}
             </h2>
 
             {/* Highlight & Subtitle */}
-            <p className="text-amber-200/90 text-xs sm:text-sm font-medium mt-1.5">
+            <p className="text-amber-200/90 text-[11px] sm:text-sm font-medium mt-1 sm:mt-1.5">
               ✦ {slide.highlight}
             </p>
-            <p className="text-white/85 text-xs sm:text-sm md:text-base font-light mt-1 max-w-lg leading-relaxed line-clamp-2 sm:line-clamp-none text-pretty">
+            <p className="text-white/85 text-[11px] sm:text-sm md:text-base font-light mt-0.5 sm:mt-1 max-w-lg leading-relaxed line-clamp-2 sm:line-clamp-none text-pretty">
               {slide.subtitle}
             </p>
 
             {/* Bottom Action Bar */}
-            <div className="mt-3.5 sm:mt-5 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center space-x-2.5 sm:space-x-3">
+            <div className="mt-3 sm:mt-5 flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
+              <div className="flex items-center space-x-2 sm:space-x-3">
                 <button
                   id="hero-explore-btn"
                   onClick={() => handleSlideClick(slide)}
-                  className="group inline-flex items-center space-x-2 bg-white text-[#1c1c19] hover:bg-[#fcf9f4] px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-wider transition-all transform active:scale-98 shadow-md cursor-pointer whitespace-nowrap"
+                  className="group inline-flex items-center space-x-1.5 sm:space-x-2 bg-white text-[#1c1c19] hover:bg-[#fcf9f4] px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-semibold tracking-wider transition-all transform active:scale-98 shadow-md cursor-pointer whitespace-nowrap"
                 >
                   <span>{slide.buttonText}</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-[#74584d]" />
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1 text-[#74584d]" />
                 </button>
 
                 {onOpenSkinQuiz && (
                   <button
                     onClick={onOpenSkinQuiz}
-                    className="inline-flex items-center space-x-1.5 bg-black/40 hover:bg-black/60 text-white backdrop-blur-xs border border-white/40 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all transform active:scale-98 cursor-pointer shadow-xs whitespace-nowrap"
+                    className="inline-flex items-center space-x-1.5 bg-black/40 hover:bg-black/60 text-white backdrop-blur-xs border border-white/40 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider transition-all transform active:scale-98 cursor-pointer shadow-xs whitespace-nowrap"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-[#fed8c9]" />
+                    <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#fed8c9]" />
                     <span>{heroData.quizBtn}</span>
                   </button>
                 )}
@@ -216,8 +216,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
               </div>
 
               {/* Slide Counter & Next Product Preview */}
-              <div className="flex items-center space-x-3 text-right">
-                <div className="text-white/80 text-[11px] sm:text-xs font-serif tracking-wide hidden sm:block">
+              <div className="flex items-center space-x-2 sm:space-x-3 text-right">
+                <div className="text-white/80 text-[10px] sm:text-xs font-serif tracking-wide hidden sm:block">
                   <span className="font-mono font-bold text-white">0{currentSlide + 1}</span> / 0{slides.length}
                 </div>
 
@@ -230,8 +230,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                       aria-label={`Go to slide ${i + 1}`}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         i === currentSlide
-                          ? 'w-6 sm:w-8 bg-white'
-                          : 'w-2 bg-white/40 hover:bg-white/70'
+                          ? 'w-5 sm:w-8 bg-white'
+                          : 'w-1.5 sm:w-2 bg-white/40 hover:bg-white/70'
                       }`}
                     />
                   ))}
@@ -241,12 +241,12 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           </div>
         </div>
 
-        {/* Left / Right Slide Navigation Arrows */}
+        {/* Left / Right Slide Navigation Arrows (Desktop / Tablet only; mobile uses smooth touch gestures) */}
         <button
           id="hero-prev-slide-btn"
           onClick={handlePrev}
           aria-label={heroData.prevSlideLabel}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
@@ -255,7 +255,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           id="hero-next-slide-btn"
           onClick={handleNext}
           aria-label={heroData.nextSlideLabel}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>

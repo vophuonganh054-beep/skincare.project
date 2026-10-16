@@ -62,20 +62,21 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
     );
   }
 
-  // On standard desktop or responsive layout
+  // Responsive layout: on mobile screens (< 640px), position above BottomNav (bottom-20 right-3)
+  // On desktop / tablet (sm:), position nicely at bottom-6 right-6 with full descriptions
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end space-y-2">
+    <div className="fixed bottom-20 right-3 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end space-y-1.5 sm:space-y-2 pointer-events-auto">
       {onOpenSkinQuiz && (
         <button
           onClick={onOpenSkinQuiz}
-          className="bg-white/95 hover:bg-white text-[#74584d] hover:text-[#584137] px-3.5 py-2 rounded-full shadow-lg flex items-center space-x-2 border border-[#fed8c9] hover:scale-105 active:scale-95 transition-all text-xs cursor-pointer group"
+          className="bg-white/95 hover:bg-white text-[#74584d] hover:text-[#584137] px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-full shadow-lg flex items-center space-x-1.5 sm:space-x-2 border border-[#fed8c9] hover:scale-105 active:scale-95 transition-all text-xs cursor-pointer group"
           title={btnTexts.skinQuizLabel}
         >
-          <div className="w-5 h-5 rounded-full bg-[#f4ece3] flex items-center justify-center text-emerald-700">
-            <Activity className="w-3.5 h-3.5 text-emerald-600" />
+          <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#f4ece3] flex items-center justify-center text-emerald-700 shrink-0">
+            <Activity className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600" />
           </div>
-          <span className="text-[11px] font-semibold tracking-wide">{btnTexts.skinQuizLabel}</span>
-          <span className="text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.2 rounded-full">
+          <span className="text-[10px] sm:text-[11px] font-semibold tracking-wide">{btnTexts.skinQuizLabel}</span>
+          <span className="text-[8px] sm:text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.2 rounded-full hidden xs:inline-block">
             {btnTexts.oneMin}
           </span>
         </button>
@@ -86,44 +87,45 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
         href="https://www.facebook.com/profile.php?id=61595372038444"
         target="_blank"
         rel="noopener noreferrer"
-        className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-4 py-2.5 rounded-full shadow-2xl flex items-center space-x-2.5 border border-white/30 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
+        className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-full shadow-2xl flex items-center space-x-2 border border-white/30 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
         title="Chat trực tiếp với tư vấn viên qua Facebook Fanpage"
       >
-        <div className="w-6 h-6 rounded-full bg-white text-[#1877F2] flex items-center justify-center shrink-0 shadow-xs">
-          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+        <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white text-[#1877F2] flex items-center justify-center shrink-0 shadow-xs">
+          <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-current" viewBox="0 0 24 24">
             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
           </svg>
         </div>
         <div className="text-left">
           <div className="flex items-center space-x-1">
-            <span className="block text-[11px] font-bold tracking-wider uppercase text-white leading-tight">
-              Chat Tư Vấn Fanpage
+            <span className="block text-[10px] sm:text-[11px] font-bold tracking-wider uppercase text-white leading-tight">
+              Tư Vấn Fanpage
             </span>
-            <span className="text-[8px] bg-white text-[#1877F2] px-1 rounded-xs font-black leading-tight">
+            <span className="text-[7.5px] sm:text-[8px] bg-white text-[#1877F2] px-1 rounded-xs font-black leading-tight">
               24/7
             </span>
           </div>
-          <span className="block text-[9px] text-blue-100 font-medium leading-tight">
+          <span className="hidden sm:block text-[9px] text-blue-100 font-medium leading-tight">
             Messenger 1-1 • Hỗ trợ ngay
           </span>
         </div>
       </a>
 
+      {/* Nút Trợ Lý AI & CSKH */}
       <button
         id="desktop-floating-support-btn"
         onClick={onOpenSupport}
-        className="bg-[#1c1c19] hover:bg-black text-white px-4 py-2 rounded-full shadow-xl flex items-center space-x-2 border border-[#fed8c9]/50 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
+        className="bg-[#1c1c19] hover:bg-black text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full shadow-xl flex items-center space-x-2 border border-[#fed8c9]/50 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
         title={btnTexts.sublabel}
       >
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center shrink-0">
           <Sparkles className="w-3.5 h-3.5 text-[#fed8c9] group-hover:rotate-12 transition-transform" />
           <span className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-emerald-400 rounded-full ring-1 ring-[#1c1c19] animate-pulse" />
         </div>
         <div className="text-left">
-          <span className="block text-[11px] font-semibold tracking-wider text-white leading-tight">
+          <span className="block text-[10px] sm:text-[11px] font-semibold tracking-wider text-white leading-tight">
             Trợ Lý AI &amp; CSKH
           </span>
-          <span className="block text-[9px] text-[#fed8c9] font-light leading-tight">
+          <span className="hidden sm:block text-[9px] text-[#fed8c9] font-light leading-tight">
             Giải đáp tự động 24/7
           </span>
         </div>

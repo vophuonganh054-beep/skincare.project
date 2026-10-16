@@ -4,6 +4,7 @@ import { AlpsLogo } from './AlpsLogo';
 import { ViewMode, ActiveTab, UserProfile } from '../types';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSelector } from './LanguageSelector';
+import { useRouter, Link } from '../context/RouterContext';
 
 interface HeaderProps {
   viewMode: ViewMode;
@@ -43,6 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenBrandStory,
 }) => {
   const { t, language } = useLanguage();
+  const { pathname, navigate } = useRouter();
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
 
@@ -197,37 +199,57 @@ export const Header: React.FC<HeaderProps> = ({
       {/* Main Bar */}
       <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-7xl mx-auto'} flex items-center justify-between gap-2 sm:gap-4 lg:gap-6 w-full`}>
         {/* Left: Brand Logo (Anchored, never squished) */}
-        <div
-          onClick={() => onSelectTab('home')}
+        <Link
+          to="/"
           className="cursor-pointer select-none group py-1 flex items-center flex-shrink-0"
           title="Alps Skincare • Pure Essence"
         >
           <AlpsLogo />
-        </div>
+        </Link>
 
         {/* Center: Desktop Navigation Links */}
         {!isMobileFrame && (
           <nav className="hidden lg:flex items-center justify-center flex-1 space-x-2.5 xl:space-x-5 text-[11px] xl:text-xs font-medium tracking-wider text-[#46464a] whitespace-nowrap px-1 xl:px-2">
-            <button
-              onClick={() => onSelectTab('home')}
+            <Link
+              to="/"
               className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
-                activeTab === 'home'
+                pathname === '/'
                   ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
               {t.nav.home}
-            </button>
-            <button
-              onClick={() => onSelectTab('catalog')}
+            </Link>
+            <Link
+              to="/san-pham"
               className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
-                activeTab === 'catalog'
+                pathname.startsWith('/san-pham')
                   ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
               {t.nav.catalog}
-            </button>
+            </Link>
+            <Link
+              to="/ve-alps"
+              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+                pathname === '/ve-alps'
+                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  : ''
+              }`}
+            >
+              Về Alps
+            </Link>
+            <Link
+              to="/lien-he"
+              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+                pathname === '/lien-he'
+                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  : ''
+              }`}
+            >
+              Liên hệ
+            </Link>
             <button
               onClick={() => onSelectTab('routine')}
               className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
@@ -237,28 +259,6 @@ export const Header: React.FC<HeaderProps> = ({
               }`}
             >
               {t.nav.routine}
-            </button>
-            <button
-              onClick={() => {
-                if (onOpenBrandStory) {
-                  onOpenBrandStory();
-                } else {
-                  const el = document.getElementById('brand-story');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className="hidden xl:inline-block transition-colors hover:text-[#1c1c19] font-medium py-1 whitespace-nowrap cursor-pointer"
-            >
-              {t.nav.story}
-            </button>
-            <button
-              onClick={() => {
-                const el = document.getElementById('minimalist-packaging');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="hidden xl:inline-block transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer"
-            >
-              {t.nav.packaging}
             </button>
             <button
               onClick={() => {
@@ -275,8 +275,12 @@ export const Header: React.FC<HeaderProps> = ({
             </button>
             <button
               onClick={() => {
-                const el = document.getElementById('campaign-2010');
-                el?.scrollIntoView({ behavior: 'smooth' });
+                if (pathname !== '/') {
+                  navigate('/#campaign-2010');
+                } else {
+                  const el = document.getElementById('campaign-2010');
+                  el?.scrollIntoView({ behavior: 'smooth' });
+                }
               }}
               className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1 px-3 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1 whitespace-nowrap cursor-pointer shadow-2xs text-[11px]"
             >
@@ -286,7 +290,7 @@ export const Header: React.FC<HeaderProps> = ({
             {onOpenSkinQuiz && (
               <button
                 onClick={onOpenSkinQuiz}
-                className="transition-all hover:scale-105 active:scale-95 px-2.5 xl:px-3 py-1 rounded-full bg-[#f4ece3] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-2xs cursor-pointer whitespace-nowrap"
+                className="transition-all hover:scale-105 active:scale-95 px-2.5 xl:px-3 py-1 rounded-full bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-2xs cursor-pointer whitespace-nowrap"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#74584d] shrink-0" />
                 <span>{t.nav.quiz}</span>
@@ -438,27 +442,27 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       {/* 20/10 Campaign Banner Strip across all devices */}
-      <div className="bg-gradient-to-r from-[#8b5545] via-[#9e6353] to-[#74584d] text-white text-[11px] sm:text-xs py-1.5 px-3 flex items-center justify-center space-x-2 tracking-wide font-medium shadow-xs">
-        <span className="text-amber-200 animate-pulse text-xs">🌸</span>
+      <div className="bg-gradient-to-r from-[#8b5545] via-[#9e6353] to-[#74584d] text-white text-[10px] sm:text-xs py-1.5 px-2 sm:px-3 flex items-center justify-center space-x-1.5 sm:space-x-2 tracking-wide font-medium shadow-xs overflow-hidden max-w-full">
+        <span className="text-amber-200 animate-pulse text-xs shrink-0">🌸</span>
         <button
           type="button"
           onClick={() => {
             const el = document.getElementById('campaign-2010');
             el?.scrollIntoView({ behavior: 'smooth' });
           }}
-          className="hover:underline cursor-pointer flex items-center space-x-1.5 truncate max-w-full"
+          className="hover:underline cursor-pointer flex items-center space-x-1.5 truncate max-w-full min-w-0"
         >
-          <span className="font-bold text-amber-200 uppercase tracking-wider text-[9px] sm:text-[10px] bg-black/25 px-2 py-0.5 rounded-full shrink-0">
+          <span className="font-bold text-amber-200 uppercase tracking-wider text-[8.5px] sm:text-[10px] bg-black/25 px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
             20/10 TRI ÂN
           </span>
-          <span className="truncate text-white/95">
-            Nhập mã <strong className="text-amber-200 underline font-bold">PHUNU20</strong> giảm ngay 20% • Tặng kèm Hộp quà độc quyền của ALPS sang trọng dành tặng phái nữ
+          <span className="truncate text-white/95 text-[10px] sm:text-xs">
+            Nhập mã <strong className="text-amber-200 underline font-bold">PHUNU20</strong> giảm 20% • Tặng kèm Hộp quà ALPS sang trọng phái nữ
           </span>
           <span className="text-amber-200 underline underline-offset-2 ml-1 hidden md:inline shrink-0 font-bold">
             Khám phá 2 Combo →
           </span>
         </button>
-        <span className="text-amber-200 animate-pulse text-xs">🌸</span>
+        <span className="text-amber-200 animate-pulse text-xs shrink-0">🌸</span>
       </div>
     </header>
   );

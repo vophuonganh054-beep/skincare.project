@@ -25,6 +25,13 @@ import { BrandStoryModal } from './components/BrandStoryModal';
 import { WomenDayCampaignSection } from './components/WomenDayCampaignSection';
 import { CampaignCombo } from './data/campaign2010';
 import { Sparkles, Type } from 'lucide-react';
+import { useRouter } from './context/RouterContext';
+import { HomePage } from './pages/HomePage';
+import { ProductsPage } from './pages/ProductsPage';
+import { ProductDetailPage } from './pages/ProductDetailPage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { auth, onAuthStateChanged } from './firebase';
 import {
   loginWithGoogle,
@@ -42,11 +49,19 @@ import {
 } from './services/firebaseService';
 
 export default function App() {
+  const { route, pathname, navigate } = useRouter();
+
   // Device view mode: 'desktop' | 'mobile' | 'responsive'
   const [viewMode, setViewMode] = useState<ViewMode>('responsive');
 
   // Navigation tab
   const [activeTab, setActiveTab] = useState<ActiveTab>('home');
+
+  useEffect(() => {
+    if (route === 'home') setActiveTab('home');
+    else if (route === 'products' || route === 'product-detail') setActiveTab('catalog');
+    else if (route === 'about') setActiveTab('routine');
+  }, [route]);
 
   // Search
   const [searchQuery, setSearchQuery] = useState('');
@@ -857,9 +872,9 @@ export default function App() {
   const handleSelectTab = (tab: ActiveTab) => {
     setActiveTab(tab);
     if (tab === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      navigate('/');
     } else if (tab === 'catalog') {
-      handleScrollToCatalog();
+      navigate('/san-pham');
     } else if (tab === 'account') {
       setAccountInitialTab('orders');
       setIsAccountOpen(true);
@@ -877,8 +892,7 @@ export default function App() {
 
   // Scroll to catalog helper
   const handleScrollToCatalog = () => {
-    const el = document.getElementById('desktop-catalog') || document.getElementById('catalog-section');
-    el?.scrollIntoView({ behavior: 'smooth' });
+    navigate('/san-pham');
   };
 
   return (
@@ -901,52 +915,70 @@ export default function App() {
           onOpenPolicies={handleOpenPolicies}
           onOpenFontSwitcher={() => setIsFontSwitcherOpen(true)}
           onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
-          onOpenBrandStory={() => setIsBrandStoryOpen(true)}
+          onOpenBrandStory={() => navigate('/ve-alps')}
         />
 
         <main className="flex-grow pb-16 sm:pb-0">
-          <HeroBanner
-            onExploreClick={handleScrollToCatalog}
-            onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
-            isMobileFrame={false}
-          />
-
-          {/* CHIẾN DỊCH TRI ÂN 20/10 NGÀY PHỤ NỮ VIỆT NAM */}
-          <WomenDayCampaignSection
-            onAddComboToCart={handleAddComboToCart}
-            onBuyNowCombo={handleBuyNowCombo}
-            onApplyVoucherToCart={handleApplyVoucherToCart}
-            onShowToast={showToast}
-            isMobileFrame={false}
-          />
-
-          <RitualCallout
-            onOpenRitual={() => setIsRitualModalOpen(true)}
-            isMobileFrame={false}
-          />
-
-          <div id="desktop-catalog">
-            <CatalogSection
-              products={PRODUCTS}
-              onSelectProduct={setSelectedProduct}
-              onAddToCart={(p, e) => handleAddToCart(p, 1, e)}
-              onBuyNow={(p, e) => handleBuyNow(p, 1, e)}
+          {route === 'home' && (
+            <HomePage
+              onSelectProduct={(p) => {
+                navigate(`/san-pham/${p.id}`);
+              }}
+              onAddToCart={(p, qty, e) => handleAddToCart(p, qty || 1, e)}
+              onBuyNow={(p, qty, e) => handleBuyNow(p, qty || 1, e)}
+              onAddComboToCart={handleAddComboToCart}
+              onBuyNowCombo={handleBuyNowCombo}
+              onAddDuoToCart={handleAddDuoToCart}
+              onApplyVoucherToCart={handleApplyVoucherToCart}
+              onOpenRitualModal={() => setIsRitualModalOpen(true)}
+              onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
+              onOpenBrandStory={() => navigate('/ve-alps')}
+              onShowToast={showToast}
               searchQuery={searchQuery}
-              isMobileFrame={false}
             />
-          </div>
+          )}
 
-          <MinimalistPackagingDesign
-            onOpenCollection={handleScrollToCatalog}
-            onAddDuoToCart={handleAddDuoToCart}
-            isMobileFrame={false}
-          />
+          {route === 'products' && (
+            <ProductsPage
+              onSelectProduct={(p) => {
+                navigate(`/san-pham/${p.id}`);
+              }}
+              onAddToCart={(p, qty, e) => handleAddToCart(p, qty || 1, e)}
+              onBuyNow={(p, qty, e) => handleBuyNow(p, qty || 1, e)}
+              onOpenRitualModal={() => setIsRitualModalOpen(true)}
+              onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
+              onShowToast={showToast}
+            />
+          )}
 
-          <BrandPhilosophy
-            isMobileFrame={false}
-            onOpenStoryModal={() => setIsBrandStoryOpen(true)}
-            onExploreCollection={handleScrollToCatalog}
-          />
+          {route === 'product-detail' && (
+            <ProductDetailPage
+              onAddToCart={(p, qty, e) => handleAddToCart(p, qty || 1, e)}
+              onBuyNow={(p, qty, e) => handleBuyNow(p, qty || 1, e)}
+              onOpenRitualModal={() => setIsRitualModalOpen(true)}
+              onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
+              onShowToast={showToast}
+              user={user}
+            />
+          )}
+
+          {route === 'about' && (
+            <AboutPage
+              onOpenRitualModal={() => setIsRitualModalOpen(true)}
+              onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
+            />
+          )}
+
+          {route === 'contact' && (
+            <ContactPage
+              onOpenSupportModal={() => setIsSupportOpen(true)}
+              onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
+              onOpenPolicies={handleOpenPolicies}
+              onShowToast={showToast}
+            />
+          )}
+
+          {route === 'not-found' && <NotFoundPage />}
         </main>
 
         <Footer

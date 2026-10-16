@@ -240,25 +240,25 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2.5">
+                <div className="grid grid-cols-2 gap-2 sm:gap-2.5">
                   <button
                     onClick={handleAdd}
-                    className={`py-3 px-4 rounded-full text-xs font-semibold tracking-wider uppercase transition-all border flex items-center justify-center space-x-1.5 cursor-pointer ${
+                    className={`py-3 px-2 sm:px-4 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all border flex items-center justify-center space-x-1 sm:space-x-1.5 cursor-pointer ${
                       addedAnimation
                         ? 'bg-emerald-600 text-white border-emerald-600'
                         : 'bg-white hover:bg-[#f6f3ee] text-[#1c1c19] border-[#202022]/20 active:scale-98 shadow-xs'
                     }`}
                   >
-                    <ShoppingBag className="w-4 h-4" />
-                    <span>{t.catalog.addToCart}</span>
+                    <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                    <span className="truncate">{t.catalog.addToCart}</span>
                   </button>
 
                   <button
                     onClick={() => onBuyNow && onBuyNow(product, quantity)}
-                    className="py-3 px-4 rounded-full text-xs font-semibold tracking-wider uppercase transition-all bg-[#1c1c19] hover:bg-black text-white active:scale-98 shadow-md flex items-center justify-center space-x-1.5 cursor-pointer"
+                    className="py-3 px-2 sm:px-4 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all bg-[#1c1c19] hover:bg-black text-white active:scale-98 shadow-md flex items-center justify-center space-x-1 sm:space-x-1.5 cursor-pointer"
                   >
-                    <span>{t.catalog.buyNow}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#fed8c9]" />
+                    <span className="truncate">{t.catalog.buyNow}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#fed8c9] shrink-0" />
                   </button>
                 </div>
               </div>

@@ -111,13 +111,13 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
     <div className={`relative inline-block ${className}`} ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-1.5 px-2.5 py-1 text-xs rounded-full bg-[#f0ede9] hover:bg-[#e7e3dc] text-[#1c1c19] border border-[#202022]/10 transition-all cursor-pointer shadow-2xs"
+        className="flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1 text-xs rounded-full bg-[#f0ede9] hover:bg-[#e7e3dc] text-[#1c1c19] border border-[#202022]/10 transition-all cursor-pointer shadow-2xs shrink-0"
         title="Ngôn ngữ / Language (VI • EN • DE • ES • ZH)"
       >
-        <Globe className="w-3.5 h-3.5 text-[#74584d]" />
-        <span className="text-xs">{currentLangOption.flag}</span>
-        <span className="font-bold text-[11px] uppercase tracking-wider">{currentLangOption.shortLabel}</span>
-        <ChevronDown className={`w-3 h-3 text-[#77767b] transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <Globe className="w-3.5 h-3.5 text-[#74584d] shrink-0" />
+        <span className="text-xs shrink-0">{currentLangOption.flag}</span>
+        <span className="font-bold text-[11px] uppercase tracking-wider hidden sm:inline">{currentLangOption.shortLabel}</span>
+        <ChevronDown className={`w-3 h-3 text-[#77767b] shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
