@@ -208,49 +208,42 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 <h1 className="text-2xl sm:text-3xl font-serif text-[#1c1c19] tracking-tight leading-snug">
                   {product.name}
                 </h1>
-                <p className="text-xs sm:text-sm text-[#74584d] font-medium mt-1">
+                <p className="text-sm sm:text-base text-[#74584d] font-semibold mt-1">
                   {product.subtitle}
                 </p>
-                <p className="text-xs text-[#77767b] mt-0.5">Dung tích: <span className="font-semibold text-[#1c1c19]">{product.capacity}</span></p>
+                <p className="text-sm text-[#77767b] mt-1">Dung tích: <span className="font-semibold text-[#1c1c19]">{product.capacity}</span></p>
               </div>
 
-              {/* Rating and Social Proof */}
-              <div className="flex items-center space-x-3 text-xs text-[#77767b] pb-2 border-b border-[#202022]/6">
-                <div className="flex items-center text-amber-500 space-x-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-current" />
-                  ))}
-                  <span className="font-bold text-[#1c1c19] ml-1.5">{product.rating}</span>
-                </div>
+              {/* Social Proof */}
+              <div className="flex items-center space-x-3 text-sm text-[#77767b] pb-2.5 border-b border-[#202022]/6">
+                <span className="font-semibold text-[#1c1c19]">Đã bán {product.soldCount}</span>
                 <span>•</span>
-                <span className="font-medium text-[#1c1c19]">Đã bán {product.soldCount}</span>
-                <span>•</span>
-                <span className="text-[#0d8459] font-medium flex items-center space-x-1">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
+                <span className="text-[#0d8459] font-semibold flex items-center space-x-1.5">
+                  <CheckCircle2 className="w-4 h-4" />
                   <span>Còn hàng tại kho TP.HCM</span>
                 </span>
               </div>
 
               {/* Price Box */}
-              <div className="bg-[#fcf5f1] border border-[#fed8c9] rounded-2xl p-4 flex items-center justify-between">
+              <div className="bg-[#fcf5f1] border border-[#fed8c9] rounded-2xl p-4 sm:p-5 flex items-center justify-between">
                 <div>
                   <div className="flex items-baseline space-x-3">
-                    <span className="text-2xl sm:text-3xl font-bold text-[#1c1c19]">
+                    <span className="text-2xl sm:text-4xl font-bold text-[#1c1c19]">
                       {product.price.toLocaleString('vi-VN')}₫
                     </span>
                     {product.originalPrice && (
-                      <span className="text-sm text-[#a8a6ad] line-through">
+                      <span className="text-base text-[#a8a6ad] line-through">
                         {product.originalPrice.toLocaleString('vi-VN')}₫
                       </span>
                     )}
                   </div>
-                  <p className="text-[11px] text-[#74584d] mt-1">
+                  <p className="text-xs text-[#74584d] font-medium mt-1.5">
                     Đã bao gồm thuế GTGT & Miễn phí vận chuyển cho đơn hàng này
                   </p>
                 </div>
                 {discountPercent > 0 && (
                   <div className="text-right">
-                    <span className="bg-[#e85338] text-white text-xs font-bold px-3 py-1 rounded-full">
+                    <span className="bg-[#e85338] text-white text-xs sm:text-sm font-bold px-3 py-1 rounded-full">
                       -{discountPercent}% GIẢM
                     </span>
                   </div>
@@ -258,41 +251,41 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               </div>
 
               {/* Short Description */}
-              <p className="text-xs sm:text-sm text-[#5a595e] font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-[#5a595e] font-normal leading-relaxed">
                 {product.description}
               </p>
 
               {/* Quantity Selector & Action Buttons */}
-              <div className="space-y-3 pt-2">
+              <div className="space-y-3.5 pt-2">
                 <div className="flex items-center space-x-4">
-                  <span className="text-xs font-medium text-[#1c1c19]">Số lượng:</span>
+                  <span className="text-sm font-semibold text-[#1c1c19]">Số lượng:</span>
                   <div className="flex items-center border border-[#202022]/15 rounded-xl bg-white overflow-hidden">
                     <button
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="px-3.5 py-1.5 text-sm hover:bg-[#f4ede4] transition-colors cursor-pointer text-[#1c1c19]"
+                      className="px-4 py-2 text-base hover:bg-[#f4ede4] transition-colors cursor-pointer text-[#1c1c19] font-bold"
                     >
                       -
                     </button>
-                    <span className="px-4 py-1.5 text-xs font-bold min-w-[36px] text-center text-[#1c1c19]">
+                    <span className="px-4 py-2 text-sm font-bold min-w-[40px] text-center text-[#1c1c19]">
                       {quantity}
                     </span>
                     <button
                       onClick={() => setQuantity((q) => Math.min(10, q + 1))}
-                      className="px-3.5 py-1.5 text-sm hover:bg-[#f4ede4] transition-colors cursor-pointer text-[#1c1c19]"
+                      className="px-4 py-2 text-base hover:bg-[#f4ede4] transition-colors cursor-pointer text-[#1c1c19] font-bold"
                     >
                       +
                     </button>
                   </div>
-                  <span className="text-[11px] text-[#77767b]">
-                    Tạm tính: <strong>{(product.price * quantity).toLocaleString('vi-VN')}₫</strong>
+                  <span className="text-xs sm:text-sm text-[#77767b]">
+                    Tạm tính: <strong className="text-[#1c1c19]">{(product.price * quantity).toLocaleString('vi-VN')}₫</strong>
                   </span>
                 </div>
 
                 {/* Primary CTA Buttons */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
                   <button
                     onClick={(e) => onAddToCart(product, quantity, e)}
-                    className="w-full py-3.5 px-4 rounded-2xl bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-semibold text-xs flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-sm active:scale-98"
+                    className="w-full py-3.5 px-4 rounded-2xl bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-xs active:scale-98"
                   >
                     <ShoppingBag className="w-4 h-4" />
                     <span>THÊM VÀO GIỎ HÀNG</span>
@@ -300,7 +293,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
 
                   <button
                     onClick={(e) => onBuyNow(product, quantity, e)}
-                    className="w-full py-3.5 px-4 rounded-2xl bg-[#202022] hover:bg-[#74584d] text-white font-semibold text-xs flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-md active:scale-98"
+                    className="w-full py-3.5 px-4 rounded-2xl bg-[#202022] hover:bg-[#74584d] text-white font-bold text-xs sm:text-sm flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-md active:scale-98"
                   >
                     <span>MUA NGAY - GIAO HỎA TỐC</span>
                     <ArrowRight className="w-4 h-4" />

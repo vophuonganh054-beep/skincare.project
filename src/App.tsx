@@ -15,7 +15,7 @@ import { CartDrawer } from './components/CartDrawer';
 import { CheckoutSuccessModal } from './components/CheckoutSuccessModal';
 import { AccountDrawer } from './components/AccountDrawer';
 import { CustomerSupportModal } from './components/CustomerSupportModal';
-import { SupportFloatingButton } from './components/SupportFloatingButton';
+import { FloatingAIChatWidget } from './components/FloatingAIChatWidget';
 import { CheckoutModal } from './components/CheckoutModal';
 import { PoliciesModal, PolicyTabType } from './components/PoliciesModal';
 import { Footer } from './components/Footer';
@@ -77,14 +77,6 @@ export default function App() {
       const saved = localStorage.getItem('alps_user_profile');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (
-          parsed?.email?.includes('vophuonganh') ||
-          parsed?.name?.includes('Phương Anh') ||
-          parsed?.email?.includes('khachhang@alps.id.vn')
-        ) {
-          localStorage.removeItem('alps_user_profile');
-          return null;
-        }
         if (parsed?.isLoggedIn && parsed?.name) return parsed;
       }
     } catch {}
@@ -467,7 +459,7 @@ export default function App() {
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
-      if (!msg.includes('đã đóng')) {
+      if (!msg.includes('đã đóng') && !msg.includes('đã được đóng') && !msg.includes('đã hủy')) {
         showToast(msg || 'Đăng nhập Google không thành công.');
       }
       throw err;
@@ -989,11 +981,11 @@ export default function App() {
           onOpenBrandStory={() => setIsBrandStoryOpen(true)}
         />
 
-        {/* Floating CSKH 24/7 button on desktop / tablet / mobile web */}
-        <SupportFloatingButton
-          onOpenSupport={() => setIsSupportOpen(true)}
+        {/* Bong bóng nổi Chuyên Viên Da Liễu Thụy Sĩ AI (Gemini 3.8 Flash) 24/7 */}
+        <FloatingAIChatWidget
+          user={user}
           onOpenSkinQuiz={() => setIsSkinQuizOpen(true)}
-          isMobileFrame={false}
+          onOpenSupportModal={() => setIsSupportOpen(true)}
         />
 
         {/* Bottom Nav appears on small screens when in responsive mode */}

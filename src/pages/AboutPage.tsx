@@ -129,7 +129,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenRitualModal, onOpenS
     {
       stage: 'Giai đoạn 4',
       title: 'Phân Phối Chính Thức Tại Việt Nam',
-      desc: 'Đặt chi nhánh tại Landmark 81 TP.HCM, mang tiêu chuẩn da liễu Thụy Sĩ chăm sóc làn da người Việt.',
+      desc: 'Đặt chi nhánh tại 30 Trịnh Đình Thảo, Tân Phú, Thành Phố Hồ Chí Minh, mang tiêu chuẩn da liễu Thụy Sĩ chăm sóc làn da người Việt.',
     },
   ];
 

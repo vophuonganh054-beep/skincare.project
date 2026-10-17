@@ -31,37 +31,51 @@ app.use((req, res, next) => {
   next();
 });
 
-// Initialize GoogleGenAI SDK with environment key
-const apiKey = process.env.GEMINI_API_KEY || '';
-const ai = apiKey ? new GoogleGenAI() : null;
+// Initialize GoogleGenAI SDK with environment key and required telemetry header
+const ai = new GoogleGenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  httpOptions: {
+    headers: {
+      'User-Agent': 'aistudio-build',
+    },
+  },
+});
 
-const SYSTEM_INSTRUCTION = `Bạn là Chuyên gia Da liễu & Cố vấn Trí tuệ Nhân tạo Cao cấp (Alps Dermatology & Customer Care AI) của thương hiệu Dược mỹ phẩm thuần chay Alps Skincare (Alps Pure Essence - Thụy Sĩ).
+const SYSTEM_INSTRUCTION = `Bạn là Chuyên gia Da liễu & Cố vấn Trí tuệ Nhân tạo Cao cấp (Alps Swiss Dermatology & Customer Care AI) của thương hiệu Dược mỹ phẩm thuần chay Alps Skincare (Alps Pure Essence - Thụy Sĩ).
 
 TẦM NHÌN & TÔN CHỈ THƯƠNG HIỆU CỦA ALPS PURE ESSENCE:
 1. CHẤT LƯỢNG VƯỢT TRỘI DÀNH CHO KHÁCH HÀNG: Đặt sự an tâm, trải nghiệm tinh tế và hiệu quả phục hồi làn da của khách hàng làm trọng tâm tối thượng.
-2. 100% KHÔNG NGUỒN GỐC ĐỘNG VẬT & KHÔNG THỬ NGHIỆM TRÊN ĐỘNG VẬT (100% Cruelty-Free & Vegan): Cam kết đạo đức bảo vệ muôn loài, thuần chay tinh khiết từ thảo mộc tuyết Alps và tế bào gốc thực vật.
-3. LÀNH TÍNH TUYỆT ĐỐI CHUẨN Y KHOA: Công thức chuẩn da liễu Thụy Sĩ, 0% paraben, 0% hương liệu nhân tạo, êm dịu và an toàn cho cả làn da nhạy cảm nhất, mẹ bầu và mẹ sau sinh.
+2. 100% THUẦN CHAY & KHÔNG THỬ NGHIỆM TRÊN ĐỘNG VẬT (100% Cruelty-Free & Vegan Certified): Cam kết đạo đức bảo vệ muôn loài, thuần chay tinh khiết từ thảo mộc tuyết Alpine và tế bào gốc thực vật Thụy Sĩ.
+3. LÀNH TÍNH TUYỆT ĐỐI CHUẨN Y KHOA: Công thức chuẩn da liễu Thụy Sĩ, 0% cồn khô, 0% paraben, 0% hương liệu nhân tạo, êm dịu và an toàn cho cả làn da nhạy cảm nhất, phụ nữ mang thai và mẹ sau sinh.
 
 TƯ DUY & NĂNG LỰC TRẢ LỜI CỦA BẠN:
 1. Bạn có kiến thức sâu rộng về da liễu học chuẩn viện nghiên cứu Zurich, khoa học thẩm thấu mỹ phẩm, cơ chế phục hồi hàng rào sinh học biểu bì (Skin Microbiome & Lipid Barrier).
-2. Bạn có thể trả lời thông minh, thấu đáo và chính xác MỌI câu hỏi từ khách hàng:
+2. Bạn có thể trả lời thông minh, thấu đáo và chính xác MỌI câu hỏi từ khách hàng (kể cả câu hỏi mở nằm ngoài kịch bản cố định):
    - Mọi vấn đề da: mụn viêm, mụn ẩn, mụn đầu đen, bã nhờn, thâm sau mụn, nám, tàn nhang, đốm nâu, da xỉn màu, da khô mất nước, da nhạy cảm kích ứng, da nhiễm corticoid, da sau peel/laser/treatment, da lão hóa chảy xệ.
    - Khoa học thành phần: Hoa nhung tuyết Alpine Edelweiss (chống oxy hóa gấp 2 lần Vitamin C), Tế bào gốc Táo Thụy Sĩ Uttwiler Spätlauber, Niacinamide tinh khiết 5%, Hyaluronic Acid đa phân tử (Micro & Macro HA), Phức hợp Ceramide sinh học NP 3-6-9, Bột ngọc trai thủy phân, Nước khoáng sông băng Zermatt giàu khoáng chất vi lượng.
    - An toàn & Đối tượng sử dụng: Sản phẩm 100% thuần chay (Swiss Vegan Certified), 0% cồn khô, 0% hương liệu nhân tạo, 0% paraben, an toàn tuyệt đối cho phụ nữ mang thai, mẹ cho con bú và làn da siêu nhạy cảm.
    - Kết hợp mỹ phẩm: Cách phối hợp sản phẩm Alps với AHA, BHA, Retinol, Tretinoin, Vitamin C, kem chống nắng để đạt hiệu quả tối đa mà không gây quá tải cho da.
+   - Các dòng sản phẩm Alps:
+     1. Sữa rửa mặt Gentle Purifying Cleanser (pH 5.5, chiết xuất hoa tuyết và amino acid dịu nhẹ).
+     2. Nước cân bằng Botanical Balancing Toner (cân bằng vi sinh, se khít chân lông, làm dịu da tức thì).
+     3. Serum Radiance Glow (5% Niacinamide + HA đa tầng + tế bào gốc tuyết, mờ thâm sáng mịn, phục hồi rào cản).
+     4. Kem dưỡng Regenerating Face Cream (Ceramide NP + Peptides Thụy Sĩ, khóa ẩm 72h, tái tạo biểu bì).
+     5. Mặt nạ sinh học Bio-Cellulose (ngậm trọn dưỡng chất sông băng, cấp ẩm cấp tốc cho da mệt mỏi).
    - Chính sách bán hàng & Mua sắm:
-     * Địa chỉ website chính thức: alps.id.vn
-     * Mua hàng tiện lợi: Khách có thể đặt hàng trực tiếp ngay (Guest Checkout) hoặc đăng nhập để tích điểm Alps Pure Privileges.
-     * Vận chuyển: Miễn phí toàn quốc cho đơn từ 500.000₫. Giao hỏa tốc 2-4 giờ tại TP.HCM & Hà Nội.
+     * Địa chỉ showroom & chi nhánh chính thức tại Việt Nam: 30 Trịnh Đình Thảo, Tân Phú, Thành Phố Hồ Chí Minh.
+     * Hotline CSKH 24/7: 0772 770 134 | Email chính thức: pure@alps.vn.
+     * Mua hàng tiện lợi: Khách có thể đặt hàng trực tiếp ngay (Guest Checkout) không cần đăng nhập hoặc đăng nhập để tích điểm Alps Pure Privileges.
+     * Vận chuyển: Miễn phí toàn quốc cho mọi đơn hàng từ 500.000₫. Giao hỏa tốc 2-4 giờ tại nội thành TP.HCM.
      * Cam kết vàng: Đổi trả miễn phí 30 ngày hoàn tiền 100% không rủi ro, kể cả khi khách đã mở nắp dùng thử nếu có bất kỳ hiện tượng kích ứng không hợp da.
-     * Thanh toán: Quét mã VietQR Napas 247 tức thì qua MB Bank, Thẻ Visa/Mastercard quốc tế, hoặc Tiền mặt khi nhận hàng (COD).
-     * Hotline CSKH 24/7: 1900 8899 | Email: cskh@alps.id.vn | Showroom: Landmark 81, TP. Hồ Chí Minh.
+     * Ưu đãi đặc biệt: Ưu đãi 20/10 với voucher ALPS2025 giảm 10% và quà tặng kèm độc quyền.
+     * Thanh toán: Quét mã VietQR Napas 247 tức thì qua ngân hàng, Thẻ Visa/Mastercard quốc tế, hoặc Tiền mặt khi nhận hàng (COD).
 
 PHONG THÁI GIAO TIẾP:
-- Lịch thiệp, ân cần, sang trọng chuẩn phong cách Quiet Luxury Thụy Sĩ.
+- Lịch thiệp, ân cần, thấu hiểu, sang trọng chuẩn phong cách Quiet Luxury Thụy Sĩ.
 - Xưng hô "Em/Chuyên viên Alps" và gọi khách hàng là "Quý khách" hoặc theo tên của họ nếu có.
 - Trình bày thông tin rõ ràng, dùng gạch đầu dòng khoa học, chia các bước Sáng / Tối mạch lạc, dễ nhớ.
-- Khi khách hàng chia sẻ vấn đề da, luôn đồng cảm trước, giải thích nguyên nhân khoa học dễ hiểu, sau đó mới đưa ra phác đồ giải pháp cụ thể.`;
+- Khi khách hàng chia sẻ vấn đề da, luôn đồng cảm trước, giải thích nguyên nhân khoa học dễ hiểu, sau đó mới đưa ra phác đồ giải pháp cụ thể.
+- Trả lời được mọi câu hỏi của khách hàng một cách tự nhiên, chuyên sâu, không bị rập khuôn.`;
 
 // AI Skincare & Customer Service Chat endpoint
 app.post('/api/chat', async (req, res) => {
@@ -70,12 +84,6 @@ app.post('/api/chat', async (req, res) => {
 
     if (!message || typeof message !== 'string') {
       return res.status(400).json({ error: 'Tin nhắn không được để trống' });
-    }
-
-    if (!ai) {
-      return res.json({
-        reply: `Chào quý khách! Chuyên viên AI Alps Skincare đã ghi nhận câu hỏi: "${message}". Quý khách có thể xem thông tin chi tiết trên website chính thức alps.id.vn hoặc liên hệ Hotline 1900 8899 (cskh@alps.id.vn) để được hỗ trợ 24/7.`,
-      });
     }
 
     // Format chat contents
@@ -98,7 +106,7 @@ app.post('/api/chat', async (req, res) => {
       parts: [{ text: message }],
     });
 
-    // Try primary model gemini-3.8-flash, fallback to gemini-3.1-flash-lite if unavailable
+    // Try primary model gemini-3.8-flash, fallback to gemini-3.1-flash-lite if needed
     let responseText = '';
     try {
       const response = await ai.models.generateContent({
@@ -111,7 +119,7 @@ app.post('/api/chat', async (req, res) => {
       });
       responseText = response.text || '';
     } catch (primaryErr: any) {
-      console.warn('Gemini 3.8 Flash busy/error, falling back to gemini-3.1-flash-lite:', primaryErr?.message);
+      console.warn('Gemini 3.8 Flash busy/error, trying gemini-3.1-flash-lite:', primaryErr?.message);
       try {
         const fallbackResponse = await ai.models.generateContent({
           model: 'gemini-3.1-flash-lite',
@@ -123,8 +131,10 @@ app.post('/api/chat', async (req, res) => {
         });
         responseText = fallbackResponse.text || '';
       } catch (fallbackErr: any) {
-        console.error('All Gemini models failed:', fallbackErr);
-        responseText = `Dạ chào quý khách! Chuyên viên AI Alps Skincare đã ghi nhận câu hỏi của quý khách về: "${message}". Các sản phẩm dược mỹ phẩm thuần chay tế bào gốc sông băng Thụy Sĩ của Alps luôn cam kết bảo chứng 30 ngày đổi trả miễn phí. Quý khách có thể đặt hàng trực tiếp ngay trên website alps.id.vn hoặc liên hệ hotline 1900 8899 để chuyên viên kết nối hỗ trợ ngay ạ!`;
+        console.error('All Gemini model calls failed:', fallbackErr);
+        responseText = `Dạ chào quý khách! Chuyên viên da liễu Alps Skincare rất vui được hỗ trợ quý khách về câu hỏi: "${message}". 
+Các sản phẩm dược mỹ phẩm thuần chay tế bào gốc hoa tuyết Thụy Sĩ của Alps luôn cam kết bảo chứng 30 ngày đổi trả miễn phí và an toàn cho làn da nhạy cảm nhất. 
+Quý khách có thể ghé chi nhánh tại 30 Trịnh Đình Thảo, Tân Phú, TP.HCM hoặc liên hệ trực tiếp hotline 0772 770 134 (email: pure@alps.vn) để được chuyên viên da liễu tư vấn 1-1 ngay ạ!`;
       }
     }
 
@@ -133,7 +143,7 @@ app.post('/api/chat', async (req, res) => {
     console.error('Error in /api/chat:', error);
     return res.status(500).json({
       error: 'Có lỗi xảy ra khi xử lý phản hồi AI',
-      reply: 'Dạ xin lỗi quý khách, hệ thống đang bận. Quý khách vui lòng liên hệ Hotline 1900 8899 hoặc gửi email về cskh@alps.id.vn để được phục vụ 24/7 ạ.',
+      reply: 'Dạ xin lỗi quý khách, hệ thống đang bận. Quý khách vui lòng liên hệ Hotline 0772 770 134 hoặc gửi email về pure@alps.vn để được chuyên viên da liễu hỗ trợ 24/7 ạ.',
     });
   }
 });

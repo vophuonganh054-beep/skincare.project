@@ -148,7 +148,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
         <div className="p-4 sm:p-5 bg-white border-t border-[#202022]/8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center space-x-2 text-xs text-[#77767b]">
             <Phone className="w-3.5 h-3.5 text-[#74584d]" />
-            <span>{pData.supportHelpText} <strong className="text-[#1c1c19]">1900 8899</strong></span>
+            <span>{pData.supportHelpText} <strong className="text-[#1c1c19]">0772 770 134</strong></span>
           </div>
 
           <div className="flex items-center space-x-2 w-full sm:w-auto">

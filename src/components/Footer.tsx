@@ -203,16 +203,20 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
               <span>{t.footer.supportTitle} →</span>
             </Link>
             <ul className="space-y-2 text-xs text-[#c7c6ca]">
+              <li className="flex items-start space-x-2">
+                <span className="text-[#fed8c9] shrink-0">Địa chỉ:</span>
+                <span className="text-white">30 Trịnh Đình Thảo, Tân Phú, Thành Phố Hồ Chí Minh</span>
+              </li>
               <li className="flex items-center space-x-2">
                 <span className="text-[#fed8c9]">{t.footer.hotlineLabel}</span>
-                <a href="tel:19008899" className="text-white font-bold hover:text-[#fed8c9] transition-colors">
-                  1900 8899 (Miễn cước)
+                <a href="tel:0772770134" className="text-white font-bold hover:text-[#fed8c9] transition-colors">
+                  0772 770 134
                 </a>
               </li>
               <li className="flex items-center space-x-2">
                 <span className="text-[#fed8c9]">{t.footer.emailLabel}</span>
-                <a href="mailto:pure@alps.com" className="hover:text-white transition-colors">
-                  pure@alps.com
+                <a href="mailto:pure@alps.vn" className="hover:text-white transition-colors">
+                  pure@alps.vn
                 </a>
               </li>
               <li className="flex items-center space-x-2">
@@ -363,10 +367,10 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
                 {footerI18n.support247}
               </button>
             ) : (
-              <span className="hover:text-white cursor-pointer">Hotline: 1900 8899</span>
+              <span className="hover:text-white cursor-pointer">Hotline: 0772 770 134</span>
             )}
             <span>•</span>
-            <a href="mailto:pure@alps.com" className="hover:text-white transition-colors">pure@alps.com</a>
+            <a href="mailto:pure@alps.vn" className="hover:text-white transition-colors">pure@alps.vn</a>
             <span>•</span>
             <a href="https://alps.id.vn" target="_blank" rel="noopener noreferrer" className="hover:text-[#fed8c9] text-white font-medium transition-colors">alps.id.vn</a>
           </div>

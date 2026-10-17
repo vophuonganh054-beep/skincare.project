@@ -21,8 +21,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   const { pathname } = useRouter();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#ffffff]/95 backdrop-blur-lg border-t border-[#202022]/8 py-1.5 px-1 xs:px-2 safe-area-bottom shadow-lg">
-      <div className="max-w-md mx-auto flex items-center justify-around gap-0.5">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#ffffff]/95 backdrop-blur-lg border-t border-[#202022]/8 py-2 px-1 xs:px-2 safe-area-bottom shadow-lg">
+      <div className="max-w-md mx-auto flex items-center justify-around gap-1">
         {/* Trang chủ */}
         <Link
           to="/"
@@ -30,8 +30,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             pathname === '/' ? 'text-[#1c1c19]' : 'text-[#77767b] hover:text-[#1c1c19]'
           }`}
         >
-          <Home className={`w-4.5 h-4.5 sm:w-5 sm:h-5 ${pathname === '/' ? 'stroke-[2.25] text-[#1c1c19]' : 'stroke-[1.5]'}`} />
-          <span className="text-[8.5px] xs:text-[9.5px] tracking-tight mt-0.5 font-medium uppercase truncate max-w-full px-0.5">
+          <Home className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname === '/' ? 'stroke-[2.5] text-[#1c1c19]' : 'stroke-[1.8]'}`} />
+          <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
             {t.nav.home}
           </span>
         </Link>
@@ -43,8 +43,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             pathname.startsWith('/san-pham') ? 'text-[#1c1c19]' : 'text-[#77767b] hover:text-[#1c1c19]'
           }`}
         >
-          <LayoutGrid className={`w-4.5 h-4.5 sm:w-5 sm:h-5 ${pathname.startsWith('/san-pham') ? 'stroke-[2.25] text-[#1c1c19]' : 'stroke-[1.5]'}`} />
-          <span className="text-[8.5px] xs:text-[9.5px] tracking-tight mt-0.5 font-medium uppercase truncate max-w-full px-0.5">
+          <LayoutGrid className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname.startsWith('/san-pham') ? 'stroke-[2.5] text-[#1c1c19]' : 'stroke-[1.8]'}`} />
+          <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
             {t.nav.catalog}
           </span>
         </Link>
@@ -57,14 +57,14 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             className="flex flex-col items-center justify-center flex-1 min-w-0 py-1 transition-colors relative cursor-pointer text-[#77767b] hover:text-[#1c1c19]"
           >
             <div className="relative">
-              <ShoppingBag className="w-4.5 h-4.5 sm:w-5 sm:h-5 stroke-[1.5]" />
+              <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-2 min-w-[14px] h-[14px] px-0.5 bg-[#08080a] text-white text-[9px] font-bold rounded-full flex items-center justify-center pointer-events-none">
+                <span className="absolute -top-1 -right-2 min-w-[16px] h-[16px] px-1 bg-[#08080a] text-white text-[10px] font-bold rounded-full flex items-center justify-center pointer-events-none">
                   {cartCount}
                 </span>
               )}
             </div>
-            <span className="text-[8.5px] xs:text-[9.5px] tracking-tight mt-0.5 font-medium uppercase truncate max-w-full px-0.5">
+            <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
               {t.nav.cart}
             </span>
           </button>
@@ -77,9 +77,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             pathname === '/ve-alps' ? 'text-[#1c1c19]' : 'text-[#77767b] hover:text-[#1c1c19]'
           }`}
         >
-          <Info className={`w-4.5 h-4.5 sm:w-5 sm:h-5 ${pathname === '/ve-alps' ? 'stroke-[2.25] text-[#74584d]' : 'stroke-[1.5]'}`} />
-          <span className="text-[8.5px] xs:text-[9.5px] tracking-tight mt-0.5 font-medium uppercase truncate max-w-full px-0.5">
-            Về Alps
+          <Info className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname === '/ve-alps' ? 'stroke-[2.5] text-[#74584d]' : 'stroke-[1.8]'}`} />
+          <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
+            VỀ ALPS
           </span>
         </Link>
 
@@ -90,9 +90,9 @@ export const BottomNav: React.FC<BottomNavProps> = ({
             pathname === '/lien-he' ? 'text-[#1c1c19]' : 'text-[#77767b] hover:text-[#1c1c19]'
           }`}
         >
-          <Headphones className={`w-4.5 h-4.5 sm:w-5 sm:h-5 ${pathname === '/lien-he' ? 'stroke-[2.25] text-[#74584d]' : 'stroke-[1.5]'}`} />
-          <span className="text-[8.5px] xs:text-[9.5px] tracking-tight mt-0.5 font-medium uppercase truncate max-w-full px-0.5">
-            Liên hệ
+          <Headphones className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname === '/lien-he' ? 'stroke-[2.5] text-[#74584d]' : 'stroke-[1.8]'}`} />
+          <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
+            LIÊN HỆ
           </span>
         </Link>
       </div>

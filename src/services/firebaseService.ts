@@ -121,10 +121,21 @@ export async function loginWithGoogle(): Promise<UserProfile> {
 
     return profileData;
   } catch (error) {
-    if ((error as { code?: string })?.code === 'auth/popup-closed-by-user') {
-      throw new Error('Cửa sổ đăng nhập đã đóng.');
+    const code = (error as { code?: string })?.code;
+    const msg = error instanceof Error ? error.message : String(error);
+    if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') {
+      throw new Error('Cửa sổ đăng nhập đã được đóng.');
     }
-    throw error;
+    if (code === 'auth/popup-blocked') {
+      throw new Error('Trình duyệt đang chặn cửa sổ pop-up. Vui lòng cho phép pop-up hoặc sử dụng form đăng nhập Email/SĐT bên dưới.');
+    }
+    if (code === 'auth/unauthorized-domain') {
+      throw new Error('Tên miền máy chủ hiện tại chưa được cấp quyền OAuth trong Firebase Console. Bạn có thể đăng nhập bằng form Email hoặc Số điện thoại bên dưới hoàn toàn bình thường.');
+    }
+    if (code === 'auth/operation-not-allowed') {
+      throw new Error('Phương thức Google Sign-in chưa được kích hoạt trong Firebase Console. Vui lòng sử dụng form Email/SĐT bên dưới.');
+    }
+    throw new Error(msg || 'Đăng nhập Google không thành công. Vui lòng thử lại hoặc dùng Email/SĐT.');
   }
 }
 

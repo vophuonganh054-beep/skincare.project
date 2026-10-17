@@ -209,12 +209,12 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center: Desktop Navigation Links */}
         {!isMobileFrame && (
-          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-2.5 xl:space-x-5 text-[11px] xl:text-xs font-medium tracking-wider text-[#46464a] whitespace-nowrap px-1 xl:px-2">
+          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-3 xl:space-x-6 text-xs xl:text-sm font-semibold tracking-wider text-[#46464a] whitespace-nowrap px-1 xl:px-2">
             <Link
               to="/"
-              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+              className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
                 pathname === '/'
-                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  ? 'text-[#1c1c19] font-bold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
@@ -222,9 +222,9 @@ export const Header: React.FC<HeaderProps> = ({
             </Link>
             <Link
               to="/san-pham"
-              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+              className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
                 pathname.startsWith('/san-pham')
-                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  ? 'text-[#1c1c19] font-bold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
@@ -232,29 +232,29 @@ export const Header: React.FC<HeaderProps> = ({
             </Link>
             <Link
               to="/ve-alps"
-              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+              className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
                 pathname === '/ve-alps'
-                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  ? 'text-[#1c1c19] font-bold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
-              Về Alps
+              VỀ ALPS
             </Link>
             <Link
               to="/lien-he"
-              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+              className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
                 pathname === '/lien-he'
-                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  ? 'text-[#1c1c19] font-bold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
-              Liên hệ
+              LIÊN HỆ
             </Link>
             <button
               onClick={() => onSelectTab('routine')}
-              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+              className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
                 activeTab === 'routine'
-                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  ? 'text-[#1c1c19] font-bold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
@@ -265,9 +265,9 @@ export const Header: React.FC<HeaderProps> = ({
                 if (onOpenAccount) onOpenAccount();
                 else onSelectTab('account');
               }}
-              className={`transition-colors hover:text-[#1c1c19] py-1 whitespace-nowrap cursor-pointer ${
+              className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
                 activeTab === 'account'
-                  ? 'text-[#1c1c19] font-semibold underline underline-offset-4 decoration-[#74584d]'
+                  ? 'text-[#1c1c19] font-bold underline underline-offset-4 decoration-[#74584d]'
                   : ''
               }`}
             >
@@ -282,17 +282,17 @@ export const Header: React.FC<HeaderProps> = ({
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1 px-3 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1 whitespace-nowrap cursor-pointer shadow-2xs text-[11px]"
+              className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1.5 px-3.5 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1.5 whitespace-nowrap cursor-pointer shadow-xs text-xs sm:text-sm"
             >
               <span>🌸</span>
-              <span>Chiến Dịch 20/10</span>
+              <span>Ưu Đãi 20/10</span>
             </button>
             {onOpenSkinQuiz && (
               <button
                 onClick={onOpenSkinQuiz}
-                className="transition-all hover:scale-105 active:scale-95 px-2.5 xl:px-3 py-1 rounded-full bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-2xs cursor-pointer whitespace-nowrap"
+                className="transition-all hover:scale-105 active:scale-95 px-3 xl:px-3.5 py-1.5 rounded-full bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-xs cursor-pointer whitespace-nowrap text-xs sm:text-sm"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#74584d] shrink-0" />
+                <Sparkles className="w-4 h-4 text-[#74584d] shrink-0" />
                 <span>{t.nav.quiz}</span>
               </button>
             )}

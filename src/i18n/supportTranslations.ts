@@ -101,7 +101,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       oneMin: '1 PHÚT',
       chatLabel: 'Chat AI & CSKH',
       tag247: '24/7',
-      sublabel: 'Tư vấn mọi câu hỏi • Hotline 1900 8899',
+      sublabel: 'Tư vấn mọi câu hỏi • Hotline 0772 770 134',
       mobileQuiz: 'Soi Da AI',
       mobileChat: 'Chat AI • CSKH',
     },
@@ -109,7 +109,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       title: 'Chuyên Gia Da Liễu AI Alps',
       aiSubtitle: 'Trí Tuệ Nhân Tạo 24/7',
       online247: 'Trực tuyến 24/7',
-      officialWebsite: 'Website chính thức: alps.id.vn • Hotline: 1900 8899',
+      officialWebsite: 'Website chính thức: alps.vn • Hotline: 0772 770 134',
       resetChat: 'Làm mới cuộc trò chuyện',
       resetConfirm: 'Dạ em đã làm mới cuộc trò chuyện. Quý khách cần chuyên viên tư vấn về vấn đề da hay câu hỏi nào về Alps Skincare ạ?',
       quizBannerText: 'Chưa biết nền da của mình? Hãy làm',
@@ -118,7 +118,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       thinking: 'Chuyên gia AI đang phân tích và soạn câu trả lời...',
       inputPlaceholder: 'Hỏi AI bất kỳ điều gì: cách trị mụn, thành phần, đặt hàng, đổi trả...',
       welcomeMessage: (name) =>
-        `Dạ kính chào ${name || 'quý khách'}! Em là Chuyên viên Tư vấn Da liễu & CSKH Trí Tuệ Nhân Tạo (AI) của Alps Skincare Thụy Sĩ (alps.id.vn).\n\nEm được trang bị toàn bộ cơ sở dữ liệu y khoa từ Viện nghiên cứu Zurich và sẵn sàng giải đáp thông minh mọi câu hỏi của quý khách:\n• Chẩn đoán tình trạng da & lên phác đồ điều trị cá nhân hóa\n• Giải đáp thành phần dược mỹ phẩm tế bào gốc sông băng thuần chay\n• Hướng dẫn đặt hàng nhanh, tra cứu vận chuyển & thanh toán VietQR Napas 247\n• Chính sách bảo chứng đổi trả 30 ngày hoàn tiền 100% không rủi ro\n\nQuý khách đang quan tâm hoặc cần tư vấn về vấn đề gì hôm nay ạ?`,
+        `Dạ kính chào ${name || 'quý khách'}! Em là Chuyên viên Da liễu Thụy Sĩ & CSKH Trí Tuệ Nhân Tạo (Gemini AI) của Alps Skincare (alps.vn).\n\nEm được kết nối trực tiếp với cơ sở dữ liệu y khoa từ Viện nghiên cứu Zurich và sẵn sàng giải đáp thông minh mọi câu hỏi của quý khách:\n• Chẩn đoán tình trạng da & lên phác đồ điều trị cá nhân hóa\n• Giải đáp thành phần dược mỹ phẩm tế bào gốc hoa tuyết thuần chay\n• Hướng dẫn đặt hàng nhanh, tra cứu vận chuyển & thanh toán VietQR Napas 247\n• Chính sách bảo chứng đổi trả 30 ngày hoàn tiền 100% không rủi ro\n\nQuý khách đang quan tâm hoặc cần tư vấn về vấn đề gì hôm nay ạ?`,
       quickPrompts: [
         'Chat Fanpage Facebook cùng chuyên viên tư vấn',
         'Kiểm tra tình trạng da & thiết lập phác đồ cá nhân hóa',
@@ -129,7 +129,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         'Da hay bị đỏ rát khi ngồi máy lạnh, phục hồi màng lipid ra sao?',
       ],
       fallbackDefault:
-        'Dạ cảm ơn quý khách. Hệ thống đang bảo trì đường truyền AI ngắn hạn. Quý khách vui lòng gọi Hotline 1900 8899 hoặc gửi email cskh@alps.id.vn để chuyên viên tư vấn ngay 24/7 ạ!',
+        'Dạ cảm ơn quý khách. Quý khách vui lòng gọi Hotline 0772 770 134 hoặc gửi email pure@alps.vn để chuyên viên da liễu tư vấn ngay 24/7 ạ!',
       fallbackGuestCheckout:
         'Dạ kính thưa quý khách, tại website chính thức alps.id.vn, quý khách có thể:\n1. Đặt hàng trực tiếp ngay (Guest Checkout) mà không bắt buộc phải đăng nhập.\n2. Hoặc đăng nhập tài khoản để tích lũy điểm hội viên Alps Pure Privileges và lưu địa chỉ nhận hàng tự động.\nMọi đơn hàng đều được cam kết đổi trả 30 ngày hoàn tiền 100% ạ!',
       fallbackReturns:
@@ -142,23 +142,23 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     contact: {
       hotlineTitle: 'Tổng Đài Miễn Cước 24/7',
       hotlineDesc: 'Hỗ trợ tư vấn da liễu, đặt hàng & xử lý khiếu nại',
-      hotlineFree: '1900 8899 (Miễn cước toàn quốc)',
+      hotlineFree: '0772 770 134 (Hotline CSKH)',
       emailTitle: 'Hộp Thư Điện Tử CSKH',
-      emailAddress: 'cskh@alps.id.vn',
+      emailAddress: 'pure@alps.vn',
       emailDesc: 'Phản hồi trong vòng 60 phút',
       zurichTitle: 'Trụ Sở Thụy Sĩ (Zurich HQ)',
       zurichAddress: 'Bahnhofstrasse 45, 8001 Zürich, Switzerland',
       zurichDesc: 'Viện nghiên cứu dược mỹ phẩm & kiểm định lâm sàng',
       hcmTitle: 'Trụ Sở & Văn Phòng Phân Phối TP.HCM',
-      hcmAddress: '30 D. Trịnh Đình Thảo, P. Hòa Thạnh, Q. Tân Phú, TP. Hồ Chí Minh',
+      hcmAddress: '30 Trịnh Đình Thảo, Tân Phú, Thành Phố Hồ Chí Minh',
       hcmDesc: 'Trải nghiệm trực tiếp & nhận tư vấn chuyên sâu cùng chuyên gia',
       hanoiTitle: 'Văn Phòng Đại Diện TP.HCM',
-      hanoiAddress: '30 D. Trịnh Đình Thảo, P. Hòa Thạnh, Q. Tân Phú, TP. Hồ Chí Minh',
+      hanoiAddress: '30 Trịnh Đình Thảo, Tân Phú, Thành Phố Hồ Chí Minh',
       hanoiDesc: 'Trung tâm phân phối chính thức & dịch vụ khách hàng',
       workingHoursTitle: 'Thời Gian Hoạt Động',
       workingHoursDesc: 'Tổng đài & Tư vấn trực tuyến: 24/7 xuyên suốt',
       workingHoursTime: 'Tư vấn chuyên sâu & CSKH: 08:30 - 21:30 hàng ngày (kể cả Lễ, Tết)',
-      callNowBtn: 'Gọi 1900 8899',
+      callNowBtn: 'Gọi 0772 770 134',
     },
     ticket: {
       title: 'Gửi Phiếu Hỗ Trợ Khách Hàng',
@@ -167,7 +167,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       phoneLabel: 'Số điện thoại liên hệ *',
       emailLabel: 'Địa chỉ Email (nếu có)',
       orderCodeLabel: 'Mã đơn hàng liên quan (nếu có)',
-      orderCodePlaceholder: 'Ví dụ: ALPS-89421',
+      orderCodePlaceholder: 'Mã đơn hàng (ALPS-XXXXX)',
       topicLabel: 'Chủ đề cần hỗ trợ *',
       messageLabel: 'Chi tiết câu hỏi hoặc vấn đề cần xử lý *',
       messagePlaceholder: 'Mô tả chi tiết tình trạng da, thắc mắc đơn hàng hoặc yêu cầu của bạn...',
@@ -238,7 +238,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       oneMin: '1 MIN',
       chatLabel: 'AI Care & Support',
       tag247: '24/7',
-      sublabel: 'Immediate assistance • Hotline 1900 8899',
+      sublabel: 'Immediate assistance • Hotline 0772 770 134',
       mobileQuiz: 'Skin Diagnostic',
       mobileChat: 'AI Support 24/7',
     },
@@ -246,7 +246,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       title: 'Alps AI Dermatology Advisor',
       aiSubtitle: 'Artificial Intelligence 24/7',
       online247: 'Live 24/7',
-      officialWebsite: 'Official Boutique: alps.id.vn • Hotline: +41 44 211 8899',
+      officialWebsite: 'Official Boutique: alps.vn • Hotline: 0772 770 134',
       resetChat: 'Reset Conversation',
       resetConfirm: 'Conversation refreshed. How may our Swiss dermatology advisor assist your skincare regimen today?',
       quizBannerText: 'Unsure of your biometric skin profile? Take the',
@@ -255,7 +255,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       thinking: 'AI Dermatology Advisor is evaluating your inquiry...',
       inputPlaceholder: 'Ask anything: acne healing, INCI ingredients, orders, 30-day returns...',
       welcomeMessage: (name) =>
-        `Welcome ${name || 'esteemed guest'}! I am the AI Dermatology & Client Care Specialist for Alps Skincare Switzerland (alps.id.vn).\n\nPowered by clinical data from our Zurich research institute, I am prepared to assist you with:\n• Biometric skin diagnosis & bespoke regimen building\n• Swiss glacial stem cell and vegan INCI science\n• Express shipping, order tracking & seamless payments\n• 30-day risk-free 100% money-back guarantee\n\nHow may I care for your skin today?`,
+        `Welcome ${name || 'esteemed guest'}! I am the AI Dermatology & Client Care Specialist for Alps Skincare Switzerland (alps.vn).\n\nPowered by clinical data from our Zurich research institute, I am prepared to assist you with:\n• Biometric skin diagnosis & bespoke regimen building\n• Swiss glacial stem cell and vegan INCI science\n• Express shipping, order tracking & seamless payments\n• 30-day risk-free 100% money-back guarantee\n\nHow may I care for your skin today?`,
       quickPrompts: [
         'Analyze my skin & establish a personalized ritual',
         'Which Alps routine best treats oily, congested acne-prone skin?',
@@ -265,9 +265,9 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         'How do I restore my lipid moisture barrier in air-conditioned environments?',
       ],
       fallbackDefault:
-        'Thank you for reaching out. Our AI network is briefly refreshing. Please call our 24/7 hotline 1900 8899 or email cskh@alps.id.vn for instant specialist support.',
+        'Thank you for reaching out. Our AI network is briefly refreshing. Please call our 24/7 hotline 0772 770 134 or email pure@alps.vn for instant specialist support.',
       fallbackGuestCheckout:
-        'At alps.id.vn, you may:\n1. Check out immediately as a guest without creating an account.\n2. Or sign in to accumulate Alps Pure Privileges tier rewards and save delivery addresses.\nEvery order includes our 30-day 100% money-back guarantee.',
+        'At alps.vn, you may:\n1. Check out immediately as a guest without creating an account.\n2. Or sign in to accumulate Alps Pure Privileges tier rewards and save delivery addresses.\nEvery order includes our 30-day 100% money-back guarantee.',
       fallbackReturns:
         'Alps Delivery & Guarantee Policy:\n• 100% return & refund within 30 days even if opened and sampled, should any irritation occur.\n• Complimentary shipping on orders above 500,000₫ / $50.\n• Express dispatch in 24 hours.',
       fallbackSerum:
@@ -278,9 +278,9 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     contact: {
       hotlineTitle: '24/7 Toll-Free Client Hotline',
       hotlineDesc: 'Skin consultations, orders & dedicated support',
-      hotlineFree: '1900 8899 / +41 44 211 8899',
+      hotlineFree: '0772 770 134 / +41 44 211 8899',
       emailTitle: 'Customer Care Inbox',
-      emailAddress: 'cskh@alps.id.vn',
+      emailAddress: 'pure@alps.vn',
       emailDesc: 'Direct specialist reply within 60 minutes',
       zurichTitle: 'Zurich Global Headquarters',
       zurichAddress: 'Bahnhofstrasse 45, 8001 Zürich, Switzerland',

@@ -507,7 +507,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           await onGoogleLogin();
                         } catch (err: unknown) {
                           const msg = err instanceof Error ? err.message : String(err);
-                          if (!msg.includes('đã đóng')) {
+                          if (!msg.includes('đã đóng') && !msg.includes('đã được đóng') && !msg.includes('đã hủy')) {
                             setAuthError(msg || 'Đăng nhập Google thất bại');
                           }
                         } finally {
@@ -605,7 +605,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     <div className="p-3 bg-[#f6f3ee] border border-[#ebe8e3] rounded-xl text-[11px] text-[#74584d] flex items-start space-x-2 animate-fadeIn">
                       <HelpCircle className="w-4 h-4 shrink-0 mt-0.5" />
                       <div>
-                        Để bảo vệ an toàn thông tin khách hàng, vui lòng liên hệ hotline chăm sóc khách hàng <strong>1900 8899</strong> hoặc gửi yêu cầu tới <strong>pure@alps.com</strong> để đặt lại mật khẩu tức thì.
+                        Để bảo vệ an toàn thông tin khách hàng, vui lòng liên hệ hotline chăm sóc khách hàng <strong>0772 770 134</strong> hoặc gửi yêu cầu tới <strong>pure@alps.vn</strong> để đặt lại mật khẩu tức thì.
                       </div>
                     </div>
                   )}
@@ -1210,7 +1210,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       <Headphones className="w-4 h-4" />
                       <span>Cần hỗ trợ tra cứu hoặc đổi thông tin đơn hàng?</span>
                     </div>
-                    <span className="text-[10px] text-[#8a9a86] font-medium">1900 8899</span>
+                    <span className="text-[10px] text-[#8a9a86] font-medium">0772 770 134</span>
                   </div>
                   <p className="text-[11px] text-[#77767b] leading-relaxed">
                     Bạn có thể liên hệ trực tiếp với bộ phận Chăm Sóc Khách Hàng 24/7 để được hỗ trợ điều hướng vận chuyển, đổi địa chỉ hoặc tư vấn phác đồ sử dụng.
@@ -1446,7 +1446,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       <Headphones className="w-4 h-4" />
                       <span>Hỗ Trợ & Tư Vấn Da Liễu 24/7</span>
                     </div>
-                    <span className="text-[10px] text-[#8a9a86] font-medium">1900 8899</span>
+                    <span className="text-[10px] text-[#8a9a86] font-medium">0772 770 134</span>
                   </div>
                   <p className="text-[11px] text-[#77767b] leading-relaxed">
                     Đội ngũ chuyên viên tư vấn da Alps luôn sẵn sàng hỗ trợ phác đồ sử dụng hoặc chính sách đổi trả hàng 30 ngày.

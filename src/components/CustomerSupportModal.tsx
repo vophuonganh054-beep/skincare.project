@@ -293,7 +293,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                       </span>
                     </div>
                     <a
-                      href="tel:19008899"
+                      href="tel:0772770134"
                       className="px-3 py-1.5 bg-[#202022] hover:bg-black text-white text-xs font-medium rounded-full shadow-2xs transition-colors shrink-0"
                     >
                       {support.contact.callNowBtn}
@@ -316,18 +316,18 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                       {support.contact.emailTitle}
                     </h4>
                     <p className="text-xs text-[#77767b] mt-0.5">
-                      cskh@alps.id.vn • pure@alps.com
+                      pure@alps.vn
                     </p>
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-[#f0ede9] flex items-center justify-between">
                     <div>
                       <span className="font-medium text-xs text-[#74584d] block">
-                        cskh@alps.id.vn
+                        pure@alps.vn
                       </span>
                     </div>
                     <a
-                      href="mailto:cskh@alps.id.vn"
+                      href="mailto:pure@alps.vn"
                       className="px-3 py-1.5 bg-[#f6f3ee] hover:bg-[#ede7df] text-[#1c1c19] text-xs font-medium rounded-full border border-[#202022]/10 transition-colors shrink-0"
                     >
                       Email

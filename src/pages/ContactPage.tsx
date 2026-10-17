@@ -91,11 +91,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-serif text-sm font-semibold text-[#1c1c19]">Địa Điểm & Chi Nhánh</h3>
-                  <div className="text-xs text-[#5a595e] space-y-2 mt-2 leading-relaxed">
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-[#1c1c19]">Địa Điểm & Chi Nhánh</h3>
+                  <div className="text-sm text-[#5a595e] space-y-2 mt-2 leading-relaxed">
                     <p>
                       <strong className="text-[#1c1c19]">Địa chỉ liên hệ:</strong><br />
-                      Tòa nhà Landmark 81, 720A Điện Biên Phủ, Phường 22, Quận Bình Thạnh, TP. Hồ Chí Minh.
+                      30 Trịnh Đình Thảo, Tân Phú, Thành Phố Hồ Chí Minh
                     </p>
                   </div>
                 </div>
@@ -109,17 +109,17 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="font-serif text-sm font-semibold text-[#1c1c19]">Hotline & Email Trực Tuyến</h3>
-                  <div className="text-xs text-[#5a595e] space-y-2 mt-2 leading-relaxed">
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-[#1c1c19]">Hotline & Email Trực Tuyến</h3>
+                  <div className="text-sm text-[#5a595e] space-y-2 mt-2 leading-relaxed">
                     <p>
                       <span className="text-[#77767b]">Hotline CSKH / Đặt hàng:</span><br />
-                      <a href="tel:0772770134" className="font-bold text-base text-[#1c1c19] hover:text-[#74584d]">
+                      <a href="tel:0772770134" className="font-bold text-lg text-[#1c1c19] hover:text-[#74584d]">
                         0772 770 134
                       </a>
                     </p>
                     <p>
                       <span className="text-[#77767b]">Email hỗ trợ khách hàng:</span><br />
-                      <a href="mailto:pure@alps.vn" className="font-medium text-[#74584d] hover:underline">
+                      <a href="mailto:pure@alps.vn" className="font-semibold text-base text-[#74584d] hover:underline">
                         pure@alps.vn
                       </a>
                     </p>
@@ -196,7 +196,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-[#1c1c19] mb-1">
+                      <label className="block text-sm font-semibold text-[#1c1c19] mb-1.5">
                         Họ và tên của bạn <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -204,13 +204,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         required
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
-                        placeholder="Ví dụ: Nguyễn Phương Anh"
-                        className="w-full px-3.5 py-2.5 text-xs bg-[#fcf9f4] border border-[#202022]/10 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all"
+                        placeholder="Họ và tên của bạn"
+                        className="w-full px-4 py-3 text-sm bg-[#fcf9f4] border border-[#202022]/15 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all text-[#1c1c19]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-[#1c1c19] mb-1">
+                      <label className="block text-sm font-semibold text-[#1c1c19] mb-1.5">
                         Số điện thoại / Zalo <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -218,34 +218,34 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                         required
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        placeholder="Ví dụ: 0912 345 678"
-                        className="w-full px-3.5 py-2.5 text-xs bg-[#fcf9f4] border border-[#202022]/10 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all"
+                        placeholder="0772 770 134"
+                        className="w-full px-4 py-3 text-sm bg-[#fcf9f4] border border-[#202022]/15 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all text-[#1c1c19]"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium text-[#1c1c19] mb-1">
+                      <label className="block text-sm font-semibold text-[#1c1c19] mb-1.5">
                         Địa chỉ Email (tùy chọn)
                       </label>
                       <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="email@example.com"
-                        className="w-full px-3.5 py-2.5 text-xs bg-[#fcf9f4] border border-[#202022]/10 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all"
+                        placeholder="pure@alps.vn"
+                        className="w-full px-4 py-3 text-sm bg-[#fcf9f4] border border-[#202022]/15 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all text-[#1c1c19]"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-[#1c1c19] mb-1">
+                      <label className="block text-sm font-semibold text-[#1c1c19] mb-1.5">
                         Chủ đề cần tư vấn
                       </label>
                       <select
                         value={topic}
                         onChange={(e) => setTopic(e.target.value)}
-                        className="w-full px-3.5 py-2.5 text-xs bg-[#fcf9f4] border border-[#202022]/10 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all cursor-pointer"
+                        className="w-full px-4 py-3 text-sm bg-[#fcf9f4] border border-[#202022]/15 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all cursor-pointer text-[#1c1c19]"
                       >
                         <option value="skin-consultation">Tư vấn chọn sản phẩm theo loại da</option>
                         <option value="routine-guide">Hướng dẫn xây dựng chu trình 5 bước</option>
@@ -257,25 +257,25 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-[#1c1c19] mb-1">
+                    <label className="block text-sm font-semibold text-[#1c1c19] mb-1.5">
                       Mô tả tình trạng da hoặc câu hỏi của bạn
                     </label>
                     <textarea
                       rows={4}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder="Mô tả ngắn gọn về tình trạng da (da dầu, da khô, mụn, thâm...) hoặc thắc mắc của bạn..."
-                      className="w-full px-3.5 py-2.5 text-xs bg-[#fcf9f4] border border-[#202022]/10 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all resize-none"
+                      placeholder="Mô tả tình trạng da hoặc câu hỏi của bạn..."
+                      className="w-full px-4 py-3 text-sm bg-[#fcf9f4] border border-[#202022]/15 rounded-xl focus:outline-none focus:border-[#74584d] focus:bg-white transition-all resize-none text-[#1c1c19]"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-3 px-4 bg-[#202022] hover:bg-[#74584d] text-white text-xs font-semibold rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-md disabled:opacity-50"
+                    className="w-full py-3.5 px-5 bg-[#202022] hover:bg-[#74584d] text-white text-sm font-bold rounded-xl flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-md disabled:opacity-50"
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>{isSubmitting ? 'Đang gửi yêu cầu...' : 'GỬI YÊU CẦU TƯ VẤN MIỄN PHÍ'}</span>
+                    <Send className="w-4 h-4" />
+                    <span>{isSubmitting ? 'ĐANG GỬI YÊU CẦU...' : 'GỬI YÊU CẦU TƯ VẤN MIỄN PHÍ'}</span>
                   </button>
                 </form>
               )}

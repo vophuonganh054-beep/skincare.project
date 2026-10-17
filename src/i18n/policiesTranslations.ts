@@ -43,7 +43,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: 'Quy trình hoàn tiền siêu tốc trong 24 giờ',
-          desc: 'Ngay khi tiếp nhận yêu cầu qua Hotline 1900 8899 hoặc Chat CSKH, chuyên viên sẽ cử nhân viên bưu tá đến tận nhà thu hồi sản phẩm và hoàn tiền trực tiếp qua chuyển khoản ngân hàng trong vòng 24 giờ làm việc.',
+          desc: 'Ngay khi tiếp nhận yêu cầu qua Hotline 0772 770 134 hoặc Chat CSKH, chuyên viên sẽ cử nhân viên bưu tá đến tận nhà thu hồi sản phẩm và hoàn tiền trực tiếp qua chuyển khoản ngân hàng trong vòng 24 giờ làm việc.',
         },
         {
           title: 'Hỗ trợ 1:1 từ Bác sĩ Da liễu Zurich',
@@ -85,7 +85,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: 'Quyền xóa dữ liệu cá nhân bất kỳ lúc nào',
-          desc: 'Quý khách có toàn quyền yêu cầu xóa toàn bộ thông tin tài khoản hoặc lịch sử đơn hàng khỏi hệ thống bằng cách liên hệ cskh@alps.id.vn.',
+          desc: 'Quý khách có toàn quyền yêu cầu xóa toàn bộ thông tin tài khoản hoặc lịch sử đơn hàng khỏi hệ thống bằng cách liên hệ pure@alps.vn.',
         },
       ],
       note: 'Tuân thủ nghiêm ngặt Luật An toàn thông tin mạng Việt Nam và Quy định bảo vệ dữ liệu châu Âu (GDPR).',
@@ -155,7 +155,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: 'Right to data erasure at any time',
-          desc: 'You hold full control to modify or delete your account records upon written request to cskh@alps.id.vn.',
+          desc: 'You hold full control to modify or delete your account records upon written request to pure@alps.vn.',
         },
       ],
       note: 'Strictly aligned with European General Data Protection Regulation (GDPR) standards.',
@@ -225,7 +225,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: 'Recht auf vollständige Löschung',
-          desc: 'Sie können die Löschung Ihres Kundenkontos jederzeit per E-Mail an cskh@alps.id.vn veranlassen.',
+          desc: 'Sie können die Löschung Ihres Kundenkontos jederzeit per E-Mail an pure@alps.vn veranlassen.',
         },
       ],
       note: 'Vollständig konform mit den Richtlinien der europäischen Datenschutz-Grundverordnung (DSGVO).',
@@ -295,7 +295,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: 'Derecho de supresión cuando lo solicite',
-          desc: 'Puede solicitar la eliminación total de sus datos escribiendo a cskh@alps.id.vn.',
+          desc: 'Puede solicitar la eliminación total de sus datos escribiendo a pure@alps.vn.',
         },
       ],
       note: 'En estricto cumplimiento con el Reglamento General de Protección de Datos (RGPD) europeo.',
@@ -323,7 +323,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: '24 小时内极速原路返还款项',
-          desc: '通过热线 1900 8899 或在线 AI 客服提交需求后，顺丰小哥将上门取件，款项将在 24 个工作小时内核实并原路退回。',
+          desc: '通过热线 0772 770 134 或在线 AI 客服提交需求后，顺丰小哥将上门取件，款项将在 24 个工作小时内核实并原路退回。',
         },
         {
           title: '苏黎世皮肤专研团队 1 对 1 指导',
@@ -365,7 +365,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: '支持随时自主注销与删除个人数据',
-          desc: '您拥有完全的数据自主权，随时可通过发送邮件至 cskh@alps.id.vn 申请注销档案。',
+          desc: '您拥有完全的数据自主权，随时可通过发送邮件至 pure@alps.vn 申请注销档案。',
         },
       ],
       note: '严格遵循欧盟通用数据保护条例 (GDPR) 与各国数据合规法规。',

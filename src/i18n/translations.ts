@@ -166,7 +166,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
   // VIETNAMESE
   vi: {
     announcement: 'BỘ SƯU TẬP MỚI 2026: MIỄN PHÍ GIAO HÀNG TOÀN QUỐC ĐƠN TỪ 500.000₫ • TẶNG THÌA BẠC CAO CẤP',
-    csHotline: 'CSKH: 1900 8899',
+    csHotline: 'Hotline: 0772 770 134',
     zurichHQ: 'Thụy Sĩ • Zurich',
     searchPlaceholder: 'Tìm serum, kem dưỡng, toner...',
     nav: {
