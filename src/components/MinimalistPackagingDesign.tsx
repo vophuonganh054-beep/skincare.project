@@ -48,7 +48,7 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white rounded-3xl p-5 sm:p-8 lg:p-10 border border-[#ebe5dc] shadow-sm">
           {/* Main Visual Image */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="product-image-frame relative rounded-2xl overflow-hidden bg-[#f4f0eb] border border-[#e8e1d6] aspect-square group shadow-xs">
+            <div className="relative rounded-2xl overflow-hidden bg-[#f4f0eb] border border-[#e8e1d6] aspect-4/3 sm:aspect-16/10 group shadow-xs">
               <img
                 src={duoImg}
                 alt={pkg.imageAlt}

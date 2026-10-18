@@ -22,7 +22,7 @@ import { Footer } from './components/Footer';
 import { FontSwitcherModal } from './components/FontSwitcherModal';
 import { SkinQuizModal } from './components/SkinQuizModal';
 import { BrandStoryModal } from './components/BrandStoryModal';
-import { OffersPage } from './pages/OffersPage';
+import { WomenDayCampaignSection } from './components/WomenDayCampaignSection';
 import { CampaignCombo } from './data/campaign2010';
 import { Sparkles, Type } from 'lucide-react';
 import { useRouter } from './context/RouterContext';
@@ -734,6 +734,7 @@ export default function App() {
 
   const handleApplyVoucherToCart = (code: string) => {
     setActiveVoucherCode(code);
+    setIsCartOpen(true);
     showToast(`🌸 Đã lưu mã ưu đãi ${code}! Giảm giá áp dụng ngay khi đặt hàng.`);
   };
 
@@ -926,15 +927,6 @@ export default function App() {
               onOpenBrandStory={() => navigate('/ve-alps')}
               onShowToast={showToast}
               searchQuery={searchQuery}
-            />
-          )}
-
-          {route === 'offers' && (
-            <OffersPage
-              onAddComboToCart={handleAddComboToCart}
-              onBuyNowCombo={handleBuyNowCombo}
-              onApplyVoucherToCart={handleApplyVoucherToCart}
-              onShowToast={showToast}
             />
           )}
 

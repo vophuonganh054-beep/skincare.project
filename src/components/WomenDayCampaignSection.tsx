@@ -33,15 +33,16 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
 }) => {
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
-  const handleCopyCode = async (code: string) => {
-    let copied = false;
-    try {
-      if (navigator.clipboard) { await navigator.clipboard.writeText(code); copied = true; }
-    } catch { /* Saving the code for checkout still works without clipboard access. */ }
+  const handleCopyCode = (code: string) => {
+    navigator.clipboard?.writeText(code);
     setCopiedCode(code);
-    onApplyVoucherToCart?.(code);
-    onShowToast(copied ? `Đã sao chép và lưu mã ${code} cho thanh toán.` : `Đã lưu mã ${code} cho thanh toán. Bạn cũng có thể nhập mã này thủ công.`);
-    setTimeout(() => setCopiedCode(null), 3000);
+    onShowToast(`Đã sao chép mã ưu đãi ${code}! Dán vào giỏ hàng để nhận giảm giá.`);
+    if (onApplyVoucherToCart) {
+      onApplyVoucherToCart(code);
+    }
+    setTimeout(() => {
+      setCopiedCode(null);
+    }, 3000);
   };
 
   return (
@@ -88,7 +89,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
               </h3>
             </div>
             <p className="text-xs text-[#77746f]">
-              Nhấn <strong className="text-[#1c1c19]">"Sao Chép Mã"</strong> để lưu mã cho lần thanh toán tiếp theo
+              Nhấn <strong className="text-[#1c1c19]">"Sao Chép Mã"</strong> để tự động áp dụng vào giỏ hàng
             </p>
           </div>
 
@@ -156,11 +157,6 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
               );
             })}
           </div>
-          <div className="mt-6 pt-4 border-t border-[#ebe4d8] text-xs text-[#5f5d58] space-y-2">
-            <p className="font-semibold text-[#1c1c19]">Cách sử dụng voucher</p>
-            <p>Chọn một mã, bấm Lấy mã rồi thêm sản phẩm vào giỏ. Mã đã lưu sẽ được điền khi mở thanh toán.</p>
-            <p>Mỗi đơn dùng một mã, không cộng dồn. Phần trăm giảm tính trên tiền sản phẩm trước phí vận chuyển. Phí giao hàng và tổng tiền được hiển thị tại thanh toán.</p>
-          </div>
         </div>
 
         {/* 2. THE 2 EXCLUSIVE 20/10 GIFT COMBOS */}
@@ -185,7 +181,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
               >
                 {/* Image and Badge */}
                 <div>
-                  <div className="product-image-frame relative aspect-square overflow-hidden bg-[#f4f0eb]">
+                  <div className="relative aspect-4/3 overflow-hidden bg-[#f4f0eb]">
                     <img
                       src={combo.image}
                       alt={combo.name}

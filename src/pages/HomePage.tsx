@@ -1,5 +1,6 @@
 import React from 'react';
 import { HeroBanner } from '../components/HeroBanner';
+import { WomenDayCampaignSection } from '../components/WomenDayCampaignSection';
 import { RitualCallout } from '../components/RitualCallout';
 import { CatalogSection } from '../components/CatalogSection';
 import { MinimalistPackagingDesign } from '../components/MinimalistPackagingDesign';
@@ -54,15 +55,14 @@ export const HomePage: React.FC<HomePageProps> = ({
         isMobileFrame={false}
       />
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-        <Link to="/uu-dai-20-10" className="flex items-center justify-between gap-4 rounded-2xl border border-[#e4c9bd] bg-[#f9f1eb] px-5 py-4 text-[#74584d]">
-          <div className="min-w-0">
-            <p className="font-serif text-lg sm:text-xl">Ưu đãi 20/10</p>
-            <p className="text-xs sm:text-sm mt-1">Lấy voucher và khám phá các combo quà tặng ALPS.</p>
-          </div>
-          <ArrowRight className="w-5 h-5 shrink-0" />
-        </Link>
-      </section>
+      {/* CHIẾN DỊCH TRI ÂN 20/10 NGÀY PHỤ NỮ VIỆT NAM */}
+      <WomenDayCampaignSection
+        onAddComboToCart={onAddComboToCart}
+        onBuyNowCombo={onBuyNowCombo}
+        onApplyVoucherToCart={onApplyVoucherToCart}
+        onShowToast={onShowToast}
+        isMobileFrame={false}
+      />
 
       {/* 5-Step Ritual Callout */}
       <RitualCallout

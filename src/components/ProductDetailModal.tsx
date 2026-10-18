@@ -93,7 +93,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-start">
             {/* Left: Product Image Showcase */}
             <div className="space-y-3">
-              <div className="product-image-frame relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-xs border border-[#202022]/6 flex items-center justify-center">
+              <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-xs border border-[#202022]/6 flex items-center justify-center">
                 <img
                   src={product.image}
                   alt={product.name}

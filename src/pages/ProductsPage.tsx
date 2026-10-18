@@ -208,7 +208,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   {/* Image Container with clickable link */}
                   <Link
                     to={productUrl}
-                    className="product-image-frame relative block aspect-square bg-[#f9f6f0] overflow-hidden cursor-pointer"
+                    className="relative block aspect-[4/4] bg-[#f9f6f0] overflow-hidden cursor-pointer"
                   >
                     <SafeImage
                       src={product.image}

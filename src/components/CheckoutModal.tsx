@@ -188,10 +188,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   };
 
   useEffect(() => {
-    if (isOpen && initialPromoCode) {
+    if (isOpen && initialPromoCode && !promoApplied) {
       handleApplyPromo(initialPromoCode);
     }
-  }, [isOpen, initialPromoCode]);
+  }, [isOpen, initialPromoCode, promoApplied]);
 
   // Pricing calculations
   const safeItems: CartItem[] = (Array.isArray(items) ? items : []).filter((it) => it && it.product);

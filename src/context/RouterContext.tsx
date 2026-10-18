@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
-export type RouteType = 'home' | 'products' | 'product-detail' | 'about' | 'contact' | 'offers' | 'not-found';
+export type RouteType = 'home' | 'products' | 'product-detail' | 'about' | 'contact' | 'not-found';
 
 export interface RouteInfo {
   route: RouteType;
@@ -23,10 +23,6 @@ export function parseRoute(pathname: string): RouteInfo {
 
   if (normalized === '/' || normalized === '') {
     return { route: 'home', params: {}, pathname: '/' };
-  }
-
-  if (normalized === '/uu-dai-20-10' || normalized === '/voucher') {
-    return { route: 'offers', params: {}, pathname: '/uu-dai-20-10' };
   }
 
   if (normalized === '/san-pham' || normalized === '/san-pham/') {

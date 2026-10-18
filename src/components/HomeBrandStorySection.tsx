@@ -23,7 +23,7 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left: Imagery with quiet luxury frame */}
           <div className="lg:col-span-6 relative">
-            <div className="product-image-frame relative rounded-3xl overflow-hidden aspect-square bg-[#202022] shadow-xl border border-[#202022]/10 group">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#202022] shadow-xl border border-[#202022]/10 group">
               <img
                 src={originStreamImg}
                 alt="Alps Pure Essence Brand Heritage"
