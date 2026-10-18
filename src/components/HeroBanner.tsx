@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight, ShieldCheck } from 'lucide-react';
 import collectionBannerImg from '../assets/images/alps_banner_champagne_1789839179884.jpg';
-import glowSerumImg from '../assets/images/alps_radiance_glow_serum_exclusive.jpg';
+import glowSerumImg from '../assets/images/alps-serum-stone.jpg';
 import faceCreamImg from '../assets/images/alps_cream_champagne_1789839152375.jpg';
 import hydroMaskImg from '../assets/images/alps_mask_champagne_1789839165550.jpg';
-import cleanserImg from '../assets/images/alps_cleanser_white_official_1792002235984.jpg';
+import cleanserImg from '../assets/images/alps-cleanser-stone.jpg';
 import { PRODUCTS } from '../data/products';
 import { Product } from '../types';
 import { useLanguage } from '../context/LanguageContext';

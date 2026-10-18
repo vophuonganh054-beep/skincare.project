@@ -182,19 +182,12 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                 {/* Image and Badge */}
                 <div>
                   <div className="relative aspect-4/3 overflow-hidden bg-[#f4f0eb]">
-                    {combo.id === 'combo-serum-kem-duong' ? (
-                      <div className="w-full h-full grid grid-cols-2 gap-1 p-4 bg-[#fcf9f4]" aria-label="Serum và kem dưỡng ALPS">
-                        {combo.productIds.map(id => {
-                          const product = PRODUCTS.find(p => p.id === id)!;
-                          return <img key={id} src={product.image} alt={product.name} className="w-full h-full min-h-0 object-contain" />;
-                        })}
-                      </div>
-                    ) : <img
+                    <img
                       src={combo.image}
                       alt={combo.name}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />}
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
                     <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#74584d] shadow-xs border border-[#fed8c9]">
