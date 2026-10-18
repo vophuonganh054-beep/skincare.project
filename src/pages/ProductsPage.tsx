@@ -254,14 +254,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                       {/* Product Name with Link */}
                       <Link
                         to={productUrl}
-                        className="block font-serif text-lg sm:text-xl font-bold text-[#1c1c19] group-hover:text-[#74584d] transition-colors leading-snug"
+                        className="block font-serif text-base sm:text-lg font-semibold text-[#1c1c19] tracking-tight group-hover:text-[#74584d] transition-colors text-pretty leading-snug"
                       >
                         {product.name}
                       </Link>
 
                       <p className="text-xs text-[#74584d] font-semibold mt-1">{product.capacity}</p>
 
-                      <p className="text-sm text-[#5a595e] line-clamp-2 mt-2 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-[#5a595e] font-normal line-clamp-2 mt-2 leading-relaxed">
                         {product.description}
                       </p>
 
@@ -276,13 +276,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
                     {/* Price and Action Buttons */}
                     <div className="pt-3 border-t border-[#202022]/5">
-                      <div className="flex items-baseline justify-between mb-3">
+                      <div className="flex items-baseline justify-between gap-2 mb-3">
                         <div>
-                          <span className="text-xl sm:text-2xl font-bold text-[#1c1c19]">
+                          <span className="font-serif text-base sm:text-lg font-bold text-[#1c1c19] tabular-nums">
                             {(product.promoPrice ?? product.price).toLocaleString('vi-VN')}₫
                           </span>
                           {product.originalPrice && (
-                            <span className="text-sm text-[#a8a6ad] line-through ml-2">
+                            <span className="text-xs sm:text-sm text-[#77767b] line-through ml-2 tabular-nums">
                               {product.originalPrice.toLocaleString('vi-VN')}₫
                             </span>
                           )}

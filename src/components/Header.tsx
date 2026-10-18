@@ -197,7 +197,7 @@ export const Header: React.FC<HeaderProps> = ({
       )}
 
       {/* Main Bar */}
-      <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-7xl 2xl:max-w-[1536px] mx-auto'} grid grid-cols-[auto_minmax(0,1fr)] 2xl:grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-2 sm:gap-x-4 w-full`}>
+      <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-[1536px] mx-auto'} flex flex-nowrap items-center justify-between gap-2 lg:gap-3 w-full`}>
         {/* Left: Brand Logo (Anchored, never squished) */}
         <Link
           to="/"
@@ -209,7 +209,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center: Desktop Navigation Links */}
         {!isMobileFrame && (
-          <nav className="hidden lg:flex order-3 col-span-2 2xl:order-2 2xl:col-span-1 min-w-0 flex-wrap gap-x-4 gap-y-2 items-center justify-center text-xs xl:text-sm font-semibold tracking-wider text-[#46464a] whitespace-nowrap px-1 xl:px-2">
+          <nav className="hidden lg:flex flex-1 min-w-0 flex-nowrap overflow-x-auto scrollbar-none gap-x-2 xl:gap-x-3 items-center justify-start 2xl:justify-center text-[10px] xl:text-xs font-semibold tracking-normal text-[#46464a] whitespace-nowrap py-1 px-1 [&>*]:shrink-0">
             <Link
               to="/"
               className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
@@ -282,7 +282,7 @@ export const Header: React.FC<HeaderProps> = ({
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
-              className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1.5 px-3.5 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1.5 whitespace-nowrap cursor-pointer shadow-xs text-xs sm:text-sm"
+              className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1.5 px-2 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1.5 whitespace-nowrap cursor-pointer shadow-xs text-[10px] xl:text-xs"
             >
               <span>🌸</span>
               <span>Ưu Đãi 20/10</span>
@@ -290,7 +290,7 @@ export const Header: React.FC<HeaderProps> = ({
             {onOpenSkinQuiz && (
               <button
                 onClick={onOpenSkinQuiz}
-                className="transition-all hover:scale-105 active:scale-95 px-3 xl:px-3.5 py-1.5 rounded-full bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-xs cursor-pointer whitespace-nowrap text-xs sm:text-sm"
+                className="transition-all hover:scale-105 active:scale-95 px-2 py-1.5 rounded-full bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-xs cursor-pointer whitespace-nowrap text-[10px] xl:text-xs"
               >
                 <Sparkles className="w-4 h-4 text-[#74584d] shrink-0" />
                 <span>{t.nav.quiz}</span>
@@ -300,7 +300,7 @@ export const Header: React.FC<HeaderProps> = ({
         )}
 
         {/* Right Side Controls - Anchored & Overflow Proof */}
-        <div className="flex order-2 2xl:order-3 min-w-0 max-w-full flex-wrap gap-y-1 items-center justify-end justify-self-end space-x-1 sm:space-x-1.5 md:space-x-2 shrink-0">
+        <div className="flex min-w-0 max-w-full flex-wrap gap-y-1 items-center justify-end space-x-1 sm:space-x-1.5 md:space-x-2 shrink-0">
           {/* Search Toggle / Input */}
           {showSearchInput ? (
             <div className="relative flex items-center shrink-0">
