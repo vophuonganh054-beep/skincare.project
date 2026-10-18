@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 
-export type RouteType = 'home' | 'products' | 'product-detail' | 'about' | 'contact' | 'not-found';
+export type RouteType = 'home' | 'offers' | 'products' | 'product-detail' | 'about' | 'contact' | 'not-found';
 
 export interface RouteInfo {
   route: RouteType;
@@ -27,6 +27,10 @@ export function parseRoute(pathname: string): RouteInfo {
 
   if (normalized === '/san-pham' || normalized === '/san-pham/') {
     return { route: 'products', params: {}, pathname: '/san-pham' };
+  }
+
+  if (normalized === '/uu-dai-20-10' || normalized === '/voucher') {
+    return { route: 'offers', params: {}, pathname: '/uu-dai-20-10' };
   }
 
   const productDetailMatch = normalized.match(/^\/san-pham\/([^/]+)$/);

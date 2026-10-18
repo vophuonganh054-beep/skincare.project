@@ -5,7 +5,7 @@ export const PRICES: Record<string, number> = {
   'cleanser-gentle-purifying': 250000, 'toner-botanical': 220000,
   'serum-radiance': 390000, 'cream-regenerating': 450000,
   'mask-hydro-lifting': 280000, 'combo-toner-mat-na': 500000,
-  'combo-toan-dien': 1590000,
+  'combo-toan-dien': 1590000, 'combo-serum-kem-duong': 840000,
 };
 export const CARRIERS: Record<string, number> = { ghtk: 15000, ghn: 25000, express: 45000, viettel: 20000 };
 const DISCOUNTS: Record<string, number> = { PHUNU20: 20, WOMEN20: 20, ALPS2010: 15, COMBO20: 15, ALPS10: 10, ALPS2025: 10, BEAUTY10: 10, VIP20: 20, VEGAN20: 20 };

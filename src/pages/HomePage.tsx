@@ -56,13 +56,18 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
 
       {/* CHIẾN DỊCH TRI ÂN 20/10 NGÀY PHỤ NỮ VIỆT NAM */}
-      <WomenDayCampaignSection
-        onAddComboToCart={onAddComboToCart}
-        onBuyNowCombo={onBuyNowCombo}
-        onApplyVoucherToCart={onApplyVoucherToCart}
-        onShowToast={onShowToast}
-        isMobileFrame={false}
-      />
+      <div className="bg-[#f9f4ec] border-y border-[#e8ded1] px-4 py-7 sm:py-9">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold tracking-wider text-[#8b5545]">DÀNH TẶNG NÀNG • 20/10</p>
+            <h2 className="font-serif text-2xl mt-1">Voucher &amp; combo quà tặng ALPS</h2>
+            <p className="text-sm text-[#74584d] mt-2">Nhập PHUNU20 giảm 20% • Tặng hộp quà khi mua combo.</p>
+          </div>
+          <Link to="/uu-dai-20-10" className="inline-flex items-center gap-2 shrink-0 rounded-full bg-[#74584d] px-6 py-3 text-white text-xs font-semibold">
+            Khám phá ưu đãi 20/10 <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </div>
 
       {/* 5-Step Ritual Callout */}
       <RitualCallout

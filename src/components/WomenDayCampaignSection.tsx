@@ -34,9 +34,9 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   const handleCopyCode = (code: string) => {
-    navigator.clipboard?.writeText(code);
+    navigator.clipboard?.writeText(code).catch(() => {});
     setCopiedCode(code);
-    onShowToast(`Đã sao chép mã ưu đãi ${code}! Dán vào giỏ hàng để nhận giảm giá.`);
+    onShowToast(`Đã chọn mã ${code}! Mã sẽ được áp dụng khi thanh toán.`);
     if (onApplyVoucherToCart) {
       onApplyVoucherToCart(code);
     }
@@ -166,7 +166,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
               PHIÊN BẢN GIỚI HẠN • QUÀ TẶNG TRỌN VẸN
             </span>
             <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19]">
-              Top 2 Combo Quà Tặng 20/10 Được Yêu Thích Nhất
+              3 Combo Quà Tặng 20/10 Dành Cho Nàng
             </h3>
             <p className="text-xs sm:text-sm text-[#77746f] mt-2">
               Mỗi combo đều được tặng kèm Hộp quà độc quyền của ALPS sang trọng phù hợp dành tặng cho phái nữ &amp; thiệp chúc mừng 20/10 viết tay miễn phí.
@@ -182,12 +182,19 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                 {/* Image and Badge */}
                 <div>
                   <div className="relative aspect-4/3 overflow-hidden bg-[#f4f0eb]">
-                    <img
+                    {combo.id === 'combo-serum-kem-duong' ? (
+                      <div className="w-full h-full grid grid-cols-2 gap-1 p-4 bg-[#fcf9f4]" aria-label="Serum và kem dưỡng ALPS">
+                        {combo.productIds.map(id => {
+                          const product = PRODUCTS.find(p => p.id === id)!;
+                          return <img key={id} src={product.image} alt={product.name} className="w-full h-full min-h-0 object-contain" />;
+                        })}
+                      </div>
+                    ) : <img
                       src={combo.image}
                       alt={combo.name}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    />}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
                     <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#74584d] shadow-xs border border-[#fed8c9]">
