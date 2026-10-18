@@ -5,6 +5,8 @@ import { VisaBadge, MastercardBadge } from './PaymentBadges';
 interface VietQRCardProps {
   orderNumber: string;
   amount: number;
+  paymentToken: string;
+  paymentRequest: {items: {productId: string; quantity: number}[]; carrierId: string; promoCode: string; buyer: Record<string, string>};
   onShowToast?: (msg: string) => void;
   compact?: boolean;
   isPaymentReceived?: boolean;
@@ -36,6 +38,8 @@ export function formatTransferDes(orderNumber: string): string {
 export const VietQRCard: React.FC<VietQRCardProps> = ({
   orderNumber,
   amount,
+  paymentToken,
+  paymentRequest,
   onShowToast,
   compact = false,
   isPaymentReceived = false,
@@ -43,6 +47,8 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
   onCheckPayment,
   onPaymentSuccess,
 }) => {
+  const [registered, setRegistered] = useState(false);
+  const [paymentError, setPaymentError] = useState('');
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [backendDes, setBackendDes] = useState<string>(() => formatTransferDes(orderNumber));
   const [sepayConfig, setSepayConfig] = useState<SePayConfig>({
@@ -77,81 +83,51 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
 
   const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
 
-  // Fetch SePay configuration and initiate payment tracking on server
+  // Register the immutable server-priced basket before displaying a payable QR.
   useEffect(() => {
-    let isMounted = true;
-    fetch(`${API_BASE}/api/sepay/config`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (isMounted && data) {
-          setSepayConfig({
-            paymentsEnabled: Boolean(data.paymentsEnabled),
-            isProduction: Boolean(data.isProduction),
-            bankName: data.bankName ? `MB Bank (${data.bankName})` : 'MB Bank (Ngân hàng TMCP Quân Đội)',
-            bankCode: data.bankCode || 'MB',
-            accountNumber: (data.accountNumber || '0772770134').replace(/\s/g, ''),
-            accountName: data.accountName || 'ALPS',
-            hasApiKey: Boolean(data.hasApiKey),
-            missingConfigs: Array.isArray(data.missingConfigs) ? data.missingConfigs : [],
-          });
-        }
-      })
-      .catch((err) => console.warn('Could not load SePay config:', err));
+    let active = true;
+    setRegistered(false);
+    setPaymentError('');
+    fetch(`${API_BASE}/api/sepay/initiate`, {
+      method: 'POST', headers: {'Content-Type': 'application/json', 'X-Payment-Token': paymentToken},
+      body: JSON.stringify({orderNumber, amount, ...paymentRequest}),
+    }).then(async response => {
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Không thể khởi tạo thanh toán.');
+      if (!active) return;
+      setBackendDes(data.des);
+      setSepayConfig(previous => ({...previous, ...data}));
+      setRegistered(true);
+      if (data.isPaid) onPaymentSuccess?.();
+    }).catch(error => {
+      if (active) setPaymentError(error.message || 'Không kết nối được máy chủ thanh toán.');
+    });
+    return () => { active = false; };
+  }, [orderNumber, amount, paymentToken, paymentRequest]);
 
-    // Register expected payment and sync exact backend des
-    if (orderNumber && amount > 0) {
-      fetch(`${API_BASE}/api/sepay/initiate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ orderNumber, amount }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (isMounted && data) {
-            if (data.des || data.transferCode) {
-              setBackendDes(data.des || data.transferCode);
-            }
-            if (data.acc || data.accountNumber) {
-              setSepayConfig((prev) => ({
-                ...prev,
-                accountNumber: String(data.acc || data.accountNumber).replace(/\s/g, ''),
-              }));
-            }
-          }
-        })
-        .catch((err) => console.warn('Could not initiate SePay order:', err));
-    }
-
-    return () => {
-      isMounted = false;
-    };
-  }, [orderNumber, amount]);
-
-  // Automatic real-time status polling every 3.5 seconds
+  // Recursive timeout avoids overlapping requests and catches payments made while away.
   useEffect(() => {
-    if (isPaymentReceived || !orderNumber) return;
-
-    const interval = setInterval(async () => {
+    if (!registered || isPaymentReceived) return;
+    let active = true;
+    let timer: ReturnType<typeof setTimeout>;
+    const poll = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/sepay/payment-status/${encodeURIComponent(orderNumber)}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.isPaid) {
-            if (onPaymentSuccess) {
-              onPaymentSuccess();
-            }
-            if (onShowToast) {
-              onShowToast('✓ SePay: Đã nhận được chuyển khoản MB Bank thành công!');
-            }
-          }
+        const response = await fetch(`${API_BASE}/api/sepay/payment-status/${orderNumber}`, {cache: 'no-store', headers: {'X-Payment-Token': paymentToken}});
+        if (!response.ok) throw new Error();
+        const data = await response.json();
+        if (!active) return;
+        setPaymentError(data.status === 'underpaid' ? 'Số tiền chuyển chưa đủ. Liên hệ ALPS để đối soát, không chuyển lại toàn bộ đơn.' : '');
+        if (data.isPaid && data.amount === amount) {
+          onPaymentSuccess?.();
+          onShowToast?.('✓ Đã nhận thanh toán qua SePay!');
+          return;
         }
-      } catch (err) {
-        // Silent poll error
-      }
-    }, 3500);
-
-    return () => clearInterval(interval);
-  }, [orderNumber, isPaymentReceived, onPaymentSuccess, onShowToast]);
+      } catch { if (active) setPaymentError('Đang kết nối lại để kiểm tra thanh toán. Nếu đã chuyển, vui lòng không chuyển lại.'); }
+      if (active) timer = setTimeout(poll, 3500);
+    };
+    void poll();
+    return () => { active = false; clearTimeout(timer); };
+  }, [registered, orderNumber, amount, paymentToken, isPaymentReceived, onPaymentSuccess, onShowToast]);
 
   const copyToClipboard = (text: string, label: string) => {
     navigator.clipboard.writeText(text);
@@ -165,6 +141,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
   };
 
   const handleDownloadQR = () => {
+    if (!registered) return;
     const a = document.createElement('a');
     a.href = vietQrImageUrl;
     a.download = `VietQR_MB_${transferDes}.png`;
@@ -231,14 +208,14 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
         {/* Dynamic VietQR Image Container */}
         <div className="relative z-10 my-2 flex flex-col items-center justify-center p-1 bg-white rounded-2xl shadow-inner border border-[#202022]/8 overflow-hidden">
           <div className="relative w-full flex items-center justify-center min-h-[260px]">
-            <img
+            {registered ? <img
               src={vietQrImageUrl}
               alt={`Mã VietQR động MB Bank ${integerAmount.toLocaleString('vi-VN')}đ - ${transferDes}`}
               className={`w-full max-w-[290px] rounded-xl object-contain transition-opacity duration-300 ${
                 isVerifying ? 'opacity-40 filter blur-[1px]' : 'opacity-100'
               }`}
               loading="eager"
-            />
+            /> : <p role="status" className="px-4 text-xs text-[#74584d]">{paymentError || 'Đang tạo phiên thanh toán...'}</p>}
             {isVerifying && (
               <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2 bg-white/70 backdrop-blur-xs rounded-xl">
                 <RefreshCw className="w-8 h-8 text-[#74584d] animate-spin" />
@@ -323,7 +300,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
               <div className="flex items-center space-x-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
                 <span className="font-semibold text-xs text-[#1c1c19]">
-                  Chờ nhận chuyển khoản...
+                  {paymentError || 'Chờ nhận chuyển khoản...'}
                 </span>
               </div>
               <span className="text-[10px] text-[#74584d] bg-[#fed8c9]/30 px-2 py-0.5 rounded-full font-medium">

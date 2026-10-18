@@ -4,6 +4,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import dotenv from 'dotenv';
+import { registerPayments } from './server/payments.ts';
 
 dotenv.config();
 
@@ -24,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Payment-Token');
   if (req.method === 'OPTIONS') {
     return res.sendStatus(200);
   }
@@ -32,7 +33,7 @@ app.use((req, res, next) => {
 });
 
 // Initialize GoogleGenAI SDK with environment key and required telemetry header
-const ai = new GoogleGenAI({
+const getAI = () => new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
   httpOptions: {
     headers: {
@@ -109,7 +110,7 @@ app.post('/api/chat', async (req, res) => {
     // Try primary model gemini-3.8-flash, fallback to gemini-3.1-flash-lite if needed
     let responseText = '';
     try {
-      const response = await ai.models.generateContent({
+      const response = await getAI().models.generateContent({
         model: 'gemini-3.8-flash',
         contents,
         config: {
@@ -121,7 +122,7 @@ app.post('/api/chat', async (req, res) => {
     } catch (primaryErr: any) {
       console.warn('Gemini 3.8 Flash busy/error, trying gemini-3.1-flash-lite:', primaryErr?.message);
       try {
-        const fallbackResponse = await ai.models.generateContent({
+        const fallbackResponse = await getAI().models.generateContent({
           model: 'gemini-3.1-flash-lite',
           contents,
           config: {
@@ -189,9 +190,9 @@ Hãy đóng vai trò Viện trưởng Da liễu Zurich Thụy Sĩ và trả về
   "recommendedProductIds": ["cleanser", "toner", "serum", "cream", "mask"]
 }`;
 
-    if (ai) {
+    if (process.env.GEMINI_API_KEY) {
       try {
-        const response = await ai.models.generateContent({
+        const response = await getAI().models.generateContent({
           model: 'gemini-3.8-flash',
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
           config: {
@@ -247,382 +248,7 @@ Hãy đóng vai trò Viện trưởng Da liễu Zurich Thụy Sĩ và trả về
 // ==============================================================================
 // SEPAY & MB BANK PAYMENT GATEWAY INTEGRATION (SECURE & IDEMPOTENT)
 // ==============================================================================
-interface SePayTransaction {
-  id?: number | string;
-  gateway?: string;
-  transactionDate?: string;
-  accountNumber?: string;
-  code?: string | null;
-  content?: string;
-  transferType?: string;
-  transferAmount?: number;
-  accumulated?: number;
-  subAccount?: string | null;
-  referenceCode?: string;
-  description?: string;
-}
-
-interface PaymentRecord {
-  orderNumber: string;
-  amount: number;
-  isPaid: boolean;
-  status: 'pending' | 'paid' | 'underpaid' | 'expired';
-  createdAt: string;
-  paidAt?: string;
-  transaction?: SePayTransaction;
-  transactionId?: string | number;
-}
-
-// Persistent Storage Engine (Filesystem JSON storage + in-memory cache)
-const DATA_DIR = path.resolve(__dirname, '.data');
-const ORDERS_STORAGE_FILE = path.join(DATA_DIR, 'sepay_orders.json');
-const PROCESSED_TX_STORAGE_FILE = path.join(DATA_DIR, 'sepay_processed_tx.json');
-
-try {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-} catch (e) {
-  console.warn('Could not initialize .data directory:', e);
-}
-
-function loadOrdersFromDisk(): Map<string, PaymentRecord> {
-  const map = new Map<string, PaymentRecord>();
-  try {
-    if (fs.existsSync(ORDERS_STORAGE_FILE)) {
-      const raw = fs.readFileSync(ORDERS_STORAGE_FILE, 'utf-8');
-      const list = JSON.parse(raw);
-      if (Array.isArray(list)) {
-        list.forEach((rec) => {
-          if (rec && rec.orderNumber) map.set(rec.orderNumber, rec);
-        });
-      }
-    }
-  } catch (err) {
-    console.warn('Failed reading persistent orders file, initializing fresh store:', err);
-  }
-  return map;
-}
-
-function saveOrdersToDisk(map: Map<string, PaymentRecord>) {
-  try {
-    const list = Array.from(map.values());
-    fs.writeFileSync(ORDERS_STORAGE_FILE, JSON.stringify(list, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Failed writing persistent orders file:', err);
-  }
-}
-
-function loadProcessedTxFromDisk(): Set<string> {
-  const set = new Set<string>();
-  try {
-    if (fs.existsSync(PROCESSED_TX_STORAGE_FILE)) {
-      const raw = fs.readFileSync(PROCESSED_TX_STORAGE_FILE, 'utf-8');
-      const list = JSON.parse(raw);
-      if (Array.isArray(list)) {
-        list.forEach((id) => set.add(String(id)));
-      }
-    }
-  } catch (err) {
-    console.warn('Failed reading persistent tx file, initializing fresh store:', err);
-  }
-  return set;
-}
-
-function saveProcessedTxToDisk(set: Set<string>) {
-  try {
-    const list = Array.from(set.values());
-    fs.writeFileSync(PROCESSED_TX_STORAGE_FILE, JSON.stringify(list, null, 2), 'utf-8');
-  } catch (err) {
-    console.error('Failed writing persistent tx file:', err);
-  }
-}
-
-// In-memory cache synced with persistent disk storage
-const paymentRecords = loadOrdersFromDisk();
-const processedTxSet = loadProcessedTxFromDisk();
-
-// Environment configurations
-const PAYMENTS_ENABLED = process.env.PAYMENTS_ENABLED === 'true';
-// MB Bank account number: Strictly preserve leading 0, no whitespace
-const SEPAY_ACCOUNT_NUMBER = (process.env.SEPAY_ACCOUNT_NUMBER || '0772770134').replace(/\s/g, '');
-const SEPAY_BANK_NAME = process.env.SEPAY_BANK_NAME || 'MB';
-const SEPAY_ACCOUNT_NAME = process.env.SEPAY_ACCOUNT_NAME || 'ALPS';
-const SEPAY_WEBHOOK_TOKEN = process.env.SEPAY_WEBHOOK_TOKEN || '';
-
-// Synchronous helper: Generate clean transfer memo without duplicating ALPS prefix
-function formatTransferDes(orderNumber: string): string {
-  const clean = (orderNumber || '').replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-  if (clean.startsWith('ALPS')) {
-    return clean;
-  }
-  return `ALPS${clean}`;
-}
-
-// 1. Get SePay Configuration Status (Public safe config, never leaks secrets)
-app.get('/api/sepay/config', (_req, res) => {
-  const isProduction = process.env.NODE_ENV === 'production';
-  const missingConfigs: string[] = [];
-  if (!PAYMENTS_ENABLED) {
-    missingConfigs.push('PAYMENTS_ENABLED="false" (Đang ở Chế độ Thử nghiệm / Sandbox Mode)');
-  }
-  if (!process.env.SEPAY_ACCOUNT_NUMBER) {
-    missingConfigs.push('SEPAY_ACCOUNT_NUMBER (Đang dùng mặc định 0772770134)');
-  }
-
-  return res.json({
-    paymentsEnabled: PAYMENTS_ENABLED,
-    isProduction,
-    bankName: SEPAY_BANK_NAME,
-    bankCode: 'MB',
-    accountNumber: SEPAY_ACCOUNT_NUMBER, // 0772770134
-    accountName: SEPAY_ACCOUNT_NAME,
-    hasWebhookToken: Boolean(SEPAY_WEBHOOK_TOKEN),
-    missingConfigs,
-    webhookEndpoint: '/api/sepay/webhook',
-  });
-});
-
-// 2. Initiate Payment Record for Order (Persisted to disk)
-app.post('/api/sepay/initiate', (req, res) => {
-  try {
-    const { orderNumber, amount } = req.body;
-    if (!orderNumber || typeof orderNumber !== 'string') {
-      return res.status(400).json({ error: 'Mã đơn hàng không hợp lệ' });
-    }
-
-    const numAmount = Math.round(Number(amount)) || 0;
-    const transferDes = formatTransferDes(orderNumber);
-
-    let existing = paymentRecords.get(orderNumber);
-    if (existing) {
-      if (numAmount > 0) {
-        existing.amount = numAmount;
-        saveOrdersToDisk(paymentRecords);
-      }
-      return res.json({
-        success: true,
-        payment: existing,
-        orderNumber,
-        des: transferDes,
-        transferCode: transferDes,
-        bank: 'MB',
-        bankCode: 'MB',
-        acc: SEPAY_ACCOUNT_NUMBER,
-        accountNumber: SEPAY_ACCOUNT_NUMBER,
-        accountName: SEPAY_ACCOUNT_NAME,
-        amount: numAmount,
-      });
-    }
-
-    const newRecord: PaymentRecord = {
-      orderNumber,
-      amount: numAmount,
-      isPaid: false,
-      status: 'pending',
-      createdAt: new Date().toISOString(),
-    };
-
-    paymentRecords.set(orderNumber, newRecord);
-    saveOrdersToDisk(paymentRecords);
-
-    return res.json({
-      success: true,
-      payment: newRecord,
-      orderNumber,
-      des: transferDes,
-      transferCode: transferDes,
-      bank: 'MB',
-      bankCode: 'MB',
-      acc: SEPAY_ACCOUNT_NUMBER,
-      accountNumber: SEPAY_ACCOUNT_NUMBER,
-      accountName: SEPAY_ACCOUNT_NAME,
-      amount: numAmount,
-    });
-  } catch (err: any) {
-    console.error('Error in /api/sepay/initiate:', err);
-    return res.status(500).json({ error: 'Không thể khởi tạo phiên thanh toán' });
-  }
-});
-
-// 3. Check Payment Status for Order
-app.get('/api/sepay/payment-status/:orderNumber', (req, res) => {
-  try {
-    const { orderNumber } = req.params;
-    const record = paymentRecords.get(orderNumber);
-
-    return res.json({
-      success: true,
-      orderNumber,
-      isPaid: record ? record.isPaid : false,
-      status: record ? record.status : 'pending',
-      paymentsEnabled: PAYMENTS_ENABLED,
-      transaction: record?.transaction || null,
-      paidAt: record?.paidAt || null,
-    });
-  } catch (err: any) {
-    console.error('Error in /api/sepay/payment-status:', err);
-    return res.status(500).json({ error: 'Lỗi kiểm tra trạng thái thanh toán' });
-  }
-});
-
-// 4. Simulate Payment Success (Đã vô hiệu hóa hoàn toàn theo yêu cầu)
-app.all('/api/sepay/simulate-success', (_req, res) => {
-  return res.status(403).json({
-    success: false,
-    error: 'Chức năng mô phỏng thanh toán đã bị vô hiệu hóa hoàn toàn. Hệ thống chỉ xác nhận khi nhận được thanh toán thực tế qua SePay Webhook.',
-  });
-});
-
-// 5. SePay Webhook Endpoint (Strict Authentication, Full 4-Step Validation & Idempotency)
-app.post('/api/sepay/webhook', (req, res) => {
-  try {
-    // KHI PAYMENTS_ENABLED=true: BẮT BUỘC có SEPAY_WEBHOOK_TOKEN và từ chối nếu thiếu hoặc sai Authorization
-    if (PAYMENTS_ENABLED) {
-      if (!SEPAY_WEBHOOK_TOKEN) {
-        console.error('[SePay Webhook] PAYMENTS_ENABLED=true nhưng SEPAY_WEBHOOK_TOKEN chưa được cấu hình!');
-        return res.status(500).json({
-          success: false,
-          error: 'Cấu hình bảo mật chưa hoàn tất: Bắt buộc cấu hình SEPAY_WEBHOOK_TOKEN khi bật thanh toán.',
-        });
-      }
-
-      const authHeader = req.headers['authorization'];
-      const tokenHeader = req.headers['x-sepay-token'] || req.query.token;
-
-      let extractedToken = '';
-      if (typeof authHeader === 'string' && authHeader.trim()) {
-        const parts = authHeader.trim().split(/\s+/);
-        // Hỗ trợ "Apikey <token>" hoặc "Bearer <token>" hoặc token nguyên bản
-        if (parts.length >= 2 && (parts[0].toLowerCase() === 'apikey' || parts[0].toLowerCase() === 'bearer')) {
-          extractedToken = parts.slice(1).join(' ').trim();
-        } else {
-          extractedToken = authHeader.trim();
-        }
-      } else if (typeof tokenHeader === 'string') {
-        extractedToken = tokenHeader.trim();
-      }
-
-      // Tuyệt đối không cho phép bỏ qua xác thực
-      if (!extractedToken || extractedToken !== SEPAY_WEBHOOK_TOKEN) {
-        console.warn('[SePay Webhook] Từ chối request: Thiếu hoặc sai Authorization: Apikey <token>');
-        return res.status(401).json({
-          success: false,
-          error: 'Unauthorized: Webhook token không hợp lệ hoặc bị thiếu.',
-        });
-      }
-    }
-
-    const data: SePayTransaction = req.body;
-    console.log('[SePay Webhook] Nhận dữ liệu giao dịch webhook:', data);
-
-    const { content, transferAmount, transferType, referenceCode, id, accountNumber } = data;
-
-    // KIỂM TRA 1: Tiền vào (transferType === 'in')
-    if (transferType !== 'in') {
-      console.log('[SePay Webhook] Bỏ qua giao dịch không phải tiền vào (transferType !== "in"):', transferType);
-      return res.json({ success: true, message: 'Bỏ qua giao dịch không phải tiền vào' });
-    }
-
-    // KIỂM TRA 2: Đúng tài khoản ngân hàng nhận tiền
-    const cleanWebhookAccount = String(accountNumber || '').replace(/\s/g, '').toUpperCase();
-    const cleanConfigAccount = String(SEPAY_ACCOUNT_NUMBER || '').replace(/\s/g, '').toUpperCase();
-    if (cleanWebhookAccount !== cleanConfigAccount) {
-      console.warn(`[SePay Webhook] Sai tài khoản nhận: nhận ${cleanWebhookAccount}, kỳ vọng ${cleanConfigAccount}`);
-      return res.status(400).json({
-        success: false,
-        error: `Số tài khoản nhận tiền không khớp với cấu hình hệ thống (nhận: ${cleanWebhookAccount}).`,
-      });
-    }
-
-    // KIỂM TRA CHỐNG XỬ LÝ TRÙNG LẶP (IDEMPOTENCY)
-    const txId = String(id || referenceCode || `${cleanWebhookAccount}_${transferAmount}_${content}`);
-    if (processedTxSet.has(txId)) {
-      console.log(`[SePay Webhook] Giao dịch ID ${txId} đã được xử lý trước đó. Bỏ qua để chống trùng lặp.`);
-      return res.json({
-        success: true,
-        message: 'Giao dịch đã được ghi nhận trước đó (Idempotent ignore)',
-      });
-    }
-
-    // KIỂM TRA 3: Đúng mã đơn hàng trong nội dung chuyển khoản
-    const rawContent = (content || '').toUpperCase();
-    const cleanRawContent = rawContent.replace(/[^A-Z0-9]/g, '');
-    let matchedOrder: PaymentRecord | null = null;
-
-    // Tìm kiếm trong danh sách đơn hàng đã lưu bền vững (so sánh chuỗi chuẩn hóa)
-    for (const [orderNum, record] of paymentRecords.entries()) {
-      const cleanNum = orderNum.replace(/[^A-Z0-9]/g, '').toUpperCase();
-      if (cleanNum && cleanRawContent.includes(cleanNum)) {
-        matchedOrder = record;
-        break;
-      }
-    }
-
-    // Fallback: Tìm mã số tự sinh dạng số hoặc ALPS/ORD
-    if (!matchedOrder) {
-      for (const [orderNum, record] of paymentRecords.entries()) {
-        const digitsOnly = orderNum.replace(/[^0-9]/g, '');
-        if (digitsOnly.length >= 4 && cleanRawContent.includes(digitsOnly)) {
-          matchedOrder = record;
-          break;
-        }
-      }
-    }
-
-    if (!matchedOrder) {
-      console.warn(`[SePay Webhook] Không tìm thấy mã đơn hàng hợp lệ trong nội dung chuyển khoản: "${content}"`);
-      return res.status(404).json({
-        success: false,
-        error: 'Không tìm thấy đơn hàng tương ứng với nội dung chuyển khoản trong hệ thống.',
-      });
-    }
-
-    // KIỂM TRA 4: Đúng số tiền do server tính
-    const receivedAmount = Number(transferAmount) || 0;
-    const expectedAmount = Number(matchedOrder.amount) || 0;
-
-    if (expectedAmount > 0 && receivedAmount < expectedAmount) {
-      console.warn(
-        `[SePay Webhook] Số tiền chuyển khoản (${receivedAmount}₫) nhỏ hơn số tiền cần thanh toán (${expectedAmount}₫) cho đơn ${matchedOrder.orderNumber}`
-      );
-      matchedOrder.status = 'underpaid';
-      saveOrdersToDisk(paymentRecords);
-      return res.status(400).json({
-        success: false,
-        error: `Số tiền thanh toán (${receivedAmount}₫) không đủ so với giá trị đơn hàng (${expectedAmount}₫).`,
-      });
-    }
-
-    // TẤT CẢ 4 KIỂM TRA ĐỀU HỢP LỆ -> XÁC NHẬN THANH TOÁN VÀ LƯU BỀN VỮNG
-    matchedOrder.isPaid = true;
-    matchedOrder.status = 'paid';
-    matchedOrder.paidAt = new Date().toISOString();
-    matchedOrder.transaction = data;
-    matchedOrder.transactionId = txId;
-
-    // Đánh dấu ID giao dịch đã xử lý (chống trùng lặp)
-    processedTxSet.add(txId);
-
-    // Ghi tức thì vào đĩa cứng (Persistent Storage)
-    saveProcessedTxToDisk(processedTxSet);
-    saveOrdersToDisk(paymentRecords);
-
-    console.log(
-      `[SePay Webhook] ✓ XÁC NHẬN THANH TOÁN THÀNH CÔNG cho đơn hàng ${matchedOrder.orderNumber} (Đã nhận: ${receivedAmount}₫, TxId: ${txId})`
-    );
-
-    return res.json({
-      success: true,
-      message: `Đơn hàng ${matchedOrder.orderNumber} đã được xác nhận thanh toán thành công`,
-      orderNumber: matchedOrder.orderNumber,
-      transactionId: txId,
-    });
-  } catch (error: any) {
-    console.error('Error processing SePay webhook:', error);
-    return res.status(500).json({ success: false, error: error.message });
-  }
-});
+registerPayments(app);
 
 // BẮT BUỘC: Mọi endpoint /api/* không tồn tại PHẢI trả về JSON 404, không bao giờ fallback về HTML index.html
 app.all('/api/*', (req, res) => {
@@ -670,6 +296,10 @@ async function startServer() {
   });
 }
 
-startServer().catch((err) => {
-  console.error('Failed to start server:', err);
-});
+// Vercel invokes the exported Express handler; local/AI Studio still starts the server.
+export default app;
+if (!process.env.VERCEL) {
+  startServer().catch((err) => {
+    console.error('Failed to start server:', err);
+  });
+}

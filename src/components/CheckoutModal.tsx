@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   X,
   ShieldCheck,
@@ -175,7 +175,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   };
 
   // Generate order number for this session
-  const [orderNumber] = useState(() => `ALPS-${Math.floor(10000 + Math.random() * 90000)}`);
+  const [paymentToken] = useState(() => Array.from(crypto.getRandomValues(new Uint8Array(32)), b => b.toString(16).padStart(2, '0')).join(''));
 
   const handleApplyPromo = (directCode?: string) => {
     const code = (directCode || promoCode).trim().toUpperCase();
@@ -228,37 +228,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const discountAmount = Math.round((subtotal * discountPercent) / 100);
   const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee);
 
+  const basketKey = JSON.stringify([safeItems.map(it => [it.product.id, it.quantity]), selectedCarrierId, promoApplied ? promoCode : '', totalAmount, isOpen]);
+  const orderNumber = useMemo(() => 'ALPS' + Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('').toUpperCase(), [basketKey]);
+  const paymentRequest = useMemo(() => ({
+    items: safeItems.map(it => ({productId: it.product.id, quantity: it.quantity})),
+    carrierId: selectedCarrierId, promoCode: promoApplied ? promoCode : '',
+    buyer: {buyerName, phone, email, address, note},
+  }), [basketKey, buyerName, phone, email, address, note]);
+  useEffect(() => { setPaymentReceived(false); setFormError(null); }, [orderNumber]);
+
+  // No card processor is connected: never treat a timer as a bank confirmation.
   const handleAuthorizeCard = () => {
-    const cleanNum = cardNumber.replace(/\s/g, '');
-    if (cleanNum.length < 15) {
-      setFormError('Vui lòng nhập số thẻ Visa / Mastercard hợp lệ (tối thiểu 15-16 số).');
-      return;
-    }
-    if (!cardHolder.trim()) {
-      setFormError('Vui lòng nhập tên in trên thẻ (không dấu).');
-      return;
-    }
-    if (cardExpiry.length < 4) {
-      setFormError('Vui lòng nhập thời hạn thẻ (MM/YY).');
-      return;
-    }
-    if (cardCvv.length < 3) {
-      setFormError('Vui lòng nhập mã bảo mật CVV/CVC (3 chữ số ở mặt sau thẻ).');
-      return;
-    }
-    setFormError(null);
-    setIsAuthorizingCard(true);
-    if (onShowToast) {
-      onShowToast('Đang kết nối cổng thanh toán thẻ Visa Secure 3D OTP...');
-    }
-    setTimeout(() => {
-      setIsAuthorizingCard(false);
-      setCardAuthSuccess(true);
-      setPaymentReceived(true);
-      if (onShowToast) {
-        onShowToast(`✓ Đã xác thực thẻ Visa/Mastercard (•••• ${cleanNum.slice(-4)}) thành công! Nút đặt hàng đã mở.`);
-      }
-    }, 1400);
+    setFormError('Thanh toán thẻ chưa được kết nối. Vui lòng chọn VietQR, chuyển khoản hoặc COD.');
   };
 
   const handleCheckPayment = async () => {
@@ -270,7 +251,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
     try {
       const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
-      const res = await fetch(`${apiBase}/api/sepay/payment-status/${encodeURIComponent(orderNumber)}`);
+      const res = await fetch(`${apiBase}/api/sepay/payment-status/${encodeURIComponent(orderNumber)}`, {cache: 'no-store', headers: {'X-Payment-Token': paymentToken}});
       if (res.ok) {
         const data = await res.json();
         if (data && data.isPaid) {
@@ -287,14 +268,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     }
 
     setIsVerifyingPayment(false);
-    const msg = 'Hệ thống chưa ghi nhận biến động số dư cho đơn hàng này. (Lưu ý: Thanh toán MB Bank trực tuyến hiện đang tắt, vui lòng chọn phương thức COD để đặt hàng thật).';
+    const msg = 'Chưa xác nhận được thanh toán cho đơn này. Vui lòng kiểm tra số tiền và nội dung chuyển khoản; nếu đã chuyển, đừng chuyển lại mà hãy liên hệ ALPS.';
     setFormError(msg);
     if (onShowToast) {
       onShowToast(msg);
     }
   };
 
-  const handleSubmitOrder = (e?: React.SyntheticEvent) => {
+  const handleSubmitOrder = async (e?: React.SyntheticEvent) => {
     if (e && typeof e.preventDefault === 'function') {
       e.preventDefault();
     }
@@ -326,6 +307,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       return;
     }
 
+    if (paymentMethod === 'vietqr' || paymentMethod === 'bank_transfer') {
+      try {
+        const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
+        const response = await fetch(`${apiBase}/api/sepay/payment-status/${orderNumber}`, {cache: 'no-store', headers: {'X-Payment-Token': paymentToken}});
+        const status = await response.json();
+        if (!response.ok || !status.isPaid || status.amount !== totalAmount) throw new Error();
+      } catch {
+        setPaymentReceived(false);
+        setFormError('Chưa xác nhận được thanh toán từ máy chủ. Vui lòng đợi kiểm tra lại.');
+        return;
+      }
+    }
     setIsSubmitting(true);
 
     const newOrder: Order = {
@@ -816,6 +809,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       <VietQRCard
                         orderNumber={orderNumber}
                         amount={totalAmount}
+                        paymentToken={paymentToken}
+                        paymentRequest={paymentRequest}
                         onShowToast={onShowToast}
                         isPaymentReceived={paymentReceived}
                         isVerifying={isVerifyingPayment}
@@ -998,6 +993,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       <VietQRCard
                         orderNumber={orderNumber}
                         amount={totalAmount}
+                        paymentToken={paymentToken}
+                        paymentRequest={paymentRequest}
                         onShowToast={onShowToast}
                         isPaymentReceived={paymentReceived}
                         isVerifying={isVerifyingPayment}
@@ -1231,7 +1228,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                                     : 'Chưa xác thực thẻ Visa (Vui lòng bấm Xác thực thẻ ở trên)'
                                   : paymentMethod === 'vietqr' || paymentMethod === 'bank_transfer'
                                   ? paymentReceived
-                                    ? `✓ ${cData.placeOrderBtn}`
+                                    ? `✓ Đã thanh toán • ${cData.placeOrderBtn}`
                                     : `Chờ nhận chuyển khoản MB Bank (${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫)`
                                   : `${cData.placeOrderBtn} • ${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`}
                               </span>

@@ -1,87 +1,62 @@
-# HƯỚNG DẪN TÍCH HỢP CHAT TƯ VẤN & THANH TOÁN MB BANK QUA SEPAY
+# Bật thanh toán SePay trên web ALPS hiện tại
 
-Tài liệu hướng dẫn cấu trúc tệp, cơ chế hoạt động và các bước kết nối cổng thanh toán tự động SePay (MB Bank) cùng Chatbot Tư vấn Da liễu AI cho dự án Alps Skincare.
+Bản sửa giữ nguyên CSS, bố cục, ảnh, giỏ hàng, QR và COD. Khi nhận đủ tiền hợp lệ, phần QR hiển thị trạng thái thành công và nút đặt hàng hiện “✓ Đã thanh toán”. Nút xác nhận vẫn dùng để hoàn thành đơn như trước.
 
----
+## 1. Cập nhật đúng dự án AI Studio đang dùng
 
-## 1. DANH SÁCH ĐƯỜNG DẪN CÁC FILE CẬP NHẬT
+Sao lưu dự án trước. Đưa các tệp sau vào ĐÚNG dự án hiện tại, giữ đường dẫn:
+- `server.ts`
+- thư mục mới `server/` (gồm `payments.ts`, `payment-core.ts`)
+- `src/components/CheckoutModal.tsx`
+- `src/components/VietQRCard.tsx`
+- `package.json` và `package-lock.json` nếu có.
 
-| STT | Tệp tin / Đường dẫn | Mô tả vai trò |
-|---|---|---|
-| 1 | `server.ts` | Backend Express xử lý webhook SePay (`/api/sepay/webhook`), API kiểm tra trạng thái giao dịch (`/api/sepay/payment-status/:orderNumber`), khởi tạo (`/api/sepay/initiate`), mô phỏng test (`/api/sepay/simulate-success`), cấu hình an toàn (`/api/sepay/config`) và AI Chat tư vấn da liễu (`/api/chat`). |
-| 2 | `src/components/VietQRCard.tsx` | Thành phần hiển thị thẻ chuyển khoản VietQR chuẩn Napas 247 cho MB Bank; tích hợp tự động polling kiểm tra số dư qua SePay mỗi 3.5s; chế độ thử nghiệm có nút mô phỏng thanh toán thành công tức thì khi `PAYMENTS_ENABLED=false`. |
-| 3 | `src/components/CheckoutModal.tsx` | Quy trình đặt hàng và thanh toán trực tiếp; tự động đồng bộ trạng thái thanh toán từ SePay MB Bank và mở khóa nút đặt hàng khi nhận tiền. |
-| 4 | `src/components/AICustomerSupportChat.tsx` | Khung chat tư vấn chuyên gia da liễu Thụy Sĩ (Zurich Dermatology AI); tư vấn phác đồ da, thành phần thảo dược tuyết Alps, giải đáp cách thanh toán VietQR MB Bank và kiểm tra đơn hàng. |
-| 5 | `src/components/CustomerSupportModal.tsx` | Hộp thoại CSKH đa kênh (Chat AI 24/7, Gửi phiếu hỗ trợ, Kênh liên hệ, FAQ). |
-| 6 | `.env.example` | Mẫu biến môi trường đầy đủ cho Gemini AI và SePay MB Bank. |
-| 7 | `HUONG_DAN_AI_STUDIO.md` | Tài liệu đặc tả và hướng dẫn cấu hình chi tiết (tệp này). |
+Có thể giải nén ZIP và thay nội dung từng tệp trong trình sửa mã AI Studio. Không tạo dự án mới, không yêu cầu AI vẽ lại giao diện. Các tệp khác trong ZIP giữ nội dung gốc, ngoại trừ tài liệu cấu hình và kiểm thử. Nếu nền tảng hỗ trợ nhập cả dự án thì nhập mã vào dự án hiện tại theo tính năng của nền tảng; không giả định có nút nhập ZIP.
 
----
+Lệnh kiểm tra: `npm install`, `npm run lint`, `npm run build`, `npm run test:payments`.
+Ứng dụng phải chạy backend bằng `npm start` với `NODE_ENV=production` sau khi build, và lắng nghe cổng `PORT` của nơi triển khai. Chỉ tải thư mục `dist` lên hosting tĩnh sẽ KHÔNG có API nhận webhook.
 
-## 2. TRẠNG THÁI HIỆN TẠI (CHẾ ĐỘ THỬ NGHIỆM)
+## 2. Đặt cấu hình ở máy chủ
 
-- Biến môi trường hiện tại được đặt mặc định:
-  ```env
-  PAYMENTS_ENABLED="false"
-  ```
-- **Hành vi khi thử nghiệm:**
-  - Khách hàng chọn phương thức thanh toán **VietQR MB Bank** tại bước Checkout.
-  - Mã QR thanh toán hiển thị đúng thông tin MB Bank và số tiền đơn hàng.
-  - Thẻ hiển thị huy hiệu: `Thử nghiệm: PAYMENTS_ENABLED=false`.
-  - Có nút **"⚡ Mô phỏng đã TT"** (Simulate Success): Cho phép người dùng bấm để hệ thống chuyển ngay sang trạng thái "ĐÃ NHẬN TIỀN" mà không cần chuyển khoản thật, phục vụ việc kiểm thử luồng đặt hàng.
-  - Nút **"Xác nhận đặt hàng ngay"** lập tức được kích hoạt.
+Dùng phần cấu hình biến môi trường / Secrets của nơi triển khai, không dán khóa vào chat, mã React hoặc biến có tiền tố `VITE_`:
 
----
-
-## 3. CÁC CẤU HÌNH CẦN THIẾT ĐỂ KẾT NỐI THẬT (PRODUCTION)
-
-Khi bạn sẵn sàng kết nối nhận tiền thật về tài khoản MB Bank tự động qua SePay, hãy cấu hình các thông số sau trong phần Environment Variables / Secrets:
-
-### Bước 1: Đăng ký và cấu hình trên SePay
-1. Đăng ký/Đăng nhập tại [https://my.sepay.vn](https://my.sepay.vn).
-2. Vào mục **Ngân hàng kết nối** > Thêm tài khoản ngân hàng **MB Bank (Ngân hàng Quân Đội)**.
-3. Liên kết ứng dụng MB Bank theo hướng dẫn của SePay để SePay có thể đọc biến động số dư.
-4. Vào mục **Tích hợp Webhook**:
-   - Tại mục **Cấu hình Webhook**, điền Webhook URL:
-     ```
-     https://<tên-miền-website-của-bạn>/api/sepay/webhook
-     ```
-   - Phương thức: `POST` (dạng JSON).
-
-### Bước 2: Thiết lập Biến Môi Trường (Environment Variables)
-
-```env
-# 1. Bật tính năng thanh toán thực tế (Chỉ đổi khi đã sẵn sàng nhận tiền thật)
-PAYMENTS_ENABLED="true"
-
-# 2. Số tài khoản MB Bank đã liên kết trên SePay (BẮT BUỘC để tạo mã VietQR đúng tài khoản)
-SEPAY_ACCOUNT_NUMBER="Số tài khoản MB Bank thật của bạn"
-
-# 3. Tên ngân hàng & Tên chủ tài khoản MB Bank (hiển thị trên mã VietQR)
-SEPAY_BANK_NAME="MB"
-SEPAY_ACCOUNT_NAME="TÊN CHỦ TÀI KHOẢN MB BANK"
-
-# 4. Khóa bí mật xác thực Webhook (TÙY CHỌN - khuyên dùng để tránh người ngoài giả mạo gọi webhook)
-SEPAY_WEBHOOK_TOKEN="KHÓA_BÍ_MẬT_BẠN_ĐẶT"
-
-# 5. SEPAY_API_KEY (KHÔNG BẮT BUỘC cho việc nhận thanh toán qua Webhook)
-# Khi nhận thanh toán, SePay tự động gửi HTTP POST Webhook đến server của bạn.
-# Bạn CHỈ CẦN SEPAY_API_KEY nếu website của bạn chủ động gọi API SePay (ví dụ lấy danh sách lịch sử giao dịch).
-SEPAY_API_KEY=""
+```
+PAYMENTS_ENABLED=true
+SEPAY_ACCOUNT_NUMBER=<số tài khoản MB đã liên kết SePay>
+SEPAY_ACCOUNT_NAME=<tên chủ tài khoản thật>
+SEPAY_WEBHOOK_TOKEN=<khóa xác thực webhook>
 ```
 
----
+`SEPAY_WEBHOOK_TOKEN` là API Key xác thực của webhook đã đặt trong SePay; không phải token REST API dùng để đọc lịch sử giao dịch. Bản này nhận webhook nên không cần token REST API.
 
-## 4. BẢO TOÀN GIAO DIỆN MOBILE & TÍNH NĂNG ĐÃ TỐI ƯU
-Toàn bộ các cải tiến giao diện mobile mới nhất đã được giữ nguyên 100%:
-- Header responsive, logo Alps tỷ lệ chuẩn trên màn hình nhỏ.
-- Bottom navigation hỗ trợ iOS `safe-area-bottom` và không bị che khuất.
-- Nút chat/tư vấn nổi (`SupportFloatingButton`) tự động căn chỉnh vị trí an toàn trên thanh điều hướng mobile (`bottom-20 right-3.5`).
-- Thẻ sản phẩm Catalog bố cục 2 cột không bị tràn số tiền và nút bấm.
-- Toàn bộ tính năng giỏ hàng, soi da Skin Quiz, phân tích phác đồ da, xem đánh giá và các trang triết lý thương hiệu đều hoạt động trơn tru.
+Hệ thống dùng Firestore hiện có trong `firebase-applet-config.json`. Backend Google Cloud dùng tài khoản dịch vụ của runtime (Application Default Credentials). Tài khoản đó phải được cấp quyền đọc/ghi Firestore của dự án và database đã chọn, ví dụ vai trò Cloud Datastore User trong phạm vi phù hợp. Nếu gặp lỗi quyền, quản trị viên dự án cần cấu hình IAM; KHÔNG mở public Firestore rules để xử lý lỗi này. Nếu dùng backend ngoài Google Cloud, cấu hình thông tin dịch vụ qua secret `FIREBASE_SERVICE_ACCOUNT_JSON` hoặc ADC được hỗ trợ.
 
----
+Hai collection mới `paymentSessions` và `paymentTransactions` chỉ cho backend truy cập; bộ rules hiện tại mặc định từ chối client, không cần mở quyền. Không lưu khóa vào frontend. Dữ liệu thanh toán không còn phụ thuộc file `.data` tạm của máy chủ.
 
-## 5. KIỂM TRA BẢN BUILD & TYPESCRIPT
-- Chạy kiểm tra TypeScript: `npm run lint` (`tsc --noEmit`)
-- Chạy kiểm tra đóng gói: `npm run build`
+## 3. Cấu hình webhook trong SePay
+
+Trong tài khoản SePay đã liên kết ngân hàng, thêm/sửa webhook:
+- Sự kiện: Có tiền vào.
+- Tài khoản: đúng tài khoản MB đã đặt ở backend.
+- URL: địa chỉ HTTPS CÔNG KHAI của backend, thêm `/api/sepay/webhook`.
+- Phương thức: POST, dữ liệu JSON.
+- Xác thực: API Key; dùng cùng giá trị `SEPAY_WEBHOOK_TOKEN`.
+- Nếu lọc mã thanh toán, phải cho phép mã dạng `ALPS` + 24 ký tự hex. Để tránh lọc mất giao dịch, có thể tắt lọc mã và để backend tự đối soát.
+
+KHÔNG dùng URL trang chỉnh sửa `ai.studio/apps/...` làm webhook. Dùng URL ứng dụng đã triển khai chạy backend và không yêu cầu đăng nhập Google. Link editor có thể vẫn dùng xem thử, nhưng webhook cần backend công khai. Nếu web `alps.id.vn` đang được phục vụ từ cùng backend, dùng domain đó. Nếu domain ở hosting tĩnh, phải trỏ API tới backend bằng `VITE_API_BASE_URL` rồi build lại, hoặc cấu hình proxy phù hợp.
+
+Kiểm tra `/api/sepay/config` trên host ứng dụng: phải trả JSON với `paymentsEnabled: true`. Nếu trả HTML/404 thì domain đó chưa có backend. Chỉ nên bật nhận tiền sau khi mở checkout và QR hiện ra: điều này chứng tỏ backend đã tạo được phiên trong Firestore.
+
+## 4. Kiểm tra thật trước khi mở bán
+
+Tạo một đơn, ghi lại số tiền/nội dung QR và chuyển đúng từ tài khoản khác. Chỉ chuyển khoản khi chắc chắn số tài khoản và tên người nhận trong ứng dụng ngân hàng là của bạn. Trang sẽ kiểm tra mỗi khoảng 3,5 giây; thời điểm xác nhận còn phụ thuộc SePay/ngân hàng. Kiểm tra nhật ký webhook nếu chậm.
+
+Sau thành công, bấm xác nhận đặt hàng để hoàn tất bước đặt đơn hiện có. Nếu khách đóng trang trước bước này, phiên thanh toán và thông tin người mua đã nhập vẫn được lưu trong `paymentSessions` để chủ shop đối soát; bản này chưa có màn hình quản trị xử lý đơn bỏ dở.
+
+Không cộng dồn nhiều lần chuyển thiếu: giao dịch riêng lẻ phải đủ số tiền; trường hợp chuyển thiếu/thừa/sai nội dung cần chủ shop đối soát. Không yêu cầu khách chuyển lại toàn bộ khi chưa rõ giao dịch trước. Gửi lại cùng webhook không tạo thanh toán trùng. Khi đổi giỏ hàng, mã ưu đãi hoặc vận chuyển, hệ thống tạo mã thanh toán mới và không dùng xác nhận của giỏ cũ.
+
+Thanh toán thẻ Visa/Mastercard trong bản gốc chỉ dùng bộ đếm giờ giả thành công, chưa có ngân hàng xử lý. Bản sửa giữ phần giao diện nhưng vô hiệu hóa xác nhận giả. Hiện hỗ trợ thực tế: chuyển khoản SePay và COD; thẻ cần tích hợp cổng thẻ riêng.
+
+## Phạm vi kiểm tra
+
+Các bài kiểm thử trong `tests/` kiểm tra tính giá, đối soát và tuyến API bằng kho dữ liệu giả lập. Đó không phải chứng nhận đã nhận tiền thật. Cần hoàn tất cấu hình, triển khai và thử giao dịch thật trên tài khoản của bạn để xác nhận hoạt động đầy đủ.
