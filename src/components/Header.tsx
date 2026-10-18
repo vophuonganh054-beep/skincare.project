@@ -201,10 +201,10 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Left: Brand Logo (Anchored, never squished) */}
         <Link
           to="/"
-          className="cursor-pointer select-none group py-1 flex items-center flex-shrink-0"
+          className="cursor-pointer select-none group flex items-center justify-center flex-shrink-0 w-[76px]"
           title="Alps Skincare • Pure Essence"
         >
-          <svg viewBox="187 261 847 659" role="img" aria-label="ALPS Pure Essence" className="w-[76px] h-[59px] sm:w-[86px] sm:h-[67px] shrink-0">
+          <svg viewBox="187 261 847 659" role="img" aria-label="ALPS Pure Essence" className="block w-[76px] h-[59px] shrink-0">
             <image href={headerLogo} width="1242" height="1242" />
           </svg>
         </Link>
