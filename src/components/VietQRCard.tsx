@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Copy, Check, Download, ShieldCheck, Building, RefreshCw, CheckCircle2 } from 'lucide-react';
-import { VisaBadge, MastercardBadge } from './PaymentBadges';
 
 interface VietQRCardProps {
   orderNumber: string;
@@ -201,7 +200,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
             {integerAmount.toLocaleString('vi-VN')} <span className="text-lg">₫</span>
           </div>
           <div className="text-[10px] text-[#77767b] mt-0.5">
-            Miễn phí chuyển khoản 24/7 Napas
+            Chuyển khoản ngân hàng 24/7
           </div>
         </div>
 
@@ -220,7 +219,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
               <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2 bg-white/70 backdrop-blur-xs rounded-xl">
                 <RefreshCw className="w-8 h-8 text-[#74584d] animate-spin" />
                 <span className="text-[11px] font-semibold text-[#1c1c19]">
-                  Đang quét giao dịch Napas 247...
+                  Đang kiểm tra giao dịch chuyển khoản...
                 </span>
                 <span className="text-[10px] text-[#77767b]">
                   Đang đối soát mã {transferDes}
@@ -253,19 +252,11 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
           </div>
         </div>
 
-        {/* Bottom Brands: VietQR Pay, VietQR Global, napas 247 & Card badges */}
+        {/* Bank transfer via VietQR */}
         <div className="relative z-10 pt-2 border-t border-[#202022]/6 flex items-center justify-between text-[10px] text-[#46464a] font-medium px-1">
           <div className="flex items-center space-x-0.5">
             <span className="font-bold text-[#e02020]">Viet</span>
             <span className="font-bold text-[#0052cc]">QR</span>
-          </div>
-          <div className="flex items-center space-x-0.5">
-            <span className="font-bold text-[#002f87]">napas</span>
-            <span className="font-bold text-[#107c41]">247</span>
-          </div>
-          <div className="flex items-center space-x-1">
-            <VisaBadge className="h-4.5 px-1 py-0.2" />
-            <MastercardBadge className="h-4.5 px-1 py-0.2" />
           </div>
         </div>
       </div>
@@ -444,7 +435,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
         <div className="flex items-start space-x-1.5 text-[10px] text-[#77767b] bg-[#fcf9f4] p-2.5 rounded-xl">
           <ShieldCheck className="w-3.5 h-3.5 text-[#8a9a86] shrink-0 mt-0.5" />
           <span>
-            Hệ thống ngân hàng Napas 247 và MB Bank sẽ tự động đối soát và khớp đơn hàng tức thì.
+            Hệ thống SePay và MB Bank sẽ tự động đối soát và khớp đơn hàng tức thì.
           </span>
         </div>
       </div>

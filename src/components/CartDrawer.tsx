@@ -3,7 +3,7 @@ import { X, ShoppingBag, Trash2, ArrowRight, ShieldCheck, Sparkles, Truck, Tag }
 import { CartItem, UserProfile } from '../types';
 import { PRODUCTS } from '../data/products';
 import { AlpsIcon } from './AlpsLogo';
-import { VisaBadge, VisaSecureBadge, MastercardBadge, NapasBadge, VietQRBadge } from './PaymentBadges';
+import { VietQRBadge } from './PaymentBadges';
 import { useLanguage } from '../context/LanguageContext';
 import { CHECKOUT_I18N } from '../i18n/checkoutTranslations';
 import { getLocalizedProduct } from '../i18n/productTranslations';
@@ -416,10 +416,6 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <div className="pt-2 flex flex-col items-center justify-center space-y-1.5 border-t border-[#202022]/6">
                 <span className="text-[10px] text-[#77767b]">{cData.securePaymentAccepted}</span>
                 <div className="flex items-center space-x-1.5 flex-wrap justify-center">
-                  <VisaBadge className="h-5" />
-                  <VisaSecureBadge className="h-5" />
-                  <MastercardBadge className="h-5" />
-                  <NapasBadge className="h-5" />
                   <VietQRBadge className="h-5" />
                 </div>
               </div>

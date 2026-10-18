@@ -278,23 +278,16 @@ export const PaymentBadgesGroup: React.FC<PaymentBadgesGroupProps> = ({
       {showLabel && (
         <div className="flex items-center space-x-2">
           <span className={`text-[10px] font-semibold uppercase tracking-wider ${labelColor}`}>
-            CỔNG THANH TOÁN & THẺ ĐƯỢC CHẤP NHẬN
+            PHƯƠNG THỨC THANH TOÁN
           </span>
           <span className={`text-[9.5px] ${textColor} hidden sm:inline`}>
-            (Chuẩn quốc tế PCI-DSS & Visa Secure SSL)
+            (Chuyển khoản ngân hàng hoặc COD)
           </span>
         </div>
       )}
       <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-        <VisaBadge className={badgeSize} />
-        <VisaDebitBadge className={badgeSize} />
-        <VisaSecureBadge className={badgeSize} />
-        <MastercardBadge className={badgeSize} />
-        <JcbBadge className={badgeSize} />
-        <NapasBadge className={badgeSize} />
         <VietQRBadge className={badgeSize} />
-        <MomoBadge className={badgeSize} />
-        <ApplePayBadge className={badgeSize} />
+        <span className="text-xs font-semibold px-2 py-1 border rounded bg-white text-[#74584d]">COD</span>
       </div>
     </div>
   );

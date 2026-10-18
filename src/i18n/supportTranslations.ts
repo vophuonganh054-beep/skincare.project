@@ -118,7 +118,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       thinking: 'Chuyên gia AI đang phân tích và soạn câu trả lời...',
       inputPlaceholder: 'Hỏi AI bất kỳ điều gì: cách trị mụn, thành phần, đặt hàng, đổi trả...',
       welcomeMessage: (name) =>
-        `Dạ kính chào ${name || 'quý khách'}! Em là Chuyên viên Da liễu Thụy Sĩ & CSKH Trí Tuệ Nhân Tạo (Gemini AI) của Alps Skincare (alps.vn).\n\nEm được kết nối trực tiếp với cơ sở dữ liệu y khoa từ Viện nghiên cứu Zurich và sẵn sàng giải đáp thông minh mọi câu hỏi của quý khách:\n• Chẩn đoán tình trạng da & lên phác đồ điều trị cá nhân hóa\n• Giải đáp thành phần dược mỹ phẩm tế bào gốc hoa tuyết thuần chay\n• Hướng dẫn đặt hàng nhanh, tra cứu vận chuyển & thanh toán VietQR Napas 247\n• Chính sách bảo chứng đổi trả 30 ngày hoàn tiền 100% không rủi ro\n\nQuý khách đang quan tâm hoặc cần tư vấn về vấn đề gì hôm nay ạ?`,
+        `Dạ kính chào ${name || 'quý khách'}! Em là Chuyên viên Da liễu Thụy Sĩ & CSKH Trí Tuệ Nhân Tạo (Gemini AI) của Alps Skincare (alps.vn).\n\nEm được kết nối trực tiếp với cơ sở dữ liệu y khoa từ Viện nghiên cứu Zurich và sẵn sàng giải đáp thông minh mọi câu hỏi của quý khách:\n• Chẩn đoán tình trạng da & lên phác đồ điều trị cá nhân hóa\n• Giải đáp thành phần dược mỹ phẩm tế bào gốc hoa tuyết thuần chay\n• Hướng dẫn đặt hàng nhanh, tra cứu vận chuyển & thanh toán VietQR\n• Chính sách bảo chứng đổi trả 30 ngày hoàn tiền 100% không rủi ro\n\nQuý khách đang quan tâm hoặc cần tư vấn về vấn đề gì hôm nay ạ?`,
       quickPrompts: [
         'Chat Fanpage Facebook cùng chuyên viên tư vấn',
         'Kiểm tra tình trạng da & thiết lập phác đồ cá nhân hóa',
@@ -216,9 +216,9 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
             'Bạn có thể bấm vào nút "Soi Da AI" trên website để hoàn thành bài trắc nghiệm 1 phút, hoặc chat trực tiếp với Trợ Lý Da Liễu AI 24/7 để nhận phác đồ cá nhân hóa ngay lập tức.',
         },
         {
-          question: 'Thanh toán qua quét mã VietQR Napas 247 được xác nhận như thế nào?',
+          question: 'Thanh toán qua quét mã VietQR được xác nhận như thế nào?',
           answer:
-            'Khi bạn quét mã VietQR bằng ứng dụng ngân hàng, hệ thống Napas 247 sẽ tự động điền sẵn số tiền và nội dung đơn hàng. Ngay sau khi chuyển khoản thành công, hệ thống Alps sẽ tự động nhận diện và cập nhật trạng thái đơn hàng trong 3-5 giây.',
+            'Khi bạn quét mã VietQR bằng ứng dụng ngân hàng, ứng dụng ngân hàng sẽ tự động điền sẵn số tiền và nội dung đơn hàng. Ngay sau khi chuyển khoản thành công, hệ thống Alps sẽ tự động nhận diện và cập nhật trạng thái đơn hàng trong 3-5 giây.',
         },
       ],
     },
@@ -354,7 +354,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         {
           question: 'How are digital VietQR / card payments verified?',
           answer:
-            'Payments via VietQR Napas 247 or international cards (Visa/Mastercard) are validated with bank-grade encryption in 3-5 seconds.',
+            'Choose bank transfer via VietQR or cash on delivery (COD). Bank transfers are confirmed automatically after the payment is matched.',
         },
       ],
     },

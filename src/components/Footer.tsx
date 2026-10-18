@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck, Award, HeartHandshake, Phone, Headphones, Mail, MapPin, Type } from 'lucide-react';
 import { AlpsLogo } from './AlpsLogo';
-import { PaymentBadgesGroup, VisaBadge, VisaDebitBadge, MastercardBadge, NapasBadge, VietQRBadge } from './PaymentBadges';
+import { PaymentBadgesGroup, VietQRBadge } from './PaymentBadges';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSelector } from './LanguageSelector';
 import { Link } from '../context/RouterContext';
@@ -162,10 +162,6 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
                 {t.footer.acceptPayment}
               </span>
               <div className="flex flex-wrap items-center gap-1.5">
-                <VisaBadge className="h-6" />
-                <VisaDebitBadge className="h-6" />
-                <MastercardBadge className="h-6" />
-                <NapasBadge className="h-6" />
                 <VietQRBadge className="h-6" />
               </div>
             </div>

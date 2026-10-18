@@ -77,7 +77,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       points: [
         {
           title: 'Bảo mật thông tin thanh toán tuyệt đối',
-          desc: 'Alps không lưu trữ thông tin thẻ ngân hàng của quý khách. Mọi giao dịch qua VietQR Napas 247 và thẻ Visa/Mastercard đều được mã hóa theo tiêu chuẩn quốc tế PCI-DSS Level 1.',
+          desc: 'Alps hỗ trợ chuyển khoản ngân hàng qua VietQR và thanh toán khi nhận hàng (COD). Trạng thái chuyển khoản được cập nhật sau khi hệ thống đối soát thành công.',
         },
         {
           title: 'Cam kết không chia sẻ dữ liệu cho bên thứ ba',
@@ -147,7 +147,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       points: [
         {
           title: 'Zero storage of payment credentials',
-          desc: 'Alps never retains credit card numbers. All payments through VietQR Napas and Visa/Mastercard are processed under PCI-DSS Level 1 certification.',
+          desc: 'Alps supports bank transfer via VietQR and cash on delivery (COD). Transfer status is updated after successful payment matching.',
         },
         {
           title: 'Strict anti-disclosure pledge',
@@ -217,7 +217,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       points: [
         {
           title: 'Keine Speicherung sensibler Zahlungsdaten',
-          desc: 'Zahlungen erfolgen über zertifizierte PCI-DSS Level 1 Gateways mit 3D-Secure-Verschlüsselung.',
+          desc: 'Alps unterstützt Banküberweisung per VietQR und Barzahlung bei Lieferung (COD). Überweisungen werden nach erfolgreichem Zahlungsabgleich bestätigt.',
         },
         {
           title: 'Keine Weitergabe an Dritte',
@@ -287,7 +287,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       points: [
         {
           title: 'No almacenamos sus datos bancarios',
-          desc: 'Todas las transacciones se realizan bajo los estándares internacionales PCI-DSS Nivel 1.',
+          desc: 'Alps admite transferencia bancaria mediante VietQR y pago contra entrega (COD). Las transferencias se confirman tras verificar el pago.',
         },
         {
           title: 'Confidencialidad absoluta de su historial',
@@ -357,7 +357,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       points: [
         {
           title: '严禁保存任何银行卡敏感信息',
-          desc: 'Alps 绝不在本地服务器储存用户支付卡号。所有 VietQR 与国际信用卡结算均通过 PCI-DSS Level 1 认证通道。',
+          desc: 'Alps 支持 VietQR 银行转账和货到付款（COD）。转账状态将在系统核对付款成功后更新。',
         },
         {
           title: '绝不对外泄露用户隐私与测肤档案',
