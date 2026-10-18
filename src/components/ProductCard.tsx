@@ -95,13 +95,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           <div className="min-w-0">
             <div className="flex items-baseline space-x-2 flex-wrap">
               <span className="font-serif text-base sm:text-lg font-bold text-[#1c1c19] tabular-nums">
-                {product.price.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
+                {(product.promoPrice ?? product.price).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
               </span>
-              {product.originalPrice && product.originalPrice > product.price && (
+              {product.originalPrice && product.originalPrice > (product.promoPrice ?? product.price) && (
                 <span className="text-xs sm:text-sm text-[#77767b] line-through tabular-nums">
                   {product.originalPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
                 </span>
               )}
+                    {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">Sau mã {product.promoCode}</span>}
             </div>
             {displayNote && (
               <span className="block text-xs text-[#8a9a86] font-medium tracking-wide truncate mt-0.5">

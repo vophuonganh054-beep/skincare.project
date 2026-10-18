@@ -176,15 +176,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {/* Pricing Box */}
                 <div className="mt-3.5 p-4 rounded-2xl bg-white border border-[#202022]/6 flex items-baseline justify-between">
                   <div>
-                    <div className="flex items-baseline space-x-2">
+                    <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                       <span className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19]">
-                        {product.price.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
+                        {(product.promoPrice ?? product.price).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
                       </span>
-                      {product.originalPrice && product.originalPrice > product.price && (
+                      {product.originalPrice && product.originalPrice > (product.promoPrice ?? product.price) && (
                         <span className="text-xs sm:text-sm text-[#77767b] line-through">
                           {product.originalPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
                         </span>
                       )}
+                    {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">Sau mã {product.promoCode}</span>}
                     </div>
                     {product.note && (
                       <p className="text-xs text-[#8a9a86] font-medium mt-0.5">
@@ -236,7 +237,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     </button>
                   </div>
                   <span className="text-xs text-[#77767b]">
-                    {t.cart.total} <strong className="text-[#1c1c19] font-serif text-sm">{(product.price * quantity).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫</strong>
+                    {language === 'vi' ? 'Tạm tính trước mã:' : 'Subtotal before code:'} <strong className="text-[#1c1c19] font-serif text-sm">{(product.price * quantity).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫</strong>
                   </span>
                 </div>
 

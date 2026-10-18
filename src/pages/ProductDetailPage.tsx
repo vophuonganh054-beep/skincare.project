@@ -98,7 +98,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
   };
 
   const discountPercent = product.originalPrice
-    ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
+    ? Math.round(((product.originalPrice - (product.promoPrice ?? product.price)) / product.originalPrice) * 100)
     : 0;
 
   // Other products for recommendations
@@ -227,18 +227,19 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               {/* Price Box */}
               <div className="bg-[#fcf5f1] border border-[#fed8c9] rounded-2xl p-4 sm:p-5 flex items-center justify-between">
                 <div>
-                  <div className="flex items-baseline space-x-3">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                     <span className="text-2xl sm:text-4xl font-bold text-[#1c1c19]">
-                      {product.price.toLocaleString('vi-VN')}₫
+                      {(product.promoPrice ?? product.price).toLocaleString('vi-VN')}₫
                     </span>
                     {product.originalPrice && (
                       <span className="text-base text-[#a8a6ad] line-through">
                         {product.originalPrice.toLocaleString('vi-VN')}₫
                       </span>
                     )}
+                    {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">Sau mã {product.promoCode}</span>}
                   </div>
                   <p className="text-xs text-[#74584d] font-medium mt-1.5">
-                    Đã bao gồm thuế GTGT & Miễn phí vận chuyển cho đơn hàng này
+                    Giá ưu đãi sau mã PHUNU20 • Phí vận chuyển tính tại thanh toán
                   </p>
                 </div>
                 {discountPercent > 0 && (
@@ -277,7 +278,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     </button>
                   </div>
                   <span className="text-xs sm:text-sm text-[#77767b]">
-                    Tạm tính: <strong className="text-[#1c1c19]">{(product.price * quantity).toLocaleString('vi-VN')}₫</strong>
+                    Tạm tính trước mã: <strong className="text-[#1c1c19]">{(product.price * quantity).toLocaleString('vi-VN')}₫</strong>
                   </span>
                 </div>
 

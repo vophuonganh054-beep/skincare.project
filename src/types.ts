@@ -29,6 +29,8 @@ export interface Product {
   soldCount: string;
   price: number;
   originalPrice?: number;
+  promoPrice?: number; // Price after applying promoCode once at checkout.
+  promoCode?: string;
   note?: string;
   image: string; // Links to uploaded image (e.g. 'Image 6.jpeg')
   fallbackImage: string; // Resilient fallback high-res aesthetic photography

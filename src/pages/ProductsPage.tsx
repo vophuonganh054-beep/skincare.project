@@ -279,17 +279,18 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                       <div className="flex items-baseline justify-between mb-3">
                         <div>
                           <span className="text-xl sm:text-2xl font-bold text-[#1c1c19]">
-                            {product.price.toLocaleString('vi-VN')}₫
+                            {(product.promoPrice ?? product.price).toLocaleString('vi-VN')}₫
                           </span>
                           {product.originalPrice && (
                             <span className="text-sm text-[#a8a6ad] line-through ml-2">
                               {product.originalPrice.toLocaleString('vi-VN')}₫
                             </span>
                           )}
+                    {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">Sau mã {product.promoCode}</span>}
                         </div>
                         {product.originalPrice && (
                           <span className="text-xs font-bold text-[#e85338] bg-[#feeceb] px-2.5 py-0.5 rounded-full">
-                            -{Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}%
+                            -{Math.round(((product.originalPrice - (product.promoPrice ?? product.price)) / product.originalPrice) * 100)}%
                           </span>
                         )}
                       </div>
