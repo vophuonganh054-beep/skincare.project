@@ -106,7 +106,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       mobileChat: 'Chat AI • CSKH',
     },
     aiChat: {
-      title: 'Chuyên Gia Da Liễu AI Alps',
+      title: 'Trợ Lý Tư Vấn AI ALPS',
       aiSubtitle: 'Trí Tuệ Nhân Tạo 24/7',
       online247: 'Trực tuyến 24/7',
       officialWebsite: 'Website chính thức: alps.vn • Hotline: 0772 770 134',
@@ -116,9 +116,9 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       quizBannerBold: 'Bài Soi Da AI (1 phút)',
       quizBannerBtn: 'Soi da ngay',
       thinking: 'Chuyên gia AI đang phân tích và soạn câu trả lời...',
-      inputPlaceholder: 'Hỏi AI bất kỳ điều gì: cách trị mụn, thành phần, đặt hàng, đổi trả...',
+      inputPlaceholder: 'Hỏi về sản phẩm, thành phần, giá hoặc routine của bạn...',
       welcomeMessage: (name) =>
-        `Dạ kính chào ${name || 'quý khách'}! Em là Chuyên viên Da liễu Thụy Sĩ & CSKH Trí Tuệ Nhân Tạo (Gemini AI) của Alps Skincare (alps.vn).\n\nEm được kết nối trực tiếp với cơ sở dữ liệu y khoa từ Viện nghiên cứu Zurich và sẵn sàng giải đáp thông minh mọi câu hỏi của quý khách:\n• Chẩn đoán tình trạng da & lên phác đồ điều trị cá nhân hóa\n• Giải đáp thành phần dược mỹ phẩm tế bào gốc hoa tuyết thuần chay\n• Hướng dẫn đặt hàng nhanh, tra cứu vận chuyển & thanh toán VietQR\n• Chính sách bảo chứng đổi trả 30 ngày hoàn tiền 100% không rủi ro\n\nQuý khách đang quan tâm hoặc cần tư vấn về vấn đề gì hôm nay ạ?`,
+        `Dạ chào ${name || 'bạn'}! Em là trợ lý AI Gemini của ALPS Pure Essence (alps.id.vn). Em có thể tư vấn sản phẩm theo loại da và ngân sách, so sánh giá/thành phần, hướng dẫn cách dùng và thanh toán. Bạn đang cần cải thiện vấn đề gì trên da ạ?`,
       quickPrompts: [
         'Chat Fanpage Facebook cùng chuyên viên tư vấn',
         'Kiểm tra tình trạng da & thiết lập phác đồ cá nhân hóa',
@@ -255,7 +255,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       thinking: 'AI Dermatology Advisor is evaluating your inquiry...',
       inputPlaceholder: 'Ask anything: acne healing, INCI ingredients, orders, 30-day returns...',
       welcomeMessage: (name) =>
-        `Welcome ${name || 'esteemed guest'}! I am the AI Dermatology & Client Care Specialist for Alps Skincare Switzerland (alps.vn).\n\nPowered by clinical data from our Zurich research institute, I am prepared to assist you with:\n• Biometric skin diagnosis & bespoke regimen building\n• Swiss glacial stem cell and vegan INCI science\n• Express shipping, order tracking & seamless payments\n• 30-day risk-free 100% money-back guarantee\n\nHow may I care for your skin today?`,
+        `Hello ${name || 'there'}! I am the ALPS Pure Essence AI assistant, powered by Gemini. I can help compare products, ingredients and prices, suggest a routine for your budget, and explain checkout. What would you like help with?`,
       quickPrompts: [
         'Analyze my skin & establish a personalized ritual',
         'Which Alps routine best treats oily, congested acne-prone skin?',
@@ -391,7 +391,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       thinking: 'AI-Dermatologe analysiert Ihre Anfrage...',
       inputPlaceholder: 'Fragen Sie nach Hautpflege, Inhaltsstoffen, Bestellungen, Rückgabe...',
       welcomeMessage: (name) =>
-        `Herzlich willkommen ${name || 'geschätzter Gast'}! Ich bin Ihr persönlicher AI-Dermatologieberater von Alps Skincare Schweiz (alps.id.vn).\n\nBasierend auf den klinischen Daten unseres Zürcher Instituts beantworte ich gerne Ihre Fragen zu:\n• Biometrischer Hautdiagnose & Pflegeritualen\n• Schweizer Gletscherstammzellen & tierfreien Rezepturen\n• Express-Versand & sicherer Bezahlung\n• Unserer 30-tägigen 100% Geld-zurück-Garantie\n\nWie kann ich Ihre Haut heute unterstützen?`,
+        `Hallo ${name || ''}! Ich bin der KI-Produktberater von ALPS Pure Essence mit Gemini. Ich helfe bei Produkten, Inhaltsstoffen, Preisen, Anwendung und Bestellung. Was möchten Sie über Ihre Hautpflege wissen?`,
       quickPrompts: [
         'Hautzustand analysieren & individuelles Ritual erstellen',
         'Welche Pflege eignet sich für ölige, unreine Haut?',
@@ -527,7 +527,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       thinking: 'El especialista AI está analizando su consulta...',
       inputPlaceholder: 'Pregunte lo que desee: acné, ingredientes INCI, pedidos, devoluciones...',
       welcomeMessage: (name) =>
-        `¡Bienvenido ${name || 'estimado cliente'}! Soy el Asistente Dermatológico AI de Alps Skincare Suiza (alps.id.vn).\n\nCon el respaldo científico de nuestro instituto en Zúrich, estoy listo para responder sobre:\n• Diagnóstico biológico y rutinas personalizadas\n• Ciencia de células madre de glaciares suizos y fórmulas 100% veganas\n• Seguimiento de envíos rápidos y pagos seguros\n• Garantía de 30 días con reembolso del 100%\n\n¿En qué podemos asistirle hoy?`,
+        `¡Hola ${name || ''}! Soy el asistente de productos de ALPS Pure Essence con Gemini. Puedo ayudarte con ingredientes, precios, rutinas y pedidos. ¿Qué necesitas para tu cuidado de la piel?`,
       quickPrompts: [
         'Analizar mi piel y diseñar una rutina personalizada',
         '¿Qué productos son ideales para piel grasa o con tendencia al acné?',
@@ -663,7 +663,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       thinking: 'AI 皮肤科顾问正在为您分析与撰写答复...',
       inputPlaceholder: '向 AI 咨询任何问题：控油祛痘、INCI成分、订单物流、30天退换...',
       welcomeMessage: (name) =>
-        `尊贵的${name || '贵宾'}，您好！我是瑞士 Alps Skincare (alps.id.vn) 的人工智能皮肤专研顾问。\n\n依托苏黎世皮肤科研所的海量临床数据库，我随时准备为您解答：\n• 智能测肤分析与定制护肤方案\n• 瑞士雪山植物干细胞与纯素活性成分解析\n• 闪电配送进度查询与便捷支付\n• 30天安心试用 100% 退款保证\n\n请问您今天最关注哪些肌肤护理需求？`,
+        `您好 ${name || ''}！我是 ALPS Pure Essence 的 Gemini AI 产品助手，可以介绍成分、价格、使用方法和下单流程。您想改善哪方面的护肤问题？`,
       quickPrompts: [
         '分析我的皮肤状态并定制专属护肤步骤',
         '油痘肌与毛孔粗大最推荐使用哪款产品？',

@@ -1,4 +1,4 @@
-import { ShippingCarrier } from '../types';
+import type { ShippingCarrier } from '../types.ts';
 
 export const SHIPPING_CARRIERS: ShippingCarrier[] = [
   {

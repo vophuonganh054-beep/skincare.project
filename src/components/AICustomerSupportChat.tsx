@@ -106,7 +106,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
 
     try {
       // Build history for context
-      const history = messages.map((m) => ({
+      const history = messages.filter(m => !m.id.startsWith('welcome') && !m.id.startsWith('error')).slice(-12).map((m) => ({
         role: m.role,
         text: m.text,
       }));
@@ -124,13 +124,9 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
         }),
       });
 
-      if (!res.ok) {
-        throw new Error('Network error');
-      }
-
       const data = await res.json();
-      const aiReply = data.reply || supportTexts.fallbackDefault;
-
+      if (!res.ok) throw new Error(data.reply || 'Gemini hiện chưa trả lời được. Vui lòng thử lại sau.');
+      const aiReply = typeof data.reply === 'string' && data.reply.trim() ? data.reply : 'Gemini chưa có câu trả lời. Bạn vui lòng thử lại.';
       const aiMsg: Message = {
         id: `ai-${Date.now()}`,
         role: 'model',
@@ -143,102 +139,13 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
 
       setMessages((prev) => [...prev, aiMsg]);
     } catch (err) {
-      console.warn('Chat API error, using intelligent client fallback:', err);
-      // Smart Fallback answers for key topics in current language
-      let fallbackText = supportTexts.fallbackDefault;
-
-      const lower = text.toLowerCase();
-      if (
-        lower.includes('đăng nhập') ||
-        lower.includes('tài khoản') ||
-        lower.includes('mua') ||
-        lower.includes('đặt hàng') ||
-        lower.includes('account') ||
-        lower.includes('guest') ||
-        lower.includes('login') ||
-        lower.includes('konto') ||
-        lower.includes('cuenta') ||
-        lower.includes('登录')
-      ) {
-        fallbackText = supportTexts.fallbackGuestCheckout;
-      } else if (
-        lower.includes('đổi trả') ||
-        lower.includes('vận chuyển') ||
-        lower.includes('ship') ||
-        lower.includes('return') ||
-        lower.includes('refund') ||
-        lower.includes('versand') ||
-        lower.includes('rückgabe') ||
-        lower.includes('devolución') ||
-        lower.includes('退款')
-      ) {
-        fallbackText = supportTexts.fallbackReturns;
-      } else if (
-        lower.includes('tư vấn viên') ||
-        lower.includes('chuyên viên') ||
-        lower.includes('người thật') ||
-        lower.includes('nhân viên') ||
-        lower.includes('gặp người') ||
-        lower.includes('facebook') ||
-        lower.includes('fb') ||
-        lower.includes('fanpage') ||
-        lower.includes('messenger') ||
-        lower.includes('mạng xã hội') ||
-        lower.includes('social') ||
-        lower.includes('zalo')
-      ) {
-        fallbackText = 'Dạ kính thưa quý khách! Quý khách có thể kết nối và nhắn tin Messenger trực tiếp 1-1 với Chuyên viên Tư vấn Da liễu & CSKH Alps qua trang Facebook Fanpage chính thức tại: https://www.facebook.com/profile.php?id=61595372038444.\n\nChuyên viên tư vấn luôn túc trực 24/7 trên Fanpage để soi da, lên phác đồ phục hồi hàng rào ẩm và tư vấn gói quà 20/10 chu đáo nhất ạ!';
-      } else if (
-        lower.includes('serum') ||
-        lower.includes('sáng da') ||
-        lower.includes('thâm') ||
-        lower.includes('glow') ||
-        lower.includes('pregnant') ||
-        lower.includes('niacinamide') ||
-        lower.includes('leuchtkraft') ||
-        lower.includes('manchas') ||
-        lower.includes('美白') ||
-        lower.includes('精华')
-      ) {
-        fallbackText = supportTexts.fallbackSerum;
-      } else if (
-        lower.includes('da dầu') ||
-        lower.includes('mụn') ||
-        lower.includes('lỗ chân lông') ||
-        lower.includes('oily') ||
-        lower.includes('acne') ||
-        lower.includes('pore') ||
-        lower.includes('unrein') ||
-        lower.includes('grasa') ||
-        lower.includes('acné') ||
-        lower.includes('控油') ||
-        lower.includes('痘')
-      ) {
-        fallbackText = supportTexts.fallbackOilyAcne;
-      } else if (
-        lower.includes('sepay') ||
-        lower.includes('mb bank') ||
-        lower.includes('chuyển khoản') ||
-        lower.includes('vietqr') ||
-        lower.includes('thanh toán') ||
-        lower.includes('quét mã') ||
-        lower.includes('napas')
-      ) {
-        fallbackText = 'Dạ Alps Skincare hỗ trợ thanh toán thông minh tự động qua cổng SePay kết nối trực tiếp MB Bank (Ngân hàng TMCP Quân Đội):\n• Quý khách quét mã VietQR trên ứng dụng ngân hàng, số tiền và nội dung chuyển khoản được điền sẵn chính xác 100%.\n• Hệ thống SePay sẽ tự động nhận diện và kích hoạt đơn hàng sau khi backend đối soát thành công mà không cần gửi ảnh biên lai.\n• Nếu chuyển khoản trực tuyến đang bảo trì hoặc chưa sẵn sàng, quý khách có thể chọn phương thức Tiền mặt khi nhận hàng (COD) để đặt hàng an tâm và thuận tiện ạ!';
-      }
-
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: `ai-${Date.now()}`,
-          role: 'model',
-          text: fallbackText,
-          timestamp: new Date().toLocaleTimeString(language === 'vi' ? 'vi-VN' : 'en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-          }),
-        },
-      ]);
+      setMessages(prev => [...prev, {
+        id: `error-${Date.now()}`, role: 'model',
+        text: language === 'vi'
+          ? (err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Không kết nối được Gemini. Bạn vui lòng thử lại hoặc liên hệ shop qua hotline 0772 770 134.')
+          : 'The AI assistant is unavailable. Please try again or contact ALPS at 0772 770 134.',
+        timestamp: new Date().toLocaleTimeString(language === 'vi' ? 'vi-VN' : 'en-US', {hour:'2-digit',minute:'2-digit'}),
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -396,6 +303,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
         >
           <input
             type="text"
+            maxLength={3000}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder={supportTexts.inputPlaceholder}
