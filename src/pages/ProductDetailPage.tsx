@@ -130,7 +130,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column: Product Image Gallery */}
           <div className="lg:col-span-6 space-y-4">
-            <div className="relative aspect-square bg-[#f9f6f0] rounded-3xl overflow-hidden border border-[#202022]/8 shadow-sm group">
+            <div className="product-image-frame relative aspect-square bg-[#f9f6f0] rounded-3xl overflow-hidden border border-[#202022]/8 shadow-sm group">
               <SafeImage
                 src={product.image}
                 fallbackSrc={product.fallbackImage}
@@ -492,7 +492,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
               to={getProductPath(rel)}
               className="bg-white rounded-2xl border border-[#202022]/6 overflow-hidden flex flex-col group hover:shadow-lg transition-all duration-300"
             >
-              <div className="aspect-[4/3] bg-[#f9f6f0] overflow-hidden relative">
+              <div className="product-image-frame aspect-square bg-[#f9f6f0] overflow-hidden relative">
                 <SafeImage
                   src={rel.image}
                   fallbackSrc={rel.fallbackImage}

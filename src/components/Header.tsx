@@ -274,14 +274,7 @@ export const Header: React.FC<HeaderProps> = ({
               {t.nav.orders}
             </button>
             <button
-              onClick={() => {
-                if (pathname !== '/') {
-                  navigate('/#campaign-2010');
-                } else {
-                  const el = document.getElementById('campaign-2010');
-                  el?.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+              onClick={() => navigate('/uu-dai-20-10')}
               className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1.5 px-2 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1.5 whitespace-nowrap cursor-pointer shadow-xs text-[10px] xl:text-xs"
             >
               <span>🌸</span>
@@ -446,10 +439,7 @@ export const Header: React.FC<HeaderProps> = ({
         <span className="text-amber-200 animate-pulse text-xs shrink-0">🌸</span>
         <button
           type="button"
-          onClick={() => {
-            const el = document.getElementById('campaign-2010');
-            el?.scrollIntoView({ behavior: 'smooth' });
-          }}
+          onClick={() => navigate('/uu-dai-20-10')}
           className="hover:underline cursor-pointer flex items-center space-x-1.5 truncate max-w-full min-w-0"
         >
           <span className="font-bold text-amber-200 uppercase tracking-wider text-[8.5px] sm:text-[10px] bg-black/25 px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
@@ -459,7 +449,7 @@ export const Header: React.FC<HeaderProps> = ({
             Nhập mã <strong className="text-amber-200 underline font-bold">PHUNU20</strong> giảm 20% • Tặng kèm Hộp quà ALPS sang trọng phái nữ
           </span>
           <span className="text-amber-200 underline underline-offset-2 ml-1 hidden md:inline shrink-0 font-bold">
-            Khám phá 2 Combo →
+            Lấy voucher →
           </span>
         </button>
         <span className="text-amber-200 animate-pulse text-xs shrink-0">🌸</span>

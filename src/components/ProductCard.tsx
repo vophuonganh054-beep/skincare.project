@@ -44,7 +44,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       {/* Top Image Container */}
       <Link
         to={productUrl}
-        className="relative aspect-square w-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#f6f3ee] flex items-center justify-center block"
+        className="product-image-frame relative aspect-square w-full overflow-hidden rounded-xl sm:rounded-2xl bg-[#f6f3ee] flex items-center justify-center block"
       >
         {/* Top Tag */}
         <div className="absolute top-2 left-2 z-10">

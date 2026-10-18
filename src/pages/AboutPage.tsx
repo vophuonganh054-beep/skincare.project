@@ -280,7 +280,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenRitualModal, onOpenS
                 </p>
               </div>
 
-              <div className="lg:col-span-6 relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#202022] shadow-md">
+              <div className="lg:col-span-6 product-image-frame relative aspect-square rounded-2xl overflow-hidden bg-[#202022] shadow-md">
                 <img
                   src={originStreamImg}
                   alt="Dòng suối nguồn sông băng Alps"
