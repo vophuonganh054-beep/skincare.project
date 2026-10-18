@@ -197,7 +197,7 @@ export const Header: React.FC<HeaderProps> = ({
       )}
 
       {/* Main Bar */}
-      <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-[1536px] mx-auto'} flex flex-nowrap items-center justify-between gap-2 lg:gap-3 w-full`}>
+      <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-[1536px] mx-auto'} flex flex-nowrap items-center justify-between gap-2 lg:gap-5 w-full`}>
         {/* Left: Brand Logo (Anchored, never squished) */}
         <Link
           to="/"
@@ -211,7 +211,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center: Desktop Navigation Links */}
         {!isMobileFrame && (
-          <nav className="hidden lg:flex flex-1 min-w-0 flex-nowrap overflow-x-auto scrollbar-none gap-x-2 xl:gap-x-3 items-center justify-start 2xl:justify-center text-[10px] xl:text-xs font-semibold tracking-normal text-[#46464a] whitespace-nowrap py-1 px-1 [&>*]:shrink-0">
+          <nav className="hidden lg:flex flex-1 min-w-0 flex-nowrap overflow-x-auto scrollbar-none gap-x-2 xl:gap-x-3 items-center justify-evenly text-[10px] xl:text-xs font-semibold tracking-normal text-[#46464a] whitespace-nowrap py-1 px-1 [&>*]:shrink-0 [&>*]:min-h-8 [&>*]:flex [&>*]:items-center [&>*]:justify-center">
             <Link
               to="/"
               className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
@@ -295,7 +295,7 @@ export const Header: React.FC<HeaderProps> = ({
         )}
 
         {/* Right Side Controls - Anchored & Overflow Proof */}
-        <div className="flex min-w-0 max-w-full flex-wrap gap-y-1 items-center justify-end space-x-1 sm:space-x-1.5 md:space-x-2 shrink-0">
+        <div className="flex min-w-0 max-w-full flex-wrap sm:flex-nowrap gap-1 sm:gap-1.5 md:gap-2 items-center justify-end shrink-0 [&>button]:h-8 [&>button]:w-8 [&>button]:p-1.5">
           {/* Search Toggle / Input */}
           {showSearchInput ? (
             <div className="relative flex items-center shrink-0">
@@ -331,7 +331,7 @@ export const Header: React.FC<HeaderProps> = ({
           )}
 
           {/* Multi-language Selector (EN, VI, DE, ES, ZH) */}
-          <LanguageSelector variant="header" />
+          <LanguageSelector variant="header" className="flex items-center [&>button]:h-8" />
 
           {/* Brand Typography Preset Switcher */}
           {onOpenFontSwitcher && (
@@ -359,7 +359,7 @@ export const Header: React.FC<HeaderProps> = ({
           )}
 
           {/* Notifications button with indicator dot */}
-          <div className="relative hidden sm:block">
+          <div className="relative hidden sm:flex sm:items-center">
             <button
               id="header-bell-btn"
               onClick={() => setShowNotification(!showNotification)}
