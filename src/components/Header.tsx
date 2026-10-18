@@ -197,7 +197,7 @@ export const Header: React.FC<HeaderProps> = ({
       )}
 
       {/* Main Bar */}
-      <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-7xl mx-auto'} flex items-center justify-between gap-2 sm:gap-4 lg:gap-6 w-full`}>
+      <div className={`px-3 sm:px-6 ${isMobileFrame ? 'py-2' : 'py-2.5 sm:py-3 max-w-7xl 2xl:max-w-[1536px] mx-auto'} grid grid-cols-[auto_minmax(0,1fr)] 2xl:grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-x-3 gap-y-2 sm:gap-x-4 w-full`}>
         {/* Left: Brand Logo (Anchored, never squished) */}
         <Link
           to="/"
@@ -209,7 +209,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Center: Desktop Navigation Links */}
         {!isMobileFrame && (
-          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-3 xl:space-x-6 text-xs xl:text-sm font-semibold tracking-wider text-[#46464a] whitespace-nowrap px-1 xl:px-2">
+          <nav className="hidden lg:flex order-3 col-span-2 2xl:order-2 2xl:col-span-1 min-w-0 flex-wrap gap-x-4 gap-y-2 items-center justify-center text-xs xl:text-sm font-semibold tracking-wider text-[#46464a] whitespace-nowrap px-1 xl:px-2">
             <Link
               to="/"
               className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
@@ -300,7 +300,7 @@ export const Header: React.FC<HeaderProps> = ({
         )}
 
         {/* Right Side Controls - Anchored & Overflow Proof */}
-        <div className="flex items-center space-x-1 sm:space-x-1.5 md:space-x-2 shrink-0">
+        <div className="flex order-2 2xl:order-3 min-w-0 max-w-full flex-wrap gap-y-1 items-center justify-end justify-self-end space-x-1 sm:space-x-1.5 md:space-x-2 shrink-0">
           {/* Search Toggle / Input */}
           {showSearchInput ? (
             <div className="relative flex items-center shrink-0">

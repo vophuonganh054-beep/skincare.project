@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import {
   X,
   User,
@@ -167,6 +168,18 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
       setSaveSuccessMsg('');
     }
   }, [user, isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.style.overflow = previous;
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
@@ -375,22 +388,22 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
     return order.status === orderStatusFilter;
   });
 
-  return (
-    <div className="fixed inset-0 z-50 overflow-hidden bg-black/60 backdrop-blur-xs flex justify-end">
-      <div className="fixed inset-0" onClick={onClose} />
+  return createPortal(
+    <div className={`account-overlay bg-black/60 backdrop-blur-xs ${user ? 'account-overlay--drawer' : ''}`}>
+      <div className="absolute inset-0" onClick={onClose} aria-hidden="true" />
 
-      <div className="relative w-full max-w-lg bg-[#fcf9f4] shadow-2xl h-full flex flex-col z-10">
+      <div role="dialog" aria-modal="true" aria-labelledby="alps-account-title" className="account-panel relative bg-[#fcf9f4] shadow-2xl flex flex-col z-10">
         {/* Header */}
-        <div className="p-4 sm:p-5 border-b border-[#202022]/10 flex items-center justify-between bg-white">
-          <div className="flex items-center space-x-2">
+        <div className="p-4 sm:p-5 border-b border-[#202022]/10 flex items-center justify-between gap-3 bg-white shrink-0">
+          <div className="flex items-center space-x-2 min-w-0">
             <span className="text-xs text-[#74584d]">✦</span>
-            <h3 className="font-serif text-lg font-normal text-[#1c1c19]">
+            <h3 id="alps-account-title" className="font-serif text-base sm:text-lg font-normal text-[#1c1c19] min-w-0">
               {user ? 'Tài Khoản Thành Viên ALPS' : 'Tài Khoản ALPS Pure Essence'}
             </h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 text-[#77767b] hover:text-[#1c1c19] rounded-full hover:bg-[#f0ede9] transition-colors"
+            className="p-1.5 text-[#77767b] hover:text-[#1c1c19] rounded-full hover:bg-[#f0ede9] transition-colors shrink-0"
             title="Đóng"
           >
             <X className="w-5 h-5" />
@@ -437,7 +450,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
         ) : null}
 
         {/* Body Container */}
-        <div className="flex-grow overflow-y-auto p-4 sm:p-5 space-y-4">
+        <div className="account-body flex-1 min-h-0 min-w-0 overflow-y-auto overflow-x-hidden p-3 sm:p-5 space-y-4">
           {saveSuccessMsg && (
             <div className="bg-[#8a9a86]/20 border border-[#8a9a86]/40 text-[#2f4a2b] px-4 py-2.5 rounded-2xl text-xs flex items-center space-x-2 animate-fadeIn">
               <CheckCircle2 className="w-4 h-4 shrink-0 text-[#3d5a39]" />
@@ -1476,6 +1489,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
