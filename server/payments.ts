@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { applicationDefault, cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { equalSecret, extractOrder, quote, validateTransaction } from './payment-core.ts';
-import firebaseConfig from '../firebase-applet-config.json';
+import firebaseConfig from '../firebase-applet-config.json' with { type: 'json' };
 
 export function registerPayments(app: Express, databaseOverride?: ReturnType<typeof getFirestore>) {
   const enabled = process.env.PAYMENTS_ENABLED === 'true';

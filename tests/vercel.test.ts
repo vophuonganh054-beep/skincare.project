@@ -1,6 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {spawnSync} from 'node:child_process';
+
+test('Vercel handler loads in native Node without a TypeScript loader', () => {
+  const result = spawnSync(process.execPath, [
+    '--experimental-strip-types', '--input-type=module', '-e',
+    "await import('./api/index.ts'); console.log('handler loaded')",
+  ], {
+    cwd: new URL('../', import.meta.url),
+    env: {...process.env, NODE_OPTIONS: '', VERCEL: '1', PAYMENTS_ENABLED: 'false', GEMINI_API_KEY: ''},
+    encoding: 'utf8', timeout: 30000,
+  });
+  assert.equal(result.status, 0, result.stderr || String(result.error));
+  assert.match(result.stdout, /handler loaded/);
+});
 
 test('Vercel handler loads with payments disabled and no Gemini credentials', async () => {
   process.env.VERCEL = '1';
