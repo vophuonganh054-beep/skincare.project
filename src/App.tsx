@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { PRODUCTS } from './data/products';
 import { INITIAL_ORDERS } from './data/initialOrders';
 import { Product, CartItem, ActiveTab, ViewMode, Order, UserProfile } from './types';
+import { NewProductPopup } from './components/NewProductPopup';
 import { Header } from './components/Header';
 import { HeroBanner } from './components/HeroBanner';
 import { RitualCallout } from './components/RitualCallout';
@@ -1007,6 +1008,11 @@ export default function App() {
           />
         </div>
       </div>
+
+      <NewProductPopup
+        enabled={route === 'home' && ![isCartOpen, isAccountOpen, isSupportOpen, isCheckoutOpen, isPoliciesOpen, isRitualModalOpen, isFontSwitcherOpen, isSkinQuizOpen, isBrandStoryOpen, isCheckoutSuccessOpen, !!selectedProduct].some(Boolean)}
+        onExplore={() => navigate('/uu-dai-20-10')}
+      />
 
       {/* Cart Drawer (Starts completely empty with elegant empty state) */}
       <CartDrawer
