@@ -1,7 +1,7 @@
 .alps-launch {
   position:fixed; inset:0; margin:auto; padding:32px 12px 8px; border:0;
   width:min(560px,calc(100vw - 24px)); max-width:none;
-  max-height:calc(100dvh - 24px); overflow:auto;
+  max-height:calc(100dvh - 24px); overflow:visible;
   background:transparent; color:#542b32;
 }
 .alps-launch::backdrop { background:#21171b9c; backdrop-filter:blur(4px); }
@@ -19,24 +19,14 @@
 }
 .alps-launch-image-link img {
   display:block; width:auto; height:auto; max-width:100%;
-  max-height:calc(100dvh - 80px); margin:0 auto;
+  max-height:calc(100dvh - 135px); margin:0 auto;
   object-fit:contain; filter:drop-shadow(0 16px 22px #37162233);
 }
 .alps-launch button:focus-visible { outline:2px solid #fff; outline-offset:4px; }
-/* Keep the original gift artwork; offer details are live text rather than the old all-shop poster claim. */
-.alps-launch-art { display:block; width:min(100%,clamp(90px,calc((100dvh - 265px)*1.122),430px)); aspect-ratio:1122/1000; overflow:hidden; margin:0 auto; }
-.alps-launch-art img { width:100%; max-width:none; max-height:none; }
-.alps-launch-offers { display:block; position:relative; width:min(360px,96%); margin:-2px auto 0; padding:15px 12px 12px; border:1px solid #d9c1a2; border-radius:23px; background:linear-gradient(120deg,#fff8ec,#f6e8d8); box-shadow:0 12px 32px #37162226; }
-.alps-launch-offers-title { display:block; font-size:11px; letter-spacing:.13em; font-weight:700; color:#294a3c; }
-.alps-launch-rates { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin:10px 0; }
-.alps-launch-rates>span { display:flex; flex-direction:column; align-items:center; gap:3px; color:#294a3c; font-size:11px; }
-.alps-launch-rates>span+span { border-left:1px solid #d9c1a2; }
-.alps-launch-rates strong { font-family:var(--font-serif-custom,serif); font-size:clamp(23px,6vw,34px); line-height:1.2; color:#ac5661; }
-.alps-launch-rates small { font-size:9px; font-weight:600; color:#78614f; }
-.alps-launch-terms { display:block; font-size:9px; color:#78614f; line-height:1.6; }
-.alps-launch-cta { display:block; width:max-content; margin:10px auto 0; border-radius:30px; background:#b9646e; color:white; padding:8px 25px; font-size:11px; font-weight:600; }
 @keyframes alps-ad-in {
   from { opacity:0; transform:translateY(18px) scale(.95); }
   to { opacity:1; transform:none; }
 }
 @media(prefers-reduced-motion:reduce) { .alps-launch[open] { animation:none; } }
+
+.alps-launch-note { max-width:480px; margin:7px auto 0; font-size:11px; line-height:1.6; text-align:center; color:#fff8ee; text-shadow:0 1px 4px #21171b; }

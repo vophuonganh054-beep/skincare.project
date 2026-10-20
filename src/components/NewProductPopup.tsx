@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import popupAd from '../assets/images/alps-voucher-popup.webp';
 import './NewProductPopup.css';
 
-const VISIT_KEY = 'alps_voucher_ad_2010_v4';
+const VISIT_KEY = 'alps_voucher_ad_2010_v5';
 
 export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onExplore: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -43,18 +43,9 @@ export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onEx
       <div className="alps-launch-ad">
         <button className="alps-launch-close" aria-label="Đóng quảng cáo" onClick={dismiss} autoFocus><X size={20} /></button>
         <button className="alps-launch-image-link" aria-label="Xem voucher ưu đãi ALPS" onClick={() => { dismiss(); onExplore(); }}>
-          <span className="alps-launch-art"><img src={popupAd} alt="Bộ quà tặng ALPS màu hồng" /></span>
-          <span className="alps-launch-offers">
-            <span className="alps-launch-offers-title">ƯU ĐÃI DÀNH CHO NÀNG</span>
-            <span className="alps-launch-rates">
-              <span><strong>20%</strong><span>Hàng lẻ</span><small>PHUNU20</small></span>
-              <span><strong>15%</strong><span>Combo</span><small>ALPS2010</small></span>
-              <span><strong>10%</strong><span>Thành viên</span><small>ALPS2025</small></span>
-            </span>
-            <span className="alps-launch-terms">Mỗi đơn một mã • Thành viên cần đăng nhập</span>
-            <span className="alps-launch-cta">XEM VOUCHER</span>
-          </span>
+          <img src={popupAd} alt="Ưu đãi ALPS giảm 20% hàng lẻ với PHUNU20. Nhấn để xem đầy đủ điều kiện voucher." />
         </button>
+        <p className="alps-launch-note">PHUNU20: giảm 20% hàng lẻ · ALPS2010: giảm 15% combo · ALPS2025: giảm 10% cho thành viên đăng nhập. Mỗi đơn dùng một mã.</p>
       </div>
     </dialog>, document.body
   );
