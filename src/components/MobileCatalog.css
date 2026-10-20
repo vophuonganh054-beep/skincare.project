@@ -12,9 +12,11 @@
   .alps-product-tile .alps-tile-bottom { margin-top:9px; padding-top:0; border-top:0; gap:0; }
   .alps-product-tile .alps-tile-price-row { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:0 4px; margin-bottom:8px; min-height:35px; align-content:flex-start; }
   .alps-product-tile .alps-tile-price-row>div { min-width:0; }
+  .alps-product-tile .alps-tile-price-row>div { display:flex; flex-wrap:wrap; align-items:baseline; gap:0 4px; width:100%; }
+  .alps-product-tile .alps-tile-body>.alps-tile-bottom { margin-top:6px; }
   .alps-product-tile .alps-tile-current-price { font-size:14px; font-weight:700; line-height:20px; white-space:nowrap; }
-  .alps-product-tile .alps-tile-old-price { font-size:10px; font-weight:400; line-height:15px; margin-left:0; white-space:nowrap; }
-  .alps-product-tile .alps-tile-price-row>div>.alps-tile-old-price { margin-left:4px; }
+  .alps-product-tile .alps-tile-old-price { font-size:9.5px; font-weight:400; line-height:15px; margin-left:0; white-space:nowrap; }
+  .alps-product-tile .alps-tile-price-row>div>.alps-tile-old-price { margin-left:0; }
   .alps-product-tile .alps-tile-voucher { font-size:9px; line-height:14px; margin:0; letter-spacing:0; }
   .alps-product-tile .alps-tile-actions { display:grid; grid-template-columns:36px minmax(0,1fr); gap:6px; width:100%; padding:0; }
   .alps-product-tile .alps-tile-actions>button { height:36px; min-width:0; width:100%; margin:0; padding:0 5px; border-radius:9px; font-size:10px; line-height:1.2; letter-spacing:0; box-shadow:none; }
