@@ -15,6 +15,7 @@ interface HeroBannerProps {
   onSelectProduct?: (product: Product) => void;
   onOpenSkinQuiz?: () => void;
   isMobileFrame?: boolean;
+  motionPaused?: boolean;
 }
 
 interface BannerSlide {
@@ -58,6 +59,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   onSelectProduct,
   onOpenSkinQuiz,
   isMobileFrame = false,
+  motionPaused = false,
 }) => {
   const { language } = useLanguage();
   const heroData = HERO_I18N[language] || HERO_I18N.vi;
@@ -75,12 +77,12 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 
   // Auto slide rotation every 5.5 seconds unless user is hovering/interacting
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || motionPaused) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, [isPaused, slides.length]);
+  }, [isPaused, motionPaused, slides.length]);
 
   const handlePrev = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
@@ -154,7 +156,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = s.fallbackImage;
                 }}
-                className="w-full h-full object-cover object-center scale-105"
+                className={`w-full h-full object-cover object-center scale-105${idx === currentSlide ? ' alps-hero-active-photo' : ''}`}
               />
               {/* High contrast gradient overlays */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" />

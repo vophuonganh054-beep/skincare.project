@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { SensoryEditorial } from '../components/SensoryEditorial';
 import { BeautyRibbon, GiftEditorial } from '../components/GiftEditorial';
 import '../components/ArtfulStorefront.css';
 import { HeroBanner } from '../components/HeroBanner';
@@ -11,7 +12,7 @@ import { Product } from '../types';
 import { CampaignCombo } from '../data/campaign2010';
 import { PRODUCTS } from '../data/products';
 import { useRouter, Link } from '../context/RouterContext';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Pause, Play } from 'lucide-react';
 
 interface HomePageProps {
   onSelectProduct: (product: Product) => void;
@@ -44,6 +45,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   const { navigate } = useRouter();
   const storefront = useRef<HTMLDivElement>(null);
+  const [motionPaused, setMotionPaused] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const change = () => setMotionPaused(preference.matches);
+    preference.addEventListener('change', change);
+    return () => preference.removeEventListener('change', change);
+  }, []);
 
   useEffect(() => {
     const root = storefront.current;
@@ -56,24 +65,55 @@ export const HomePage: React.FC<HomePageProps> = ({
         }
       });
     }, { threshold: 0.06 });
+    root.querySelectorAll('[id^="product-card-"]').forEach((card, index) => {
+      card.setAttribute('data-art-reveal', '');
+      (card as HTMLElement).style.setProperty('--art-delay', `${(index % 3) * 90}ms`);
+    });
     root.querySelectorAll('[data-art-reveal]').forEach(section => observer.observe(section));
     root.classList.add('art-ready');
     return () => { observer.disconnect(); root.classList.remove('art-ready'); };
   }, []);
+
+  useEffect(() => {
+    const root = storefront.current;
+    if (!root || motionPaused) return;
+    const images = Array.from(root.querySelectorAll<HTMLElement>('[data-art-parallax]'));
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      images.forEach(image => {
+        const rect = image.parentElement!.getBoundingClientRect();
+        if (rect.bottom > 0 && rect.top < window.innerHeight) {
+          const offset = Math.max(-20, Math.min(20, (window.innerHeight / 2 - rect.top - rect.height / 2) * 0.06));
+          image.style.setProperty('--art-offset', `${offset}px`);
+        }
+      });
+    };
+    const scroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    window.addEventListener('scroll', scroll, { passive: true });
+    update();
+    return () => {
+      window.removeEventListener('scroll', scroll);
+      cancelAnimationFrame(frame);
+      images.forEach(image => image.style.removeProperty('--art-offset'));
+    };
+  }, [motionPaused]);
 
   const handleExploreProducts = () => {
     navigate('/san-pham');
   };
 
   return (
-    <div className="w-full alps-art-store" ref={storefront}>
+    <div className={`w-full alps-art-store${motionPaused ? ' art-motion-paused' : ''}`} ref={storefront}>
       {/* Hero Banner */}
       <HeroBanner
         onExploreClick={handleExploreProducts}
         onOpenSkinQuiz={onOpenSkinQuiz}
         isMobileFrame={false}
+        motionPaused={motionPaused}
       />
 
+      <div className="alps-motion-toolbar"><span>THE ALPS EDIT / VẺ ĐẸP CỦA NHỮNG KHOẢNG LẶNG</span><button onClick={() => setMotionPaused(value => !value)} aria-pressed={motionPaused}>{motionPaused ? <Play size={13} /> : <Pause size={13} />}{motionPaused ? 'Bật hiệu ứng' : 'Tạm dừng hiệu ứng'}</button></div>
       <BeautyRibbon />
       <GiftEditorial />
 
@@ -82,6 +122,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         onOpenRitual={onOpenRitualModal}
         isMobileFrame={false}
       />
+
+      <SensoryEditorial onOpenSkinQuiz={onOpenSkinQuiz} />
 
       {/* Featured Catalog Section */}
       <div id="desktop-catalog" className="relative" data-art-reveal>

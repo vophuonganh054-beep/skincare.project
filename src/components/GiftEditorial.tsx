@@ -17,7 +17,7 @@ export function GiftEditorial() {
       <Link to="/uu-dai-20-10" className="alps-gift-visual" aria-label="Xem bộ quà tặng và voucher ALPS">
         <span className="alps-gift-orbit" aria-hidden="true" />
         <span className="alps-gift-watermark" aria-hidden="true">for her.</span>
-        <img src={giftSet} alt="Hộp quà ALPS màu hồng với bộ sản phẩm chăm sóc da" loading="lazy" />
+        <div className="alps-gift-float"><img src={giftSet} alt="Hộp quà ALPS màu hồng với bộ sản phẩm chăm sóc da" loading="lazy" /></div>
         <span className="alps-gift-seal"><span>DÀNH CHO</span><em>nàng</em><span>20 / 10</span></span>
       </Link>
     </section>

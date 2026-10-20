@@ -25,14 +25,14 @@
 .alps-gift-orbit { position:absolute; width:78%; aspect-ratio:1; border:1px solid #b8977c40; border-radius:50%; transform:translateY(10px); }
 .alps-gift-orbit::after { content:''; position:absolute; inset:17px; border:1px solid #b8977c20; border-radius:50%; }
 .alps-gift-watermark { position:absolute; top:24px; left:15%; font-family:var(--font-serif-custom,serif); font-style:italic; font-size:clamp(60px,7vw,98px); color:#cdb5a63b; z-index:-1; }
-.alps-gift-visual>img { width:102%; max-width:none; transform:rotate(-7deg); filter:drop-shadow(0 22px 15px #945c4e28); transition:transform .8s cubic-bezier(.2,.8,.2,1); }
-.alps-gift-visual:hover>img { transform:translateY(-8px) rotate(-4deg); }
+.alps-gift-float>img { width:102%; max-width:none; transform:rotate(-7deg); filter:drop-shadow(0 22px 15px #945c4e28); transition:transform .8s cubic-bezier(.2,.8,.2,1); }
+.alps-gift-visual:hover .alps-gift-float>img { transform:translateY(-8px) rotate(-4deg); }
 .alps-gift-seal { position:absolute; right:22px; bottom:26px; display:flex; flex-direction:column; justify-content:center; align-items:center; width:88px; height:88px; border-radius:50%; background:#3b4b3e; color:#f6f1e4; box-shadow:0 0 0 5px #3b4b3e13; transform:rotate(9deg); }
 .alps-gift-seal>span { font-size:7px; letter-spacing:.12em; }
 .alps-gift-seal>em { font-family:var(--font-serif-custom,serif); font-size:25px; line-height:1.5; }
 .alps-art-store #desktop-catalog { padding-top:16px; background:linear-gradient(#f5f2e9a0,#fcf9f4 32%); }
-.alps-art-store [id^='product-card-'] { transition:transform .45s,box-shadow .45s; border-color:#ddd7ca80; box-shadow:0 4px 18px #4d4b3c06; }
-.alps-art-store [id^='product-card-']:hover { transform:translateY(-7px); box-shadow:0 16px 35px #4d4b3c12; }
+.alps-art-store [id^='product-card-'] { transition:transform .45s,translate .45s,box-shadow .45s; border-color:#ddd7ca80; box-shadow:0 4px 18px #4d4b3c06; }
+.alps-art-store [id^='product-card-']:hover { translate:0 -7px; box-shadow:0 16px 35px #4d4b3c12; }
 .alps-art-story { background:#edf0e8; padding-block:80px; }
 .alps-art-story .alps-story-photo { border-radius:46% 46% 6px 6px; aspect-ratio:4/4.5; box-shadow:none; border:1px solid #d6d8cc; }
 .alps-art-story .alps-story-bloom { position:absolute; width:30%; aspect-ratio:1; object-fit:cover; border-radius:50%; right:-3%; top:8%; border:7px solid #edf0e8; box-shadow:0 10px 25px #25351c10; }
@@ -40,6 +40,70 @@
 .alps-art-store.art-ready [data-art-reveal] { opacity:0; transform:translateY(25px); transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1); }
 .alps-art-store.art-ready [data-art-reveal].is-visible { opacity:1; transform:none; }
 @keyframes alps-ribbon-drift { to { transform:translateX(-50%); } }
+.alps-motion-toolbar { max-width:1232px; margin:18px auto -12px; display:flex; align-items:center; justify-content:space-between; gap:16px; padding-inline:8px; color:#817568; }
+.alps-motion-toolbar>span { font-size:9px; letter-spacing:.15em; }
+.alps-motion-toolbar button { display:inline-flex; align-items:center; gap:6px; font-size:10px; border:1px solid #b9b0a3; border-radius:30px; padding:7px 10px; flex-shrink:0; }
+.alps-motion-toolbar button:hover { background:#ede8de; }
+.alps-art-store a:focus-visible,.alps-motion-toolbar button:focus-visible,.alps-sensory-quiz:focus-visible { outline:2px solid #58654d; outline-offset:5px; }
+.alps-gift-float { width:100%; animation:alps-gift-levitate 7s ease-in-out infinite; animation-play-state:paused; }
+.alps-gift-float>img { display:block; }
+.alps-gift-editorial.is-visible .alps-gift-float { animation-play-state:running; }
+.alps-gift-orbit { animation:alps-orbit-breathe 8s ease-in-out infinite; }
+.alps-gift-orbit::before { content:''; position:absolute; width:8px; height:8px; left:14%; top:14%; border-radius:50%; background:#bba18b; box-shadow:0 0 0 7px #bba18b10; }
+.alps-art-store #hero-banner-slider .alps-hero-active-photo { animation:alps-cinematic-drift 6s ease-out both; }
+.alps-gift-copy>* { transition:opacity .8s,translate .8s; }
+.art-ready .alps-gift-editorial:not(.is-visible) .alps-gift-copy>* { opacity:0; translate:0 18px; }
+.alps-gift-copy>:nth-child(2) { transition-delay:.1s; }
+.alps-gift-copy>:nth-child(3) { transition-delay:.2s; }
+.alps-gift-copy>:nth-child(4) { transition-delay:.3s; }
+.alps-gift-copy>:nth-child(5) { transition-delay:.4s; }
+.alps-art-store.art-ready [data-art-reveal] { transition-delay:var(--art-delay,0ms); }
+.alps-sensory { max-width:1232px; margin:100px auto 110px; padding:35px 52px; display:grid; grid-template-columns:1fr 1fr; gap:70px; align-items:center; position:relative; }
+.alps-sensory-copy { position:relative; z-index:1; }
+.alps-sensory h2 { color:#35483b; font-family:var(--font-serif-custom,serif); font-size:clamp(46px,6.4vw,84px); font-weight:400; line-height:1.13; letter-spacing:-.055em; margin:32px 0 28px; }
+.alps-sensory h2 em { color:#967965; font-weight:400; }
+.alps-sensory-description { max-width:340px; font-size:14px; line-height:1.9; color:#796d62; margin-bottom:27px; }
+.alps-sensory-quiz { display:flex; align-items:center; gap:8px; font-size:11px; color:#847363; margin-top:20px; text-align:left; }
+.alps-sensory-quiz:hover { color:#35483b; }
+.alps-sensory-index { display:flex; align-items:center; gap:32px; margin-top:50px; color:#968071; font-size:9px; letter-spacing:.18em; }
+.alps-sensory-index svg { animation:alps-arrow-breathe 2.8s ease-in-out infinite; }
+.alps-sensory-visual { position:relative; min-width:0; padding:30px 0; }
+.alps-sensory-photo { display:block; overflow:hidden; border-radius:180px 180px 8px 8px; aspect-ratio:4/5; position:relative; background:#ded3c4; }
+.alps-sensory-photo>img { width:100%; height:100%; object-fit:cover; transform:translateY(var(--art-offset,0px)) scale(1.1); }
+.alps-sensory-caption { position:absolute; inset:auto 18px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; border-radius:50px; padding:15px 18px; background:#fcf9f4ed; color:#35483b; font-size:10px; letter-spacing:.08em; }
+.alps-sensory-caption svg { transition:transform .4s; }
+.alps-sensory-photo:hover .alps-sensory-caption svg { transform:translate(3px,-3px); }
+.alps-sensory-halo { position:absolute; inset:0 -22px 0 22px; border:1px solid #c9beac80; border-radius:50% 50% 4px 4px; transform:rotate(8deg); pointer-events:none; }
+.alps-sensory-flower { position:absolute; width:32%; left:-13%; top:4%; transform:rotate(-11deg); }
+.alps-sensory-flower>img { width:100%; aspect-ratio:1; object-fit:cover; border-radius:50%; border:7px solid #fcf9f4; box-shadow:0 12px 25px #66594416; }
+.alps-sensory-flower>span { display:block; text-align:center; font-family:var(--font-serif-custom,serif); font-size:12px; font-style:italic; margin-top:8px; color:#847363; }
+.alps-sensory-signature { position:absolute; bottom:-12px; right:-12px; font-family:var(--font-serif-custom,serif); font-style:italic; font-size:38px; color:#8f7960; transform:rotate(-7deg); pointer-events:none; }
+.alps-sensory.is-visible .alps-sensory-flower { animation:alps-flower-sway 9s ease-in-out infinite; }
+.alps-art-story .alps-story-bloom { transition:transform 1s; }
+.alps-art-story:hover .alps-story-bloom { transform:rotate(12deg); }
+.alps-art-store.art-motion-paused *, .alps-art-store.art-motion-paused *::before,.alps-art-store.art-motion-paused *::after { animation-play-state:paused!important; }
+.alps-art-store.art-motion-paused [data-art-parallax] { transform:scale(1.1); }
+.art-motion-paused.art-ready [data-art-reveal],.art-motion-paused .alps-gift-copy>* { opacity:1!important; transform:none!important; translate:none!important; transition:none!important; }
+@keyframes alps-gift-levitate { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+@keyframes alps-orbit-breathe { 0%,100% { transform:translateY(10px) scale(1); opacity:.65; } 50% { transform:translateY(10px) scale(1.04); opacity:1; } }
+@keyframes alps-cinematic-drift { from { transform:scale(1.02); } to { transform:scale(1.09); } }
+@keyframes alps-flower-sway { 0%,100% { transform:rotate(-11deg) translateY(0); } 50% { transform:rotate(-6deg) translateY(-6px); } }
+@keyframes alps-arrow-breathe { 0%,100% { transform:translateY(0); } 50% { transform:translateY(7px); } }
+@media(max-width:1264px) { .alps-sensory { margin-inline:24px; padding-inline:28px; gap:50px; } .alps-motion-toolbar { margin-inline:24px; } }
+@media(max-width:700px) {
+ .alps-motion-toolbar { margin:14px 16px -6px; padding:0; }
+ .alps-motion-toolbar>span { font-size:8px; max-width:160px; line-height:1.6; }
+ .alps-motion-toolbar button { font-size:9px; }
+ .alps-sensory { grid-template-columns:1fr; margin:58px 24px 65px; padding:0 8px; gap:35px; }
+ .alps-sensory h2 { font-size:58px; margin:24px 0; }
+ .alps-sensory-description { font-size:13px; }
+ .alps-sensory-index { margin-top:28px; }
+ .alps-sensory-visual { width:88%; margin-left:auto; }
+ .alps-sensory-flower { width:36%; left:-16%; }
+ .alps-sensory-signature { font-size:29px; right:-4px; bottom:0; }
+ .alps-sensory-halo { right:-10px; left:10px; }
+ .alps-gift-float>img { margin-inline:auto; }
+}
 @media(max-width:700px) {
  .alps-art-store #hero-banner-slider h2 { font-size:27px; }
  .alps-art-store #hero-banner-slider::after { inset:8px; }
@@ -52,7 +116,7 @@
  .alps-gift-copy>p { font-size:13px; }
  .alps-gift-footnote { margin-top:22px; }
  .alps-gift-visual { min-height:300px; padding:15px 12px 25px; }
- .alps-gift-visual>img { width:100%; max-width:430px; }
+ .alps-gift-float>img { width:100%; max-width:430px; }
  .alps-gift-watermark { top:-10px; }
  .alps-gift-seal { width:70px; height:70px; right:17px; bottom:22px; }
  .alps-gift-seal>em { font-size:21px; }
@@ -62,7 +126,10 @@
 }
 @media(min-width:701px) and (max-width:1264px) { .alps-gift-editorial { margin-inline:24px; } }
 @media(prefers-reduced-motion:reduce) {
+ .alps-art-store *,.alps-art-store *::before,.alps-art-store *::after { animation:none!important; scroll-behavior:auto!important; }
+ .alps-sensory-photo>img { transform:scale(1.1); }
+ .alps-gift-copy>* { opacity:1!important; translate:none!important; transition:none; }
  .alps-ribbon-track { animation:none; }
  .alps-art-store.art-ready [data-art-reveal] { opacity:1; transform:none; transition:none; }
- .alps-gift-visual>img,.alps-art-store [id^='product-card-'],.alps-editorial-link>span { transition:none; }
+ .alps-gift-float>img,.alps-art-store [id^='product-card-'],.alps-editorial-link>span { transition:none; }
 }
