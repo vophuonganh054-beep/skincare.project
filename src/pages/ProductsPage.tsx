@@ -106,7 +106,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
       </div>
 
       {/* Hero Banner Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-6">
+      <section className="alps-catalog-intro max-w-7xl mx-auto px-4 sm:px-6 pt-8 pb-6">
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#f4ede4] border border-[#fed8c9] text-[#74584d] text-xs font-semibold tracking-wider uppercase">
             <Sparkles className="w-3.5 h-3.5" />
@@ -115,14 +115,14 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
           <h1 className="text-2xl sm:text-4xl font-serif text-[#1c1c19] tracking-tight">
             Bộ Sưu Tập Dược Mỹ Phẩm Tế Bào Gốc Sông Băng
           </h1>
-          <p className="text-xs sm:text-sm text-[#5a595e] font-light leading-relaxed">
+          <p className="alps-tile-secondary text-xs sm:text-sm text-[#5a595e] font-light leading-relaxed">
             Tuyển chọn 5 tuyệt tác sinh học phân tử chứa chiết xuất hoa nhung tuyết Edelweiss và nước khoáng sông băng Thụy Sĩ.
             Được bào chế chuẩn y khoa, thuần chay 100%, bảo vệ trọn vẹn rào cản biểu bì làn da Châu Á.
           </p>
         </div>
 
         {/* Filter Pills and Search/Sort Bar */}
-        <div className="mt-8 space-y-4">
+        <div className="alps-catalog-filters mt-8 space-y-4">
           {/* Category Tabs */}
           <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 py-1">
             {categories.map((cat) => (
@@ -196,19 +196,19 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="alps-product-grid grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-8">
             {filteredProducts.map((product) => {
               const productUrl = getProductPath(product);
 
               return (
                 <div
                   key={product.id}
-                  className="bg-white rounded-2xl border border-[#202022]/6 overflow-hidden flex flex-col hover:shadow-xl hover:border-[#fed8c9] transition-all duration-300 group"
+                  className="alps-product-tile bg-white rounded-2xl border border-[#202022]/6 overflow-hidden flex flex-col hover:shadow-xl hover:border-[#fed8c9] transition-all duration-300 group"
                 >
                   {/* Image Container with clickable link */}
                   <Link
                     to={productUrl}
-                    className="relative block aspect-[4/4] bg-[#f9f6f0] overflow-hidden cursor-pointer"
+                    className="alps-tile-photo relative block aspect-[4/4] bg-[#f9f6f0] overflow-hidden cursor-pointer"
                   >
                     <SafeImage
                       src={product.image}
@@ -218,7 +218,7 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     />
 
                     {/* Step Badge */}
-                    <div className="absolute top-3 left-3 bg-[#202022]/85 backdrop-blur-md text-[#fed8c9] text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-full flex items-center space-x-1">
+                    <div className="alps-tile-image-label absolute top-3 left-3 bg-[#202022]/85 backdrop-blur-md text-[#fed8c9] text-[10px] tracking-wider uppercase font-semibold px-2.5 py-1 rounded-full flex items-center space-x-1">
                       <span>Bước {product.routineStepNumber || 1}</span>
                       <span className="text-white/60">•</span>
                       <span className="text-white">{product.categoryLabel}</span>
@@ -226,13 +226,13 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
 
                     {/* Tag badge */}
                     {product.tag && (
-                      <div className="absolute top-3 right-3 bg-[#e85338] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
+                      <div className="alps-tile-image-label absolute top-3 right-3 bg-[#e85338] text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">
                         {product.tag}
                       </div>
                     )}
 
                     {/* Quick view overlay button */}
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <div className="alps-tile-image-label absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
                       <span className="bg-white/95 text-[#1c1c19] text-xs font-semibold px-4 py-2 rounded-full shadow-lg flex items-center space-x-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
                         <Eye className="w-3.5 h-3.5 text-[#74584d]" />
                         <span>Xem chi tiết</span>
@@ -241,10 +241,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   </Link>
 
                   {/* Product Info */}
-                  <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
+                  <div className="alps-tile-body p-5 flex-1 flex flex-col justify-between space-y-4">
                     <div>
                       {/* Brand tag & Sold count */}
-                      <div className="flex items-center justify-between text-xs text-[#77767b] mb-2">
+                      <div className="alps-tile-secondary flex items-center justify-between text-xs text-[#77767b] mb-2">
                         <span className="text-[11px] uppercase tracking-wider text-[#74584d] font-bold bg-[#f7f2ee] px-2.5 py-0.5 rounded-full border border-[#74584d]/15">
                           ALPS • Pure Essence
                         </span>
@@ -254,20 +254,20 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                       {/* Product Name with Link */}
                       <Link
                         to={productUrl}
-                        className="block font-serif text-base sm:text-lg font-semibold text-[#1c1c19] tracking-tight group-hover:text-[#74584d] transition-colors text-pretty leading-snug"
+                        className="alps-tile-title block font-serif text-base sm:text-lg font-semibold text-[#1c1c19] tracking-tight group-hover:text-[#74584d] transition-colors text-pretty leading-snug"
                       >
                         {product.name}
                       </Link>
 
-                      <p className="text-xs text-[#74584d] font-semibold mt-1">{product.capacity}</p>
+                      <p className="alps-tile-capacity text-xs text-[#74584d] font-semibold mt-1">{product.capacity}</p>
 
-                      <p className="text-xs sm:text-sm text-[#5a595e] font-normal line-clamp-2 mt-2 leading-relaxed">
+                      <p className="alps-tile-secondary text-xs sm:text-sm text-[#5a595e] font-normal line-clamp-2 mt-2 leading-relaxed">
                         {product.description}
                       </p>
 
                       {/* Key ingredient bullet */}
                       {product.keyIngredients && product.keyIngredients[0] && (
-                        <div className="mt-2.5 text-xs text-[#77767b] flex items-start space-x-1.5">
+                        <div className="alps-tile-secondary mt-2.5 text-xs text-[#77767b] flex items-start space-x-1.5">
                           <CheckCircle2 className="w-3.5 h-3.5 text-[#74584d] shrink-0 mt-0.5" />
                           <span className="line-clamp-1">{product.keyIngredients[0]}</span>
                         </div>
@@ -275,37 +275,38 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                     </div>
 
                     {/* Price and Action Buttons */}
-                    <div className="pt-3 border-t border-[#202022]/5">
-                      <div className="flex items-baseline justify-between gap-2 mb-3">
+                    <div className="alps-tile-bottom pt-3 border-t border-[#202022]/5">
+                      <div className="alps-tile-price-row flex items-baseline justify-between gap-2 mb-3">
                         <div>
-                          <span className="font-serif text-base sm:text-lg font-bold text-[#1c1c19] tabular-nums">
+                          <span className="alps-tile-current-price font-serif text-base sm:text-lg font-bold text-[#1c1c19] tabular-nums">
                             {(product.promoPrice ?? product.price).toLocaleString('vi-VN')}₫
                           </span>
                           {product.originalPrice && (
-                            <span className="text-xs sm:text-sm text-[#77767b] line-through ml-2 tabular-nums">
+                            <span className="alps-tile-old-price text-xs sm:text-sm text-[#77767b] line-through ml-2 tabular-nums">
                               {product.originalPrice.toLocaleString('vi-VN')}₫
                             </span>
                           )}
-                    {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">Sau mã {product.promoCode}</span>}
+                    {product.promoCode && <span className="alps-tile-voucher block w-full text-[10px] text-[#74584d] font-medium mt-1">Sau mã {product.promoCode}</span>}
                         </div>
                         {product.originalPrice && (
-                          <span className="text-xs font-bold text-[#e85338] bg-[#feeceb] px-2.5 py-0.5 rounded-full">
+                          <span className="alps-tile-secondary text-xs font-bold text-[#e85338] bg-[#feeceb] px-2.5 py-0.5 rounded-full">
                             -{Math.round(((product.originalPrice - (product.promoPrice ?? product.price)) / product.originalPrice) * 100)}%
                           </span>
                         )}
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2.5">
+                      <div className="alps-tile-actions grid grid-cols-2 gap-2.5">
                         <button
+                          aria-label={`Thêm vào giỏ: ${product.name}`}
                           onClick={(e) => onAddToCart(product, 1, e)}
-                          className="w-full py-3 px-2 bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+                          className="alps-tile-add w-full py-3 px-2 bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
                         >
                           <ShoppingBag className="w-4 h-4" />
                           <span>Thêm vào giỏ</span>
                         </button>
                         <button
                           onClick={(e) => onBuyNow(product, 1, e)}
-                          className="w-full py-3 px-2 bg-[#202022] hover:bg-[#74584d] text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+                          className="alps-tile-buy w-full py-3 px-2 bg-[#202022] hover:bg-[#74584d] text-white text-xs sm:text-sm font-semibold rounded-xl flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
                         >
                           <span>Mua ngay</span>
                           <ArrowRight className="w-3.5 h-3.5" />

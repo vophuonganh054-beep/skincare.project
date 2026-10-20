@@ -1,3 +1,4 @@
+import './components/MobileCatalog.css';
 import { createComboProduct } from './data/cartProducts';
 import React, { useState, useEffect, useRef } from 'react';
 import { PRODUCTS } from './data/products';

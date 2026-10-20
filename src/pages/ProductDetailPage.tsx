@@ -485,7 +485,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div className="alps-related-grid grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-6">
           {relatedProducts.map((rel) => (
             <Link
               key={rel.id}
