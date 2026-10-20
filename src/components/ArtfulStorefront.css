@@ -36,7 +36,7 @@
 .alps-art-story { background:#edf0e8; padding-block:80px; }
 .alps-art-story .alps-story-photo { border-radius:46% 46% 6px 6px; aspect-ratio:4/4.5; box-shadow:none; border:1px solid #d6d8cc; }
 .alps-art-story .alps-story-bloom { position:absolute; width:30%; aspect-ratio:1; object-fit:cover; border-radius:50%; right:-3%; top:8%; border:7px solid #edf0e8; box-shadow:0 10px 25px #25351c10; }
-.alps-art-story .alps-story-word { position:absolute; left:4%; top:10%; font-family:var(--font-serif-custom,serif); font-style:italic; color:#fff9e8; font-size:42px; line-height:1.1; pointer-events:none; text-shadow:0 2px 12px #0003; }
+.alps-art-story .alps-story-word { position:absolute; left:22%; top:22%; font-family:var(--font-serif-custom,serif); font-style:italic; color:#fff9e8; font-size:42px; line-height:1.1; pointer-events:none; text-shadow:0 2px 12px #0003; }
 .alps-art-store.art-ready [data-art-reveal] { opacity:0; transform:translateY(25px); transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1); }
 .alps-art-store.art-ready [data-art-reveal].is-visible { opacity:1; transform:none; }
 @keyframes alps-ribbon-drift { to { transform:translateX(-50%); } }
