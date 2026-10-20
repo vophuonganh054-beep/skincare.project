@@ -18,17 +18,18 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
   ];
 
   return (
-    <section className="py-14 sm:py-20 bg-[#faf8f5] text-[#1c1c19] border-t border-[#ebe6df] relative overflow-hidden">
+    <section className="alps-art-story py-14 sm:py-20 text-[#1c1c19] border-t border-[#ebe6df] relative overflow-hidden" data-art-reveal>
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left: Imagery with quiet luxury frame */}
           <div className="lg:col-span-6 relative">
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-[16/11] bg-[#202022] shadow-xl border border-[#202022]/10 group">
+            <div className="alps-story-photo relative overflow-hidden bg-[#202022] group">
               <img
                 src={originStreamImg}
                 alt="Alps Pure Essence Brand Heritage"
                 className="w-full h-full object-cover opacity-90 group-hover:scale-103 transition-transform duration-700 ease-out"
               />
+              <span className="alps-story-word" aria-hidden="true">Pure,<br />by nature.</span>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-5 sm:p-7">
                 <div className="text-white space-y-1">
                   <span className="text-[10px] sm:text-xs font-semibold tracking-widest text-[#fed8c9] uppercase block">
@@ -40,6 +41,8 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
                 </div>
               </div>
             </div>
+
+            <img className="alps-story-bloom" src={edelweissImg} alt="Hoa tuyết Edelweiss" loading="lazy" />
 
             {/* Overlapping small accent badge */}
             <div className="hidden sm:flex absolute -bottom-5 -right-5 bg-white p-3.5 rounded-2xl border border-[#202022]/10 shadow-lg items-center space-x-3">

@@ -157,8 +157,8 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                 className="w-full h-full object-cover object-center scale-105"
               />
               {/* High contrast gradient overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/55 to-black/30" />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent hidden sm:block" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/10" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/15 to-transparent hidden sm:block" />
             </div>
           ))}
         </div>

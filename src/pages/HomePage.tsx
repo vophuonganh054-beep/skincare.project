@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { BeautyRibbon, GiftEditorial } from '../components/GiftEditorial';
+import '../components/ArtfulStorefront.css';
 import { HeroBanner } from '../components/HeroBanner';
 import { WomenDayCampaignSection } from '../components/WomenDayCampaignSection';
 import { RitualCallout } from '../components/RitualCallout';
@@ -41,13 +43,30 @@ export const HomePage: React.FC<HomePageProps> = ({
   searchQuery,
 }) => {
   const { navigate } = useRouter();
+  const storefront = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = storefront.current;
+    if (!root || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06 });
+    root.querySelectorAll('[data-art-reveal]').forEach(section => observer.observe(section));
+    root.classList.add('art-ready');
+    return () => { observer.disconnect(); root.classList.remove('art-ready'); };
+  }, []);
 
   const handleExploreProducts = () => {
     navigate('/san-pham');
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full alps-art-store" ref={storefront}>
       {/* Hero Banner */}
       <HeroBanner
         onExploreClick={handleExploreProducts}
@@ -55,19 +74,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         isMobileFrame={false}
       />
 
-      {/* CHIẾN DỊCH TRI ÂN 20/10 NGÀY PHỤ NỮ VIỆT NAM */}
-      <div className="bg-[#f9f4ec] border-y border-[#e8ded1] px-4 py-7 sm:py-9">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold tracking-wider text-[#8b5545]">DÀNH TẶNG NÀNG • 20/10</p>
-            <h2 className="font-serif text-2xl mt-1">Voucher &amp; combo quà tặng ALPS</h2>
-            <p className="text-sm text-[#74584d] mt-2">Nhập PHUNU20 giảm 20% • Tặng hộp quà khi mua combo.</p>
-          </div>
-          <Link to="/uu-dai-20-10" className="inline-flex items-center gap-2 shrink-0 rounded-full bg-[#74584d] px-6 py-3 text-white text-xs font-semibold">
-            Khám phá ưu đãi 20/10 <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </div>
+      <BeautyRibbon />
+      <GiftEditorial />
 
       {/* 5-Step Ritual Callout */}
       <RitualCallout
@@ -76,7 +84,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       />
 
       {/* Featured Catalog Section */}
-      <div id="desktop-catalog" className="relative">
+      <div id="desktop-catalog" className="relative" data-art-reveal>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#202022]/5 pb-4">
           <div>
             <div className="flex items-center space-x-2 text-[11px] uppercase tracking-widest text-[#74584d] font-semibold">
