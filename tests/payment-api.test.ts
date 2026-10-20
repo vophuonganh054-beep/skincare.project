@@ -88,3 +88,33 @@ test('disabled payments reject webhooks even with a matching secret', async () =
     assert.equal(response.status, 503);
   } finally { server.close(); }
 });
+
+test('member code requires verified identity; category rules and gifts are enforced by HTTP', async () => {
+  process.env.PAYMENTS_ENABLED = 'true';
+  process.env.SEPAY_ACCOUNT_NUMBER = '0772770134';
+  process.env.SEPAY_ACCOUNT_NAME = 'TEST';
+  process.env.SEPAY_WEBHOOK_TOKEN = 'test-webhook-key';
+  const storage = store();
+  const app = express(); app.use(express.json());
+  registerPayments(app, storage.database as any, async token => {
+    if (token === 'valid-member') return {uid: 'member-123'};
+    if (token === 'anonymous') return {uid: 'guest', firebase: {sign_in_provider: 'anonymous'}};
+    throw new Error('Invalid token');
+  });
+  const server = app.listen(0, '127.0.0.1');
+  await new Promise<void>(resolve => server.once('listening', resolve));
+  const url = 'http://127.0.0.1:' + (server.address() as any).port + '/api/sepay/initiate';
+  const body = {orderNumber: 'ALPSAAAAAAAAAAAAAAAAAAAAAAAA', items: [{productId: 'combo-serum-kem-duong', quantity: 1}], carrierId: 'ghtk', promoCode: 'ALPS2025', amount: 756000, isMember: true};
+  const post = (data: any, token = '') => fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-Payment-Token': 'a'.repeat(64), ...(token ? {Authorization: 'Bearer ' + token} : {})}, body: JSON.stringify(data)});
+  try {
+    for (const token of ['', 'fake', 'anonymous']) assert.equal((await post(body, token)).status, 401);
+    assert.equal(storage.records.size, 0);
+    assert.equal((await post({...body, promoCode: 'PHUNU20', amount: 672000})).status, 400);
+    assert.equal((await post({...body, promoCode: 'COMBO20', amount: 714000})).status, 400);
+    assert.equal((await post(body, 'valid-member')).status, 200);
+    const record = storage.records.get('paymentSessions/' + body.orderNumber);
+    assert.equal(record.memberUid, 'member-123');
+    assert.equal(record.amount, 756000);
+    assert.ok(record.items[0].freeGifts.some((gift: string) => gift.includes('toner ALPS 10 ml')));
+  } finally { server.close(); }
+});

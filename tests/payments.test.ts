@@ -4,7 +4,7 @@ import {quote, equalSecret, extractOrder, validateTransaction} from '../server/p
 const body = {items: [{productId: 'serum-radiance', quantity: 1}], carrierId: 'ghtk', promoCode: 'PHUNU20'};
 test('server prices include shipping and discount, ignoring client prices', () => {
   assert.equal(quote({...body, amount: 1}).amount, 327000);
-  assert.equal(quote({...body, items: [{productId: 'combo-toan-dien', quantity: 1}]}).amount, 1272000);
+  assert.equal(quote({...body, promoCode: 'ALPS2010', items: [{productId: 'combo-toan-dien', quantity: 1}]}).amount, 1351500);
 });
 test('rejects tampered baskets and unsupported coupons', () => {
   for (const input of [{...body, items: []}, {...body, items: [{productId: 'nope', quantity: 1}]}, {...body, items: [{productId: 'serum-radiance', quantity: -1}]}, {...body, promoCode: '__proto__'}, {...body, carrierId: 'constructor'}]) assert.throws(() => quote(input));

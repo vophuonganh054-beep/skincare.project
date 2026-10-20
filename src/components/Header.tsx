@@ -448,7 +448,7 @@ export const Header: React.FC<HeaderProps> = ({
             20/10 TRI ÂN
           </span>
           <span className="truncate text-white/95 text-[10px] sm:text-xs">
-            Nhập mã <strong className="text-amber-200 underline font-bold">PHUNU20</strong> giảm 20% • Tặng kèm Hộp quà ALPS sang trọng phái nữ
+            Nhập mã <strong className="text-amber-200 underline font-bold">PHUNU20</strong> giảm 20% hàng lẻ • ALPS2010 giảm 15% combo
           </span>
           <span className="text-amber-200 underline underline-offset-2 ml-1 hidden md:inline shrink-0 font-bold">
             Voucher & 3 Combo →

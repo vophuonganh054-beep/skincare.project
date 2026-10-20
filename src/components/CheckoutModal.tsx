@@ -1,3 +1,6 @@
+import { getPromotionDiscount } from '../data/promotions';
+import { currentCartProduct } from '../data/cartProducts';
+import { auth } from '../firebase';
 import React, { useState, useEffect, useMemo } from 'react';
 import {
   X,
@@ -72,7 +75,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   // Promo code
   const [promoCode, setPromoCode] = useState('');
-  const [discountPercent, setDiscountPercent] = useState(0);
+  const [appliedPromoCode, setAppliedPromoCode] = useState('');
+  const [promoError, setPromoError] = useState('');
   const [promoApplied, setPromoApplied] = useState(false);
 
   // Form error
@@ -161,40 +165,32 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   const handleApplyPromo = (directCode?: string) => {
     const code = (directCode || promoCode).trim().toUpperCase();
-    if (!code) return;
-    if (code === 'PHUNU20' || code === 'WOMEN20') {
-      setDiscountPercent(20);
-      setPromoApplied(true);
-      setPromoCode(code);
-      if (onShowToast) onShowToast(`🌸 Đã áp dụng mã 20/10 ${code}: Giảm 20% toàn đơn hàng!`);
-    } else if (code === 'ALPS2010' || code === 'COMBO20') {
-      setDiscountPercent(15);
-      setPromoApplied(true);
-      setPromoCode(code);
-      if (onShowToast) onShowToast(`✨ Đã áp dụng mã ưu đãi ${code}: Giảm 15%!`);
-    } else if (code === 'ALPS10' || code === 'ALPS2025' || code === 'BEAUTY10') {
-      setDiscountPercent(10);
-      setPromoApplied(true);
-      setPromoCode(code);
-      if (onShowToast) onShowToast(`Đã áp dụng mã ưu đãi ${code}: Giảm 10%`);
-    } else if (code === 'VIP20' || code === 'VEGAN20') {
-      setDiscountPercent(20);
-      setPromoApplied(true);
-      setPromoCode(code);
-      if (onShowToast) onShowToast('Đã áp dụng mã đặc quyền VIP: Giảm 20%');
-    } else {
-      if (onShowToast) onShowToast('Mã ưu đãi không hợp lệ. Hãy thử: PHUNU20 (-20%) hoặc ALPS2010 (-15%)');
+    const next = getPromotionDiscount(code, promotionItems, isMember);
+    if (next.error || !next.percent) {
+      setPromoError(next.error || 'Vui lòng nhập mã ưu đãi.');
+      setAppliedPromoCode('');
+      setPromoApplied(false);
+      return;
     }
+    setAppliedPromoCode(next.code);
+    setPromoCode(next.code);
+    setPromoApplied(true);
+    setPromoError('');
+    onShowToast?.(`Đã áp dụng ${next.code}: giảm ${next.percent}% phần hàng phù hợp.`);
   };
 
   useEffect(() => {
-    if (isOpen && initialPromoCode) {
-      handleApplyPromo(initialPromoCode);
+    if (isOpen) {
+      setPromoError('');
+      setAppliedPromoCode('');
+      setPromoApplied(false);
+      setPromoCode(initialPromoCode || '');
+      if (initialPromoCode) handleApplyPromo(initialPromoCode);
     }
   }, [isOpen, initialPromoCode]);
 
   // Pricing calculations
-  const safeItems: CartItem[] = (Array.isArray(items) ? items : []).filter((it) => it && it.product);
+  const safeItems: CartItem[] = (Array.isArray(items) ? items : []).filter((it) => it && it.product).map(it => ({...it, product: currentCartProduct(it.product)}));
   const subtotal = safeItems.reduce((sum, item) => {
     const price = typeof item.product?.price === 'number' ? item.product.price : 0;
     const qty = typeof item.quantity === 'number' && item.quantity > 0 ? item.quantity : 1;
@@ -207,14 +203,19 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const isFreeShipping = selectedCarrier?.freeThreshold ? subtotal >= selectedCarrier.freeThreshold : false;
   const shippingFee = isFreeShipping ? 0 : (selectedCarrier?.price ?? 30000);
 
-  const discountAmount = Math.round((subtotal * discountPercent) / 100);
+  const promotionItems = safeItems.map(item => ({productId: item.product.id, unitPrice: item.product.price, quantity: item.quantity}));
+  const isMember = Boolean(auth.currentUser && !auth.currentUser.isAnonymous);
+  const promotion = getPromotionDiscount(promoApplied ? appliedPromoCode : '', promotionItems, isMember);
+  const discountPercent = promotion.percent;
+  const discountAmount = promotion.discountAmount;
+  const effectivePromoCode = promotion.error ? '' : promotion.code;
   const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee);
 
-  const basketKey = JSON.stringify([safeItems.map(it => [it.product.id, it.quantity]), selectedCarrierId, promoApplied ? promoCode : '', totalAmount, isOpen]);
+  const basketKey = JSON.stringify([safeItems.map(it => [it.product.id, it.quantity]), selectedCarrierId, effectivePromoCode, totalAmount, isOpen]);
   const orderNumber = useMemo(() => 'ALPS' + Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('').toUpperCase(), [basketKey]);
   const paymentRequest = useMemo(() => ({
     items: safeItems.map(it => ({productId: it.product.id, quantity: it.quantity})),
-    carrierId: selectedCarrierId, promoCode: promoApplied ? promoCode : '',
+    carrierId: selectedCarrierId, promoCode: effectivePromoCode,
     buyer: {buyerName, phone, email, address, note},
   }), [basketKey, buyerName, phone, email, address, note]);
   useEffect(() => { setPaymentReceived(false); setFormError(null); }, [orderNumber]);
@@ -823,7 +824,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       type="text"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      placeholder={language === 'vi' ? 'Nhập mã ưu đãi (VD: ALPS10)' : 'Promo code (e.g. ALPS10)'}
+                      placeholder={language === 'vi' ? 'Nhập PHUNU20, ALPS2010 hoặc ALPS2025' : 'PHUNU20, ALPS2010 or ALPS2025'}
                       className="flex-grow px-3 py-2 bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl text-xs uppercase tracking-wider focus:outline-none focus:border-[#74584d]"
                     />
                     <button
@@ -844,29 +845,32 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       type="button"
                       onClick={() => handleApplyPromo('PHUNU20')}
                       className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
-                        promoApplied && discountPercent === 20
+                        effectivePromoCode === 'PHUNU20'
                           ? 'bg-[#74584d] text-white border-[#74584d]'
                           : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
                       }`}
                     >
-                      PHUNU20 (-20%)
+                      PHUNU20 · Hàng lẻ -20%
                     </button>
                     <button
                       type="button"
                       onClick={() => handleApplyPromo('ALPS2010')}
                       className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
-                        promoApplied && discountPercent === 15
+                        effectivePromoCode === 'ALPS2010'
                           ? 'bg-[#74584d] text-white border-[#74584d]'
                           : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
                       }`}
                     >
-                      ALPS2010 (-15%)
+                      ALPS2010 · Combo -15%
                     </button>
                   </div>
 
-                  {promoApplied && (
+                  <button type="button" onClick={() => handleApplyPromo('ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">ALPS2025 · Thành viên -10%</button>
+                  <p className="text-[10px] text-[#77767b] mt-2">Mỗi đơn dùng một mã. Không cộng dồn. Mã thành viên yêu cầu đăng nhập.</p>
+                  {(promoError || promotion.error) && <p role="alert" className="text-xs text-[#ba1a1a] mt-2">{promoError || promotion.error}</p>}
+                  {promoApplied && !promotion.error && (
                     <span className="text-[10px] text-[#2d4a36] font-medium block mt-1.5 flex items-center space-x-1">
-                      <span>✓ Đã áp dụng ưu đãi giảm {discountPercent}% thành công!</span>
+                      <span>✓ Đã áp dụng {effectivePromoCode}: giảm {discountPercent}% phần hàng phù hợp!</span>
                     </span>
                   )}
                 </div>

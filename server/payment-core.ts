@@ -1,4 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
+import { getPromotionDiscount } from '../src/data/promotions.ts';
+import { CAMPAIGN_2010_DATA } from '../src/data/campaignCatalog.ts';
 
 // Shared by the server and storefront: prices are never accepted from the browser.
 export const PRICES: Record<string, number> = {
@@ -8,19 +10,20 @@ export const PRICES: Record<string, number> = {
   'combo-toan-dien': 1590000, 'combo-serum-kem-duong': 840000,
 };
 export const CARRIERS: Record<string, number> = { ghtk: 15000, ghn: 25000, express: 45000, viettel: 20000 };
-const DISCOUNTS: Record<string, number> = { PHUNU20: 20, WOMEN20: 20, ALPS2010: 15, COMBO20: 15, ALPS10: 10, ALPS2025: 10, BEAUTY10: 10, VIP20: 20, VEGAN20: 20 };
-export function quote(body: any) {
+export function quote(body: any, context: { isMember?: boolean } = {}) {
   if (!Array.isArray(body.items) || !body.items.length || body.items.length > 50) throw new Error('Giỏ hàng không hợp lệ');
   const items = body.items.map((item: any) => {
     if (!Object.hasOwn(PRICES, item.productId) || !Number.isSafeInteger(item.quantity) || item.quantity < 1 || item.quantity > 99) throw new Error('Sản phẩm hoặc số lượng không hợp lệ');
-    return { productId: item.productId, quantity: item.quantity, unitPrice: PRICES[item.productId] };
+    const combo = CAMPAIGN_2010_DATA.combos.find(c => c.id === item.productId);
+    return { productId: item.productId, quantity: item.quantity, unitPrice: PRICES[item.productId], ...(combo ? { freeGifts: combo.freeGifts } : {}) };
   });
   if (!Object.hasOwn(CARRIERS, body.carrierId)) throw new Error('Đơn vị vận chuyển không hợp lệ');
   const code = String(body.promoCode || '').trim().toUpperCase();
-  if (code && !Object.hasOwn(DISCOUNTS, code)) throw new Error('Mã ưu đãi không hợp lệ');
+  const promotion = getPromotionDiscount(code, items, context.isMember);
+  if (promotion.error) throw new Error(promotion.error);
   const subtotal = items.reduce((sum: number, i: any) => sum + i.quantity * i.unitPrice, 0);
   const shippingFee = body.carrierId === 'ghtk' && subtotal >= 500000 ? 0 : CARRIERS[body.carrierId];
-  return { items, carrierId: body.carrierId, promoCode: code, amount: subtotal - Math.round(subtotal * (DISCOUNTS[code] || 0) / 100) + shippingFee };
+  return { items, carrierId: body.carrierId, promoCode: code, amount: subtotal - promotion.discountAmount + shippingFee };
 }
 export function equalSecret(a: string, b: string) {
   const x = Buffer.from(a), y = Buffer.from(b);

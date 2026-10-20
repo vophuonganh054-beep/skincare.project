@@ -10,7 +10,7 @@ export function GiftEditorial() {
         <span className="alps-editorial-label"><span /> THE ART OF GIVING • 20/10</span>
         <h2 id="gift-editorial-title">Một chút nâng niu.<br /><em>Một món quà đẹp.</em></h2>
         <p>Gửi trao yêu thương qua những điều nhỏ bé. Khám phá các bộ quà chăm sóc da ALPS dành cho người phụ nữ bạn trân quý.</p>
-        <div className="alps-editorial-voucher"><Gift size={18} strokeWidth={1.3} /><span>Mã <strong>PHUNU20</strong> <span aria-hidden="true">·</span> Giảm <strong>20%</strong></span></div>
+        <div className="alps-editorial-voucher"><Gift size={18} strokeWidth={1.3} /><span>Mã <strong>ALPS2010</strong> <span aria-hidden="true">·</span> Giảm <strong>15%</strong> combo</span></div>
         <Link to="/uu-dai-20-10" className="alps-editorial-link">Khám phá quà cho nàng <span><ArrowUpRight size={19} /></span></Link>
         <span className="alps-gift-footnote">ALPS PURE ESSENCE / GIFT COLLECTION</span>
       </div>

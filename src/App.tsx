@@ -1,3 +1,4 @@
+import { createComboProduct } from './data/cartProducts';
 import React, { useState, useEffect, useRef } from 'react';
 import { PRODUCTS } from './data/products';
 import { INITIAL_ORDERS } from './data/initialOrders';
@@ -675,42 +676,11 @@ export default function App() {
   };
 
   // Convert CampaignCombo to Product representation for cart & checkout
-  const createComboProduct = (combo: CampaignCombo): Product => ({
-    id: combo.id,
-    name: combo.name,
-    shortName: combo.name,
-    capacity: 'Hộp Quà Cao Cấp 20/10',
-    category: 'all',
-    categoryLabel: 'Set Quà Tặng 20/10',
-    tag: combo.badge,
-    tagType: 'bestseller',
-    subtitle: combo.subTitle,
-    description: `${combo.description} (Quà tặng kèm: ${combo.freeGifts.join(' + ')})`,
-    rating: 5.0,
-    reviewCount: 48,
-    soldCount: '250+ set',
-    price: combo.salePrice,
-    originalPrice: combo.originalPrice,
-    image: combo.image,
-    fallbackImage: combo.image,
-    keyIngredients: [
-      'Chiết xuất tuyết nhung Alps',
-      'Tế bào gốc táo Thụy Sĩ',
-      'Nước khoáng sông băng Matterhorn',
-    ],
-    benefits: combo.includes,
-    usage: 'Sử dụng trọn vẹn quy trình theo các bước ghi trên từng sản phẩm trong set.',
-    routineStepNumber: 1,
-    routineStepTitle: 'Đại Nghi Thức Dưỡng Da 20/10',
-    inStock: true,
-    isFeatured: true,
-  });
+
 
   const handleAddComboToCart = (combo: CampaignCombo) => {
     const comboProduct = createComboProduct(combo);
-    if (!activeVoucherCode) {
-      setActiveVoucherCode('PHUNU20');
-    }
+    setActiveVoucherCode('ALPS2010');
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.product.id === comboProduct.id);
       if (idx > -1) {
@@ -726,9 +696,7 @@ export default function App() {
 
   const handleBuyNowCombo = (combo: CampaignCombo) => {
     const comboProduct = createComboProduct(combo);
-    if (!activeVoucherCode) {
-      setActiveVoucherCode('PHUNU20');
-    }
+    setActiveVoucherCode('ALPS2010');
     setCheckoutItems([{ product: comboProduct, quantity: 1 }]);
     setIsCheckoutOpen(true);
     showToast(`🌸 Đang mở thanh toán 20/10 cho "${combo.name}"`);

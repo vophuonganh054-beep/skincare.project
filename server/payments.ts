@@ -2,10 +2,12 @@ import type { Express, Request } from 'express';
 import { createHash } from 'node:crypto';
 import { applicationDefault, cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import { getAuth } from 'firebase-admin/auth';
 import { equalSecret, extractOrder, quote, validateTransaction } from './payment-core.ts';
 import firebaseConfig from '../firebase-applet-config.json' with { type: 'json' };
 
-export function registerPayments(app: Express, databaseOverride?: ReturnType<typeof getFirestore>) {
+type MemberVerifier = (token: string) => Promise<{ uid: string; firebase?: { sign_in_provider?: string } }>;
+export function registerPayments(app: Express, databaseOverride?: ReturnType<typeof getFirestore>, verifyMemberOverride?: MemberVerifier) {
   const enabled = process.env.PAYMENTS_ENABLED === 'true';
   const account = (process.env.SEPAY_ACCOUNT_NUMBER || '').replace(/\s/g, '');
   const name = process.env.SEPAY_ACCOUNT_NAME || '';
@@ -33,9 +35,26 @@ export function registerPayments(app: Express, databaseOverride?: ReturnType<typ
       const orderNumber = req.body.orderNumber;
       const token = access(req);
       if (!validId(orderNumber) || !/^[a-f0-9]{64}$/.test(token)) return res.status(400).json({error: 'Phiên thanh toán không hợp lệ'});
-      const pricing = quote(req.body);
+      let memberUid: string | undefined;
+      if (String(req.body.promoCode || '').trim().toUpperCase() === 'ALPS2025') {
+        const idToken = /^Bearer (.+)$/.exec(req.get('Authorization') || '')?.[1];
+        if (!idToken) return res.status(401).json({error: 'Vui lòng đăng nhập thành viên để dùng mã ALPS2025.'});
+        try {
+          const verify = verifyMemberOverride || (async (value: string) => {
+            // Authentication belongs to the original storefront project, not the payments database.
+            const authApp = getApps().find(a => a.name === 'storefront-auth') || initializeApp({ projectId: firebaseConfig.projectId }, 'storefront-auth');
+            return getAuth(authApp).verifyIdToken(value);
+          });
+          const member = await verify(idToken);
+          if (!member.uid || member.firebase?.sign_in_provider === 'anonymous') throw new Error('Not a member');
+          memberUid = member.uid;
+        } catch { return res.status(401).json({error: 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại để dùng mã thành viên.'}); }
+      }
+      let pricing: ReturnType<typeof quote>;
+      try { pricing = quote(req.body, {isMember: Boolean(memberUid)}); }
+      catch (error) { return res.status(400).json({error: error instanceof Error ? error.message : 'Giỏ hàng không hợp lệ'}); }
       if (pricing.amount !== req.body.amount) return res.status(409).json({error: 'Giá trị giỏ hàng đã thay đổi. Vui lòng mở lại thanh toán.'});
-      const fingerprint = hash(JSON.stringify(pricing));
+      const fingerprint = hash(JSON.stringify({...pricing, ...(memberUid ? {memberUid} : {})}));
       const ref = db().collection('paymentSessions').doc(orderNumber);
       const buyer = Object.fromEntries(['buyerName', 'phone', 'email', 'address', 'note'].map(key => [key, String(req.body.buyer?.[key] || '').slice(0, 500)]));
       const result = await db().runTransaction(async tx => {
@@ -46,7 +65,7 @@ export function registerPayments(app: Express, databaseOverride?: ReturnType<typ
           if (!previous.isPaid) tx.update(ref, {buyer});
           return {isPaid: previous.isPaid, status: previous.status};
         }
-        tx.create(ref, { orderNumber, ...pricing, buyer, fingerprint, tokenHash: hash(token), isPaid: false, status: 'pending', createdAt: new Date().toISOString() });
+        tx.create(ref, { orderNumber, ...pricing, ...(memberUid ? {memberUid} : {}), buyer, fingerprint, tokenHash: hash(token), isPaid: false, status: 'pending', createdAt: new Date().toISOString() });
         return {isPaid: false, status: 'pending'};
       });
       res.set('Cache-Control', 'no-store').json({success: true, ...configuration(), ...result, amount: pricing.amount, des: orderNumber});

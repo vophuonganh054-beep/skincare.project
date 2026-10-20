@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Copy, Check, Download, ShieldCheck, Building, RefreshCw, CheckCircle2 } from 'lucide-react';
+import { auth } from '../firebase';
 
 interface VietQRCardProps {
   orderNumber: string;
@@ -87,10 +88,21 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
     let active = true;
     setRegistered(false);
     setPaymentError('');
-    fetch(`${API_BASE}/api/sepay/initiate`, {
-      method: 'POST', headers: {'Content-Type': 'application/json', 'X-Payment-Token': paymentToken},
-      body: JSON.stringify({orderNumber, amount, ...paymentRequest}),
-    }).then(async response => {
+    const initiate = async () => {
+      const headers: Record<string, string> = {'Content-Type': 'application/json', 'X-Payment-Token': paymentToken};
+      if (paymentRequest.promoCode === 'ALPS2025') {
+        const idToken = await auth.currentUser?.getIdToken();
+        if (!idToken) throw new Error('Vui lòng đăng nhập để dùng mã thành viên.');
+        headers.Authorization = `Bearer ${idToken}`;
+      }
+      if (!active) return;
+      return fetch(`${API_BASE}/api/sepay/initiate`, {
+        method: 'POST', headers,
+        body: JSON.stringify({orderNumber, amount, ...paymentRequest}),
+      });
+    };
+    initiate().then(async response => {
+      if (!response) return;
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Không thể khởi tạo thanh toán.');
       if (!active) return;

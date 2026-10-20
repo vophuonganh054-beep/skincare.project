@@ -1,3 +1,6 @@
+import { getPromotionDiscount } from '../data/promotions';
+import { currentCartProduct } from '../data/cartProducts';
+import { auth } from '../firebase';
 import React, { useState } from 'react';
 import { X, ShoppingBag, Trash2, ArrowRight, ShieldCheck, Sparkles, Truck, Tag } from 'lucide-react';
 import { CartItem, UserProfile } from '../types';
@@ -59,16 +62,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       const product = item.product;
       // If product object is present
       if (product && typeof product === 'object' && product.id) {
-        const catalogProd = PRODUCTS.find((p) => p.id === product.id) || PRODUCTS[0];
         return {
-          product: {
-            ...catalogProd,
-            price: typeof product.price === 'number' ? product.price : catalogProd.price,
-            name: product.name || catalogProd.name,
-            image: product.image || catalogProd.image,
-            fallbackImage: product.fallbackImage || catalogProd.fallbackImage,
-            capacity: product.capacity || catalogProd.capacity,
-          },
+          product: currentCartProduct(product),
           quantity: typeof item.quantity === 'number' && item.quantity > 0 ? item.quantity : 1,
           selectedSize: item.selectedSize,
         };
@@ -76,7 +71,8 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
       // If product was stored as id or string
       const rawId = (item as unknown as { productId?: string; id?: string }).productId || (item as unknown as { id?: string }).id;
       if (typeof rawId === 'string') {
-        const catalogProd = PRODUCTS.find((p) => p.id === rawId || p.id.includes(rawId) || rawId.includes(p.id)) || PRODUCTS[0];
+        const canonical = currentCartProduct({id: rawId} as CartItem['product']);
+        const catalogProd = canonical.name ? canonical : PRODUCTS.find((p) => p.id === rawId || p.id.includes(rawId) || rawId.includes(p.id)) || PRODUCTS[0];
         return {
           product: catalogProd,
           quantity: typeof item.quantity === 'number' && item.quantity > 0 ? item.quantity : 1,
@@ -93,36 +89,28 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     0
   );
 
-  const getVoucherDiscountPercent = (code: string | null) => {
-    if (!code) return 0;
-    const upper = code.trim().toUpperCase();
-    if (['PHUNU20', 'WOMEN20', 'VIP20', 'VEGAN20'].includes(upper)) return 20;
-    if (['ALPS2010', 'COMBO20'].includes(upper)) return 15;
-    if (['ALPS2025', 'ALPS10', 'BEAUTY10'].includes(upper)) return 10;
-    return 0;
-  };
-
-  const discountPercent = getVoucherDiscountPercent(appliedVoucher);
-  const discountAmount = Math.round((subtotal * discountPercent) / 100);
+  const promotionItems = safeItems.map(item => ({productId: item.product.id, unitPrice: item.product.price, quantity: item.quantity}));
+  const isMember = Boolean(auth.currentUser && !auth.currentUser.isAnonymous);
+  const promotion = getPromotionDiscount(appliedVoucher, promotionItems, isMember);
+  const discountPercent = promotion.percent;
+  const discountAmount = promotion.discountAmount;
   const freeShippingThreshold = 500000;
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
-  const shippingFee = subtotal === 0 || subtotal >= freeShippingThreshold ? 0 : 30000;
+  const shippingFee = subtotal === 0 || subtotal >= freeShippingThreshold ? 0 : 15000;
   const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee);
 
   const handleApplyVoucher = (e?: React.FormEvent, directCode?: string) => {
     if (e) e.preventDefault();
     const target = (directCode || voucherCode).trim().toUpperCase();
-    const pct = getVoucherDiscountPercent(target);
-    if (pct > 0) {
-      setAppliedVoucher(target);
-      setVoucherCode(target);
-      setVoucherError(null);
-      if (onVoucherApplied) {
-        onVoucherApplied(target);
-      }
-    } else {
-      setVoucherError('Mã không hợp lệ. Hãy thử: PHUNU20 (-20%), ALPS2010 (-15%) hoặc ALPS2025 (-10%)');
+    const next = getPromotionDiscount(target, promotionItems, isMember);
+    if (next.error || !next.percent) {
+      setVoucherError(next.error || 'Vui lòng nhập mã ưu đãi.');
+      return;
     }
+    setAppliedVoucher(next.code);
+    setVoucherCode(next.code);
+    setVoucherError(null);
+    onVoucherApplied?.(next.code);
   };
 
   return (
@@ -345,7 +333,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
                       }`}
                     >
-                      PHUNU20 (-20%)
+                      PHUNU20 · Hàng lẻ -20%
                     </button>
                     <button
                       type="button"
@@ -356,18 +344,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
                       }`}
                     >
-                      ALPS2010 (-15%)
+                      ALPS2010 · Combo -15%
                     </button>
                   </div>
 
-                  {appliedVoucher && (
+                  <button type="button" onClick={() => handleApplyVoucher(undefined, 'ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">ALPS2025 · Thành viên -10%</button>
+                  <p className="text-[10px] text-[#77767b] mt-2">Mỗi đơn dùng một mã. Mã hàng lẻ/combo chỉ giảm phần hàng phù hợp; mã thành viên yêu cầu đăng nhập.</p>
+                  {appliedVoucher && !promotion.error && (
                     <p className="text-[11px] text-[#2d4a36] font-medium mt-2 flex items-center space-x-1">
-                      <span>✓ Đã áp dụng mã {appliedVoucher} (-{discountPercent}%)</span>
+                      <span>✓ Đã áp dụng mã {appliedVoucher} (-{discountPercent}% phần hàng áp dụng)</span>
                     </p>
                   )}
-                  {voucherError && (
+                  {(voucherError || promotion.error) && (
                     <p className="text-[11px] text-[#ba1a1a] mt-1.5">
-                      {voucherError}
+                      {voucherError || promotion.error}
                     </p>
                   )}
                 </div>

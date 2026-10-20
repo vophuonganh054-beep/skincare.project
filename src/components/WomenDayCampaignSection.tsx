@@ -93,7 +93,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {CAMPAIGN_2010_DATA.vouchers.map((voucher: PromoVoucher) => {
               const isCopied = copiedCode === voucher.code;
               return (
@@ -120,7 +120,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                       )}
                     </div>
 
-                    <p className="text-[11px] text-[#5f5d58] leading-snug line-clamp-2">
+                    <p className="text-[11px] text-[#5f5d58] leading-snug">
                       {voucher.description}
                     </p>
                   </div>
@@ -195,7 +195,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                     </div>
 
                     <div className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#ba1a1a] text-white shadow-xs">
-                      Áp mã PHUNU20: -20%
+                      Áp mã ALPS2010: -15%
                     </div>
 
                     <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
@@ -270,17 +270,17 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                     </div>
                     <div className="text-right">
                       <span className="text-[10px] text-[#74584d] font-medium block">
-                        Áp mã PHUNU20 (-20%)
+                        Áp mã ALPS2010 (-15%)
                       </span>
                       <span className="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
-                        Còn {Math.round(combo.originalPrice * 0.8).toLocaleString('vi-VN')}₫
+                        Còn {Math.round(combo.originalPrice * 0.85).toLocaleString('vi-VN')}₫
                       </span>
                     </div>
                   </div>
 
                   <div className="text-[11px] text-[#74584d] bg-[#fcf5f1] border border-[#fed8c9] rounded-xl px-2.5 py-1.5 text-center mb-2.5 font-medium flex items-center justify-center space-x-1">
                     <span>🌸</span>
-                    <span>Combo giữ giá gốc • Áp mã <strong>PHUNU20</strong> để giảm 20%!</span>
+                    <span>Combo giữ giá gốc • Áp mã <strong>ALPS2010</strong> để giảm 15%!</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-1">
