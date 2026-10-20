@@ -141,7 +141,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({
                   </p>
                   <div className="pt-3">
                     <a
-                      href="https://www.facebook.com/profile.php?id=61595372038444"
+                      href="https://www.facebook.com/alpspuressence/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center space-x-2 px-4 py-2 bg-[#1877f2] text-white text-xs font-semibold rounded-xl hover:bg-[#166fe5] transition-colors shadow-sm"

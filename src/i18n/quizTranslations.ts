@@ -50,7 +50,7 @@ export interface QuizI18n {
 
 export const QUIZ_I18N: Record<SupportedLanguage, QuizI18n> = {
   vi: {
-    modalTitle: 'Chẩn Đoán Làn Da AI Sinh Học • Skin Diagnostic',
+    modalTitle: 'Chẩn Đoán Làn Da Sinh Học • Skin Diagnostic',
     stepIndicator: (step, total) => `Câu hỏi ${step}/${total}`,
     backBtn: 'Quay lại',
     nextBtn: 'Tiếp theo',
@@ -151,7 +151,7 @@ export const QUIZ_I18N: Record<SupportedLanguage, QuizI18n> = {
   },
 
   en: {
-    modalTitle: 'Biometric AI Skin Diagnostic • Alps Pure Essence',
+    modalTitle: 'Biometric Skin Diagnostic • Alps Pure Essence',
     stepIndicator: (step, total) => `Question ${step} of ${total}`,
     backBtn: 'Back',
     nextBtn: 'Next',
@@ -252,7 +252,7 @@ export const QUIZ_I18N: Record<SupportedLanguage, QuizI18n> = {
   },
 
   de: {
-    modalTitle: 'Biometrische AI-Hautanalyse • Alps Pure Essence',
+    modalTitle: 'Biometrische Hautanalyse • Alps Pure Essence',
     stepIndicator: (step, total) => `Frage ${step} von ${total}`,
     backBtn: 'Zurück',
     nextBtn: 'Weiter',
@@ -353,7 +353,7 @@ export const QUIZ_I18N: Record<SupportedLanguage, QuizI18n> = {
   },
 
   es: {
-    modalTitle: 'Diagnóstico Facial AI • Alps Pure Essence',
+    modalTitle: 'Diagnóstico Facial • Alps Pure Essence',
     stepIndicator: (step, total) => `Pregunta ${step} de ${total}`,
     backBtn: 'Atrás',
     nextBtn: 'Siguiente',
@@ -454,7 +454,7 @@ export const QUIZ_I18N: Record<SupportedLanguage, QuizI18n> = {
   },
 
   zh: {
-    modalTitle: 'AI 仿生测肤诊断 • Alps Pure Essence',
+    modalTitle: '仿生测肤诊断 • Alps Pure Essence',
     stepIndicator: (step, total) => `第 ${step} 题 / 共 ${total} 题`,
     backBtn: '返回上一步',
     nextBtn: '下一题',

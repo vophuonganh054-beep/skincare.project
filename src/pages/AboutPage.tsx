@@ -463,7 +463,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onOpenRitualModal, onOpenS
                 onClick={onOpenSkinQuiz}
                 className="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-medium border border-white/20 transition-colors cursor-pointer"
               >
-                Trắc Nghiệm Soi Da AI
+                Trắc Nghiệm Soi Da
               </button>
             )}
           </div>

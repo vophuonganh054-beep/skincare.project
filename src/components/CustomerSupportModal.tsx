@@ -178,7 +178,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
 
         {/* Modal Scrollable Body */}
         <div className="overflow-y-auto p-4 sm:p-5 flex-grow text-[#1c1c19] bg-[#fcf9f4]">
-          {/* TAB 0: CHAT AI TƯ VẤN KHÁCH HÀNG 24/7 */}
+          {/* TAB 0: CHAT TƯ VẤN KHÁCH HÀNG 24/7 */}
           {activeTab === 'ai_chat' && (
             <div className="space-y-3 animate-fade-in">
               {/* Fanpage Direct Chat Callout */}
@@ -201,7 +201,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                 </div>
 
                 <a
-                  href="https://www.facebook.com/profile.php?id=61595372038444"
+                  href="https://www.facebook.com/alpspuressence/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center space-x-1.5 px-3.5 py-1.5 bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold rounded-full shadow-xs transition-all shrink-0 cursor-pointer self-start sm:self-auto"
@@ -251,7 +251,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
 
                     <div className="flex items-center space-x-3 shrink-0">
                       <a
-                        href="https://www.facebook.com/profile.php?id=61595372038444"
+                        href="https://www.facebook.com/alpspuressence/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center space-x-1.5 px-4 py-2 bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold rounded-full shadow-xs transition-colors"
@@ -359,7 +359,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                     </div>
 
                     <a
-                      href="https://www.facebook.com/profile.php?id=61595372038444"
+                      href="https://www.facebook.com/alpspuressence/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center space-x-1.5 px-4 py-2 bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold rounded-full shadow-xs transition-colors shrink-0"

@@ -125,8 +125,8 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.reply || 'Gemini hiện chưa trả lời được. Vui lòng thử lại sau.');
-      const aiReply = typeof data.reply === 'string' && data.reply.trim() ? data.reply : 'Gemini chưa có câu trả lời. Bạn vui lòng thử lại.';
+      if (!res.ok) throw new Error(data.reply || 'Tư vấn viên ALPS hiện chưa trả lời được. Vui lòng thử lại sau.');
+      const aiReply = typeof data.reply === 'string' && data.reply.trim() ? data.reply : 'Tư vấn viên ALPS chưa có câu trả lời. Bạn vui lòng thử lại.';
       const aiMsg: Message = {
         id: `ai-${Date.now()}`,
         role: 'model',
@@ -142,8 +142,8 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
       setMessages(prev => [...prev, {
         id: `error-${Date.now()}`, role: 'model',
         text: language === 'vi'
-          ? (err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Không kết nối được Gemini. Bạn vui lòng thử lại hoặc liên hệ shop qua hotline 0772 770 134.')
-          : 'The AI assistant is unavailable. Please try again or contact ALPS at 0772 770 134.',
+          ? (err instanceof Error && err.message !== 'Failed to fetch' ? err.message : 'Không kết nối được Tư vấn viên ALPS. Bạn vui lòng thử lại hoặc liên hệ shop qua hotline 0772 770 134.')
+          : 'The assistant is unavailable. Please try again or contact ALPS at 0772 770 134.',
         timestamp: new Date().toLocaleTimeString(language === 'vi' ? 'vi-VN' : 'en-US', {hour:'2-digit',minute:'2-digit'}),
       }]);
     } finally {

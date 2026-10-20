@@ -22,7 +22,7 @@ export interface HeroTranslations {
 
 export const HERO_I18N: Record<SupportedLanguage, HeroTranslations> = {
   vi: {
-    quizBtn: 'SOI DA AI (1 PHÚT)',
+    quizBtn: 'SOI DA (1 PHÚT)',
     dermatologyBadge: 'Dược Mỹ Phẩm Cao Cấp Alps',
     nextSlideLabel: 'Slide tiếp theo',
     prevSlideLabel: 'Slide trước',
@@ -81,7 +81,7 @@ export const HERO_I18N: Record<SupportedLanguage, HeroTranslations> = {
   },
 
   en: {
-    quizBtn: 'AI SKIN DIAGNOSTIC (1 MIN)',
+    quizBtn: 'SKIN DIAGNOSTIC (1 MIN)',
     dermatologyBadge: 'Swiss Luxury Dermocosmetics',
     nextSlideLabel: 'Next slide',
     prevSlideLabel: 'Previous slide',
@@ -140,7 +140,7 @@ export const HERO_I18N: Record<SupportedLanguage, HeroTranslations> = {
   },
 
   de: {
-    quizBtn: 'AI-HAUTANALYSE (1 MIN.)',
+    quizBtn: 'HAUTANALYSE (1 MIN.)',
     dermatologyBadge: 'Schweizer Luxus-Dermokosmetik',
     nextSlideLabel: 'Nächste Folie',
     prevSlideLabel: 'Vorherige Folie',
@@ -199,7 +199,7 @@ export const HERO_I18N: Record<SupportedLanguage, HeroTranslations> = {
   },
 
   es: {
-    quizBtn: 'DIAGNÓSTICO FACIAL AI (1 MIN)',
+    quizBtn: 'DIAGNÓSTICO FACIAL (1 MIN)',
     dermatologyBadge: 'Dermocosmética Suiza de Lujo',
     nextSlideLabel: 'Siguiente diapositiva',
     prevSlideLabel: 'Diapositiva anterior',
@@ -258,7 +258,7 @@ export const HERO_I18N: Record<SupportedLanguage, HeroTranslations> = {
   },
 
   zh: {
-    quizBtn: 'AI 智能测肤 (仅需1分钟)',
+    quizBtn: '智能测肤 (仅需1分钟)',
     dermatologyBadge: '瑞士高定纯素药妆',
     nextSlideLabel: '下一张',
     prevSlideLabel: '上一张',

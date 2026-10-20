@@ -28,7 +28,7 @@ export function registerAdvisor(app: Express, generateOverride?: Generator) {
     res.set('Cache-Control', 'no-store');
     const {message, history, language} = req.body || {};
     if (typeof message !== 'string' || !message.trim() || message.length > 3000) return res.status(400).json({error:'Tin nhắn phải có từ 1 đến 3.000 ký tự.'});
-    if (!generateOverride && !process.env.GEMINI_API_KEY?.trim()) return res.status(503).json({error:'AI_NOT_CONFIGURED', reply:'Trợ lý Gemini chưa được kết nối. Bạn vui lòng liên hệ shop qua hotline 0772 770 134 hoặc Fanpage để được hỗ trợ.'});
+    if (!generateOverride && !process.env.GEMINI_API_KEY?.trim()) return res.status(503).json({error:'AI_NOT_CONFIGURED', reply:'Dịch vụ tư vấn chưa được kết nối. Bạn vui lòng liên hệ shop qua hotline 0772 770 134 hoặc Fanpage để được hỗ trợ.'});
     const turns = (Array.isArray(history) ? history : []).slice(-12).filter(turn => turn && (turn.role === 'user' || turn.role === 'model') && typeof turn.text === 'string' && turn.text.trim()).map(turn => ({role:turn.role, parts:[{text:turn.text.slice(0,3000)}]}));
     // Ignore a greeting/model-only prefix; history begins with a real customer turn.
     while (turns.length && turns[0].role !== 'user') turns.shift();
@@ -49,6 +49,6 @@ export function registerAdvisor(app: Express, generateOverride?: Generator) {
         if ([400,401,403,429].includes(failureStatus)) break;
       }
     }
-    return res.status(503).json({error:failureStatus === 429 ? 'AI_BUSY' : 'AI_UNAVAILABLE', reply:'Gemini hiện chưa trả lời được. Bạn có thể thử lại sau hoặc liên hệ shop qua hotline 0772 770 134 / Fanpage. Em chưa thể tư vấn chính xác cho câu hỏi này.'});
+    return res.status(503).json({error:failureStatus === 429 ? 'AI_BUSY' : 'AI_UNAVAILABLE', reply:'Dịch vụ tư vấn hiện chưa phản hồi được. Bạn có thể thử lại sau hoặc liên hệ shop qua hotline 0772 770 134 / Fanpage. Em chưa thể tư vấn chính xác cho câu hỏi này.'});
   });
 }

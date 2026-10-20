@@ -49,7 +49,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
 
   const getGreeting = () => {
     const customer = user?.name ? `quý khách ${user.name}` : 'quý khách';
-    return `Dạ kính chào ${customer}! Em là Chuyên viên Da liễu Thụy Sĩ & Cố vấn Trí tuệ Nhân tạo của thương hiệu Dược mỹ phẩm thuần chay Alps Skincare (alps.vn).\n\nEm được tích hợp công nghệ Gemini 3.8 Flash kết nối trực tiếp với cơ sở dữ liệu y khoa từ Viện nghiên cứu Zurich. Em có thể giải đáp thông minh và toàn diện MỌI câu hỏi của quý khách:\n• Chẩn đoán tình trạng da (mụn, thâm, nám, lão hóa, da nhạy cảm kích ứng)\n• Lên phác đồ phục hồi hàng rào sinh học & phối hợp sản phẩm khoa học\n• Giải đáp thành phần Tế bào gốc hoa tuyết Alpine, Niacinamide 5%, Ceramide\n• An toàn cho mẹ bầu, phụ nữ sau sinh & làn da treatment\n• Hướng dẫn đặt hàng nhanh không cần đăng nhập, chính sách đổi trả 30 ngày hoàn tiền 100%.\n\nQuý khách đang quan tâm hoặc cần chuyên viên tư vấn vấn đề gì cho làn da hôm nay ạ?`;
+    return `Dạ chào ${customer}! Chào mừng đến với ALPS Pure Essence. Mình có thể hỗ trợ tìm hiểu sản phẩm, thành phần, cách sử dụng, ưu đãi và đặt hàng trên alps.id.vn.\n\nBạn đang quan tâm sản phẩm nào hoặc muốn tìm chu trình chăm sóc da như thế nào?`;
   };
 
   const [messages, setMessages] = useState<Message[]>([
@@ -164,7 +164,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
       const fallbackMsg: Message = {
         id: `fallback-${Date.now()}`,
         role: 'model',
-        text: 'Dạ xin lỗi quý khách, kết nối AI tạm thời gián đoạn. Quý khách có thể liên hệ trực tiếp chuyên viên qua Hotline 0772 770 134 hoặc ghé chi nhánh 30 Trịnh Đình Thảo, Tân Phú, TP.HCM để được thăm khám da trực tiếp 1-1 miễn phí ạ!',
+        text: 'Dạ xin lỗi quý khách, dịch vụ tư vấn tạm thời gián đoạn. Bạn có thể liên hệ ALPS qua hotline 0772 770 134 hoặc Fanpage để được hỗ trợ nhé!',
         timestamp: new Date().toLocaleTimeString('vi-VN', {
           hour: '2-digit',
           minute: '2-digit',
@@ -233,7 +233,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
               <div className="w-5 h-5 rounded-full bg-[#f4ece3] flex items-center justify-center text-emerald-700 shrink-0">
                 <Activity className="w-3.5 h-3.5 text-emerald-600" />
               </div>
-              <span className="text-xs font-semibold tracking-wide">Soi Da AI</span>
+              <span className="text-xs font-semibold tracking-wide">Soi Da</span>
               <span className="text-[10px] bg-emerald-600 text-white font-bold px-1.5 py-0.5 rounded-full">
                 1 PHÚT
               </span>
@@ -242,7 +242,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
 
           {/* Quick Fanpage Messenger Chip */}
           <a
-            href="https://www.facebook.com/profile.php?id=61595372038444"
+            href="https://www.facebook.com/alpspuressence/"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-3.5 py-2 rounded-full shadow-xl flex items-center space-x-2 border border-white/20 hover:scale-105 active:scale-95 transition-all text-xs font-semibold cursor-pointer group"
@@ -262,7 +262,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
             id="floating-ai-dermatologist-btn"
             onClick={handleOpen}
             className="relative bg-[#202022] hover:bg-[#08080a] text-white pl-4 pr-5 py-2.5 sm:py-3 rounded-full shadow-2xl flex items-center space-x-3 border border-[#fed8c9]/60 hover:scale-105 active:scale-95 transition-all cursor-pointer group"
-            title="Chat ngay với Chuyên viên Da liễu Thụy Sĩ AI"
+            title="Chat ngay với Tư vấn viên ALPS"
           >
             <div className="relative flex items-center justify-center shrink-0">
               <div className="w-8 h-8 rounded-full bg-[#353337] flex items-center justify-center border border-[#fed8c9]/40 group-hover:bg-[#74584d] transition-colors">
@@ -275,20 +275,20 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
             <div className="text-left">
               <div className="flex items-center space-x-1.5">
                 <span className="text-xs sm:text-sm font-bold tracking-wide text-white uppercase leading-tight">
-                  Chuyên Viên Da Liễu AI
+                  Tư Vấn Viên ALPS
                 </span>
                 <span className="text-[10px] bg-[#fed8c9] text-[#1c1c19] px-1.5 py-0.2 rounded-full font-bold">
                   Thụy Sĩ
                 </span>
               </div>
               <span className="text-[11px] text-[#fed8c9]/90 font-light block leading-tight mt-0.5">
-                Tư vấn mọi vấn đề da • Gemini 24/7
+                Tư vấn sản phẩm & chăm sóc da
               </span>
             </div>
 
             {showNotificationBadge && (
               <span className="absolute -top-1.5 -left-1.5 bg-[#ba1a1a] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md animate-bounce">
-                Hỏi AI 1-1
+                Hỏi ALPS
               </span>
             )}
           </button>
@@ -318,11 +318,11 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
                 <div className="min-w-0">
                   <div className="flex items-center space-x-1.5">
                     <h3 className="font-serif text-sm sm:text-base font-semibold text-white truncate">
-                      Chuyên Viên Da Liễu Thụy Sĩ AI
+                      Tư Vấn Viên ALPS
                     </h3>
                   </div>
                   <p className="text-[11px] text-[#fed8c9] truncate font-light">
-                    Alps Pure Essence • Gemini 3.8 Flash 24/7
+                    Alps Pure Essence • Hỗ trợ trực tuyến
                   </p>
                 </div>
               </div>
@@ -371,7 +371,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
                         onClick={onOpenSkinQuiz}
                         className="px-2.5 py-1 bg-[#202022] text-white text-[11px] font-semibold rounded-full hover:bg-black whitespace-nowrap cursor-pointer shrink-0"
                       >
-                        Soi Da AI
+                        Soi Da
                       </button>
                     )}
                   </div>

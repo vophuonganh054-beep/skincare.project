@@ -353,7 +353,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                 Cần tư vấn chọn quà riêng cho mẹ, người yêu hoặc đặt số lượng lớn cho doanh nghiệp?
               </p>
               <a
-                href="https://www.facebook.com/profile.php?id=61595372038444"
+                href="https://www.facebook.com/alpspuressence/"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-2.5 inline-flex items-center space-x-2 text-xs font-semibold text-[#fed8c9] hover:text-white underline underline-offset-4 cursor-pointer"

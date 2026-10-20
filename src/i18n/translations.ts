@@ -177,7 +177,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
       packaging: 'BAO BÌ',
       orders: 'ĐƠN HÀNG',
       cart: 'GIỎ HÀNG',
-      quiz: 'SOI DA AI',
+      quiz: 'SOI DA',
       support: 'CSKH 24/7',
     },
     hero: {
@@ -765,7 +765,7 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
       packaging: '包装美学',
       orders: '我的订单',
       cart: '购物袋',
-      quiz: 'AI测肤',
+      quiz: '测肤',
       support: '客服热线',
     },
     hero: {

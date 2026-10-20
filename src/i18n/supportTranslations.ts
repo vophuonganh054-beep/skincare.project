@@ -91,34 +91,34 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     modalTitle: 'Trung Tâm Trợ Giúp & Chăm Sóc Khách Hàng',
     modalSubtitle: 'Alps Pure Essence Customer Care • Zurich & Vietnam',
     tabs: {
-      aiChat: 'Trợ Lý AI (24/7)',
+      aiChat: 'Tư Vấn Viên ALPS (24/7)',
       contact: 'Kênh Liên Hệ',
       ticket: 'Gửi Yêu Cầu',
       faq: 'Hỏi & Đáp (FAQ)',
     },
     floatingBtn: {
-      skinQuizLabel: 'Trắc Nghiệm Soi Da AI',
+      skinQuizLabel: 'Trắc Nghiệm Soi Da',
       oneMin: '1 PHÚT',
-      chatLabel: 'Chat AI & CSKH',
+      chatLabel: 'Chat & CSKH',
       tag247: '24/7',
       sublabel: 'Tư vấn mọi câu hỏi • Hotline 0772 770 134',
-      mobileQuiz: 'Soi Da AI',
-      mobileChat: 'Chat AI • CSKH',
+      mobileQuiz: 'Soi Da',
+      mobileChat: 'Chat • CSKH',
     },
     aiChat: {
-      title: 'Trợ Lý Tư Vấn AI ALPS',
+      title: 'Tư Vấn Viên ALPS',
       aiSubtitle: 'Trí Tuệ Nhân Tạo 24/7',
       online247: 'Trực tuyến 24/7',
       officialWebsite: 'Website chính thức: alps.vn • Hotline: 0772 770 134',
       resetChat: 'Làm mới cuộc trò chuyện',
       resetConfirm: 'Dạ em đã làm mới cuộc trò chuyện. Quý khách cần chuyên viên tư vấn về vấn đề da hay câu hỏi nào về Alps Skincare ạ?',
       quizBannerText: 'Chưa biết nền da của mình? Hãy làm',
-      quizBannerBold: 'Bài Soi Da AI (1 phút)',
+      quizBannerBold: 'Bài Soi Da (1 phút)',
       quizBannerBtn: 'Soi da ngay',
-      thinking: 'Chuyên gia AI đang phân tích và soạn câu trả lời...',
+      thinking: 'Chuyên gia đang phân tích và soạn câu trả lời...',
       inputPlaceholder: 'Hỏi về sản phẩm, thành phần, giá hoặc routine của bạn...',
       welcomeMessage: (name) =>
-        `Dạ chào ${name || 'bạn'}! Em là trợ lý AI Gemini của ALPS Pure Essence (alps.id.vn). Em có thể tư vấn sản phẩm theo loại da và ngân sách, so sánh giá/thành phần, hướng dẫn cách dùng và thanh toán. Bạn đang cần cải thiện vấn đề gì trên da ạ?`,
+        `Dạ chào ${name || 'bạn'}! Em là tư vấn viên ALPS Pure Essence (alps.id.vn). Em có thể tư vấn sản phẩm theo loại da và ngân sách, so sánh giá/thành phần, hướng dẫn cách dùng và thanh toán. Bạn đang cần cải thiện vấn đề gì trên da ạ?`,
       quickPrompts: [
         'Chat Fanpage Facebook cùng chuyên viên tư vấn',
         'Kiểm tra tình trạng da & thiết lập phác đồ cá nhân hóa',
@@ -137,7 +137,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       fallbackSerum:
         'Dạ Serum Alps Radiance Glow chứa tế bào gốc hoa tuyết Alpine kết hợp 5% Niacinamide tinh khiết và HA đa tầng. Sản phẩm giúp mờ thâm sau 14 ngày, dưỡng sáng đều màu da và mang lại hiệu ứng căng bóng ngậm nước tự nhiên mà không gây bết dính. Đặc biệt đạt chuẩn thuần chay Thụy Sĩ, an toàn tuyệt đối cho mẹ bầu và da nhạy cảm ạ.',
       fallbackOilyAcne:
-        'Dạ với làn da dầu mụn và lỗ chân lông to, chuyên gia da liễu Thụy Sĩ khuyên dùng chu trình 3 bước cốt lõi:\n1. Sữa rửa mặt Alps Gentle Purifying Cleanser (pH 5.5, làm sạch sâu bã nhờn mà không gây khô căng).\n2. Nước cân bằng Alps Botanical Balancing Toner (se khít lỗ chân lông, cấp ẩm sinh học).\n3. Serum Alps Radiance Glow (Niacinamide 5% kiềm dầu, kháng viêm mụn và mờ thâm).\nQuý khách có thể bấm vào bài Trắc Nghiệm Soi Da AI ở trên để nhận phác đồ chi tiết hơn nhé!',
+        'Dạ với làn da dầu mụn và lỗ chân lông to, chuyên gia da liễu Thụy Sĩ khuyên dùng chu trình 3 bước cốt lõi:\n1. Sữa rửa mặt Alps Gentle Purifying Cleanser (pH 5.5, làm sạch sâu bã nhờn mà không gây khô căng).\n2. Nước cân bằng Alps Botanical Balancing Toner (se khít lỗ chân lông, cấp ẩm sinh học).\n3. Serum Alps Radiance Glow (Niacinamide 5% kiềm dầu, kháng viêm mụn và mờ thâm).\nQuý khách có thể bấm vào bài Trắc Nghiệm Soi Da ở trên để nhận phác đồ chi tiết hơn nhé!',
     },
     contact: {
       hotlineTitle: 'Tổng Đài Miễn Cước 24/7',
@@ -213,7 +213,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         {
           question: 'Làm thế nào để được chuyên gia Alps lên phác đồ dưỡng da 1:1?',
           answer:
-            'Bạn có thể bấm vào nút "Soi Da AI" trên website để hoàn thành bài trắc nghiệm 1 phút, hoặc chat trực tiếp với Trợ Lý Da Liễu AI 24/7 để nhận phác đồ cá nhân hóa ngay lập tức.',
+            'Bạn có thể bấm vào nút "Soi Da" trên website để hoàn thành bài trắc nghiệm 1 phút, hoặc chat trực tiếp với Tư Vấn Viên ALPS 24/7 để nhận phác đồ cá nhân hóa ngay lập tức.',
         },
         {
           question: 'Thanh toán qua quét mã VietQR được xác nhận như thế nào?',
@@ -228,34 +228,34 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     modalTitle: 'Help Center & Client Services',
     modalSubtitle: 'Alps Pure Essence Customer Care • Zurich & International',
     tabs: {
-      aiChat: 'AI Care (24/7)',
+      aiChat: 'Care (24/7)',
       contact: 'Contact Channels',
       ticket: 'Submit Ticket',
       faq: 'FAQ & Inquiries',
     },
     floatingBtn: {
-      skinQuizLabel: 'AI Skin Diagnostic',
+      skinQuizLabel: 'Skin Diagnostic',
       oneMin: '1 MIN',
-      chatLabel: 'AI Care & Support',
+      chatLabel: 'Care & Support',
       tag247: '24/7',
       sublabel: 'Immediate assistance • Hotline 0772 770 134',
       mobileQuiz: 'Skin Diagnostic',
-      mobileChat: 'AI Support 24/7',
+      mobileChat: 'Support 24/7',
     },
     aiChat: {
-      title: 'Alps AI Dermatology Advisor',
+      title: 'Alps Dermatology Advisor',
       aiSubtitle: 'Artificial Intelligence 24/7',
       online247: 'Live 24/7',
       officialWebsite: 'Official Boutique: alps.vn • Hotline: 0772 770 134',
       resetChat: 'Reset Conversation',
       resetConfirm: 'Conversation refreshed. How may our Swiss dermatology advisor assist your skincare regimen today?',
       quizBannerText: 'Unsure of your biometric skin profile? Take the',
-      quizBannerBold: 'AI Skin Diagnostic (1 min)',
+      quizBannerBold: 'Skin Diagnostic (1 min)',
       quizBannerBtn: 'Analyze Now',
-      thinking: 'AI Dermatology Advisor is evaluating your inquiry...',
+      thinking: 'Dermatology Advisor is evaluating your inquiry...',
       inputPlaceholder: 'Ask anything: acne healing, INCI ingredients, orders, 30-day returns...',
       welcomeMessage: (name) =>
-        `Hello ${name || 'there'}! I am the ALPS Pure Essence AI assistant, powered by Gemini. I can help compare products, ingredients and prices, suggest a routine for your budget, and explain checkout. What would you like help with?`,
+        `Hello ${name || 'there'}! I am the ALPS Pure Essence product advisor. I can help compare products, ingredients and prices, suggest a routine for your budget, and explain checkout. What would you like help with?`,
       quickPrompts: [
         'Analyze my skin & establish a personalized ritual',
         'Which Alps routine best treats oily, congested acne-prone skin?',
@@ -265,7 +265,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         'How do I restore my lipid moisture barrier in air-conditioned environments?',
       ],
       fallbackDefault:
-        'Thank you for reaching out. Our AI network is briefly refreshing. Please call our 24/7 hotline 0772 770 134 or email pure@alps.vn for instant specialist support.',
+        'Thank you for reaching out. Our network is briefly refreshing. Please call our 24/7 hotline 0772 770 134 or email pure@alps.vn for instant specialist support.',
       fallbackGuestCheckout:
         'At alps.vn, you may:\n1. Check out immediately as a guest without creating an account.\n2. Or sign in to accumulate Alps Pure Privileges tier rewards and save delivery addresses.\nEvery order includes our 30-day 100% money-back guarantee.',
       fallbackReturns:
@@ -273,7 +273,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       fallbackSerum:
         'Alps Radiance Glow Serum pairs Alpine edelweiss stem cells with 5% pure Niacinamide and multi-weight HA. Clinically softens hyperpigmentation in 14 days, creating glass-skin radiance without greasy residue. 100% Swiss vegan certified, safe for pregnancy and sensitive skin.',
       fallbackOilyAcne:
-        'For oily, acne-prone skin with enlarged pores, Zurich dermatologists recommend a 3-step core ritual:\n1. Gentle Purifying Cleanser (pH 5.5, purges excess sebum without stripping).\n2. Botanical Balancing Toner (tightens pores & restores biological pH).\n3. Radiance Glow Serum (5% Niacinamide controls sebum & calms breakouts).\nTake our 1-minute AI Skin Quiz for a complete tailored routine.',
+        'For oily, acne-prone skin with enlarged pores, Zurich dermatologists recommend a 3-step core ritual:\n1. Gentle Purifying Cleanser (pH 5.5, purges excess sebum without stripping).\n2. Botanical Balancing Toner (tightens pores & restores biological pH).\n3. Radiance Glow Serum (5% Niacinamide controls sebum & calms breakouts).\nTake our 1-minute Skin Quiz for a complete tailored routine.',
     },
     contact: {
       hotlineTitle: '24/7 Toll-Free Client Hotline',
@@ -349,7 +349,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         {
           question: 'How can I receive a 1-on-1 personalized skincare prescription?',
           answer:
-            'Take our 1-minute AI Skin Diagnostic on the website, or start a live conversation with our 24/7 AI Dermatology Advisor.',
+            'Take our 1-minute Skin Diagnostic on the website, or start a live conversation with our 24/7 Dermatology Advisor.',
         },
         {
           question: 'How are digital VietQR / card payments verified?',
@@ -364,34 +364,34 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     modalTitle: 'Hilfe-Center & Kundenservice',
     modalSubtitle: 'Alps Pure Essence Kundenservice • Zürich & International',
     tabs: {
-      aiChat: 'AI-Beratung (24/7)',
+      aiChat: 'Beratung (24/7)',
       contact: 'Kontaktkanäle',
       ticket: 'Anfrage senden',
       faq: 'Häufige Fragen (FAQ)',
     },
     floatingBtn: {
-      skinQuizLabel: 'AI-Hautanalyse',
+      skinQuizLabel: 'Hautanalyse',
       oneMin: '1 MIN',
-      chatLabel: 'AI-Chat & Support',
+      chatLabel: 'Chat & Support',
       tag247: '24/7',
       sublabel: 'Rund um die Uhr • Hotline 1900 8899',
       mobileQuiz: 'Hautanalyse',
-      mobileChat: 'AI-Support 24/7',
+      mobileChat: 'Support 24/7',
     },
     aiChat: {
-      title: 'Alps AI-Dermatologieberater',
+      title: 'Alps Dermatologieberater',
       aiSubtitle: 'Künstliche Intelligenz 24/7',
       online247: 'Online 24/7',
       officialWebsite: 'Offizielle Boutique: alps.id.vn • Hotline: +41 44 211 8899',
       resetChat: 'Gespräch zurücksetzen',
       resetConfirm: 'Unterhaltung aktualisiert. Wie darf unser Schweizer Experte Ihnen heute helfen?',
       quizBannerText: 'Kennen Sie Ihr biometrisches Hautprofil? Machen Sie die',
-      quizBannerBold: 'AI-Hautanalyse (1 Min.)',
+      quizBannerBold: 'Hautanalyse (1 Min.)',
       quizBannerBtn: 'Jetzt analysieren',
-      thinking: 'AI-Dermatologe analysiert Ihre Anfrage...',
+      thinking: 'Dermatologe analysiert Ihre Anfrage...',
       inputPlaceholder: 'Fragen Sie nach Hautpflege, Inhaltsstoffen, Bestellungen, Rückgabe...',
       welcomeMessage: (name) =>
-        `Hallo ${name || ''}! Ich bin der KI-Produktberater von ALPS Pure Essence mit Gemini. Ich helfe bei Produkten, Inhaltsstoffen, Preisen, Anwendung und Bestellung. Was möchten Sie über Ihre Hautpflege wissen?`,
+        `Hallo ${name || ''}! Ich bin der Produktberater von ALPS Pure Essence. Ich helfe bei Produkten, Inhaltsstoffen, Preisen, Anwendung und Bestellung. Was möchten Sie über Ihre Hautpflege wissen?`,
       quickPrompts: [
         'Hautzustand analysieren & individuelles Ritual erstellen',
         'Welche Pflege eignet sich für ölige, unreine Haut?',
@@ -401,7 +401,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         'Hautbarriere bei trockener Büroluft nachhaltig stärken',
       ],
       fallbackDefault:
-        'Vielen Dank für Ihre Nachricht. Unser AI-Netzwerk wird kurz aktualisiert. Bitte rufen Sie unsere Hotline 1900 8899 an oder schreiben Sie an cskh@alps.id.vn.',
+        'Vielen Dank für Ihre Nachricht. Unser Netzwerk wird kurz aktualisiert. Bitte rufen Sie unsere Hotline 1900 8899 an oder schreiben Sie an cskh@alps.id.vn.',
       fallbackGuestCheckout:
         'Bei alps.id.vn können Sie direkt ohne Login als Gast bestellen oder ein Kundenkonto für Treuepunkte anlegen. Alle Bestellungen genießen 30 Tage Rückgaberecht.',
       fallbackReturns:
@@ -485,7 +485,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         {
           question: 'Wie erhalte ich ein individuelles Pflegeritual?',
           answer:
-            'Nutzen Sie unsere 1-minütige AI-Hautanalyse oder chatten Sie rund um die Uhr mit unserem AI-Dermatologieberater.',
+            'Nutzen Sie unsere 1-minütige Hautanalyse oder chatten Sie rund um die Uhr mit unserem Dermatologieberater.',
         },
         {
           question: 'Wie sicher sind die Zahlungsmethoden?',
@@ -500,34 +500,34 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     modalTitle: 'Centro de Ayuda y Atención al Cliente',
     modalSubtitle: 'Alps Pure Essence Customer Care • Zúrich e Internacional',
     tabs: {
-      aiChat: 'Asistente AI (24/7)',
+      aiChat: 'Asistente (24/7)',
       contact: 'Canales de Contacto',
       ticket: 'Enviar Solicitud',
       faq: 'Preguntas Frecuentes',
     },
     floatingBtn: {
-      skinQuizLabel: 'Diagnóstico Facial AI',
+      skinQuizLabel: 'Diagnóstico Facial ',
       oneMin: '1 MIN',
-      chatLabel: 'Chat AI y Soporte',
+      chatLabel: 'Chat y Soporte',
       tag247: '24/7',
       sublabel: 'Atención inmediata • Línea 1900 8899',
-      mobileQuiz: 'Diagnóstico AI',
-      mobileChat: 'Soporte AI 24/7',
+      mobileQuiz: 'Diagnóstico ',
+      mobileChat: 'Soporte 24/7',
     },
     aiChat: {
-      title: 'Especialista en Dermatología AI Alps',
+      title: 'Especialista en Dermatología Alps',
       aiSubtitle: 'Inteligencia Artificial 24/7',
       online247: 'En línea 24/7',
       officialWebsite: 'Boutique Oficial: alps.id.vn • Línea: +41 44 211 8899',
       resetChat: 'Reiniciar conversación',
       resetConfirm: 'Conversación actualizada. ¿En qué podemos ayudarle hoy con su rutina de cuidado?',
       quizBannerText: '¿Aún no conoce su perfil dérmico? Realice el',
-      quizBannerBold: 'Diagnóstico Facial AI (1 min)',
+      quizBannerBold: 'Diagnóstico Facial (1 min)',
       quizBannerBtn: 'Analizar ahora',
-      thinking: 'El especialista AI está analizando su consulta...',
+      thinking: 'El especialista está analizando su consulta...',
       inputPlaceholder: 'Pregunte lo que desee: acné, ingredientes INCI, pedidos, devoluciones...',
       welcomeMessage: (name) =>
-        `¡Hola ${name || ''}! Soy el asistente de productos de ALPS Pure Essence con Gemini. Puedo ayudarte con ingredientes, precios, rutinas y pedidos. ¿Qué necesitas para tu cuidado de la piel?`,
+        `¡Hola ${name || ''}! Soy el asistente de productos de ALPS Pure Essence. Puedo ayudarte con ingredientes, precios, rutinas y pedidos. ¿Qué necesitas para tu cuidado de la piel?`,
       quickPrompts: [
         'Analizar mi piel y diseñar una rutina personalizada',
         '¿Qué productos son ideales para piel grasa o con tendencia al acné?',
@@ -537,7 +537,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         'Cómo restaurar la barrera de hidratación en ambientes con aire acondicionado',
       ],
       fallbackDefault:
-        'Gracias por escribirnos. Nuestro servicio AI está en mantenimiento breve. Por favor llame al 1900 8899 o escriba a cskh@alps.id.vn.',
+        'Gracias por escribirnos. Nuestro servicio está en mantenimiento breve. Por favor llame al 1900 8899 o escriba a cskh@alps.id.vn.',
       fallbackGuestCheckout:
         'En alps.id.vn puede comprar directamente como invitado sin registrarse, o crear una cuenta para acumular puntos Alps Pure Privileges.',
       fallbackReturns:
@@ -621,7 +621,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         {
           question: '¿Cómo obtener una recomendación de cuidado 1 a 1?',
           answer:
-            'Complete nuestro diagnóstico facial AI de 1 minuto o chatee en directo con nuestro Asistente Dermatológico AI 24/7.',
+            'Complete nuestro diagnóstico facial de 1 minuto o chatee en directo con nuestro Asistente Dermatológico 24/7.',
         },
         {
           question: '¿Qué tan seguros son los métodos de pago?',
@@ -636,34 +636,34 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     modalTitle: '帮助中心与尊享客服',
     modalSubtitle: 'Alps Pure Essence Customer Care • 瑞士苏黎世与全球',
     tabs: {
-      aiChat: 'AI 护肤专家 (24/7)',
+      aiChat: '护肤专家 (24/7)',
       contact: '联系渠道',
       ticket: '提交工单',
       faq: '常见疑问 (FAQ)',
     },
     floatingBtn: {
-      skinQuizLabel: 'AI 智能测肤',
+      skinQuizLabel: '智能测肤',
       oneMin: '1分钟',
-      chatLabel: 'AI 咨询与客服',
+      chatLabel: '咨询与客服',
       tag247: '24/7',
       sublabel: '全天候智能守护 • 服务热线 1900 8899',
-      mobileQuiz: 'AI 测肤',
-      mobileChat: 'AI 客服 24/7',
+      mobileQuiz: '测肤',
+      mobileChat: '客服 24/7',
     },
     aiChat: {
-      title: 'Alps 瑞士 AI 皮肤科顾问',
+      title: 'Alps 瑞士 皮肤科顾问',
       aiSubtitle: '全天候人工智能 24/7',
       online247: '24小时实时在线',
       officialWebsite: '官方旗舰网站: alps.id.vn • 国际热线: +41 44 211 8899',
       resetChat: '重新开始对话',
       resetConfirm: '对话已刷新。请问瑞士皮肤科专家今天能为您解答哪些护肤疑问？',
       quizBannerText: '尚未了解自己的肌肤分型？立即体验',
-      quizBannerBold: 'AI 智能测肤 (仅需1分钟)',
+      quizBannerBold: '智能测肤 (仅需1分钟)',
       quizBannerBtn: '立即测肤',
-      thinking: 'AI 皮肤科顾问正在为您分析与撰写答复...',
-      inputPlaceholder: '向 AI 咨询任何问题：控油祛痘、INCI成分、订单物流、30天退换...',
+      thinking: '皮肤科顾问正在为您分析与撰写答复...',
+      inputPlaceholder: '向 咨询任何问题：控油祛痘、INCI成分、订单物流、30天退换...',
       welcomeMessage: (name) =>
-        `您好 ${name || ''}！我是 ALPS Pure Essence 的 Gemini AI 产品助手，可以介绍成分、价格、使用方法和下单流程。您想改善哪方面的护肤问题？`,
+        `您好 ${name || ''}！我是 ALPS Pure Essence 的产品顾问，可以介绍成分、价格、使用方法和下单流程。您想改善哪方面的护肤问题？`,
       quickPrompts: [
         '分析我的皮肤状态并定制专属护肤步骤',
         '油痘肌与毛孔粗大最推荐使用哪款产品？',
@@ -673,7 +673,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         '长期身处空调房，如何科学修复皮脂水润屏障？',
       ],
       fallbackDefault:
-        '感谢您的咨询。AI系统网络短暂维护中，您可以拨打热线 1900 8899 或发送邮件至 cskh@alps.id.vn 获取即时人工支持。',
+        '感谢您的咨询。系统网络短暂维护中，您可以拨打热线 1900 8899 或发送邮件至 cskh@alps.id.vn 获取即时人工支持。',
       fallbackGuestCheckout:
         '在官网 alps.id.vn 您可以直接免注册极速下单；亦可登录账户累积 Alps 会员积分。全线订单均尊享30天无忧退换保障。',
       fallbackReturns:
@@ -757,7 +757,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
         {
           question: '如何获取 1 对 1 定制专属护肤方案？',
           answer:
-            '您可以点击官网的“AI 智能测肤”完成 1 分钟测验，或随时与 24/7 在线的 AI 皮肤科顾问展开互动咨询。',
+            '您可以点击官网的“智能测肤”完成 1 分钟测验，或随时与 24/7 在线的 皮肤科顾问展开互动咨询。',
         },
         {
           question: '在线支付与银行扫码安全吗？',

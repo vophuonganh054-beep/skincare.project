@@ -113,7 +113,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: 'Rapid 24-hour refund processing',
-          desc: 'Upon receiving your request via phone or 24/7 AI chat, our courier will collect the product from your doorstep and wire funds back within 24 business hours.',
+          desc: 'Upon receiving your request via phone or 24/7 chat, our courier will collect the product from your doorstep and wire funds back within 24 business hours.',
         },
         {
           title: 'Dedicated Swiss dermatologist consultation',
@@ -323,7 +323,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: '24 小时内极速原路返还款项',
-          desc: '通过热线 0772 770 134 或在线 AI 客服提交需求后，顺丰小哥将上门取件，款项将在 24 个工作小时内核实并原路退回。',
+          desc: '通过热线 0772 770 134 或在线 客服提交需求后，顺丰小哥将上门取件，款项将在 24 个工作小时内核实并原路退回。',
         },
         {
           title: '苏黎世皮肤专研团队 1 对 1 指导',
@@ -361,7 +361,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         },
         {
           title: '绝不对外泄露用户隐私与测肤档案',
-          desc: '您的姓名、电话、收货地址与 AI 智能测肤健康档案仅供为您提供专享服务使用。',
+          desc: '您的姓名、电话、收货地址与 智能测肤健康档案仅供为您提供专享服务使用。',
         },
         {
           title: '支持随时自主注销与删除个人数据',

@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import popupAd from '../assets/images/alps-voucher-popup.webp';
 import './NewProductPopup.css';
 
-const VISIT_KEY = 'alps_voucher_ad_2010_v2';
+const VISIT_KEY = 'alps_voucher_ad_2010_v3';
 
 export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onExplore: () => void }) {
   const dialog = useRef<HTMLDialogElement>(null);
@@ -43,7 +43,7 @@ export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onEx
       <div className="alps-launch-ad">
         <button className="alps-launch-close" aria-label="Đóng quảng cáo" onClick={dismiss} autoFocus><X size={20} /></button>
         <button className="alps-launch-image-link" aria-label="Xem voucher ưu đãi ALPS" onClick={() => { dismiss(); onExplore(); }}>
-          <img src={popupAd} alt="Ưu đãi đặc biệt ALPS – giảm 25% voucher toàn shop. Nhấn để xem trang voucher." />
+          <img src={popupAd} alt="Ưu đãi đặc biệt ALPS – giảm 20% voucher toàn shop. Nhấn để xem trang voucher." />
         </button>
       </div>
     </dialog>, document.body

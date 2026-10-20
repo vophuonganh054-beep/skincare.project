@@ -34,7 +34,7 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
 
         {/* Nút Chat Fanpage Tư Vấn Viên 24/7 */}
         <a
-          href="https://www.facebook.com/profile.php?id=61595372038444"
+          href="https://www.facebook.com/alpspuressence/"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-3.5 py-1.5 rounded-full shadow-lg flex items-center space-x-1.5 text-xs transition-all active:scale-95 cursor-pointer border border-white/25"
@@ -84,7 +84,7 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
 
       {/* Nút Chat Trực Tiếp Với Tư Vấn Viên Qua Facebook Fanpage */}
       <a
-        href="https://www.facebook.com/profile.php?id=61595372038444"
+        href="https://www.facebook.com/alpspuressence/"
         target="_blank"
         rel="noopener noreferrer"
         className="bg-[#1877F2] hover:bg-[#166fe5] text-white px-3 py-1.5 sm:px-4 sm:py-2.5 rounded-full shadow-2xl flex items-center space-x-2 border border-white/30 hover:scale-105 active:scale-95 transition-all group cursor-pointer"
@@ -110,7 +110,7 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
         </div>
       </a>
 
-      {/* Nút Trợ Lý AI & CSKH */}
+      {/* Nút Tư Vấn Viên ALPS & CSKH */}
       <button
         id="desktop-floating-support-btn"
         onClick={onOpenSupport}
@@ -123,7 +123,7 @@ export const SupportFloatingButton: React.FC<SupportFloatingButtonProps> = ({
         </div>
         <div className="text-left">
           <span className="block text-[10px] sm:text-[11px] font-semibold tracking-wider text-white leading-tight">
-            Trợ Lý AI &amp; CSKH
+            Tư Vấn Viên ALPS &amp; CSKH
           </span>
           <span className="hidden sm:block text-[9px] text-[#fed8c9] font-light leading-tight">
             Giải đáp tự động 24/7

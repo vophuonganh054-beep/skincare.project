@@ -170,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div className="flex items-center space-x-4 text-[11px] shrink-0 whitespace-nowrap">
             <a
-              href="https://www.facebook.com/profile.php?id=61595372038444"
+              href="https://www.facebook.com/alpspuressence/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#fed8c9] hover:underline flex items-center space-x-1.5 transition-colors"

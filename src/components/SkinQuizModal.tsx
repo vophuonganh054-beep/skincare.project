@@ -223,14 +223,14 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
     if (onOpenSupportWithPrompt && result) {
       const prompt =
         language === 'vi'
-          ? `Chào chuyên gia AI Alps, tôi vừa hoàn thành bài trắc nghiệm soi da. Kết quả chẩn đoán: Điểm sức khỏe ${result.skinHealthScore}/100, loại da: ${answers.skinType || 'hỗn hợp'}, vấn đề: ${answers.primaryConcern || 'cần phục hồi'}, cảnh báo: "${result.riskFactor}". Bạn hãy giải thích chi tiết hơn cho tôi cách cải thiện làn da này nhé!`
+          ? `Chào chuyên gia Alps, tôi vừa hoàn thành bài trắc nghiệm soi da. Kết quả chẩn đoán: Điểm sức khỏe ${result.skinHealthScore}/100, loại da: ${answers.skinType || 'hỗn hợp'}, vấn đề: ${answers.primaryConcern || 'cần phục hồi'}, cảnh báo: "${result.riskFactor}". Bạn hãy giải thích chi tiết hơn cho tôi cách cải thiện làn da này nhé!`
           : language === 'de'
-          ? `Hallo Alps AI-Experte, ich habe gerade die biometrische Hautanalyse abgeschlossen. Ergebnis: Hautgesundheit ${result.skinHealthScore}/100, Hauttyp: ${answers.skinType || 'Mischhaut'}, Fokus: ${answers.primaryConcern || 'Regeneration'}, Warnung: "${result.riskFactor}". Bitte erklären Sie mir die besten Schritte zur Verbesserung meiner Haut.`
+          ? `Hallo Alps Experte, ich habe gerade die biometrische Hautanalyse abgeschlossen. Ergebnis: Hautgesundheit ${result.skinHealthScore}/100, Hauttyp: ${answers.skinType || 'Mischhaut'}, Fokus: ${answers.primaryConcern || 'Regeneration'}, Warnung: "${result.riskFactor}". Bitte erklären Sie mir die besten Schritte zur Verbesserung meiner Haut.`
           : language === 'es'
-          ? `Hola especialista AI de Alps, acabo de completar el diagnóstico facial. Resultados: Puntuación ${result.skinHealthScore}/100, tipo de piel: ${answers.skinType || 'mixta'}, objetivo: ${answers.primaryConcern || 'recuperación'}, alerta: "${result.riskFactor}". ¡Por favor explíqueme en detalle cómo mejorar mi piel!`
+          ? `Hola especialista de Alps, acabo de completar el diagnóstico facial. Resultados: Puntuación ${result.skinHealthScore}/100, tipo de piel: ${answers.skinType || 'mixta'}, objetivo: ${answers.primaryConcern || 'recuperación'}, alerta: "${result.riskFactor}". ¡Por favor explíqueme en detalle cómo mejorar mi piel!`
           : language === 'zh'
-          ? `您好，Alps 瑞士 AI 皮肤专家！我刚刚完成了智能测肤。诊断结果：健康分 ${result.skinHealthScore}/100，肤质：${answers.skinType || '混合性'}，首要改善目标：${answers.primaryConcern || '屏障修护'}，提示：“${result.riskFactor}”。请详细为我解读这份专属护肤方案！`
-          : `Hello Alps AI dermatology advisor, I just completed the biometric skin diagnostic. Result: Skin health score ${result.skinHealthScore}/100, skin type: ${answers.skinType || 'combination'}, primary concern: ${answers.primaryConcern || 'barrier care'}, alert: "${result.riskFactor}". Please explain how to optimize this personalized regimen!`;
+          ? `您好，Alps 瑞士 皮肤专家！我刚刚完成了智能测肤。诊断结果：健康分 ${result.skinHealthScore}/100，肤质：${answers.skinType || '混合性'}，首要改善目标：${answers.primaryConcern || '屏障修护'}，提示：“${result.riskFactor}”。请详细为我解读这份专属护肤方案！`
+          : `Hello Alps dermatology advisor, I just completed the biometric skin diagnostic. Result: Skin health score ${result.skinHealthScore}/100, skin type: ${answers.skinType || 'combination'}, primary concern: ${answers.primaryConcern || 'barrier care'}, alert: "${result.riskFactor}". Please explain how to optimize this personalized regimen!`;
       onClose();
       onOpenSupportWithPrompt(prompt);
     }
@@ -253,7 +253,7 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                   {quizData.modalTitle}
                 </h3>
                 <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#8a9a86]/20 text-[#4c5c49] font-bold">
-                  Swiss AI Dermatology
+                  Swiss Dermatology
                 </span>
               </div>
               <p className="text-xs text-[#77746f]">
@@ -299,14 +299,14 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>
                   {language === 'vi'
-                    ? 'Bảo chứng độ chính xác 98.4% bởi Alps AI Diagnostics'
+                    ? 'Gợi ý chăm sóc da dựa trên câu trả lời của bạn'
                     : language === 'de'
-                    ? '98.4% Genauigkeit bestätigt durch Alps AI Diagnostics'
+                    ? 'Pflegehinweise auf Basis Ihrer Antworten'
                     : language === 'es'
-                    ? 'Precisión del 98.4% validada por Alps AI Diagnostics'
+                    ? 'Consejos basados en tus respuestas'
                     : language === 'zh'
-                    ? '由 Alps 瑞士 AI 临床实验室认证 98.4% 高精准度'
-                    : '98.4% precision validated by Alps AI Diagnostics'}
+                    ? '根据您的回答提供护肤建议'
+                    : 'Care suggestions based on your answers'}
                 </span>
               </div>
             </div>

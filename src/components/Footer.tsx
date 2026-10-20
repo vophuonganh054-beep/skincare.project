@@ -1,4 +1,5 @@
 import React from 'react';
+import { AlpsConnections } from './AlpsConnections';
 import { ArrowRight, ShieldCheck, Award, HeartHandshake, Phone, Headphones, Mail, MapPin, Type } from 'lucide-react';
 import { AlpsLogo } from './AlpsLogo';
 import { PaymentBadgesGroup, VietQRBadge } from './PaymentBadges';
@@ -139,7 +140,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
             {/* Facebook Fanpage link in Brand column */}
             <div className="pt-1">
               <a
-                href="https://www.facebook.com/profile.php?id=61595372038444"
+                href="https://www.facebook.com/alpspuressence/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center space-x-1.5 text-[11px] text-[#fed8c9] hover:text-white bg-white/5 hover:bg-white/10 px-2.5 py-1 rounded-full border border-white/10 transition-colors"
@@ -224,7 +225,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
               <li className="flex items-center space-x-2">
                 <span className="text-[#fed8c9]">Fanpage Tư Vấn:</span>
                 <a
-                  href="https://www.facebook.com/profile.php?id=61595372038444"
+                  href="https://www.facebook.com/alpspuressence/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#fed8c9] text-white font-medium transition-colors flex items-center space-x-1"
@@ -239,7 +240,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
               <li className="flex items-center space-x-2">
                 <span className="text-[#fed8c9]">Facebook:</span>
                 <a
-                  href="https://www.facebook.com/profile.php?id=61595372038444"
+                  href="https://www.facebook.com/alpspuressence/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#fed8c9] text-white font-medium transition-colors flex items-center space-x-1"
@@ -313,6 +314,8 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
             </div>
           </div>
         </div>
+
+        <AlpsConnections />
 
         {/* Accepted Payment Methods Strip (Visa, Mastercard, JCB, Napas, VietQR, MoMo, Apple Pay) */}
         <div className="py-6 border-b border-[#31302d] flex flex-col md:flex-row items-center justify-between gap-4">
