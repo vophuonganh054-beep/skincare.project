@@ -312,8 +312,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
 
   // ENGLISH
   en: {
-    announcement: 'NEW 2026 COLLECTION: COMPLIMENTARY SHIPPING WORLDWIDE ON ORDERS OVER $50 • FREE SILVER SPATULA',
-    csHotline: 'Support: +41 44 211 8899',
+    announcement: 'NEW 2026 COLLECTION: COMPLIMENTARY NATIONWIDE SHIPPING ON ORDERS FROM 500,000₫ • FREE SILVER SPATULA',
+    csHotline: 'Support: 0772 770 134',
     zurichHQ: 'Switzerland • Zurich',
     searchPlaceholder: 'Search serums, creams, toners...',
     nav: {
@@ -459,8 +459,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
 
   // GERMAN (DEUTSCH - SWISS GERMAN)
   de: {
-    announcement: 'NEUE KOLLEKTION 2026: KOSTENLOSER VERSAND AB 50 CHF • INKLUSIVE SILBERNER SPATEL',
-    csHotline: 'Kundendienst: +41 44 211 8899',
+    announcement: 'NEUE KOLLEKTION 2026: LANDESWEITER GRATISVERSAND AB 500.000₫ • INKLUSIVE SILBERNER SPATEL',
+    csHotline: 'Kundendienst: 0772 770 134',
     zurichHQ: 'Schweiz • Zürich',
     searchPlaceholder: 'Serum, Creme, Toner suchen...',
     nav: {
@@ -606,8 +606,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
 
   // SPANISH (ESPAÑOL)
   es: {
-    announcement: 'NUEVA COLECCIÓN 2026: ENVÍO GRATUITO EN PEDIDOS SUPERIORES A 50€ • ESPÁTULA DE PLATA DE REGALO',
-    csHotline: 'Atención: +34 900 8899',
+    announcement: 'NUEVA COLECCIÓN 2026: ENVÍO NACIONAL GRATUITO EN PEDIDOS DESDE 500.000₫ • ESPÁTULA DE PLATA DE REGALO',
+    csHotline: 'Atención: 0772 770 134',
     zurichHQ: 'Suiza • Zúrich',
     searchPlaceholder: 'Buscar sérum, crema, tónico...',
     nav: {
@@ -753,8 +753,8 @@ export const TRANSLATIONS: Record<SupportedLanguage, AppTranslations> = {
 
   // CHINESE (SIMPLIFIED CHINESE - 简体中文)
   zh: {
-    announcement: '2026全新系列：全球满额包邮 • 尊享赠送纯银高定护肤勺',
-    csHotline: '贵宾热线: +41 44 211 8899',
+    announcement: '2026全新系列：全国订单满 500,000₫ 包邮 • 尊享赠送纯银高定护肤勺',
+    csHotline: '贵宾热线: 0772 770 134',
     zurichHQ: '瑞士 • 苏黎世',
     searchPlaceholder: '搜索精华、面霜、平衡水...',
     nav: {

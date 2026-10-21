@@ -1,3 +1,5 @@
+import { TRANSLATIONS } from '../src/i18n/translations.ts';
+import { CHECKOUT_I18N } from '../src/i18n/checkoutTranslations.ts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { translateCopy } from '../src/i18n/siteCopy.ts';
@@ -41,5 +43,15 @@ test('all five products include full descriptions, benefits, ingredients and usa
     const content = PRODUCT_TRANSLATIONS[id][language];
     assert.ok(content.description && content.usage && content.subtitle);
     assert.ok(content.benefits.length && content.keyIngredients.length);
+  }
+});
+
+
+test('changing language preserves the actual support hotline and Vietnamese shipping threshold', () => {
+  for (const language of ['vi', ...languages] as const) {
+    assert.ok(TRANSLATIONS[language].csHotline.includes('0772 770 134'));
+    assert.match(TRANSLATIONS[language].announcement, /500[.,]000₫/);
+    assert.match(CHECKOUT_I18N[language].cart.freeShippingBadge, /500[.,]000₫/);
+    assert.doesNotMatch(CHECKOUT_I18N[language].cart.freeShippingBadge, /\$50|50€/);
   }
 });

@@ -1,3 +1,5 @@
+import { translateCopy } from '../i18n/siteCopy';
+import type { SupportedLanguage } from '../i18n/translations';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 interface Props {
@@ -24,6 +26,12 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public render() {
+    let language: SupportedLanguage = 'vi';
+    try {
+      const saved = localStorage.getItem('alps_preferred_language');
+      if (['vi', 'en', 'de', 'es', 'zh'].includes(saved || '')) language = saved as SupportedLanguage;
+    } catch {}
+    const copy = (text: string) => translateCopy(text, language);
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-[#fcf9f4] text-[#1c1c19] flex items-center justify-center p-6">
@@ -32,10 +40,10 @@ export class ErrorBoundary extends Component<Props, State> {
               !
             </div>
             <h2 className="font-serif text-2xl font-normal text-[#1c1c19] mb-2">
-              Đã xảy ra lỗi tải trang
+              {copy('Đã xảy ra lỗi tải trang')}
             </h2>
             <p className="text-xs text-[#555] mb-6 leading-relaxed">
-              Ứng dụng vừa gặp sự cố nhỏ khi kết xuất giao diện. Hãy bấm nút bên dưới để khôi phục hoặc làm mới lại trang.
+              {copy('Ứng dụng vừa gặp sự cố nhỏ khi kết xuất giao diện. Hãy bấm nút bên dưới để khôi phục hoặc làm mới lại trang.')}
             </p>
             <button
               onClick={() => {
@@ -44,7 +52,7 @@ export class ErrorBoundary extends Component<Props, State> {
               }}
               className="px-6 py-2.5 bg-[#1c1c19] text-white rounded-full text-xs font-medium uppercase tracking-wider hover:bg-[#333] transition-all"
             >
-              Làm mới lại trang
+              {copy('Làm mới lại trang')}
             </button>
           </div>
         </div>

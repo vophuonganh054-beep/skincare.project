@@ -1222,7 +1222,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   {user.photoURL ? (
                     <img
                       src={user.photoURL}
-                      alt={copy(user.name)}
+                      alt={user.name}
                       referrerPolicy="no-referrer"
                       className="w-12 h-12 rounded-full object-cover border border-[#ebe8e3] shrink-0"
                     />

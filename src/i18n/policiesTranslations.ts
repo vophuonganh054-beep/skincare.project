@@ -127,7 +127,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       badge: 'OPEN-BOX INSPECTION GUARANTEED',
       points: [
         {
-          title: 'Complimentary shipping on orders over $50 / 500,000₫',
+          title: 'Complimentary shipping on orders from 500,000₫',
           desc: 'Enjoy insured delivery nationwide and internationally. Flat fee of 30,000₫ on minor orders under the threshold.',
         },
         {
@@ -197,7 +197,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       badge: 'VERSIEGELTE LIEFERUNG',
       points: [
         {
-          title: 'Kostenloser Versand ab 500.000₫ / ca. 50€',
+          title: 'Kostenloser Versand ab 500.000₫',
           desc: 'Zuverlässige, versicherte Lieferung direkt an Ihre Wunschadresse.',
         },
         {
@@ -267,7 +267,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       badge: 'INSPECCIÓN EN LA ENTREGA',
       points: [
         {
-          title: 'Envío gratuito a partir de 500.000₫ / $50',
+          title: 'Envío gratuito a partir de 500.000₫',
           desc: 'Disfrute de entregas aseguradas en todo el territorio con tarifa reducida para pedidos menores.',
         },
         {
@@ -337,7 +337,7 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
       badge: '支持开箱验货 • 顺丰特快',
       points: [
         {
-          title: '全场实付满 500,000₫ / $50 尊享包邮',
+          title: '全场实付满 500,000₫ 尊享包邮',
           desc: '全国各大省市顺丰特快直达，不满包邮门槛仅收取 30,000₫ 优惠运费。',
         },
         {

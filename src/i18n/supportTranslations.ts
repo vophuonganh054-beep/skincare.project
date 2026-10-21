@@ -269,7 +269,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       fallbackGuestCheckout:
         'At alps.vn, you may:\n1. Check out immediately as a guest without creating an account.\n2. Or sign in to accumulate Alps Pure Privileges tier rewards and save delivery addresses.\nEvery order includes our 30-day 100% money-back guarantee.',
       fallbackReturns:
-        'Alps Delivery & Guarantee Policy:\n• 100% return & refund within 30 days even if opened and sampled, should any irritation occur.\n• Complimentary shipping on orders above 500,000₫ / $50.\n• Express dispatch in 24 hours.',
+        'Alps Delivery & Guarantee Policy:\n• 100% return & refund within 30 days even if opened and sampled, should any irritation occur.\n• Complimentary shipping on orders above 500,000₫.\n• Express dispatch in 24 hours.',
       fallbackSerum:
         'Alps Radiance Glow Serum pairs Alpine edelweiss stem cells with 5% pure Niacinamide and multi-weight HA. Clinically softens hyperpigmentation in 14 days, creating glass-skin radiance without greasy residue. 100% Swiss vegan certified, safe for pregnancy and sensitive skin.',
       fallbackOilyAcne:
@@ -278,7 +278,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     contact: {
       hotlineTitle: '24/7 Toll-Free Client Hotline',
       hotlineDesc: 'Skin consultations, orders & dedicated support',
-      hotlineFree: '0772 770 134 / +41 44 211 8899',
+      hotlineFree: '0772 770 134',
       emailTitle: 'Customer Care Inbox',
       emailAddress: 'pure@alps.vn',
       emailDesc: 'Direct specialist reply within 60 minutes',
@@ -382,7 +382,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       title: 'Alps Dermatologieberater',
       aiSubtitle: 'Künstliche Intelligenz 24/7',
       online247: 'Online 24/7',
-      officialWebsite: 'Offizielle Boutique: alps.id.vn • Hotline: +41 44 211 8899',
+      officialWebsite: 'Offizielle Boutique: alps.id.vn • Hotline: 0772 770 134',
       resetChat: 'Gespräch zurücksetzen',
       resetConfirm: 'Unterhaltung aktualisiert. Wie darf unser Schweizer Experte Ihnen heute helfen?',
       quizBannerText: 'Kennen Sie Ihr biometrisches Hautprofil? Machen Sie die',
@@ -405,7 +405,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       fallbackGuestCheckout:
         'Bei alps.id.vn können Sie direkt ohne Login als Gast bestellen oder ein Kundenkonto für Treuepunkte anlegen. Alle Bestellungen genießen 30 Tage Rückgaberecht.',
       fallbackReturns:
-        'Alps Garantie: 100% Rückgabe innerhalb von 30 Tagen, kostenloser Versand ab 500.000₫ / 50€, Express-Zustellung.',
+        'Alps Garantie: 100% Rückgabe innerhalb von 30 Tagen, kostenloser Versand ab 500.000₫, Express-Zustellung.',
       fallbackSerum:
         'Alps Radiance Glow Serum kombiniert Alpen-Edelweiss-Stammzellen mit 5% Niacinamid und Hyaluronsäure für ebenmäßige Leuchtkraft. 100% vegan und hypoallergen.',
       fallbackOilyAcne:
@@ -414,7 +414,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     contact: {
       hotlineTitle: 'Gebührenfreie 24/7 Hotline',
       hotlineDesc: 'Hautberatung, Bestellungen & Reklamationen',
-      hotlineFree: '+41 44 211 8899 / 1900 8899',
+      hotlineFree: '0772 770 134',
       emailTitle: 'Kundenservice E-Mail',
       emailAddress: 'cskh@alps.id.vn',
       emailDesc: 'Antwort innerhalb von 60 Minuten',
@@ -518,7 +518,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       title: 'Especialista en Dermatología Alps',
       aiSubtitle: 'Inteligencia Artificial 24/7',
       online247: 'En línea 24/7',
-      officialWebsite: 'Boutique Oficial: alps.id.vn • Línea: +41 44 211 8899',
+      officialWebsite: 'Boutique Oficial: alps.id.vn • Línea: 0772 770 134',
       resetChat: 'Reiniciar conversación',
       resetConfirm: 'Conversación actualizada. ¿En qué podemos ayudarle hoy con su rutina de cuidado?',
       quizBannerText: '¿Aún no conoce su perfil dérmico? Realice el',
@@ -541,7 +541,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       fallbackGuestCheckout:
         'En alps.id.vn puede comprar directamente como invitado sin registrarse, o crear una cuenta para acumular puntos Alps Pure Privileges.',
       fallbackReturns:
-        'Política Alps: 100% de devolución en 30 días incluso si abrió el frasco, envío gratis a partir de 500.000₫ / $50 y despacho rápido.',
+        'Política Alps: 100% de devolución en 30 días incluso si abrió el frasco, envío gratis a partir de 500.000₫ y despacho rápido.',
       fallbackSerum:
         'Alps Radiance Glow Serum une células madre de edelweiss alpino, 5% de niacinamida y ácido hialurónico para una piel luminosa sin sensación grasa.',
       fallbackOilyAcne:
@@ -550,7 +550,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     contact: {
       hotlineTitle: 'Línea Gratuita 24/7',
       hotlineDesc: 'Consultas dermatológicas, pedidos y atención inmediata',
-      hotlineFree: '+41 44 211 8899 / 1900 8899',
+      hotlineFree: '0772 770 134',
       emailTitle: 'Correo de Atención al Cliente',
       emailAddress: 'cskh@alps.id.vn',
       emailDesc: 'Respuesta de especialistas en menos de 60 minutos',
@@ -654,7 +654,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       title: 'Alps 瑞士 皮肤科顾问',
       aiSubtitle: '全天候人工智能 24/7',
       online247: '24小时实时在线',
-      officialWebsite: '官方旗舰网站: alps.id.vn • 国际热线: +41 44 211 8899',
+      officialWebsite: '官方旗舰网站: alps.id.vn • 国际热线: 0772 770 134',
       resetChat: '重新开始对话',
       resetConfirm: '对话已刷新。请问瑞士皮肤科专家今天能为您解答哪些护肤疑问？',
       quizBannerText: '尚未了解自己的肌肤分型？立即体验',
@@ -677,7 +677,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
       fallbackGuestCheckout:
         '在官网 alps.id.vn 您可以直接免注册极速下单；亦可登录账户累积 Alps 会员积分。全线订单均尊享30天无忧退换保障。',
       fallbackReturns:
-        'Alps 售后与配送政策：\n• 签收后30天内若有任何不适，即使已开封使用亦支持 100% 退换款。\n• 订单满 500,000₫ / $50 全程包邮。\n• 极速顺丰保价发货。',
+        'Alps 售后与配送政策：\n• 签收后30天内若有任何不适，即使已开封使用亦支持 100% 退换款。\n• 订单满 500,000₫ 全程包邮。\n• 快速配送。',
       fallbackSerum:
         'Alps 雪花干细胞焕亮精华含高山雪绒花干细胞提取物、5%高纯烟酰胺与多重透明质酸，14天淡化痘印斑点，透出水光通透肌。瑞士纯素认证，温和无刺激。',
       fallbackOilyAcne:
@@ -686,7 +686,7 @@ export const SUPPORT_I18N: Record<SupportedLanguage, SupportI18n> = {
     contact: {
       hotlineTitle: '24/7 全天候免费服务热线',
       hotlineDesc: '皮肤科咨询、尊贵下单与售后处理',
-      hotlineFree: '+41 44 211 8899 / 1900 8899',
+      hotlineFree: '0772 770 134',
       emailTitle: '官方专属客服邮箱',
       emailAddress: 'cskh@alps.id.vn',
       emailDesc: '专业护肤顾问将在60分钟内回复',
