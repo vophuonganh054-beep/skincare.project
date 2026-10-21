@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import { getPromotionDiscount } from '../data/promotions';
 import { currentCartProduct } from '../data/cartProducts';
 import { auth } from '../firebase';
@@ -39,6 +40,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
   initialVoucher,
   onVoucherApplied,
 }) => {
+  const copy = useCopy();
   const { t, language } = useLanguage();
   const cData = CHECKOUT_I18N[language]?.cart || CHECKOUT_I18N.vi.cart;
 
@@ -131,10 +133,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               </div>
               <div>
                 <h3 className="font-serif text-lg font-medium text-[#1c1c19]">
-                  {t.cart.title}
+                  {copy(t.cart.title)}
                 </h3>
                 <p className="text-[11px] text-[#77767b]">
-                  {totalItemCount === 0 ? t.cart.emptyTitle : `${totalItemCount} ${totalItemCount === 1 ? 'item' : 'items'}`}
+                  {copy(totalItemCount === 0 ? t.cart.emptyTitle : `${totalItemCount} ${totalItemCount === 1 ? 'item' : 'items'}`)}
                 </p>
               </div>
             </div>
@@ -144,15 +146,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <button
                   onClick={onClearCart}
                   className="text-[11px] text-[#77767b] hover:text-[#ba1a1a] transition-colors px-2 py-1 cursor-pointer"
-                  title={t.cart.clearCart}
+                  title={copy(t.cart.clearCart)}
                 >
-                  {t.cart.clearCart}
+                  {copy(t.cart.clearCart)}
                 </button>
               )}
               <button
                 onClick={onClose}
                 className="w-8 h-8 rounded-full hover:bg-[#f6f3ee] text-[#1c1c19] flex items-center justify-center transition-colors cursor-pointer"
-                title="Close"
+                title={copy("Close")}
               >
                 <X className="w-5 h-5 stroke-[1.5]" />
               </button>
@@ -174,11 +176,11 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 </div>
 
                 <h4 className="font-serif text-lg sm:text-xl font-normal text-[#1c1c19] mb-2">
-                  {t.cart.emptyTitle}
+                  {copy(t.cart.emptyTitle)}
                 </h4>
 
                 <p className="text-xs sm:text-sm text-[#77767b] max-w-xs leading-relaxed mb-6">
-                  {t.cart.emptyDesc}
+                  {copy(t.cart.emptyDesc)}
                 </p>
 
                 <button
@@ -189,7 +191,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   className="w-full max-w-xs py-3 px-6 rounded-full bg-[#1c1c19] hover:bg-black text-white text-xs font-semibold tracking-wider transition-all duration-200 active:scale-98 shadow-sm flex items-center justify-center space-x-2 cursor-pointer uppercase"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-[#fed8c9]" />
-                  <span>{t.cart.continueShopping}</span>
+                  <span>{copy(t.cart.continueShopping)}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
 
@@ -197,15 +199,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 <div className="mt-10 pt-6 border-t border-[#202022]/6 w-full max-w-xs space-y-3 text-left">
                   <div className="flex items-center space-x-2.5 text-xs text-[#46464a]">
                     <ShieldCheck className="w-4 h-4 text-[#74584d] shrink-0" />
-                    <span>{cData.swissOriginalGuarantee}</span>
+                    <span>{copy(cData.swissOriginalGuarantee)}</span>
                   </div>
                   <div className="flex items-center space-x-2.5 text-xs text-[#46464a]">
                     <Truck className="w-4 h-4 text-[#74584d] shrink-0" />
-                    <span>{cData.freeShippingBadge}</span>
+                    <span>{copy(cData.freeShippingBadge)}</span>
                   </div>
                   <div className="flex items-center space-x-2.5 text-xs text-[#46464a]">
                     <Sparkles className="w-4 h-4 text-[#74584d] shrink-0" />
-                    <span>{cData.giftPrivilegeBadge}</span>
+                    <span>{copy(cData.giftPrivilegeBadge)}</span>
                   </div>
                 </div>
               </div>
@@ -218,13 +220,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <span className="text-[#1c1c19] font-medium flex items-center space-x-1.5">
                       <Truck className="w-3.5 h-3.5 text-[#74584d]" />
                       <span>
-                        {remainingForFreeShipping === 0
+                        {copy(remainingForFreeShipping === 0
                           ? cData.freeShippingQualified
-                          : cData.addMoreForFreeShipping(remainingForFreeShipping.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US'))}
+                          : cData.addMoreForFreeShipping(remainingForFreeShipping.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')))}
                       </span>
                     </span>
                     <span className="text-[11px] text-[#74584d] font-semibold">
-                      {subtotal >= freeShippingThreshold ? '100%' : `${Math.round((subtotal / freeShippingThreshold) * 100)}%`}
+                      {copy(subtotal >= freeShippingThreshold ? '100%' : `${Math.round((subtotal / freeShippingThreshold) * 100)}%`)}
                     </span>
                   </div>
                   <div className="w-full bg-[#f0ede9] h-1.5 rounded-full overflow-hidden">
@@ -247,7 +249,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                         <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#f6f3ee] shrink-0">
                           <img
                             src={item.product.image}
-                            alt={prodName}
+                            alt={copy(prodName)}
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = item.product.fallbackImage;
                             }}
@@ -257,21 +259,20 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
 
                         <div className="flex-1 min-w-0">
                           <h5 className="font-serif text-xs sm:text-sm font-medium text-[#1c1c19] line-clamp-1">
-                            {prodName}
+                            {copy(prodName)}
                           </h5>
                           <p className="text-[11px] text-[#77767b] mt-0.5">
-                            {item.product.capacity}
+                            {copy(item.product.capacity)}
                           </p>
                           <p className="font-serif text-xs font-semibold text-[#1c1c19] mt-1">
-                            {item.product.price.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                          </p>
+                            {item.product.price.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</p>
                         </div>
 
                         <div className="flex flex-col items-end space-y-2">
                           <button
                             onClick={() => onRemoveItem(item.product.id)}
                             className="text-[#77767b] hover:text-[#ba1a1a] p-1 transition-colors cursor-pointer"
-                            title={cData.removeConfirm}
+                            title={copy(cData.removeConfirm)}
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
@@ -281,17 +282,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                               onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
                               className="text-xs text-[#77767b] hover:text-[#1c1c19] px-1 font-light cursor-pointer"
                             >
-                              -
-                            </button>
+                              {"-"}</button>
                             <span className="text-[11px] font-medium text-[#1c1c19] w-4 text-center">
-                              {item.quantity}
+                              {copy(item.quantity)}
                             </span>
                             <button
                               onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
                               className="text-xs text-[#77767b] hover:text-[#1c1c19] px-1 font-light cursor-pointer"
                             >
-                              +
-                            </button>
+                              {"+"}</button>
                           </div>
                         </div>
                       </div>
@@ -306,7 +305,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <Tag className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#77767b]" />
                       <input
                         type="text"
-                        placeholder={cData.voucherPlaceholder}
+                        placeholder={copy(cData.voucherPlaceholder)}
                         value={voucherCode}
                         onChange={(e) => setVoucherCode(e.target.value)}
                         className="w-full pl-8 pr-3 py-1.5 text-xs bg-[#fcf9f4] border border-[#202022]/10 rounded-xl focus:outline-hidden focus:border-[#74584d]"
@@ -316,13 +315,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       type="submit"
                       className="px-3.5 py-1.5 bg-[#f6f3ee] hover:bg-[#ede7df] text-[#1c1c19] text-xs font-medium rounded-xl transition-colors shrink-0 cursor-pointer"
                     >
-                      {cData.voucherApplyBtn}
+                      {copy(cData.voucherApplyBtn)}
                     </button>
                   </form>
                   {/* 20/10 Quick Voucher Suggestions */}
                   <div className="mt-2 flex flex-wrap items-center gap-1.5">
                     <span className="text-[10px] text-[#74584d] font-semibold flex items-center space-x-1">
-                      <span>🌸 Mã 20/10:</span>
+                      <span>{copy("🌸 Mã 20/10:")}</span>
                     </span>
                     <button
                       type="button"
@@ -333,8 +332,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
                       }`}
                     >
-                      PHUNU20 · Hàng lẻ -20%
-                    </button>
+                      {copy("PHUNU20 · Hàng lẻ -20%")}</button>
                     <button
                       type="button"
                       onClick={() => handleApplyVoucher(undefined, 'ALPS2010')}
@@ -344,20 +342,19 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                           : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
                       }`}
                     >
-                      ALPS2010 · Combo -15%
-                    </button>
+                      {copy("ALPS2010 · Combo -15%")}</button>
                   </div>
 
-                  <button type="button" onClick={() => handleApplyVoucher(undefined, 'ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">ALPS2025 · Thành viên -10%</button>
-                  <p className="text-[10px] text-[#77767b] mt-2">Mỗi đơn dùng một mã. Mã hàng lẻ/combo chỉ giảm phần hàng phù hợp; mã thành viên yêu cầu đăng nhập.</p>
+                  <button type="button" onClick={() => handleApplyVoucher(undefined, 'ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">{copy("ALPS2025 · Thành viên -10%")}</button>
+                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Mỗi đơn dùng một mã. Mã hàng lẻ/combo chỉ giảm phần hàng phù hợp; mã thành viên yêu cầu đăng nhập.")}</p>
                   {appliedVoucher && !promotion.error && (
                     <p className="text-[11px] text-[#2d4a36] font-medium mt-2 flex items-center space-x-1">
-                      <span>✓ Đã áp dụng mã {appliedVoucher} (-{discountPercent}% phần hàng áp dụng)</span>
+                      <span>{copy("✓ Đã áp dụng mã ")}{copy(appliedVoucher)} {" (-"}{discountPercent}{copy("% phần hàng áp dụng)")}</span>
                     </p>
                   )}
                   {(voucherError || promotion.error) && (
                     <p className="text-[11px] text-[#ba1a1a] mt-1.5">
-                      {voucherError || promotion.error}
+                      {copy(voucherError || promotion.error)}
                     </p>
                   )}
                 </div>
@@ -370,24 +367,23 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
             <div className="p-4 sm:p-5 bg-white border-t border-[#202022]/8 space-y-3 safe-area-bottom">
               <div className="space-y-1.5 text-xs">
                 <div className="flex justify-between text-[#77767b]">
-                  <span>{t.cart.subtotal}</span>
-                  <span className="font-serif">{subtotal.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫</span>
+                  <span>{copy(t.cart.subtotal)}</span>
+                  <span className="font-serif">{subtotal.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                 </div>
                 {discountAmount > 0 && (
                   <div className="flex justify-between text-[#2d4a36]">
-                    <span>{cData.voucherDiscountLabel}</span>
-                    <span className="font-serif">-{discountAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫</span>
+                    <span>{copy(cData.voucherDiscountLabel)}</span>
+                    <span className="font-serif">{"-"}{discountAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-[#77767b]">
-                  <span>{t.cart.shipping}</span>
-                  <span>{shippingFee === 0 ? t.cart.freeShipping : `${shippingFee.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`}</span>
+                  <span>{copy(t.cart.shipping)}</span>
+                  <span>{copy(shippingFee === 0 ? t.cart.freeShipping : `${shippingFee.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`)}</span>
                 </div>
                 <div className="pt-2 border-t border-[#202022]/6 flex justify-between items-baseline">
-                  <span className="font-serif text-sm font-semibold text-[#1c1c19]">{t.cart.total}</span>
+                  <span className="font-serif text-sm font-semibold text-[#1c1c19]">{copy(t.cart.total)}</span>
                   <span className="font-serif text-base font-bold text-[#1c1c19]">
-                    {totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                  </span>
+                    {totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                 </div>
               </div>
 
@@ -398,13 +394,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                 }}
                 className="w-full py-3.5 px-6 rounded-full bg-[#1c1c19] hover:bg-black text-white text-xs font-semibold tracking-wider transition-all duration-200 active:scale-98 shadow-md flex items-center justify-center space-x-2 cursor-pointer uppercase"
               >
-                <span>{t.cart.checkoutBtn}</span>
+                <span>{copy(t.cart.checkoutBtn)}</span>
                 <ArrowRight className="w-4 h-4 text-[#fed8c9]" />
               </button>
 
               {/* Payment badges guarantee */}
               <div className="pt-2 flex flex-col items-center justify-center space-y-1.5 border-t border-[#202022]/6">
-                <span className="text-[10px] text-[#77767b]">{cData.securePaymentAccepted}</span>
+                <span className="text-[10px] text-[#77767b]">{copy(cData.securePaymentAccepted)}</span>
                 <div className="flex items-center space-x-1.5 flex-wrap justify-center">
                   <VietQRBadge className="h-5" />
                 </div>

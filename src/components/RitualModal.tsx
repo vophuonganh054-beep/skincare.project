@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React from 'react';
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import { AlpsIcon } from './AlpsLogo';
@@ -22,6 +23,7 @@ export const RitualModal: React.FC<RitualModalProps> = ({
   onBuyFullSet,
   onAddFullSetToCart,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const ritual = RITUAL_I18N[language] || RITUAL_I18N.vi;
 
@@ -40,10 +42,10 @@ export const RitualModal: React.FC<RitualModalProps> = ({
           <div>
             <span className="inline-flex items-center space-x-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] text-[#74584d]">
               <AlpsIcon className="w-3.5 h-3.5" color="#74584d" />
-              <span>{ritual.modalBadge}</span>
+              <span>{copy(ritual.modalBadge)}</span>
             </span>
             <h2 className="font-serif text-xl sm:text-2xl font-normal text-[#1c1c19]">
-              {ritual.modalTitle(ritual.steps.length)}
+              {copy(ritual.modalTitle(ritual.steps.length))}
             </h2>
           </div>
           <button
@@ -57,7 +59,7 @@ export const RitualModal: React.FC<RitualModalProps> = ({
         {/* Content */}
         <div className="overflow-y-auto p-5 sm:p-6 space-y-4">
           <p className="text-xs sm:text-sm text-[#46464a] leading-relaxed font-light">
-            {ritual.modalSubtitle}
+            {copy(ritual.modalSubtitle)}
           </p>
 
           <div className="space-y-3">
@@ -78,7 +80,7 @@ export const RitualModal: React.FC<RitualModalProps> = ({
                         {product && (
                           <img
                             src={product.image}
-                            alt={displayName}
+                            alt={copy(displayName)}
                             referrerPolicy="no-referrer"
                             onError={(e) => {
                               (e.target as HTMLImageElement).src = product.fallbackImage;
@@ -88,23 +90,23 @@ export const RitualModal: React.FC<RitualModalProps> = ({
                         )}
                       </div>
                       <span className="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-[#202022] text-white flex items-center justify-center font-serif text-[10px]">
-                        {step.step}
+                        {copy(step.step)}
                       </span>
                     </div>
                     <div>
                       <div className="flex items-center space-x-2">
                         <h4 className="font-serif text-sm sm:text-base font-medium text-[#1c1c19]">
-                          {displayName}
+                          {copy(displayName)}
                         </h4>
                         <span className="text-[10px] text-[#77767b] bg-[#f0ede9] px-2 py-0.5 rounded-full">
-                          {step.time}
+                          {copy(step.time)}
                         </span>
                       </div>
                       <p className="text-xs text-[#74584d] font-semibold mt-0.5">
-                        {displayCategory}
+                        {copy(displayCategory)}
                       </p>
                       <p className="text-xs text-[#46464a] font-light mt-1 max-w-lg leading-relaxed">
-                        {step.desc}
+                        {copy(step.desc)}
                       </p>
                     </div>
                   </div>
@@ -117,7 +119,7 @@ export const RitualModal: React.FC<RitualModalProps> = ({
                       }}
                       className="self-end sm:self-center text-xs font-semibold tracking-wider text-[#1c1c19] hover:text-[#74584d] flex items-center space-x-1 shrink-0 bg-[#f6f3ee] hover:bg-[#f0ede9] px-3 py-1.5 rounded-full transition-colors cursor-pointer"
                     >
-                      <span>{ritual.viewDetailBtn}</span>
+                      <span>{copy(ritual.viewDetailBtn)}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   )}
@@ -131,21 +133,19 @@ export const RitualModal: React.FC<RitualModalProps> = ({
             <div>
               <div className="inline-flex items-center space-x-1.5 text-[11px] text-[#74584d] font-semibold tracking-wider uppercase mb-1">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>{ritual.specialOfferBadge(ritual.steps.length)}</span>
+                <span>{copy(ritual.specialOfferBadge(ritual.steps.length))}</span>
               </div>
               <div className="flex items-baseline space-x-2">
                 <span className="font-serif text-xl sm:text-2xl font-bold text-[#1c1c19]">
-                  {bundleDiscountPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                </span>
+                  {bundleDiscountPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                 <span className="text-xs sm:text-sm text-[#77767b] line-through">
-                  {fullSetPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                </span>
+                  {fullSetPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                 <span className="text-[11px] text-[#ba1a1a] font-semibold bg-[#ba1a1a]/10 px-2 py-0.5 rounded-full">
-                  {ritual.savingsBadge}
+                  {copy(ritual.savingsBadge)}
                 </span>
               </div>
               <p className="text-xs text-[#77767b] mt-1">
-                {ritual.giftNote}
+                {copy(ritual.giftNote)}
               </p>
             </div>
 
@@ -158,7 +158,7 @@ export const RitualModal: React.FC<RitualModalProps> = ({
                   }}
                   className="px-5 py-3 bg-white hover:bg-[#f6f3ee] text-[#1c1c19] text-xs font-semibold tracking-wider rounded-full border border-[#202022]/15 transition-all shadow-xs active:scale-98 cursor-pointer uppercase"
                 >
-                  {ritual.addFullSetBtn}
+                  {copy(ritual.addFullSetBtn)}
                 </button>
               )}
 
@@ -170,7 +170,7 @@ export const RitualModal: React.FC<RitualModalProps> = ({
                 className="px-6 py-3 bg-[#202022] hover:bg-black text-white text-xs font-semibold tracking-wider rounded-full flex items-center justify-center space-x-2 transition-all shadow-md shrink-0 active:scale-98 cursor-pointer uppercase"
               >
                 <Sparkles className="w-4 h-4 text-[#fed8c9]" />
-                <span>{ritual.buyFullSetBtn}</span>
+                <span>{copy(ritual.buyFullSetBtn)}</span>
               </button>
             </div>
           </div>

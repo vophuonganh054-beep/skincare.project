@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import {
   X,
@@ -122,6 +123,7 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
   onAddToCart,
   onShowToast,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const quizData = QUIZ_I18N[language] || QUIZ_I18N.vi;
   const questions = quizData.questions;
@@ -250,14 +252,13 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
             <div>
               <div className="flex items-center space-x-2">
                 <h3 className="font-serif text-lg font-medium text-[#1c1c19]">
-                  {quizData.modalTitle}
+                  {copy(quizData.modalTitle)}
                 </h3>
                 <span className="text-[9px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#8a9a86]/20 text-[#4c5c49] font-bold">
-                  Swiss Dermatology
-                </span>
+                  {copy("Swiss Dermatology")}</span>
               </div>
               <p className="text-xs text-[#77746f]">
-                {quizData.stepIndicator(currentStep + 1, questions.length)}
+                {copy(quizData.stepIndicator(currentStep + 1, questions.length))}
               </p>
             </div>
           </div>
@@ -289,16 +290,16 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
               </div>
               <div className="space-y-2">
                 <h4 className="font-serif text-2xl font-normal text-[#1c1c19]">
-                  {quizData.analyzingTitle}
+                  {copy(quizData.analyzingTitle)}
                 </h4>
                 <p className="text-xs text-[#77746f] max-w-md mx-auto leading-relaxed">
-                  {quizData.analyzingDesc}
+                  {copy(quizData.analyzingDesc)}
                 </p>
               </div>
               <div className="flex items-center justify-center space-x-1.5 text-xs text-[#74584d] font-medium pt-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
                 <span>
-                  {language === 'vi'
+                  {copy(language === 'vi'
                     ? 'Gợi ý chăm sóc da dựa trên câu trả lời của bạn'
                     : language === 'de'
                     ? 'Pflegehinweise auf Basis Ihrer Antworten'
@@ -306,7 +307,7 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                     ? 'Consejos basados en tus respuestas'
                     : language === 'zh'
                     ? '根据您的回答提供护肤建议'
-                    : 'Care suggestions based on your answers'}
+                    : 'Care suggestions based on your answers')}
                 </span>
               </div>
             </div>
@@ -317,10 +318,10 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
             <div className="space-y-5">
               <div>
                 <span className="text-[11px] font-semibold uppercase tracking-wider text-[#74584d]">
-                  {currentQ.subtitle}
+                  {copy(currentQ.subtitle)}
                 </span>
                 <h4 className="font-serif text-xl sm:text-2xl font-normal text-[#1c1c19] mt-1">
-                  {currentQ.title}
+                  {copy(currentQ.title)}
                 </h4>
               </div>
 
@@ -341,10 +342,10 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                     >
                       <div className="pr-4">
                         <div className="text-sm font-semibold text-[#1c1c19]">
-                          {opt.label}
+                          {copy(opt.label)}
                         </div>
                         <div className="text-xs text-[#77746f] mt-1 leading-relaxed">
-                          {opt.desc}
+                          {copy(opt.desc)}
                         </div>
                       </div>
                       <div className="mt-1">
@@ -371,7 +372,7 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                     className="inline-flex items-center space-x-1.5 text-xs text-[#77746f] hover:text-[#1c1c19] font-medium cursor-pointer"
                   >
                     <ArrowLeft className="w-3.5 h-3.5" />
-                    <span>{quizData.backBtn}</span>
+                    <span>{copy(quizData.backBtn)}</span>
                   </button>
                 </div>
               )}
@@ -386,24 +387,24 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                 <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4">
                   <div className="space-y-1.5 text-center sm:text-left">
                     <span className="text-[10px] uppercase tracking-[0.2em] font-semibold text-[#74584d]">
-                      {quizData.clinicalResultHeader}
+                      {copy(quizData.clinicalResultHeader)}
                     </span>
                     <h4 className="font-serif text-xl sm:text-2xl font-normal text-[#1c1c19]">
-                      {result.diagnosisTitle}
+                      {copy(result.diagnosisTitle)}
                     </h4>
                     <p className="text-xs text-[#5f5d58] leading-relaxed pt-1">
-                      {result.rootCauseAnalysis}
+                      {copy(result.rootCauseAnalysis)}
                     </p>
                   </div>
 
                   {/* Circle Score */}
                   <div className="shrink-0 flex flex-col items-center justify-center p-4 bg-[#fcf9f4] rounded-2xl border border-[#ebe7df]">
                     <div className="text-3xl font-serif font-bold text-[#74584d]">
-                      {result.skinHealthScore}
-                      <span className="text-xs font-normal text-[#77746f]">/100</span>
+                      {copy(result.skinHealthScore)}
+                      <span className="text-xs font-normal text-[#77746f]">{"/100"}</span>
                     </div>
                     <div className="text-[10px] uppercase font-semibold text-[#77746f] mt-0.5">
-                      {quizData.skinScoreLabel}
+                      {copy(quizData.skinScoreLabel)}
                     </div>
                   </div>
                 </div>
@@ -413,30 +414,28 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                   <div className="bg-[#fbf9f6] p-2.5 rounded-xl text-center">
                     <div className="flex items-center justify-center space-x-1 text-[#74584d] mb-1">
                       <ShieldCheck className="w-3.5 h-3.5" />
-                      <span className="text-[10px] uppercase font-medium">{quizData.barrierStrengthLabel}</span>
+                      <span className="text-[10px] uppercase font-medium">{copy(quizData.barrierStrengthLabel)}</span>
                     </div>
                     <div className="text-sm font-semibold text-[#1c1c19]">
-                      {result.barrierStrength}%
-                    </div>
+                      {copy(result.barrierStrength)}{"%"}</div>
                   </div>
 
                   <div className="bg-[#fbf9f6] p-2.5 rounded-xl text-center">
                     <div className="flex items-center justify-center space-x-1 text-[#74584d] mb-1">
                       <Droplets className="w-3.5 h-3.5" />
-                      <span className="text-[10px] uppercase font-medium">{quizData.hydrationLevelLabel}</span>
+                      <span className="text-[10px] uppercase font-medium">{copy(quizData.hydrationLevelLabel)}</span>
                     </div>
                     <div className="text-sm font-semibold text-[#1c1c19]">
-                      {result.hydrationLevel}%
-                    </div>
+                      {copy(result.hydrationLevel)}{"%"}</div>
                   </div>
 
                   <div className="bg-[#fbf9f6] p-2.5 rounded-xl text-center">
                     <div className="flex items-center justify-center space-x-1 text-amber-700 mb-1">
                       <Activity className="w-3.5 h-3.5" />
-                      <span className="text-[10px] uppercase font-medium">{quizData.riskFactorLabel}</span>
+                      <span className="text-[10px] uppercase font-medium">{copy(quizData.riskFactorLabel)}</span>
                     </div>
                     <div className="text-xs font-semibold text-amber-900 truncate">
-                      {result.riskFactor}
+                      {copy(result.riskFactor)}
                     </div>
                   </div>
                 </div>
@@ -447,10 +446,10 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                 <div className="flex items-center justify-between">
                   <h5 className="font-serif text-lg font-medium text-[#1c1c19] flex items-center space-x-2">
                     <Sparkles className="w-4 h-4 text-[#74584d]" />
-                    <span>{quizData.personalizedRoutineTitle}</span>
+                    <span>{copy(quizData.personalizedRoutineTitle)}</span>
                   </h5>
                   <span className="text-[11px] text-[#74584d] font-medium">
-                    {quizData.swissProductsCount}
+                    {copy(quizData.swissProductsCount)}
                   </span>
                 </div>
 
@@ -459,16 +458,16 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                   <div className="bg-white rounded-2xl p-4 border border-[#ece6dc] space-y-3">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-amber-900 pb-2 border-b border-[#f0ede9]">
                       <Sun className="w-4 h-4 text-amber-600" />
-                      <span>{quizData.morningRoutineTitle}</span>
+                      <span>{copy(quizData.morningRoutineTitle)}</span>
                     </div>
                     <div className="space-y-2.5">
                       {result.morningRoutine.map((step, idx) => (
                         <div key={idx} className="text-xs">
                           <span className="font-semibold text-[#74584d] block">
-                            {step.step}: {step.product}
+                            {copy(step.step)}{": "}{copy(step.product)}
                           </span>
                           <span className="text-[#5f5d58] text-[11px] leading-relaxed block mt-0.5">
-                            {step.usage}
+                            {copy(step.usage)}
                           </span>
                         </div>
                       ))}
@@ -479,16 +478,16 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                   <div className="bg-white rounded-2xl p-4 border border-[#ece6dc] space-y-3">
                     <div className="flex items-center space-x-2 text-xs font-semibold text-indigo-900 pb-2 border-b border-[#f0ede9]">
                       <Moon className="w-4 h-4 text-indigo-600" />
-                      <span>{quizData.eveningRoutineTitle}</span>
+                      <span>{copy(quizData.eveningRoutineTitle)}</span>
                     </div>
                     <div className="space-y-2.5">
                       {result.eveningRoutine.map((step, idx) => (
                         <div key={idx} className="text-xs">
                           <span className="font-semibold text-[#74584d] block">
-                            {step.step}: {step.product}
+                            {copy(step.step)}{": "}{copy(step.product)}
                           </span>
                           <span className="text-[#5f5d58] text-[11px] leading-relaxed block mt-0.5">
-                            {step.usage}
+                            {copy(step.usage)}
                           </span>
                         </div>
                       ))}
@@ -501,11 +500,11 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
               <div className="bg-[#f7f4ee] rounded-2xl p-4 border border-[#e8e4dc] space-y-2">
                 <div className="flex items-center space-x-2 text-xs font-semibold text-[#74584d]">
                   <Info className="w-4 h-4 text-[#74584d]" />
-                  <span>{quizData.doctorAdviceTitle}</span>
+                  <span>{copy(quizData.doctorAdviceTitle)}</span>
                 </div>
                 <ul className="text-xs text-[#5f5d58] space-y-1.5 pl-5 list-disc leading-relaxed">
                   {result.expertTips.map((tip, idx) => (
-                    <li key={idx}>{tip}</li>
+                    <li key={idx}>{copy(tip)}</li>
                   ))}
                 </ul>
               </div>
@@ -517,7 +516,7 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                   className="w-full py-3.5 bg-[#1c1c19] hover:bg-black text-white text-xs sm:text-sm font-semibold tracking-wider uppercase rounded-full shadow-lg transition-all active:scale-98 flex items-center justify-center space-x-2 cursor-pointer"
                 >
                   <ShoppingBag className="w-4 h-4 text-[#fed8c9]" />
-                  <span>{quizData.addToCartRoutine}</span>
+                  <span>{copy(quizData.addToCartRoutine)}</span>
                 </button>
 
                 {onOpenSupportWithPrompt && (
@@ -526,7 +525,7 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                     className="w-full py-3 bg-white hover:bg-[#faf8f5] text-[#74584d] text-xs font-semibold tracking-wider uppercase rounded-full border border-[#74584d]/40 transition-all active:scale-98 flex items-center justify-center space-x-2 cursor-pointer"
                   >
                     <MessageSquare className="w-4 h-4 text-[#74584d]" />
-                    <span>{quizData.consultDoctor}</span>
+                    <span>{copy(quizData.consultDoctor)}</span>
                   </button>
                 )}
 
@@ -536,7 +535,7 @@ export const SkinQuizModal: React.FC<SkinQuizModalProps> = ({
                     className="inline-flex items-center space-x-1.5 text-xs text-[#77746f] hover:text-[#1c1c19] font-medium cursor-pointer"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
-                    <span>{quizData.retakeBtn}</span>
+                    <span>{copy(quizData.retakeBtn)}</span>
                   </button>
                 </div>
               </div>

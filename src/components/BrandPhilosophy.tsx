@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   Play, Pause, Volume2, VolumeX, Maximize2, Compass, Droplets, Leaf, 
@@ -478,6 +479,7 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
   onOpenStoryModal,
   onExploreCollection,
 }) => {
+  const copy = useCopy();
   const { t, language } = useLanguage();
   const currentText = STORY_I18N[language] || STORY_I18N.vi;
 
@@ -560,19 +562,18 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <div className="inline-flex items-center space-x-2 text-[10px] sm:text-xs font-semibold tracking-[0.15em] sm:tracking-[0.28em] text-[#74584d] uppercase whitespace-nowrap max-w-full overflow-hidden text-ellipsis">
           <AlpsIcon className="w-5 h-4 text-[#74584d]" color="#74584d" />
-          <span>{currentText.badge}</span>
+          <span>{copy(currentText.badge)}</span>
         </div>
 
         <h2 className="font-serif text-2xl sm:text-4xl md:text-5xl font-normal text-[#1c1c19] tracking-tight leading-tight">
-          {currentText.title}
+          {copy(currentText.title)}
         </h2>
 
         <p className="font-serif italic text-sm sm:text-base text-[#74584d]">
-          &ldquo;{currentText.slogan}&rdquo;
-        </p>
+          {"“"}{copy(currentText.slogan)}{"”"}</p>
 
         <p className="text-xs sm:text-sm text-[#5c5b5f] font-light leading-relaxed max-w-2xl mx-auto">
-          {currentText.desc}
+          {copy(currentText.desc)}
         </p>
       </div>
 
@@ -580,9 +581,9 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
       <div className="mt-8 max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
         {currentText.alpsMeaning.map((item) => (
           <div key={item.letter} className="bg-[#f6f3ee] p-3.5 sm:p-4 rounded-2xl border border-[#202022]/6 text-center">
-            <span className="font-serif text-xl sm:text-2xl font-bold text-[#74584d] block">{item.letter}</span>
-            <span className="text-[11px] font-bold text-[#1c1c19] uppercase tracking-wider block mt-0.5">{item.word}</span>
-            <span className="text-[10px] text-[#77767b] block mt-1">{item.meaning}</span>
+            <span className="font-serif text-xl sm:text-2xl font-bold text-[#74584d] block">{copy(item.letter)}</span>
+            <span className="text-[11px] font-bold text-[#1c1c19] uppercase tracking-wider block mt-0.5">{copy(item.word)}</span>
+            <span className="text-[10px] text-[#77767b] block mt-1">{copy(item.meaning)}</span>
           </div>
         ))}
       </div>
@@ -598,7 +599,7 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
               activeTier === 'story' ? originStreamImg :
               activeTier === 'philosophy' ? edelweissImg : labCraftImg
             }
-            alt="Thước phim di sản Alps Pure Essence"
+            alt={copy("Thước phim di sản Alps Pure Essence")}
             className={`w-full h-full object-cover transition-all duration-1000 ease-out transform ${
               isPlaying ? 'scale-105' : 'scale-100'
             }`}
@@ -620,18 +621,18 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
               <button
                 onClick={toggleAudio}
                 className="p-2 sm:px-3 sm:py-1.5 rounded-full bg-black/45 backdrop-blur-md hover:bg-black/60 transition-colors text-xs flex items-center space-x-1.5 border border-white/10 text-white cursor-pointer"
-                title={isMuted ? t.brandStory.natureSound : t.brandStory.playingSound}
+                title={copy(isMuted ? t.brandStory.natureSound : t.brandStory.playingSound)}
               >
                 {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-[#fed8c9]" />}
                 <span className="hidden sm:inline text-[11px]">
-                  {isMuted ? t.brandStory.natureSound : t.brandStory.playingSound}
+                  {copy(isMuted ? t.brandStory.natureSound : t.brandStory.playingSound)}
                 </span>
               </button>
 
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
                 className="p-2 rounded-full bg-black/45 backdrop-blur-md hover:bg-black/60 transition-colors text-white border border-white/10 cursor-pointer"
-                title={isPlaying ? 'Dừng chuyển động' : 'Phát chuyển động'}
+                title={copy(isPlaying ? 'Dừng chuyển động' : 'Phát chuyển động')}
               >
                 {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
               </button>
@@ -641,8 +642,7 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
           {/* Bottom Captions Overlay */}
           <div className="absolute bottom-6 left-5 right-5 sm:left-10 sm:right-10 z-20 text-white max-w-3xl space-y-2">
             <span className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#fed8c9] font-medium block">
-              Zermatt 45°58&apos;N 7°44&apos;E • 1,608M High Alpine Elevation
-            </span>
+              {copy("Zermatt 45°58'N 7°44'E • 1,608M High Alpine Elevation")}</span>
             <h3 className="font-serif text-lg sm:text-2xl md:text-3xl font-normal leading-snug">
               {activeTier === 'story' && currentText.storyTitle}
               {activeTier === 'philosophy' && currentText.philosophyTitle}
@@ -667,10 +667,10 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             }`}
           >
             <span className="text-[9px] uppercase tracking-widest font-semibold block text-[#fed8c9]">
-              {language === 'vi' ? 'TẦNG 1' : 'TIER 1'}
+              {copy(language === 'vi' ? 'TẦNG 1' : 'TIER 1')}
             </span>
             <span className="text-xs font-serif truncate block text-white/95 mt-0.5">
-              {currentText.tier1Tab}
+              {copy(currentText.tier1Tab)}
             </span>
           </button>
 
@@ -683,10 +683,10 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             }`}
           >
             <span className="text-[9px] uppercase tracking-widest font-semibold block text-[#fed8c9]">
-              {language === 'vi' ? 'TẦNG 2' : 'TIER 2'}
+              {copy(language === 'vi' ? 'TẦNG 2' : 'TIER 2')}
             </span>
             <span className="text-xs font-serif truncate block text-white/95 mt-0.5">
-              {currentText.tier2Tab}
+              {copy(currentText.tier2Tab)}
             </span>
           </button>
 
@@ -699,10 +699,10 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             }`}
           >
             <span className="text-[9px] uppercase tracking-widest font-semibold block text-[#fed8c9]">
-              {language === 'vi' ? 'TẦNG 3' : 'TIER 3'}
+              {copy(language === 'vi' ? 'TẦNG 3' : 'TIER 3')}
             </span>
             <span className="text-xs font-serif truncate block text-white/95 mt-0.5">
-              {currentText.tier3Tab}
+              {copy(currentText.tier3Tab)}
             </span>
           </button>
         </div>
@@ -718,30 +718,30 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
               <div className="lg:col-span-7 space-y-4 text-xs sm:text-sm md:text-base text-[#46464a] font-light leading-relaxed">
                 <div className="space-y-1 border-b border-[#202022]/8 pb-3">
                   <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#74584d]">
-                    I. {language === 'vi' ? 'CÂU CHUYỆN THƯƠNG HIỆU' : 'BRAND STORY'}
+                    {copy("I. ")}{copy(language === 'vi' ? 'CÂU CHUYỆN THƯƠNG HIỆU' : 'BRAND STORY')}
                   </span>
                   <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19]">
-                    {currentText.storyTitle}
+                    {copy(currentText.storyTitle)}
                   </h3>
                 </div>
 
-                <p>{currentText.storyP1}</p>
-                <p>{currentText.storyP2}</p>
-                <p>{currentText.storyP3}</p>
+                <p>{copy(currentText.storyP1)}</p>
+                <p>{copy(currentText.storyP2)}</p>
+                <p>{copy(currentText.storyP3)}</p>
 
                 <div className="p-5 bg-[#f6f3ee] rounded-2xl border border-[#202022]/8 space-y-2">
                   <span className="text-[10px] uppercase font-bold text-[#74584d] tracking-wider block">
-                    {currentText.approachTitle}
+                    {copy(currentText.approachTitle)}
                   </span>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 font-serif text-xs text-[#1c1c19]">
                     {currentText.approachPillars.map((p, idx) => (
                       <div key={idx} className="p-2 bg-white rounded-lg text-center font-medium shadow-2xs">
-                        {p}
+                        {copy(p)}
                       </div>
                     ))}
                   </div>
                   <p className="text-[11px] text-[#77767b] pt-1">
-                    {currentText.approachNote}
+                    {copy(currentText.approachNote)}
                   </p>
                 </div>
               </div>
@@ -750,19 +750,19 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
               <div className="lg:col-span-5 space-y-5">
                 <div className="bg-[#fcf9f4] p-6 rounded-2xl border border-[#202022]/8 shadow-2xs space-y-4">
                   <span className="text-[10px] uppercase font-bold tracking-wider text-[#74584d] block">
-                    {currentText.originTitle}
+                    {copy(currentText.originTitle)}
                   </span>
                   <div className="space-y-3 text-xs text-[#46464a]">
                     <div className="pb-3 border-b border-[#202022]/6">
-                      <strong className="text-[#1c1c19] text-sm font-serif block">{currentText.originAlpsTitle}</strong>
+                      <strong className="text-[#1c1c19] text-sm font-serif block">{copy(currentText.originAlpsTitle)}</strong>
                       <p className="mt-1 font-light leading-relaxed">
-                        {currentText.originAlpsDesc}
+                        {copy(currentText.originAlpsDesc)}
                       </p>
                     </div>
                     <div>
-                      <strong className="text-[#1c1c19] text-sm font-serif block">{currentText.originPureTitle}</strong>
+                      <strong className="text-[#1c1c19] text-sm font-serif block">{copy(currentText.originPureTitle)}</strong>
                       <p className="mt-1 font-light leading-relaxed">
-                        {currentText.originPureDesc}
+                        {copy(currentText.originPureDesc)}
                       </p>
                     </div>
                   </div>
@@ -771,13 +771,12 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
                 {/* Question & Origin Foundation */}
                 <div className="p-5 bg-[#f6f3ee] rounded-2xl border border-[#202022]/8 space-y-2">
                   <span className="text-[10px] uppercase font-bold text-[#74584d] tracking-wider block">
-                    {currentText.questionTitle}
+                    {copy(currentText.questionTitle)}
                   </span>
                   <p className="font-serif italic text-xs text-[#1c1c19]">
-                    &ldquo;{currentText.questionQuote}&rdquo;
-                  </p>
+                    {"“"}{copy(currentText.questionQuote)}{"”"}</p>
                   <p className="text-xs text-[#46464a] font-light leading-relaxed">
-                    {currentText.questionDesc}
+                    {copy(currentText.questionDesc)}
                   </p>
                 </div>
               </div>
@@ -786,15 +785,15 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             {/* 4 Historical Stages (2026 Origin) */}
             <div className="pt-6 border-t border-[#202022]/8 space-y-4">
               <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#74584d] block text-center">
-                {currentText.historyTitle}
+                {copy(currentText.historyTitle)}
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {currentText.historyStages.map((stage, idx) => (
                   <div key={idx} className="p-4 bg-white rounded-2xl border border-[#202022]/8 space-y-1.5 shadow-2xs">
-                    <span className="text-xs font-bold text-[#74584d]">{stage.stage}</span>
-                    <h4 className="font-serif text-sm text-[#1c1c19]">{stage.title}</h4>
+                    <span className="text-xs font-bold text-[#74584d]">{copy(stage.stage)}</span>
+                    <h4 className="font-serif text-sm text-[#1c1c19]">{copy(stage.title)}</h4>
                     <p className="text-[11px] text-[#77767b] leading-relaxed">
-                      {stage.desc}
+                      {copy(stage.desc)}
                     </p>
                   </div>
                 ))}
@@ -809,13 +808,13 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             {/* 4 Pillars of Purity */}
             <div className="text-center max-w-2xl mx-auto space-y-2">
               <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#74584d]">
-                {language === 'vi' ? 'V. TRIẾT LÝ THƯƠNG HIỆU' : 'V. BRAND PHILOSOPHY'}
+                {copy(language === 'vi' ? 'V. TRIẾT LÝ THƯƠNG HIỆU' : 'V. BRAND PHILOSOPHY')}
               </span>
               <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19]">
-                {currentText.philosophyTitle}
+                {copy(currentText.philosophyTitle)}
               </h3>
               <p className="text-xs sm:text-sm text-[#5c5b5f] font-light">
-                {currentText.philosophySubtitle}
+                {copy(currentText.philosophySubtitle)}
               </p>
             </div>
 
@@ -823,11 +822,11 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
               {currentText.pillars.map((pillar) => (
                 <div key={pillar.num} className="p-5 bg-white rounded-2xl border border-[#202022]/8 space-y-2 shadow-2xs">
                   <div className="w-8 h-8 rounded-full bg-[#fed8c9]/40 text-[#74584d] flex items-center justify-center font-serif text-sm font-bold">
-                    {pillar.num}
+                    {copy(pillar.num)}
                   </div>
-                  <h4 className="font-serif text-base text-[#1c1c19]">{pillar.title}</h4>
+                  <h4 className="font-serif text-base text-[#1c1c19]">{copy(pillar.title)}</h4>
                   <p className="text-xs text-[#5c5b5f] font-light leading-relaxed">
-                    {pillar.desc}
+                    {copy(pillar.desc)}
                   </p>
                 </div>
               ))}
@@ -839,20 +838,20 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
                 <div className="p-5 bg-[#f6f3ee] rounded-2xl border border-[#202022]/8 space-y-2">
                   <h4 className="font-serif text-base text-[#1c1c19] flex items-center space-x-2">
                     <Compass className="w-4 h-4 text-[#74584d]" />
-                    <span>{currentText.missionTitle}</span>
+                    <span>{copy(currentText.missionTitle)}</span>
                   </h4>
                   <p className="text-xs text-[#46464a] font-light leading-relaxed">
-                    {currentText.missionDesc}
+                    {copy(currentText.missionDesc)}
                   </p>
                 </div>
 
                 <div className="p-5 sm:p-6 bg-[#f6f3ee] rounded-2xl border border-[#202022]/8 space-y-3 shadow-2xs">
                   <h4 className="font-serif text-base text-[#1c1c19] flex items-center space-x-2 font-medium">
                     <Eye className="w-4 h-4 text-[#74584d]" />
-                    <span>{currentText.visionTitle}</span>
+                    <span>{copy(currentText.visionTitle)}</span>
                   </h4>
                   <p className="text-xs sm:text-sm text-[#46464a] font-light leading-relaxed">
-                    {currentText.visionDesc}
+                    {copy(currentText.visionDesc)}
                   </p>
                   {currentText.visionHighlights && (
                     <div className="pt-2 space-y-2">
@@ -860,8 +859,8 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
                         <div key={idx} className="flex items-start space-x-2.5 p-2.5 rounded-xl bg-white/70 border border-[#202022]/6">
                           <CheckCircle2 className="w-3.5 h-3.5 text-[#74584d] mt-0.5 shrink-0" />
                           <div className="text-xs">
-                            <strong className="text-[#1c1c19] block">{vh.title}</strong>
-                            <span className="text-[11px] text-[#77767b] leading-tight block mt-0.5">{vh.desc}</span>
+                            <strong className="text-[#1c1c19] block">{copy(vh.title)}</strong>
+                            <span className="text-[11px] text-[#77767b] leading-tight block mt-0.5">{copy(vh.desc)}</span>
                           </div>
                         </div>
                       ))}
@@ -872,15 +871,15 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
 
               <div className="md:col-span-7 bg-[#fcf9f4] p-6 rounded-2xl border border-[#202022]/8 shadow-2xs space-y-3">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-[#74584d] block">
-                  {currentText.valuesTitle}
+                  {copy(currentText.valuesTitle)}
                 </span>
                 <div className="space-y-2.5">
                   {currentText.values.map((val, idx) => (
                     <div key={idx} className="flex items-start space-x-3 text-xs">
                       <span className="w-1.5 h-1.5 rounded-full bg-[#74584d] mt-1.5 shrink-0" />
                       <div>
-                        <strong className="text-[#1c1c19]">{val.title}:</strong>{' '}
-                        <span className="text-[#5c5b5f] font-light">{val.desc}</span>
+                        <strong className="text-[#1c1c19]">{copy(val.title)}{":"}</strong>{' '}
+                        <span className="text-[#5c5b5f] font-light">{copy(val.desc)}</span>
                       </div>
                     </div>
                   ))}
@@ -897,13 +896,13 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             <div className="space-y-4">
               <div className="text-center max-w-2xl mx-auto space-y-1">
                 <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#74584d]">
-                  {language === 'vi' ? 'VI. CAM KẾT HÀNH ĐỘNG' : 'VI. ACTIONS & PLEDGES'}
+                  {copy(language === 'vi' ? 'VI. CAM KẾT HÀNH ĐỘNG' : 'VI. ACTIONS & PLEDGES')}
                 </span>
                 <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19]">
-                  {currentText.commitmentsTitle}
+                  {copy(currentText.commitmentsTitle)}
                 </h3>
                 <p className="text-xs text-[#5c5b5f] font-light">
-                  {currentText.commitmentsSubtitle}
+                  {copy(currentText.commitmentsSubtitle)}
                 </p>
               </div>
 
@@ -923,12 +922,12 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
                       ) : (
                         <CheckCircle2 className="w-4 h-4 text-[#74584d] shrink-0" />
                       )}
-                      <span>{item.num}. {item.title}</span>
+                      <span>{copy(item.num)}{". "}{copy(item.title)}</span>
                     </div>
                     <div className={`md:col-span-8 font-light ${
                       item.num === '07' ? 'text-[#1c1c19] font-medium' : 'text-[#5c5b5f]'
                     }`}>
-                      {item.desc}
+                      {copy(item.desc)}
                     </div>
                   </div>
                 ))}
@@ -939,13 +938,12 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             <div className="p-6 sm:p-8 bg-[#f6f3ee] rounded-3xl border border-[#202022]/8 text-center max-w-3xl mx-auto space-y-3">
               <Quote className="w-8 h-8 text-[#74584d]/20 mx-auto" />
               <h4 className="font-serif text-lg sm:text-xl text-[#1c1c19]">
-                {currentText.beliefTitle}
+                {copy(currentText.beliefTitle)}
               </h4>
               <p className="font-serif italic text-xs sm:text-sm text-[#46464a] leading-relaxed max-w-xl mx-auto">
-                &ldquo;{currentText.beliefQuote}&rdquo;
-              </p>
+                {"“"}{copy(currentText.beliefQuote)}{"”"}</p>
               <div className="pt-2 text-[11px] text-[#74584d] font-semibold uppercase tracking-wider">
-                {currentText.beliefFooter}
+                {copy(currentText.beliefFooter)}
               </div>
             </div>
           </div>
@@ -960,7 +958,7 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             className="w-full sm:w-auto px-7 py-3 rounded-full bg-[#202022] hover:bg-[#32362f] text-white text-xs sm:text-sm font-medium flex items-center justify-center space-x-2 transition-all shadow-xs cursor-pointer"
           >
             <BookOpen className="w-4 h-4 text-[#fed8c9]" />
-            <span>{t.brandStory.readMoreBtn}</span>
+            <span>{copy(t.brandStory.readMoreBtn)}</span>
           </button>
         )}
 
@@ -969,7 +967,7 @@ export const BrandPhilosophy: React.FC<BrandPhilosophyProps> = ({
             onClick={onExploreCollection}
             className="w-full sm:w-auto px-7 py-3 rounded-full bg-white hover:bg-[#f6f3ee] text-[#1c1c19] border border-[#202022]/15 text-xs sm:text-sm font-medium flex items-center justify-center space-x-2 transition-colors cursor-pointer"
           >
-            <span>{t.brandStory.exploreCollectionBtn}</span>
+            <span>{copy(t.brandStory.exploreCollectionBtn)}</span>
             <ArrowRight className="w-4 h-4 text-[#74584d]" />
           </button>
         )}

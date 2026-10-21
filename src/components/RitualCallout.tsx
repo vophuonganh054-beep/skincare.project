@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React from 'react';
 import { Flower2, ChevronRight } from 'lucide-react';
 import { AlpsIcon } from './AlpsLogo';
@@ -9,6 +10,7 @@ interface RitualCalloutProps {
 }
 
 export const RitualCallout: React.FC<RitualCalloutProps> = ({ onOpenRitual, isMobileFrame = false }) => {
+  const copy = useCopy();
   const { t } = useLanguage();
 
   return (
@@ -26,10 +28,10 @@ export const RitualCallout: React.FC<RitualCalloutProps> = ({ onOpenRitual, isMo
           {/* Texts */}
           <div>
             <h3 className="font-serif text-sm sm:text-base font-normal text-[#1c1c19] tracking-tight">
-              {t.ritual.title}
+              {copy(t.ritual.title)}
             </h3>
             <p className="text-[11px] sm:text-xs text-[#77767b] font-light mt-0.5">
-              {t.ritual.desc}
+              {copy(t.ritual.desc)}
             </p>
           </div>
         </div>
@@ -39,9 +41,9 @@ export const RitualCallout: React.FC<RitualCalloutProps> = ({ onOpenRitual, isMo
           <div className="flex flex-col items-end">
             <div className="flex items-center space-x-1 text-[10px] uppercase tracking-[0.2em] text-[#77767b] font-semibold">
               <AlpsIcon className="w-3 h-3" color="#74584d" />
-              <span>ALPS</span>
+              <span>{copy("ALPS")}</span>
             </div>
-            <div className="text-[11px] sm:text-xs uppercase tracking-[0.15em] font-serif text-[#74584d] font-medium">RITUAL</div>
+            <div className="text-[11px] sm:text-xs uppercase tracking-[0.15em] font-serif text-[#74584d] font-medium">{copy("RITUAL")}</div>
           </div>
           <ChevronRight className="w-4 h-4 text-[#77767b] group-hover:translate-x-0.5 transition-transform" />
         </div>

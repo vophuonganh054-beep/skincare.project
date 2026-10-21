@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useEffect, useState } from 'react';
 import { Copy, Check, Download, ShieldCheck, Building, RefreshCw, CheckCircle2 } from 'lucide-react';
 import { auth } from '../firebase';
@@ -47,6 +48,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
   onCheckPayment,
   onPaymentSuccess,
 }) => {
+  const copy = useCopy();
   const [registered, setRegistered] = useState(false);
   const [paymentError, setPaymentError] = useState('');
   const [copiedField, setCopiedField] = useState<string | null>(null);
@@ -185,11 +187,9 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
           {/* VietQR Logo */}
           <div className="flex items-center space-x-0.5">
             <span className="font-extrabold text-lg tracking-tight text-[#e02020] flex items-center">
-              <span className="text-xl">V</span>iet
-            </span>
+              <span className="text-xl">{copy("V")}</span>{copy("iet")}</span>
             <span className="font-extrabold text-lg tracking-tight text-[#0052cc]">
-              QR
-            </span>
+              {copy("QR")}</span>
           </div>
 
           {/* MB Bank Logo */}
@@ -198,22 +198,20 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
               <path d="M12 2L14.4 8.6L21.5 9.1L16 13.8L17.8 20.8L12 16.9L6.2 20.8L8 13.8L2.5 9.1L9.6 8.6L12 2Z" />
             </svg>
             <span className="font-black text-xl tracking-tighter text-[#002f87]">
-              MB
-            </span>
+              {copy("MB")}</span>
           </div>
         </div>
 
         {/* PROMINENT PRICE DISPLAY DIRECTLY ON THE QR CARD */}
         <div className="relative z-10 my-3 px-3 py-2.5 bg-[#fdfcf9] rounded-2xl border border-[#fed8c9] shadow-xs">
           <div className="text-[10px] text-[#74584d] font-semibold tracking-wider uppercase flex items-center justify-center space-x-1">
-            <span>SỐ TIỀN CẦN THANH TOÁN</span>
+            <span>{copy("SỐ TIỀN CẦN THANH TOÁN")}</span>
           </div>
           <div className="font-serif text-2xl sm:text-[26px] font-extrabold text-[#ba1a1a] tracking-tight leading-none mt-1">
-            {integerAmount.toLocaleString('vi-VN')} <span className="text-lg">₫</span>
+            {integerAmount.toLocaleString('vi-VN')} <span className="text-lg">{"₫"}</span>
           </div>
           <div className="text-[10px] text-[#77767b] mt-0.5">
-            Chuyển khoản ngân hàng 24/7
-          </div>
+            {copy("Chuyển khoản ngân hàng 24/7")}</div>
         </div>
 
         {/* Dynamic VietQR Image Container */}
@@ -221,20 +219,19 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
           <div className="relative w-full flex items-center justify-center min-h-[260px]">
             {registered ? <img
               src={vietQrImageUrl}
-              alt={`Mã VietQR động MB Bank ${integerAmount.toLocaleString('vi-VN')}đ - ${transferDes}`}
+              alt={copy(`Mã VietQR động MB Bank ${integerAmount.toLocaleString('vi-VN')}đ - ${transferDes}`)}
               className={`w-full max-w-[290px] rounded-xl object-contain transition-opacity duration-300 ${
                 isVerifying ? 'opacity-40 filter blur-[1px]' : 'opacity-100'
               }`}
               loading="eager"
-            /> : <p role="status" className="px-4 text-xs text-[#74584d]">{paymentError || 'Đang tạo phiên thanh toán...'}</p>}
+            /> : <p role="status" className="px-4 text-xs text-[#74584d]">{copy(paymentError || 'Đang tạo phiên thanh toán...')}</p>}
             {isVerifying && (
               <div className="absolute inset-0 flex flex-col items-center justify-center space-y-2 bg-white/70 backdrop-blur-xs rounded-xl">
                 <RefreshCw className="w-8 h-8 text-[#74584d] animate-spin" />
                 <span className="text-[11px] font-semibold text-[#1c1c19]">
-                  Đang kiểm tra giao dịch chuyển khoản...
-                </span>
+                  {copy("Đang kiểm tra giao dịch chuyển khoản...")}</span>
                 <span className="text-[10px] text-[#77767b]">
-                  Đang đối soát mã {transferDes}
+                  {copy("Đang đối soát mã ")}{copy(transferDes)}
                 </span>
               </div>
             )}
@@ -244,11 +241,9 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
                   <Check className="w-6 h-6 stroke-[3]" />
                 </div>
                 <span className="text-xs font-bold tracking-wide uppercase">
-                  ĐÃ NHẬN TIỀN
-                </span>
+                  {copy("ĐÃ NHẬN TIỀN")}</span>
                 <span className="text-[10px] text-emerald-200">
-                  +{integerAmount.toLocaleString('vi-VN')}₫
-                </span>
+                  {"+"}{integerAmount.toLocaleString('vi-VN')}{"₫"}</span>
               </div>
             )}
           </div>
@@ -256,10 +251,10 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
           {/* Account and Memo badges */}
           <div className="w-full mt-2 grid grid-cols-2 gap-1.5 text-[10px]">
             <div className="px-2 py-1 bg-[#f6f3ee] rounded-lg font-semibold text-[#1c1c19] truncate border border-[#202022]/5">
-              CHỦ TK: <span className="text-[#74584d]">{bankInfo.accountName}</span>
+              {copy("CHỦ TK: ")}<span className="text-[#74584d]">{copy(bankInfo.accountName)}</span>
             </div>
             <div className="px-2 py-1 bg-[#f6f3ee] rounded-lg font-semibold text-[#1c1c19] truncate border border-[#202022]/5">
-              NỘI DUNG: <span className="text-[#74584d]">{bankInfo.memo}</span>
+              {copy("NỘI DUNG: ")}<span className="text-[#74584d]">{copy(bankInfo.memo)}</span>
             </div>
           </div>
         </div>
@@ -267,8 +262,8 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
         {/* Bank transfer via VietQR */}
         <div className="relative z-10 pt-2 border-t border-[#202022]/6 flex items-center justify-between text-[10px] text-[#46464a] font-medium px-1">
           <div className="flex items-center space-x-0.5">
-            <span className="font-bold text-[#e02020]">Viet</span>
-            <span className="font-bold text-[#0052cc]">QR</span>
+            <span className="font-bold text-[#e02020]">{copy("Viet")}</span>
+            <span className="font-bold text-[#0052cc]">{copy("QR")}</span>
           </div>
         </div>
       </div>
@@ -283,18 +278,16 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
               </div>
               <div>
                 <div className="font-bold text-xs text-emerald-950 uppercase tracking-wide">
-                  ĐÃ NHẬN THANH TOÁN THÀNH CÔNG!
-                </div>
+                  {copy("ĐÃ NHẬN THANH TOÁN THÀNH CÔNG!")}</div>
                 <div className="text-[11px] text-emerald-800">
-                  Hệ thống MB Bank đã nhận đủ <strong>{amount.toLocaleString('vi-VN')}₫</strong>
+                  {copy("Hệ thống MB Bank đã nhận đủ ")}<strong>{amount.toLocaleString('vi-VN')}{"₫"}</strong>
                 </div>
               </div>
             </div>
             <div className="pt-2 border-t border-emerald-200/80 flex items-center justify-between text-[11px] text-emerald-900">
-              <span className="font-medium">Nút mua hàng bên dưới đã được kích hoạt:</span>
+              <span className="font-medium">{copy("Nút mua hàng bên dưới đã được kích hoạt:")}</span>
               <span className="font-bold text-emerald-700 uppercase bg-emerald-100 px-2 py-0.5 rounded-full text-[10px]">
-                Sẵn sàng đặt
-              </span>
+                {copy("Sẵn sàng đặt")}</span>
             </div>
           </div>
         ) : (
@@ -303,21 +296,19 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
               <div className="flex items-center space-x-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping" />
                 <span className="font-semibold text-xs text-[#1c1c19]">
-                  {paymentError || 'Chờ nhận chuyển khoản...'}
+                  {copy(paymentError || 'Chờ nhận chuyển khoản...')}
                 </span>
               </div>
               <span className="text-[10px] text-[#74584d] bg-[#fed8c9]/30 px-2 py-0.5 rounded-full font-medium">
-                Kiểm tra tự động 24/7
-              </span>
+                {copy("Kiểm tra tự động 24/7")}</span>
             </div>
 
             <p className="text-[11px] text-[#77767b] leading-relaxed">
-              Sau khi quý khách quét mã và hoàn tất chuyển tiền <strong>{amount.toLocaleString('vi-VN')}₫</strong> trên ứng dụng ngân hàng, cổng thanh toán SePay sẽ tự động đối soát giao dịch và kích hoạt nút đặt hàng trong 3-5 giây.
-            </p>
+              {copy("Sau khi quý khách quét mã và hoàn tất chuyển tiền ")}<strong>{amount.toLocaleString('vi-VN')}{"₫"}</strong> {copy(" trên ứng dụng ngân hàng, cổng thanh toán SePay sẽ tự động đối soát giao dịch và kích hoạt nút đặt hàng trong 3-5 giây.")}</p>
 
             <div className="flex items-center justify-center space-x-1.5 text-[10px] text-[#5f5d58] pt-1">
               <ShieldCheck className="w-3.5 h-3.5 shrink-0 text-[#74584d]" />
-              <span>Hệ thống chỉ kích hoạt đơn hàng sau khi backend đối soát giao dịch hợp lệ</span>
+              <span>{copy("Hệ thống chỉ kích hoạt đơn hàng sau khi backend đối soát giao dịch hợp lệ")}</span>
             </div>
           </div>
         )}
@@ -328,33 +319,31 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
         <div className="flex items-center justify-between pb-2 border-b border-[#202022]/6">
           <div className="flex items-center space-x-1.5 font-semibold text-[#1c1c19]">
             <Building className="w-4 h-4 text-[#74584d]" />
-            <span>Thông tin chuyển khoản MB Bank</span>
+            <span>{copy("Thông tin chuyển khoản MB Bank")}</span>
           </div>
           <span className="text-[10px] bg-[#8a9a86]/15 text-[#8a9a86] font-semibold px-2 py-0.5 rounded-full">
-            Chính thức
-          </span>
+            {copy("Chính thức")}</span>
         </div>
 
         {/* Bank & Branch */}
         <div className="flex justify-between items-start text-[11px]">
-          <span className="text-[#77767b]">Ngân hàng:</span>
+          <span className="text-[#77767b]">{copy("Ngân hàng:")}</span>
           <span className="font-medium text-[#1c1c19] text-right">
-            MB Bank (Quân Đội)
-          </span>
+            {copy("MB Bank (Quân Đội)")}</span>
         </div>
 
         {/* Account Name */}
         <div className="flex justify-between items-center text-[11px]">
-          <span className="text-[#77767b]">Tên thụ hưởng:</span>
+          <span className="text-[#77767b]">{copy("Tên thụ hưởng:")}</span>
           <div className="flex items-center space-x-1.5">
             <span className="font-bold text-[#1c1c19] uppercase tracking-wide">
-              {bankInfo.accountName}
+              {copy(bankInfo.accountName)}
             </span>
             <button
               type="button"
               onClick={() => copyToClipboard(bankInfo.accountName, 'Tên người nhận')}
               className="p-1 hover:bg-[#f0ede9] rounded text-[#77767b] hover:text-[#1c1c19] transition-colors"
-              title="Sao chép tên người nhận"
+              title={copy("Sao chép tên người nhận")}
             >
               {copiedField === 'Tên người nhận' ? (
                 <Check className="w-3.5 h-3.5 text-[#8a9a86]" />
@@ -367,16 +356,16 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
 
         {/* Account Number */}
         <div className="flex justify-between items-center text-[11px]">
-          <span className="text-[#77767b]">Số tài khoản:</span>
+          <span className="text-[#77767b]">{copy("Số tài khoản:")}</span>
           <div className="flex items-center space-x-1.5">
             <span className="font-mono font-bold text-[#1c1c19] tracking-wider text-xs">
-              {bankInfo.accountDisplayNumber}
+              {copy(bankInfo.accountDisplayNumber)}
             </span>
             <button
               type="button"
               onClick={() => copyToClipboard(bankInfo.accountNumber, 'Số tài khoản')}
               className="p-1 hover:bg-[#f0ede9] rounded text-[#77767b] hover:text-[#1c1c19] transition-colors"
-              title="Sao chép số tài khoản"
+              title={copy("Sao chép số tài khoản")}
             >
               {copiedField === 'Số tài khoản' ? (
                 <Check className="w-3.5 h-3.5 text-[#8a9a86]" />
@@ -389,16 +378,15 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
 
         {/* Amount */}
         <div className="flex justify-between items-center text-[11px]">
-          <span className="text-[#77767b]">Số tiền cần chuyển:</span>
+          <span className="text-[#77767b]">{copy("Số tiền cần chuyển:")}</span>
           <div className="flex items-center space-x-1.5">
             <span className="font-serif font-bold text-[#ba1a1a] text-sm">
-              {amount.toLocaleString('vi-VN')}₫
-            </span>
+              {amount.toLocaleString('vi-VN')}{"₫"}</span>
             <button
               type="button"
               onClick={() => copyToClipboard(amount.toString(), 'Số tiền')}
               className="p-1 hover:bg-[#f0ede9] rounded text-[#77767b] hover:text-[#1c1c19] transition-colors"
-              title="Sao chép số tiền"
+              title={copy("Sao chép số tiền")}
             >
               {copiedField === 'Số tiền' ? (
                 <Check className="w-3.5 h-3.5 text-[#8a9a86]" />
@@ -411,16 +399,16 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
 
         {/* Transfer Memo */}
         <div className="flex justify-between items-center text-[11px] pt-1 border-t border-[#202022]/6">
-          <span className="text-[#77767b]">Nội dung chuyển khoản:</span>
+          <span className="text-[#77767b]">{copy("Nội dung chuyển khoản:")}</span>
           <div className="flex items-center space-x-1.5">
             <span className="font-mono font-bold text-[#74584d] bg-[#fed8c9]/30 px-2 py-0.5 rounded text-xs">
-              {bankInfo.memo}
+              {copy(bankInfo.memo)}
             </span>
             <button
               type="button"
               onClick={() => copyToClipboard(bankInfo.memo, 'Nội dung CK')}
               className="p-1 hover:bg-[#f0ede9] rounded text-[#77767b] hover:text-[#1c1c19] transition-colors"
-              title="Sao chép nội dung"
+              title={copy("Sao chép nội dung")}
             >
               {copiedField === 'Nội dung CK' ? (
                 <Check className="w-3.5 h-3.5 text-[#8a9a86]" />
@@ -439,7 +427,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
             className="w-full py-2 bg-[#f6f3ee] hover:bg-[#ebe8e3] text-[#1c1c19] font-medium rounded-xl flex items-center justify-center space-x-1.5 transition-colors text-xs"
           >
             <Download className="w-3.5 h-3.5 text-[#74584d]" />
-            <span>Tải ảnh mã VietQR về máy</span>
+            <span>{copy("Tải ảnh mã VietQR về máy")}</span>
           </button>
         </div>
 
@@ -447,8 +435,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
         <div className="flex items-start space-x-1.5 text-[10px] text-[#77767b] bg-[#fcf9f4] p-2.5 rounded-xl">
           <ShieldCheck className="w-3.5 h-3.5 text-[#8a9a86] shrink-0 mt-0.5" />
           <span>
-            Hệ thống SePay và MB Bank sẽ tự động đối soát và khớp đơn hàng tức thì.
-          </span>
+            {copy("Hệ thống SePay và MB Bank sẽ tự động đối soát và khớp đơn hàng tức thì.")}</span>
         </div>
       </div>
     </div>

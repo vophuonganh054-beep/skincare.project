@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import { Search, Bell, ShoppingBag, Sparkles, X, User, Headphones, Type } from 'lucide-react';
 import headerLogo from '../assets/images/alps-header-logo.png';
@@ -43,6 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSkinQuiz,
   onOpenBrandStory,
 }) => {
+  const copy = useCopy();
   const { t, language } = useLanguage();
   const { pathname, navigate } = useRouter();
   const [showSearchInput, setShowSearchInput] = useState(false);
@@ -164,9 +166,9 @@ export const Header: React.FC<HeaderProps> = ({
       {!isMobileFrame && (
         <div className="bg-[#202022] text-[#fcf9f4] text-xs py-1.5 px-4 hidden md:flex items-center justify-between tracking-wider font-light">
           <div className="flex items-center space-x-2 text-[11px] mx-auto overflow-hidden text-ellipsis whitespace-nowrap px-2">
-            <span className="text-[#fed8c9] shrink-0">✦</span>
-            <span className="truncate max-w-[550px]">{t.announcement}</span>
-            <span className="text-[#fed8c9] shrink-0">✦</span>
+            <span className="text-[#fed8c9] shrink-0">{"✦"}</span>
+            <span className="truncate max-w-[550px]">{copy(t.announcement)}</span>
+            <span className="text-[#fed8c9] shrink-0">{"✦"}</span>
           </div>
           <div className="flex items-center space-x-4 text-[11px] shrink-0 whitespace-nowrap">
             <a
@@ -174,12 +176,12 @@ export const Header: React.FC<HeaderProps> = ({
               target="_blank"
               rel="noopener noreferrer"
               className="text-[#fed8c9] hover:underline flex items-center space-x-1.5 transition-colors"
-              title="Chat Fanpage Facebook với Tư Vấn Viên Alps"
+              title={copy("Chat Fanpage Facebook với Tư Vấn Viên Alps")}
             >
               <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
-              <span>Fanpage Tư Vấn</span>
+              <span>{copy("Fanpage Tư Vấn")}</span>
             </a>
             {onOpenSupport && (
               <button
@@ -187,10 +189,10 @@ export const Header: React.FC<HeaderProps> = ({
                 className="text-[#fed8c9] hover:underline flex items-center space-x-1"
               >
                 <Headphones className="w-3 h-3" />
-                <span>{t.csHotline}</span>
+                <span>{copy(t.csHotline)}</span>
               </button>
             )}
-            <span className="opacity-75">{t.zurichHQ}</span>
+            <span className="opacity-75">{copy(t.zurichHQ)}</span>
             <LanguageSelector variant="topbar" />
           </div>
         </div>
@@ -202,9 +204,9 @@ export const Header: React.FC<HeaderProps> = ({
         <Link
           to="/"
           className="cursor-pointer select-none group flex items-center justify-center flex-shrink-0 w-[76px]"
-          title="Alps Skincare • Pure Essence"
+          title={copy("Alps Skincare • Pure Essence")}
         >
-          <svg viewBox="187 261 847 659" role="img" aria-label="ALPS Pure Essence" className="block w-[76px] h-[59px] shrink-0">
+          <svg viewBox="187 261 847 659" role="img" aria-label={copy("ALPS Pure Essence")} className="block w-[76px] h-[59px] shrink-0">
             <image href={headerLogo} width="1242" height="1242" />
           </svg>
         </Link>
@@ -220,7 +222,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              {t.nav.home}
+              {copy(t.nav.home)}
             </Link>
             <Link
               to="/san-pham"
@@ -230,7 +232,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              {t.nav.catalog}
+              {copy(t.nav.catalog)}
             </Link>
             <Link
               to="/ve-alps"
@@ -240,8 +242,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              VỀ ALPS
-            </Link>
+              {copy("VỀ ALPS")}</Link>
             <Link
               to="/lien-he"
               className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
@@ -250,8 +251,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              LIÊN HỆ
-            </Link>
+              {copy("LIÊN HỆ")}</Link>
             <button
               onClick={() => onSelectTab('routine')}
               className={`transition-colors hover:text-[#1c1c19] py-1.5 whitespace-nowrap cursor-pointer ${
@@ -260,7 +260,7 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              {t.nav.routine}
+              {copy(t.nav.routine)}
             </button>
             <button
               onClick={() => {
@@ -273,14 +273,14 @@ export const Header: React.FC<HeaderProps> = ({
                   : ''
               }`}
             >
-              {t.nav.orders}
+              {copy(t.nav.orders)}
             </button>
             <button
               onClick={() => navigate('/uu-dai-20-10')}
               className="transition-all hover:text-[#ba1a1a] text-[#8b5545] font-semibold py-1.5 px-2 rounded-full bg-[#fcf5f1] border border-[#fed8c9] hover:bg-[#fed8c9]/60 flex items-center space-x-1.5 whitespace-nowrap cursor-pointer shadow-xs text-[10px] xl:text-xs"
             >
-              <span>🌸</span>
-              <span>Ưu Đãi 20/10</span>
+              <span>{"🌸"}</span>
+              <span>{copy("Ưu Đãi 20/10")}</span>
             </button>
             {onOpenSkinQuiz && (
               <button
@@ -288,7 +288,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className="transition-all hover:scale-105 active:scale-95 px-2 py-1.5 rounded-full bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] font-semibold flex items-center space-x-1.5 border border-[#fed8c9]/80 shadow-xs cursor-pointer whitespace-nowrap text-[10px] xl:text-xs"
               >
                 <Sparkles className="w-4 h-4 text-[#74584d] shrink-0" />
-                <span>{t.nav.quiz}</span>
+                <span>{copy(t.nav.quiz)}</span>
               </button>
             )}
           </nav>
@@ -304,7 +304,7 @@ export const Header: React.FC<HeaderProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                placeholder={t.searchPlaceholder}
+                placeholder={copy(t.searchPlaceholder)}
                 className="pl-8 pr-7 py-1 text-xs bg-[#f0ede9] rounded-full focus:outline-none focus:ring-1 focus:ring-[#74584d] w-24 sm:w-36 md:w-44 transition-all text-[#1c1c19]"
                 autoFocus
               />
@@ -314,7 +314,7 @@ export const Header: React.FC<HeaderProps> = ({
                   onSearchChange('');
                 }}
                 className="absolute right-2 text-[#77767b] hover:text-[#1c1c19] cursor-pointer"
-                title={headerI18n.closeSearch}
+                title={copy(headerI18n.closeSearch)}
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -324,7 +324,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="header-search-btn"
               onClick={() => setShowSearchInput(true)}
               className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors shrink-0 cursor-pointer"
-              title={headerI18n.searchTitle}
+              title={copy(headerI18n.searchTitle)}
             >
               <Search className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
             </button>
@@ -339,7 +339,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="header-font-btn"
               onClick={onOpenFontSwitcher}
               className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors hidden sm:flex items-center space-x-1 shrink-0 cursor-pointer"
-              title={headerI18n.fontTitle}
+              title={copy(headerI18n.fontTitle)}
             >
               <Type className="w-4 h-4 text-[#74584d]" />
             </button>
@@ -351,7 +351,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="header-support-btn"
               onClick={onOpenSupport}
               className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors relative hidden sm:block shrink-0 cursor-pointer"
-              title={headerI18n.supportTitle}
+              title={copy(headerI18n.supportTitle)}
             >
               <Headphones className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-[#8a9a86] rounded-full ring-2 ring-[#fcf9f4]" />
@@ -364,7 +364,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="header-bell-btn"
               onClick={() => setShowNotification(!showNotification)}
               className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors relative"
-              title={headerI18n.bellTitle}
+              title={copy(headerI18n.bellTitle)}
             >
               <Bell className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-[#ba1a1a] rounded-full ring-2 ring-[#fcf9f4]" />
@@ -373,7 +373,7 @@ export const Header: React.FC<HeaderProps> = ({
             {showNotification && (
               <div className="absolute right-0 mt-2 w-72 bg-[#ffffff] border border-[#ebe8e3] rounded-2xl shadow-xl p-3.5 z-50 text-xs">
                 <div className="flex items-center justify-between pb-2 border-b border-[#f0ede9]">
-                  <span className="font-medium text-[#1c1c19]">{headerI18n.notifTitle}</span>
+                  <span className="font-medium text-[#1c1c19]">{copy(headerI18n.notifTitle)}</span>
                   <button
                     onClick={() => setShowNotification(false)}
                     className="text-[#77767b] hover:text-[#1c1c19]"
@@ -383,15 +383,15 @@ export const Header: React.FC<HeaderProps> = ({
                 </div>
                 <div className="py-2.5 space-y-2">
                   <div className="p-2 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3]/60">
-                    <p className="font-medium text-[#74584d]">{headerI18n.notif1Title}</p>
+                    <p className="font-medium text-[#74584d]">{copy(headerI18n.notif1Title)}</p>
                     <p className="text-[#46464a] text-[11px] mt-0.5">
-                      {headerI18n.notif1Desc}
+                      {copy(headerI18n.notif1Desc)}
                     </p>
                   </div>
                   <div className="p-2 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3]/60">
-                    <p className="font-medium text-[#1c1c19]">{headerI18n.notif2Title}</p>
+                    <p className="font-medium text-[#1c1c19]">{copy(headerI18n.notif2Title)}</p>
                     <p className="text-[#46464a] text-[11px] mt-0.5">
-                      {headerI18n.notif2Desc}
+                      {copy(headerI18n.notif2Desc)}
                     </p>
                   </div>
                 </div>
@@ -405,7 +405,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="header-account-btn"
               onClick={onOpenAccount}
               className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors flex items-center space-x-1"
-              title={user ? `${user.name} - ${t.nav.orders}` : headerI18n.accountLogin}
+              title={copy(user ? `${user.name} - ${t.nav.orders}` : headerI18n.accountLogin)}
             >
               {user ? (
                 <div className="w-6 h-6 rounded-full bg-[#74584d] text-white text-[10px] font-medium flex items-center justify-center shadow-xs">
@@ -423,12 +423,12 @@ export const Header: React.FC<HeaderProps> = ({
               id="header-cart-btn"
               onClick={onOpenCart}
               className="p-1.5 text-[#1c1c19] hover:bg-[#f0ede9] rounded-full transition-colors relative shrink-0 cursor-pointer"
-              title={headerI18n.cartTitle}
+              title={copy(headerI18n.cartTitle)}
             >
               <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 stroke-[1.5]" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 min-w-[17px] h-[17px] px-1 bg-[#1c1c19] text-white text-[10px] font-semibold rounded-full flex items-center justify-center pointer-events-none">
-                  {cartCount}
+                  {copy(cartCount)}
                 </span>
               )}
             </button>
@@ -438,23 +438,20 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* 20/10 Campaign Banner Strip across all devices */}
       <div className="bg-gradient-to-r from-[#8b5545] via-[#9e6353] to-[#74584d] text-white text-[10px] sm:text-xs py-1.5 px-2 sm:px-3 flex items-center justify-center space-x-1.5 sm:space-x-2 tracking-wide font-medium shadow-xs overflow-hidden max-w-full">
-        <span className="text-amber-200 animate-pulse text-xs shrink-0">🌸</span>
+        <span className="text-amber-200 animate-pulse text-xs shrink-0">{"🌸"}</span>
         <button
           type="button"
           onClick={() => navigate('/uu-dai-20-10')}
           className="hover:underline cursor-pointer flex items-center space-x-1.5 truncate max-w-full min-w-0"
         >
           <span className="font-bold text-amber-200 uppercase tracking-wider text-[8.5px] sm:text-[10px] bg-black/25 px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
-            20/10 TRI ÂN
-          </span>
+            {copy("20/10 TRI ÂN")}</span>
           <span className="truncate text-white/95 text-[10px] sm:text-xs">
-            Nhập mã <strong className="text-amber-200 underline font-bold">PHUNU20</strong> giảm 20% hàng lẻ • ALPS2010 giảm 15% combo
-          </span>
+            {copy("Nhập mã ")}<strong className="text-amber-200 underline font-bold">{copy("PHUNU20")}</strong> {copy(" giảm 20% hàng lẻ • ALPS2010 giảm 15% combo")}</span>
           <span className="text-amber-200 underline underline-offset-2 ml-1 hidden md:inline shrink-0 font-bold">
-            Voucher & 3 Combo →
-          </span>
+            {copy("Voucher & 3 Combo →")}</span>
         </button>
-        <span className="text-amber-200 animate-pulse text-xs shrink-0">🌸</span>
+        <span className="text-amber-200 animate-pulse text-xs shrink-0">{"🌸"}</span>
       </div>
     </header>
   );

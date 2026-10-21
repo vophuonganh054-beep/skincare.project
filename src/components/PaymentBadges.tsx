@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React from 'react';
 import { SiVisa, SiMastercard, SiJcb, SiApplepay } from 'react-icons/si';
 import { ShieldCheck, Lock, Wifi } from 'lucide-react';
@@ -8,16 +9,16 @@ import { ShieldCheck, Lock, Wifi } from 'lucide-react';
 export const VisaBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Thẻ Visa Quốc Tế',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-white rounded-md border border-[#202022]/15 px-2 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <div className="flex items-center h-full">
       <SiVisa className="h-4 sm:h-4.5 w-auto text-[#1434CB] hover:text-[#1A1F71] transition-colors" />
     </div>
   </div>
-);
+)); };
 
 /**
  * Visa Debit Card Badge with Official Emblem
@@ -25,17 +26,16 @@ export const VisaBadge: React.FC<{ className?: string; title?: string }> = ({
 export const VisaDebitBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Thẻ Visa Debit / Ghi Nợ Quốc Tế',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-white rounded-md border border-[#202022]/15 px-2 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 space-x-1 ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <SiVisa className="h-3.5 sm:h-4 w-auto text-[#1434CB]" />
     <span className="text-[8px] font-black text-[#1A1F71] tracking-tighter uppercase font-sans border-l border-gray-300 pl-1">
-      DEBIT
-    </span>
+      {copy("DEBIT")}</span>
   </div>
-);
+)); };
 
 /**
  * Visa Secure / Verified by Visa Security Badge
@@ -43,16 +43,16 @@ export const VisaDebitBadge: React.FC<{ className?: string; title?: string }> = 
 export const VisaSecureBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Visa Secure - Xác thực 3D OTP Bảo Mật 100%',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-gradient-to-r from-[#1434CB]/10 to-[#1434CB]/5 rounded-md border border-[#1434CB]/25 px-2 py-0.5 shadow-2xs shrink-0 space-x-1 text-[#1434CB] ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <Lock className="w-3 h-3 text-[#1434CB]" />
     <SiVisa className="h-3 sm:h-3.5 w-auto text-[#1434CB]" />
-    <span className="text-[8.5px] font-extrabold tracking-tight uppercase">SECURE</span>
+    <span className="text-[8.5px] font-extrabold tracking-tight uppercase">{copy("SECURE")}</span>
   </div>
-);
+)); };
 
 /**
  * Mastercard Official Badge
@@ -60,14 +60,14 @@ export const VisaSecureBadge: React.FC<{ className?: string; title?: string }> =
 export const MastercardBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Thẻ Mastercard Quốc Tế',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-white rounded-md border border-[#202022]/15 px-2 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <SiMastercard className="h-4 sm:h-4.5 w-auto text-[#EB001B]" />
   </div>
-);
+)); };
 
 /**
  * JCB International Card Badge
@@ -75,14 +75,14 @@ export const MastercardBadge: React.FC<{ className?: string; title?: string }> =
 export const JcbBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Thẻ JCB Quốc Tế',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-white rounded-md border border-[#202022]/15 px-1.5 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <SiJcb className="h-4 sm:h-4.5 w-auto text-[#0079C1]" />
   </div>
-);
+)); };
 
 /**
  * Napas 247 National Card & Payment Badge
@@ -90,17 +90,17 @@ export const JcbBadge: React.FC<{ className?: string; title?: string }> = ({
 export const NapasBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Thẻ ATM Nội địa & Chuyển khoản Napas 247',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-white rounded-md border border-[#202022]/15 px-2 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <div className="flex items-center space-x-0.5 leading-none">
-      <span className="font-black text-[11px] tracking-tight text-[#003580] font-sans">napas</span>
-      <span className="font-extrabold text-[11px] tracking-tight text-[#008850] font-sans">247</span>
+      <span className="font-black text-[11px] tracking-tight text-[#003580] font-sans">{copy("napas")}</span>
+      <span className="font-extrabold text-[11px] tracking-tight text-[#008850] font-sans">{"247"}</span>
     </div>
   </div>
-);
+)); };
 
 /**
  * VietQR Instant Payment Badge
@@ -108,17 +108,17 @@ export const NapasBadge: React.FC<{ className?: string; title?: string }> = ({
 export const VietQRBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'VietQR Thanh toán quét mã ngân hàng',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-white rounded-md border border-[#202022]/15 px-2 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <div className="flex items-center space-x-0.5 leading-none">
-      <span className="font-black text-[12px] tracking-tighter text-[#E02020]">Viet</span>
-      <span className="font-black text-[12px] tracking-tighter text-[#0052CC]">QR</span>
+      <span className="font-black text-[12px] tracking-tighter text-[#E02020]">{copy("Viet")}</span>
+      <span className="font-black text-[12px] tracking-tighter text-[#0052CC]">{copy("QR")}</span>
     </div>
   </div>
-);
+)); };
 
 /**
  * MoMo e-Wallet Badge
@@ -126,14 +126,14 @@ export const VietQRBadge: React.FC<{ className?: string; title?: string }> = ({
 export const MomoBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Ví điện tử MoMo',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-[#A50064] text-white rounded-md px-1.5 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 ${className}`}
-    title={title}
+    title={copy(title)}
   >
-    <span className="font-black text-[10.5px] tracking-tight">MoMo</span>
+    <span className="font-black text-[10.5px] tracking-tight">{copy("MoMo")}</span>
   </div>
-);
+)); };
 
 /**
  * Apple Pay Badge
@@ -141,16 +141,16 @@ export const MomoBadge: React.FC<{ className?: string; title?: string }> = ({
 export const ApplePayBadge: React.FC<{ className?: string; title?: string }> = ({
   className = 'h-6 sm:h-7',
   title = 'Apple Pay',
-}) => (
+}) => { const copy = useCopy(); return ((
   <div
     className={`inline-flex items-center justify-center bg-black text-white rounded-md px-2 py-0.5 shadow-2xs hover:shadow-xs transition-shadow shrink-0 ${className}`}
-    title={title}
+    title={copy(title)}
   >
     <div className="flex items-center space-x-0.5">
       <SiApplepay className="h-4 w-auto text-white" />
     </div>
   </div>
-);
+)); };
 
 /**
  * Realistic 3D Virtual Visa / Credit Card Preview Component
@@ -168,6 +168,7 @@ export const RealisticCardVisual: React.FC<RealisticCardVisualProps> = ({
   cardExpiry = '',
   isAuthorized = false,
 }) => {
+  const copy = useCopy();
   const displayNum = cardNumber.trim()
     ? cardNumber.padEnd(19, '•')
     : '•••• •••• •••• ••••';
@@ -215,26 +216,24 @@ export const RealisticCardVisual: React.FC<RealisticCardVisualProps> = ({
 
       {/* 16-digit Card Number */}
       <div className="relative my-3 font-mono text-base sm:text-lg tracking-[0.18em] text-white font-semibold drop-shadow-sm">
-        {displayNum}
+        {copy(displayNum)}
       </div>
 
       {/* Bottom details: Cardholder & Expiry & Status */}
       <div className="relative flex items-end justify-between pt-1 text-xs">
         <div>
           <span className="block text-[8px] uppercase tracking-wider text-white/60 font-sans">
-            Chủ thẻ / Cardholder
-          </span>
+            {copy("Chủ thẻ / Cardholder")}</span>
           <span className="font-mono font-medium tracking-wider text-white truncate max-w-[170px] block">
-            {displayName}
+            {copy(displayName)}
           </span>
         </div>
 
         <div className="text-right">
           <span className="block text-[8px] uppercase tracking-wider text-white/60 font-sans">
-            Hết hạn / Expires
-          </span>
+            {copy("Hết hạn / Expires")}</span>
           <span className="font-mono font-medium tracking-wider text-white">
-            {displayExpiry}
+            {copy(displayExpiry)}
           </span>
         </div>
 
@@ -243,12 +242,12 @@ export const RealisticCardVisual: React.FC<RealisticCardVisualProps> = ({
           {isAuthorized ? (
             <>
               <ShieldCheck className="w-3 h-3 text-[#7fe69b]" />
-              <span className="text-[#7fe69b] font-semibold">Đã xác thực 3D OTP</span>
+              <span className="text-[#7fe69b] font-semibold">{copy("Đã xác thực 3D OTP")}</span>
             </>
           ) : (
             <>
               <Lock className="w-3 h-3 text-[#fed8c9]" />
-              <span className="text-white/80">Visa Secure</span>
+              <span className="text-white/80">{copy("Visa Secure")}</span>
             </>
           )}
         </div>
@@ -270,6 +269,7 @@ export const PaymentBadgesGroup: React.FC<PaymentBadgesGroupProps> = ({
   className = '',
   badgeSize = 'h-7',
 }) => {
+  const copy = useCopy();
   const textColor = theme === 'dark' ? 'text-[#898789]' : 'text-[#77767b]';
   const labelColor = theme === 'dark' ? 'text-[#fed8c9]' : 'text-[#74584d]';
 
@@ -278,16 +278,14 @@ export const PaymentBadgesGroup: React.FC<PaymentBadgesGroupProps> = ({
       {showLabel && (
         <div className="flex items-center space-x-2">
           <span className={`text-[10px] font-semibold uppercase tracking-wider ${labelColor}`}>
-            PHƯƠNG THỨC THANH TOÁN
-          </span>
+            {copy("PHƯƠNG THỨC THANH TOÁN")}</span>
           <span className={`text-[9.5px] ${textColor} hidden sm:inline`}>
-            (Chuyển khoản ngân hàng hoặc COD)
-          </span>
+            {copy("(Chuyển khoản ngân hàng hoặc COD)")}</span>
         </div>
       )}
       <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
         <VietQRBadge className={badgeSize} />
-        <span className="text-xs font-semibold px-2 py-1 border rounded bg-white text-[#74584d]">COD</span>
+        <span className="text-xs font-semibold px-2 py-1 border rounded bg-white text-[#74584d]">{copy("COD")}</span>
       </div>
     </div>
   );

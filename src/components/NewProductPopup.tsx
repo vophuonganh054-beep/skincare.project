@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
@@ -7,6 +8,7 @@ import './NewProductPopup.css';
 const VISIT_KEY = 'alps_voucher_ad_2010_v5';
 
 export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onExplore: () => void }) {
+  const copy = useCopy();
   const dialog = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   const shown = useRef(false);
@@ -38,14 +40,14 @@ export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onEx
 
   const dismiss = () => setOpen(false);
   return createPortal(
-    <dialog ref={dialog} className="alps-launch" aria-label="Ưu đãi đặc biệt ALPS"
+    <dialog ref={dialog} className="alps-launch" aria-label={copy("Ưu đãi đặc biệt ALPS")}
       onClose={dismiss} onCancel={dismiss} onClick={event => { if (event.target === event.currentTarget) dismiss(); }}>
       <div className="alps-launch-ad">
-        <button className="alps-launch-close" aria-label="Đóng quảng cáo" onClick={dismiss} autoFocus><X size={20} /></button>
-        <button className="alps-launch-image-link" aria-label="Xem voucher ưu đãi ALPS" onClick={() => { dismiss(); onExplore(); }}>
-          <img src={popupAd} alt="Ưu đãi ALPS giảm 20% hàng lẻ với PHUNU20. Nhấn để xem đầy đủ điều kiện voucher." />
+        <button className="alps-launch-close" aria-label={copy("Đóng quảng cáo")} onClick={dismiss} autoFocus><X size={20} /></button>
+        <button className="alps-launch-image-link" aria-label={copy("Xem voucher ưu đãi ALPS")} onClick={() => { dismiss(); onExplore(); }}>
+          <img src={popupAd} alt={copy("Ưu đãi ALPS giảm 20% hàng lẻ với PHUNU20. Nhấn để xem đầy đủ điều kiện voucher.")} />
         </button>
-        <p className="alps-launch-note">Ưu đãi tặng kèm quà số lượng có hạn</p>
+        <p className="alps-launch-note">{copy("Ưu đãi tặng kèm quà số lượng có hạn")}</p>
       </div>
     </dialog>, document.body
   );

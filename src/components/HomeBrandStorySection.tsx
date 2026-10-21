@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React from 'react';
 import { Link } from '../context/RouterContext';
 import { ArrowRight, Sparkles, Mountain, Leaf, Droplets, ShieldCheck, Heart } from 'lucide-react';
@@ -10,6 +11,7 @@ interface HomeBrandStorySectionProps {
 }
 
 export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ isMobileFrame = false }) => {
+  const copy = useCopy();
   const pillars = [
     { letter: 'A', word: 'Authentic', desc: 'Chân thật & Tự nhiên' },
     { letter: 'L', word: 'Luminous', desc: 'Rạng rỡ sương mai' },
@@ -26,23 +28,21 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
             <div className="alps-story-photo relative overflow-hidden bg-[#202022] group">
               <img
                 src={originStreamImg}
-                alt="Alps Pure Essence Brand Heritage"
+                alt={copy("Alps Pure Essence Brand Heritage")}
                 className="w-full h-full object-cover opacity-90 group-hover:scale-103 transition-transform duration-700 ease-out"
               />
-              <span className="alps-story-word" aria-hidden="true">Pure,<br />by nature.</span>
+              <span className="alps-story-word" aria-hidden="true">{copy("Pure,")}<br />{copy("by nature.")}</span>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-5 sm:p-7">
                 <div className="text-white space-y-1">
                   <span className="text-[10px] sm:text-xs font-semibold tracking-widest text-[#fed8c9] uppercase block">
-                    ✦ ZURICH SWITZERLAND
-                  </span>
+                    {copy("✦ ZURICH SWITZERLAND")}</span>
                   <p className="font-serif text-base sm:text-lg text-[#fcf9f4]">
-                    Nguồn cội sông băng ngàn năm & Hoa tuyết Edelweiss
-                  </p>
+                    {copy("Nguồn cội sông băng ngàn năm & Hoa tuyết Edelweiss")}</p>
                 </div>
               </div>
             </div>
 
-            <img className="alps-story-bloom" src={edelweissImg} alt="Hoa tuyết Edelweiss" loading="lazy" />
+            <img className="alps-story-bloom" src={edelweissImg} alt={copy("Hoa tuyết Edelweiss")} loading="lazy" />
 
             {/* Overlapping small accent badge */}
             <div className="hidden sm:flex absolute -bottom-5 -right-5 bg-white p-3.5 rounded-2xl border border-[#202022]/10 shadow-lg items-center space-x-3">
@@ -50,8 +50,8 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
                 <Mountain className="w-5 h-5" />
               </div>
               <div className="text-left pr-2">
-                <p className="text-[10px] uppercase tracking-wider text-[#77767b] font-semibold">Khởi sinh</p>
-                <p className="text-xs font-bold text-[#1c1c19]">Độ cao 3.000m</p>
+                <p className="text-[10px] uppercase tracking-wider text-[#77767b] font-semibold">{copy("Khởi sinh")}</p>
+                <p className="text-xs font-bold text-[#1c1c19]">{copy("Độ cao 3.000m")}</p>
               </div>
             </div>
           </div>
@@ -61,16 +61,14 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
             <div className="space-y-3">
               <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white border border-[#202022]/10 text-[#74584d] text-[11px] font-semibold tracking-widest uppercase shadow-2xs">
                 <Sparkles className="w-3 h-3 text-[#74584d]" />
-                <span>CÂU CHUYỆN THƯƠNG HIỆU</span>
+                <span>{copy("CÂU CHUYỆN THƯƠNG HIỆU")}</span>
               </div>
 
               <h2 className="text-2xl sm:text-4xl font-serif text-[#1c1c19] tracking-tight leading-snug">
-                Khi Vẻ Đẹp Bắt Đầu Từ Sự Tinh Khiết
-              </h2>
+                {copy("Khi Vẻ Đẹp Bắt Đầu Từ Sự Tinh Khiết")}</h2>
 
               <p className="text-xs sm:text-sm text-[#5a595e] font-light leading-relaxed">
-                Lấy cảm hứng từ sự tĩnh lặng và kiên cường của đỉnh núi Alps Thụy Sĩ. Chúng tôi tin rằng chăm sóc da không phải cuộc chạy đua tiêu chuẩn ồn ào — mà là khoảng thời gian để bạn lắng nghe và nuôi dưỡng cơ thể bằng những hoạt chất sinh học thuần khiết nhất.
-              </p>
+                {copy("Lấy cảm hứng từ sự tĩnh lặng và kiên cường của đỉnh núi Alps Thụy Sĩ. Chúng tôi tin rằng chăm sóc da không phải cuộc chạy đua tiêu chuẩn ồn ào — mà là khoảng thời gian để bạn lắng nghe và nuôi dưỡng cơ thể bằng những hoạt chất sinh học thuần khiết nhất.")}</p>
             </div>
 
             {/* 4 Pillars of ALPS (A-L-P-S) */}
@@ -81,10 +79,10 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
                   className="p-3 bg-white rounded-2xl border border-[#202022]/8 text-center space-y-1 hover:border-[#74584d] transition-colors"
                 >
                   <span className="w-6 h-6 rounded-full bg-[#f4ede4] text-[#74584d] text-xs font-serif font-bold inline-flex items-center justify-center">
-                    {item.letter}
+                    {copy(item.letter)}
                   </span>
-                  <p className="text-xs font-semibold text-[#1c1c19]">{item.word}</p>
-                  <p className="text-[10px] text-[#77767b] leading-tight">{item.desc}</p>
+                  <p className="text-xs font-semibold text-[#1c1c19]">{copy(item.word)}</p>
+                  <p className="text-[10px] text-[#77767b] leading-tight">{copy(item.desc)}</p>
                 </div>
               ))}
             </div>
@@ -95,15 +93,14 @@ export const HomeBrandStorySection: React.FC<HomeBrandStorySectionProps> = ({ is
                 to="/ve-alps"
                 className="w-full sm:w-auto px-6 py-3 bg-[#202022] hover:bg-[#74584d] text-white text-xs font-semibold rounded-full flex items-center justify-center space-x-2 transition-all shadow-md active:scale-98 group cursor-pointer"
               >
-                <span>XEM TOÀN BỘ CÂU CHUYỆN & TRIẾT LÝ ALPS</span>
+                <span>{copy("XEM TOÀN BỘ CÂU CHUYỆN & TRIẾT LÝ ALPS")}</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
               <Link
                 to="/san-pham"
                 className="w-full sm:w-auto px-5 py-3 text-xs font-medium text-[#74584d] hover:text-[#1c1c19] text-center"
               >
-                Khám phá 5 sản phẩm →
-              </Link>
+                {copy("Khám phá 5 sản phẩm →")}</Link>
             </div>
           </div>
         </div>

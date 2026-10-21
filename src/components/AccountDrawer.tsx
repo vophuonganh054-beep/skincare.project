@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import {
@@ -59,6 +60,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
   initialTab = 'orders',
   onAddToCart,
 }) => {
+  const copy = useCopy();
   const [activeSubTab, setActiveSubTab] = useState<'orders' | 'profile'>(initialTab);
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
@@ -396,15 +398,15 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-[#202022]/10 flex items-center justify-between gap-3 bg-white shrink-0">
           <div className="flex items-center space-x-2 min-w-0">
-            <span className="text-xs text-[#74584d]">✦</span>
+            <span className="text-xs text-[#74584d]">{"✦"}</span>
             <h3 id="alps-account-title" className="font-serif text-base sm:text-lg font-normal text-[#1c1c19] min-w-0">
-              {user ? 'Tài Khoản Thành Viên ALPS' : 'Tài Khoản ALPS Pure Essence'}
+              {copy(user ? 'Tài Khoản Thành Viên ALPS' : 'Tài Khoản ALPS Pure Essence')}
             </h3>
           </div>
           <button
             onClick={onClose}
             className="p-1.5 text-[#77767b] hover:text-[#1c1c19] rounded-full hover:bg-[#f0ede9] transition-colors shrink-0"
-            title="Đóng"
+            title={copy("Đóng")}
           >
             <X className="w-5 h-5" />
           </button>
@@ -424,9 +426,9 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   : 'text-[#77767b] hover:text-[#1c1c19]'
               }`}
             >
-              <span className="whitespace-nowrap">Danh Mục Đã Mua</span>
+              <span className="whitespace-nowrap">{copy("Danh Mục Đã Mua")}</span>
               <span className="ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] bg-[#f0ede9] text-[#1c1c19] whitespace-nowrap font-medium">
-                {orders.length}
+                {copy(orders.length)}
               </span>
               {activeSubTab === 'orders' && (
                 <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#74584d]" />
@@ -441,7 +443,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   : 'text-[#77767b] hover:text-[#1c1c19]'
               }`}
             >
-              <span className="whitespace-nowrap">Hồ Sơ & Địa Chỉ Nhận Hàng</span>
+              <span className="whitespace-nowrap">{copy("Hồ Sơ & Địa Chỉ Nhận Hàng")}</span>
               {activeSubTab === 'profile' && (
                 <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#74584d]" />
               )}
@@ -454,7 +456,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
           {saveSuccessMsg && (
             <div className="bg-[#8a9a86]/20 border border-[#8a9a86]/40 text-[#2f4a2b] px-4 py-2.5 rounded-2xl text-xs flex items-center space-x-2 animate-fadeIn">
               <CheckCircle2 className="w-4 h-4 shrink-0 text-[#3d5a39]" />
-              <span>{saveSuccessMsg}</span>
+              <span>{copy(saveSuccessMsg)}</span>
             </div>
           )}
 
@@ -467,11 +469,9 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   <User className="w-6 h-6 stroke-[1.5]" />
                 </div>
                 <h4 className="font-serif text-lg font-normal text-[#1c1c19]">
-                  Đăng Nhập Khách Hàng
-                </h4>
+                  {copy("Đăng Nhập Khách Hàng")}</h4>
                 <p className="text-xs text-[#77767b] max-w-xs mx-auto">
-                  Đăng nhập tài khoản để theo dõi đơn hàng, quản lý địa chỉ nhận hàng và nhận ưu đãi độc quyền chuẩn Thụy Sĩ.
-                </p>
+                  {copy("Đăng nhập tài khoản để theo dõi đơn hàng, quản lý địa chỉ nhận hàng và nhận ưu đãi độc quyền chuẩn Thụy Sĩ.")}</p>
 
                 {/* Auth Mode Switcher */}
                 <div className="flex bg-[#f6f3ee] rounded-full p-1 border border-[#ebe8e3] mt-3">
@@ -488,7 +488,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     }`}
                   >
                     <LogIn className="w-3.5 h-3.5" />
-                    <span>Đăng nhập</span>
+                    <span>{copy("Đăng nhập")}</span>
                   </button>
                   <button
                     type="button"
@@ -503,7 +503,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     }`}
                   >
                     <UserPlus className="w-3.5 h-3.5" />
-                    <span>Tạo tài khoản</span>
+                    <span>{copy("Tạo tài khoản")}</span>
                   </button>
                 </div>
 
@@ -536,12 +536,12 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                         <path fill="#EA4335" d="M12 4.77c1.76 0 3.34.61 4.58 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0 7.34 0 3.25 2.63 1.26 6.58l4.02 3.13c.95-2.83 3.6-4.94 6.72-4.94z" />
                       </svg>
                       <span>
-                        {isGoogleLoading ? 'ĐANG KẾT NỐI GOOGLE...' : 'ĐĂNG NHẬP VỚI GOOGLE'}
+                        {copy(isGoogleLoading ? 'ĐANG KẾT NỐI GOOGLE...' : 'ĐĂNG NHẬP VỚI GOOGLE')}
                       </span>
                     </button>
                     <div className="relative flex py-2.5 items-center">
                       <div className="flex-grow border-t border-[#ebe8e3]"></div>
-                      <span className="flex-shrink mx-2 text-[10px] text-[#77767b] tracking-wider uppercase font-medium">hoặc dùng email / số điện thoại</span>
+                      <span className="flex-shrink mx-2 text-[10px] text-[#77767b] tracking-wider uppercase font-medium">{copy("hoặc dùng email / số điện thoại")}</span>
                       <div className="flex-grow border-t border-[#ebe8e3]"></div>
                     </div>
                   </div>
@@ -556,7 +556,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                 >
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Email hoặc Số điện thoại <span className="text-[#ba1a1a]">*</span>
+                      {copy("Email hoặc Số điện thoại ")}<span className="text-[#ba1a1a]">{"*"}</span>
                     </label>
                     <div className="relative">
                       <Mail className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
@@ -567,7 +567,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           setLoginIdentifier(e.target.value);
                           if (authError) setAuthError('');
                         }}
-                        placeholder="Nhập email hoặc số điện thoại của bạn"
+                        placeholder={copy("Nhập email hoặc số điện thoại của bạn")}
                         className="w-full text-xs pl-9 pr-3 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19]"
                         autoFocus
                       />
@@ -577,15 +577,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   <div>
                     <div className="flex items-center justify-between mb-1">
                       <label className="text-xs font-medium text-[#1c1c19]">
-                        Mật khẩu <span className="text-[#ba1a1a]">*</span>
+                        {copy("Mật khẩu ")}<span className="text-[#ba1a1a]">{"*"}</span>
                       </label>
                       <button
                         type="button"
                         onClick={() => setShowForgotTip(!showForgotTip)}
                         className="text-[11px] text-[#74584d] hover:underline"
                       >
-                        Quên mật khẩu?
-                      </button>
+                        {copy("Quên mật khẩu?")}</button>
                     </div>
                     <div className="relative">
                       <Lock className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
@@ -596,14 +595,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           setLoginPassword(e.target.value);
                           if (authError) setAuthError('');
                         }}
-                        placeholder="Nhập mật khẩu"
+                        placeholder={copy("Nhập mật khẩu")}
                         className="w-full text-xs pl-9 pr-9 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19]"
                       />
                       <button
                         type="button"
                         onClick={() => setShowLoginPassword(!showLoginPassword)}
                         className="absolute right-3 top-2.5 text-[#77767b] hover:text-[#1c1c19]"
-                        title={showLoginPassword ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu'}
+                        title={copy(showLoginPassword ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu')}
                       >
                         {showLoginPassword ? (
                           <EyeOff className="w-4 h-4" />
@@ -618,8 +617,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     <div className="p-3 bg-[#f6f3ee] border border-[#ebe8e3] rounded-xl text-[11px] text-[#74584d] flex items-start space-x-2 animate-fadeIn">
                       <HelpCircle className="w-4 h-4 shrink-0 mt-0.5" />
                       <div>
-                        Để bảo vệ an toàn thông tin khách hàng, vui lòng liên hệ hotline chăm sóc khách hàng <strong>0772 770 134</strong> hoặc gửi yêu cầu tới <strong>pure@alps.vn</strong> để đặt lại mật khẩu tức thì.
-                      </div>
+                        {copy("Để bảo vệ an toàn thông tin khách hàng, vui lòng liên hệ hotline chăm sóc khách hàng ")}<strong>{"0772 770 134"}</strong> {copy(" hoặc gửi yêu cầu tới ")}<strong>{copy("pure@alps.vn")}</strong> {copy(" để đặt lại mật khẩu tức thì.")}</div>
                     </div>
                   )}
 
@@ -631,14 +629,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                         onChange={(e) => setRememberMe(e.target.checked)}
                         className="rounded border-[#ebe8e3] text-[#74584d] focus:ring-[#74584d]"
                       />
-                      <span>Ghi nhớ đăng nhập</span>
+                      <span>{copy("Ghi nhớ đăng nhập")}</span>
                     </label>
                   </div>
 
                   {authError && (
                     <div className="p-2.5 bg-red-50 border border-red-200 text-[#ba1a1a] rounded-xl text-[11px] flex items-center space-x-1.5">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                      <span>{authError}</span>
+                      <span>{copy(authError)}</span>
                     </div>
                   )}
 
@@ -646,8 +644,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     type="submit"
                     className="w-full py-3 bg-[#202022] hover:bg-black text-white text-xs font-semibold tracking-wider rounded-full shadow-md transition-all active:scale-98 mt-2"
                   >
-                    ĐĂNG NHẬP
-                  </button>
+                    {copy("ĐĂNG NHẬP")}</button>
 
                   <div className="text-center pt-2">
                     <button
@@ -658,8 +655,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       }}
                       className="text-xs text-[#74584d] hover:underline"
                     >
-                      Chưa có tài khoản? Đăng ký ngay
-                    </button>
+                      {copy("Chưa có tài khoản? Đăng ký ngay")}</button>
                   </div>
                 </form>
               ) : (
@@ -670,7 +666,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                 >
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Họ và tên của bạn <span className="text-[#ba1a1a]">*</span>
+                      {copy("Họ và tên của bạn ")}<span className="text-[#ba1a1a]">{"*"}</span>
                     </label>
                     <div className="relative">
                       <User className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
@@ -681,7 +677,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           setRegisterName(e.target.value);
                           if (authError) setAuthError('');
                         }}
-                        placeholder="Nhập họ và tên đầy đủ"
+                        placeholder={copy("Nhập họ và tên đầy đủ")}
                         className="w-full text-xs pl-9 pr-3 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19]"
                         autoFocus
                       />
@@ -690,7 +686,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
 
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Số điện thoại nhận hàng <span className="text-[#ba1a1a]">*</span>
+                      {copy("Số điện thoại nhận hàng ")}<span className="text-[#ba1a1a]">{"*"}</span>
                     </label>
                     <div className="relative">
                       <Phone className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
@@ -701,7 +697,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           setRegisterPhone(e.target.value);
                           if (authError) setAuthError('');
                         }}
-                        placeholder="Nhập số điện thoại của bạn"
+                        placeholder={copy("Nhập số điện thoại của bạn")}
                         className="w-full text-xs pl-9 pr-3 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19]"
                       />
                     </div>
@@ -709,8 +705,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
 
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Địa chỉ Email
-                    </label>
+                      {copy("Địa chỉ Email")}</label>
                     <div className="relative">
                       <Mail className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
                       <input
@@ -720,7 +715,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           setRegisterEmail(e.target.value);
                           if (authError) setAuthError('');
                         }}
-                        placeholder="Nhập địa chỉ email của bạn"
+                        placeholder={copy("Nhập địa chỉ email của bạn")}
                         className="w-full text-xs pl-9 pr-3 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19]"
                       />
                     </div>
@@ -728,7 +723,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
 
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Mật khẩu <span className="text-[#ba1a1a]">*</span>
+                      {copy("Mật khẩu ")}<span className="text-[#ba1a1a]">{"*"}</span>
                     </label>
                     <div className="relative">
                       <Lock className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
@@ -739,14 +734,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           setRegisterPassword(e.target.value);
                           if (authError) setAuthError('');
                         }}
-                        placeholder="Tạo mật khẩu (tối thiểu 6 ký tự)"
+                        placeholder={copy("Tạo mật khẩu (tối thiểu 6 ký tự)")}
                         className="w-full text-xs pl-9 pr-9 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19]"
                       />
                       <button
                         type="button"
                         onClick={() => setShowRegisterPassword(!showRegisterPassword)}
                         className="absolute right-3 top-2.5 text-[#77767b] hover:text-[#1c1c19]"
-                        title={showRegisterPassword ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu'}
+                        title={copy(showRegisterPassword ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu')}
                       >
                         {showRegisterPassword ? (
                           <EyeOff className="w-4 h-4" />
@@ -760,7 +755,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   {authError && (
                     <div className="p-2.5 bg-red-50 border border-red-200 text-[#ba1a1a] rounded-xl text-[11px] flex items-center space-x-1.5">
                       <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                      <span>{authError}</span>
+                      <span>{copy(authError)}</span>
                     </div>
                   )}
 
@@ -768,8 +763,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     type="submit"
                     className="w-full py-3 bg-[#202022] hover:bg-black text-white text-xs font-semibold tracking-wider rounded-full shadow-md transition-all active:scale-98 mt-2"
                   >
-                    TẠO TÀI KHOẢN MỚI
-                  </button>
+                    {copy("TẠO TÀI KHOẢN MỚI")}</button>
 
                   <div className="text-center pt-2">
                     <button
@@ -780,8 +774,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       }}
                       className="text-xs text-[#74584d] hover:underline"
                     >
-                      Đã có tài khoản? Đăng nhập ngay
-                    </button>
+                      {copy("Đã có tài khoản? Đăng nhập ngay")}</button>
                   </div>
                 </form>
               )}
@@ -798,7 +791,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     </div>
                     <div className="min-w-0">
                       <div className="font-semibold text-[#1c1c19] truncate text-xs">
-                        Tài khoản: {user.name}
+                        {copy("Tài khoản: ")}{user.name}
                       </div>
                       <div className="text-[10px] text-[#77767b] truncate">
                         {user.email || user.phone || 'Lịch sử mua hàng riêng biệt'}
@@ -806,8 +799,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     </div>
                   </div>
                   <div className="text-[10px] text-[#74584d] font-semibold bg-white px-2.5 py-1 rounded-full border border-[#ebe8e3] shrink-0">
-                    {orders.length} đơn hàng
-                  </div>
+                    {copy(orders.length)} {copy(" đơn hàng")}</div>
                 </div>
               )}
 
@@ -822,8 +814,8 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       : 'text-[#77767b] hover:text-[#1c1c19]'
                   }`}
                 >
-                  <span className="whitespace-nowrap">Theo đơn hàng</span>
-                  <span className="text-[11px] opacity-75 shrink-0">({orders.length})</span>
+                  <span className="whitespace-nowrap">{copy("Theo đơn hàng")}</span>
+                  <span className="text-[11px] opacity-75 shrink-0">{"("}{copy(orders.length)}{")"}</span>
                 </button>
                 <button
                   type="button"
@@ -834,8 +826,8 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       : 'text-[#77767b] hover:text-[#1c1c19]'
                   }`}
                 >
-                  <span className="whitespace-nowrap">Sản phẩm đã mua</span>
-                  <span className="text-[11px] opacity-75 shrink-0">({purchasedProducts.length})</span>
+                  <span className="whitespace-nowrap">{copy("Sản phẩm đã mua")}</span>
+                  <span className="text-[11px] opacity-75 shrink-0">{"("}{copy(purchasedProducts.length)}{")"}</span>
                 </button>
               </div>
 
@@ -848,17 +840,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                         <Package className="w-6 h-6 stroke-[1.5]" />
                       </div>
                       <h4 className="font-serif text-base font-normal text-[#1c1c19] text-balance">
-                        Tài khoản chưa có sản phẩm đã mua
-                      </h4>
+                        {copy("Tài khoản chưa có sản phẩm đã mua")}</h4>
                       <p className="text-xs text-[#77767b] max-w-xs mx-auto leading-relaxed text-pretty">
-                        Dữ liệu mua sắm được lưu riêng biệt cho từng tài khoản. Khám phá các tinh chất Thụy Sĩ và mua sắm ngay!
-                      </p>
+                        {copy("Dữ liệu mua sắm được lưu riêng biệt cho từng tài khoản. Khám phá các tinh chất Thụy Sĩ và mua sắm ngay!")}</p>
                       <button
                         onClick={onClose}
                         className="mt-2 px-5 py-2 bg-[#202022] text-white text-xs font-semibold rounded-full hover:bg-black transition-colors whitespace-nowrap"
                       >
-                        Khám phá sản phẩm ALPS
-                      </button>
+                        {copy("Khám phá sản phẩm ALPS")}</button>
                     </div>
                   ) : (
                     <div className="space-y-2.5">
@@ -876,7 +865,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           >
                             <img
                               src={product.image}
-                              alt={product.name}
+                              alt={copy(product.name)}
                               referrerPolicy="no-referrer"
                               onError={(e) => {
                                 (e.target as HTMLImageElement).src = product.fallbackImage;
@@ -886,7 +875,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           </div>
                           <div className="min-w-0 flex-grow pr-1">
                             <div className="text-[10px] uppercase tracking-wider text-[#74584d] font-semibold truncate whitespace-nowrap">
-                              {product.categoryLabel || 'Alps Pure Essence'}
+                              {copy(product.categoryLabel || 'Alps Pure Essence')}
                             </div>
                             <h5
                               onClick={() => {
@@ -895,17 +884,17 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                               }}
                               className="font-sans text-xs font-semibold text-[#1c1c19] truncate hover:text-[#74584d] cursor-pointer transition-colors leading-snug"
                             >
-                              {product.name}
+                              {copy(product.name)}
                             </h5>
                             <div className="text-[11px] text-[#77767b] mt-0.5 whitespace-nowrap flex items-center space-x-1.5">
-                              <span>{product.capacity}</span>
-                              <span>•</span>
-                              <span className="font-semibold text-[#1c1c19] tabular-nums">{product.price.toLocaleString('vi-VN')}₫</span>
+                              <span>{copy(product.capacity)}</span>
+                              <span>{"•"}</span>
+                              <span className="font-semibold text-[#1c1c19] tabular-nums">{product.price.toLocaleString('vi-VN')}{"₫"}</span>
                             </div>
                             <div className="text-[10px] text-[#8a9a86] font-medium mt-1 flex items-center space-x-1.5 flex-wrap">
-                              <span className="whitespace-nowrap bg-[#8a9a86]/10 px-1.5 py-0.5 rounded-md">Đã mua x{totalQuantity}</span>
-                              <span className="whitespace-nowrap">• {timesPurchased} lần đặt</span>
-                              {lastPurchasedAt && <span className="whitespace-nowrap">• Gần nhất: {lastPurchasedAt}</span>}
+                              <span className="whitespace-nowrap bg-[#8a9a86]/10 px-1.5 py-0.5 rounded-md">{copy("Đã mua x")}{copy(totalQuantity)}</span>
+                              <span className="whitespace-nowrap">{"• "}{copy(timesPurchased)} {copy(" lần đặt")}</span>
+                              {lastPurchasedAt && <span className="whitespace-nowrap">{copy("• Gần nhất: ")}{copy(lastPurchasedAt)}</span>}
                             </div>
                           </div>
                           <div className="shrink-0 flex flex-col space-y-1.5">
@@ -920,8 +909,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                               }}
                               className="px-3.5 py-1.5 bg-[#202022] hover:bg-black text-white text-[11px] font-semibold rounded-full transition-colors whitespace-nowrap active:scale-95 shadow-2xs"
                             >
-                              Mua lại
-                            </button>
+                              {copy("Mua lại")}</button>
                             <button
                               onClick={() => {
                                 onSelectProduct(product);
@@ -929,8 +917,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                               }}
                               className="px-3 py-1 bg-white hover:bg-[#f6f3ee] text-[#1c1c19] text-[10px] font-medium rounded-full border border-[#ebe8e3] transition-colors whitespace-nowrap"
                             >
-                              Xem lại
-                            </button>
+                              {copy("Xem lại")}</button>
                           </div>
                         </div>
                       ))}
@@ -950,8 +937,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           : 'bg-white text-[#77767b] hover:text-[#1c1c19] border border-[#202022]/10'
                       }`}
                     >
-                      Tất cả ({orders.length})
-                    </button>
+                      {copy("Tất cả (")}{copy(orders.length)}{")"}</button>
                     <button
                       onClick={() => setOrderStatusFilter('processing')}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
@@ -960,8 +946,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           : 'bg-white text-[#77767b] hover:text-[#1c1c19] border border-[#202022]/10'
                       }`}
                     >
-                      Đang chuẩn bị ({orders.filter((o) => o.status === 'processing').length})
-                    </button>
+                      {copy("Đang chuẩn bị (")}{copy(orders.filter((o) => o.status === 'processing').length)}{")"}</button>
                     <button
                       onClick={() => setOrderStatusFilter('shipping')}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
@@ -970,8 +955,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           : 'bg-white text-[#77767b] hover:text-[#1c1c19] border border-[#202022]/10'
                       }`}
                     >
-                      Đang giao ({orders.filter((o) => o.status === 'shipping').length})
-                    </button>
+                      {copy("Đang giao (")}{copy(orders.filter((o) => o.status === 'shipping').length)}{")"}</button>
                     <button
                       onClick={() => setOrderStatusFilter('delivered')}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${
@@ -980,8 +964,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           : 'bg-white text-[#77767b] hover:text-[#1c1c19] border border-[#202022]/10'
                       }`}
                     >
-                      Đã nhận hàng ({orders.filter((o) => o.status === 'delivered' || o.status === 'completed').length})
-                    </button>
+                      {copy("Đã nhận hàng (")}{copy(orders.filter((o) => o.status === 'delivered' || o.status === 'completed').length)}{")"}</button>
                   </div>
 
               {filteredOrders.length === 0 ? (
@@ -990,17 +973,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     <Package className="w-6 h-6 stroke-[1.5]" />
                   </div>
                   <h4 className="font-serif text-base font-normal text-[#1c1c19]">
-                    Chưa có đơn hàng nào
-                  </h4>
+                    {copy("Chưa có đơn hàng nào")}</h4>
                   <p className="text-xs text-[#77767b] max-w-xs mx-auto">
-                    Khám phá ngay bộ sưu tập chăm sóc da cao cấp của ALPS.
-                  </p>
+                    {copy("Khám phá ngay bộ sưu tập chăm sóc da cao cấp của ALPS.")}</p>
                   <button
                     onClick={onClose}
                     className="mt-2 px-5 py-2 bg-[#202022] text-white text-xs font-semibold rounded-full hover:bg-black transition-colors"
                   >
-                    Xem sản phẩm
-                  </button>
+                    {copy("Xem sản phẩm")}</button>
                 </div>
               ) : (
                 filteredOrders.map((order) => {
@@ -1023,10 +1003,10 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                         <div>
                           <div className="flex items-center space-x-2">
                             <span className="font-serif text-sm font-semibold text-[#1c1c19]">
-                              #{order.orderNumber}
+                              {"#"}{copy(order.orderNumber)}
                             </span>
                             <span className="text-[10px] text-[#77767b]">
-                              • {order.createdAt}
+                              {"• "}{copy(order.createdAt)}
                             </span>
                           </div>
                         </div>
@@ -1048,7 +1028,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           ) : (
                             <Clock className="w-3 h-3" />
                           )}
-                          <span>{order.statusLabel}</span>
+                          <span>{copy(order.statusLabel)}</span>
                         </div>
                       </div>
 
@@ -1066,7 +1046,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                             <div className="w-12 h-12 rounded-xl bg-[#f6f3ee] overflow-hidden shrink-0 border border-[#202022]/8">
                               <img
                                 src={item.product.image}
-                                alt={item.product.name}
+                                alt={copy(item.product.name)}
                                 referrerPolicy="no-referrer"
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).src = item.product.fallbackImage;
@@ -1076,16 +1056,15 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                             </div>
                             <div className="min-w-0 flex-grow">
                               <h5 className="font-serif text-xs font-normal text-[#1c1c19] truncate group-hover:text-[#74584d] transition-colors">
-                                {item.product.name}
+                                {copy(item.product.name)}
                               </h5>
                               <div className="text-[10px] text-[#77767b] flex items-center space-x-2 mt-0.5">
-                                <span>{item.product.capacity}</span>
-                                <span>• SL: x{item.quantity}</span>
+                                <span>{copy(item.product.capacity)}</span>
+                                <span>{copy("• SL: x")}{copy(item.quantity)}</span>
                               </div>
                             </div>
                             <div className="text-xs font-medium text-[#1c1c19] shrink-0 text-right">
-                              {(item.unitPrice * item.quantity).toLocaleString('vi-VN')}₫
-                            </div>
+                              {(item.unitPrice * item.quantity).toLocaleString('vi-VN')}{"₫"}</div>
                           </div>
                         ))}
                       </div>
@@ -1097,7 +1076,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                             <div className="flex items-center space-x-1.5 text-[#1c1c19] font-medium text-[11px]">
                               <MapPin className="w-3.5 h-3.5 text-[#74584d]" />
                               <span>
-                                {currentRecipientName} {currentPhone ? `• ${currentPhone}` : ''}
+                                {copy(currentRecipientName)} {copy(currentPhone ? `• ${currentPhone}` : '')}
                               </span>
                             </div>
 
@@ -1117,7 +1096,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                                 className="text-[10px] text-[#74584d] font-semibold hover:underline flex items-center space-x-1"
                               >
                                 <Edit3 className="w-3 h-3" />
-                                <span>{isEditingThisOrder ? 'Đóng' : 'Đổi địa chỉ'}</span>
+                                <span>{copy(isEditingThisOrder ? 'Đóng' : 'Đổi địa chỉ')}</span>
                               </button>
                             )}
                           </div>
@@ -1125,7 +1104,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                           {!isEditingThisOrder ? (
                             currentAddress ? (
                               <p className="text-[11px] text-[#77767b] pl-5 leading-relaxed">
-                                {currentAddress}
+                                {copy(currentAddress)}
                               </p>
                             ) : null
                           ) : (
@@ -1134,38 +1113,35 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                 <div>
                                   <label className="text-[10px] font-medium text-[#77767b] block mb-0.5">
-                                    Tên người nhận
-                                  </label>
+                                    {copy("Tên người nhận")}</label>
                                   <input
                                     type="text"
                                     value={orderNewName}
                                     onChange={(e) => setOrderNewName(e.target.value)}
-                                    placeholder="Nhập họ và tên người nhận"
+                                    placeholder={copy("Nhập họ và tên người nhận")}
                                     className="w-full text-xs px-2.5 py-1.5 bg-white rounded-lg border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d]"
                                   />
                                 </div>
                                 <div>
                                   <label className="text-[10px] font-medium text-[#77767b] block mb-0.5">
-                                    Số điện thoại
-                                  </label>
+                                    {copy("Số điện thoại")}</label>
                                   <input
                                     type="text"
                                     value={orderNewPhone}
                                     onChange={(e) => setOrderNewPhone(e.target.value)}
-                                    placeholder="Nhập số điện thoại"
+                                    placeholder={copy("Nhập số điện thoại")}
                                     className="w-full text-xs px-2.5 py-1.5 bg-white rounded-lg border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d]"
                                   />
                                 </div>
                               </div>
                               <div>
                                 <label className="text-[10px] font-medium text-[#77767b] block mb-0.5">
-                                  Địa chỉ giao hàng mới
-                                </label>
+                                  {copy("Địa chỉ giao hàng mới")}</label>
                                 <textarea
                                   rows={2}
                                   value={orderNewAddress}
                                   onChange={(e) => setOrderNewAddress(e.target.value)}
-                                  placeholder="Nhập địa chỉ giao hàng chi tiết"
+                                  placeholder={copy("Nhập địa chỉ giao hàng chi tiết")}
                                   className="w-full text-xs px-2.5 py-1.5 bg-white rounded-lg border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d]"
                                 />
                               </div>
@@ -1174,14 +1150,12 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                                   onClick={() => setEditingOrderId(null)}
                                   className="px-3 py-1 bg-white text-[#77767b] border border-[#ebe8e3] rounded-full text-[11px]"
                                 >
-                                  Hủy
-                                </button>
+                                  {copy("Hủy")}</button>
                                 <button
                                   onClick={() => handleSaveOrderAddress(order.id)}
                                   className="px-3 py-1 bg-[#202022] text-white rounded-full text-[11px] font-medium hover:bg-black"
                                 >
-                                  Lưu địa chỉ đơn này
-                                </button>
+                                  {copy("Lưu địa chỉ đơn này")}</button>
                               </div>
                             </div>
                           )}
@@ -1191,20 +1165,19 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       {/* Order Footer & Action */}
                       <div className="pt-3 border-t border-[#f0ede9] flex items-center justify-between text-xs">
                         <div>
-                          <span className="text-[11px] text-[#77767b] block">Tổng thanh toán</span>
+                          <span className="text-[11px] text-[#77767b] block">{copy("Tổng thanh toán")}</span>
                           <span className="font-serif text-base font-semibold text-[#1c1c19]">
-                            {order.totalAmount.toLocaleString('vi-VN')}₫
-                          </span>
+                            {order.totalAmount.toLocaleString('vi-VN')}{"₫"}</span>
                         </div>
 
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => onReorder(order)}
                             className="inline-flex items-center space-x-1.5 bg-[#f6f3ee] hover:bg-[#f0ede9] text-[#1c1c19] px-3.5 py-1.5 rounded-full text-xs font-medium transition-colors"
-                            title="Đặt mua lại các sản phẩm này ngay"
+                            title={copy("Đặt mua lại các sản phẩm này ngay")}
                           >
                             <RotateCcw className="w-3.5 h-3.5 text-[#74584d]" />
-                            <span>Mua lại</span>
+                            <span>{copy("Mua lại")}</span>
                           </button>
                         </div>
                       </div>
@@ -1221,13 +1194,12 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-1.5 font-semibold text-[#74584d]">
                       <Headphones className="w-4 h-4" />
-                      <span>Cần hỗ trợ tra cứu hoặc đổi thông tin đơn hàng?</span>
+                      <span>{copy("Cần hỗ trợ tra cứu hoặc đổi thông tin đơn hàng?")}</span>
                     </div>
-                    <span className="text-[10px] text-[#8a9a86] font-medium">0772 770 134</span>
+                    <span className="text-[10px] text-[#8a9a86] font-medium">{"0772 770 134"}</span>
                   </div>
                   <p className="text-[11px] text-[#77767b] leading-relaxed">
-                    Bạn có thể liên hệ trực tiếp với bộ phận Chăm Sóc Khách Hàng 24/7 để được hỗ trợ điều hướng vận chuyển, đổi địa chỉ hoặc tư vấn phác đồ sử dụng.
-                  </p>
+                    {copy("Bạn có thể liên hệ trực tiếp với bộ phận Chăm Sóc Khách Hàng 24/7 để được hỗ trợ điều hướng vận chuyển, đổi địa chỉ hoặc tư vấn phác đồ sử dụng.")}</p>
                   <button
                     onClick={() => {
                       onClose();
@@ -1236,7 +1208,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     className="w-full py-2 bg-white hover:bg-[#f6f3ee] text-[#1c1c19] text-xs font-semibold rounded-full border border-[#ebe8e3] transition-colors flex items-center justify-center space-x-1.5 shadow-2xs"
                   >
                     <Headphones className="w-3.5 h-3.5 text-[#74584d]" />
-                    <span>LIÊN HỆ CHĂM SÓC KHÁCH HÀNG</span>
+                    <span>{copy("LIÊN HỆ CHĂM SÓC KHÁCH HÀNG")}</span>
                   </button>
                 </div>
               )}
@@ -1250,7 +1222,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   {user.photoURL ? (
                     <img
                       src={user.photoURL}
-                      alt={user.name}
+                      alt={copy(user.name)}
                       referrerPolicy="no-referrer"
                       className="w-12 h-12 rounded-full object-cover border border-[#ebe8e3] shrink-0"
                     />
@@ -1270,8 +1242,8 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                         <span>{user.tier}</span>
                       </div>
                       {user.uid && (
-                        <div className="inline-flex items-center space-x-1 text-[9px] text-[#2c4a60] bg-[#4a6b82]/10 px-2 py-0.5 rounded-full font-medium" title="Dữ liệu được lưu trữ và đồng bộ hóa thời gian thực qua Cloud Firestore">
-                          <span>✦ Firebase Cloud Sync</span>
+                        <div className="inline-flex items-center space-x-1 text-[9px] text-[#2c4a60] bg-[#4a6b82]/10 px-2 py-0.5 rounded-full font-medium" title={copy("Dữ liệu được lưu trữ và đồng bộ hóa thời gian thực qua Cloud Firestore")}>
+                          <span>{copy("✦ Firebase Cloud Sync")}</span>
                         </div>
                       )}
                     </div>
@@ -1282,7 +1254,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   <button
                     onClick={() => setIsEditingProfile(true)}
                     className="p-2 text-[#74584d] hover:bg-[#f6f3ee] rounded-full transition-colors shrink-0"
-                    title="Chỉnh sửa thông tin"
+                    title={copy("Chỉnh sửa thông tin")}
                   >
                     <Edit3 className="w-4 h-4" />
                   </button>
@@ -1299,22 +1271,20 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     <div className="flex items-center space-x-2">
                       <Edit3 className="w-4 h-4 text-[#74584d]" />
                       <h5 className="font-serif text-sm font-semibold text-[#1c1c19]">
-                        Thay Đổi Thông Tin Giao Hàng & Người Mua
-                      </h5>
+                        {copy("Thay Đổi Thông Tin Giao Hàng & Người Mua")}</h5>
                     </div>
                     <button
                       type="button"
                       onClick={() => setIsEditingProfile(false)}
                       className="text-xs text-[#77767b] hover:text-[#1c1c19]"
                     >
-                      Hủy
-                    </button>
+                      {copy("Hủy")}</button>
                   </div>
 
                   {/* Buyer Name Input */}
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Họ và tên người mua / nhận hàng <span className="text-[#ba1a1a]">*</span>
+                      {copy("Họ và tên người mua / nhận hàng ")}<span className="text-[#ba1a1a]">{"*"}</span>
                     </label>
                     <div className="relative">
                       <User className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
@@ -1322,7 +1292,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                         type="text"
                         value={editName}
                         onChange={(e) => setEditName(e.target.value)}
-                        placeholder="Nhập họ và tên người mua"
+                        placeholder={copy("Nhập họ và tên người mua")}
                         className="w-full text-xs pl-9 pr-3 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19] font-medium"
                       />
                     </div>
@@ -1331,15 +1301,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   {/* Phone Number Input */}
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Số điện thoại nhận hàng
-                    </label>
+                      {copy("Số điện thoại nhận hàng")}</label>
                     <div className="relative">
                       <Phone className="w-4 h-4 text-[#77767b] absolute left-3 top-3" />
                       <input
                         type="tel"
                         value={editPhone}
                         onChange={(e) => setEditPhone(e.target.value)}
-                        placeholder="Nhập số điện thoại nhận hàng"
+                        placeholder={copy("Nhập số điện thoại nhận hàng")}
                         className="w-full text-xs pl-9 pr-3 py-2.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19] font-medium"
                       />
                     </div>
@@ -1348,14 +1317,13 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   {/* Shipping Address Textarea */}
                   <div>
                     <label className="text-xs font-medium text-[#1c1c19] block mb-1">
-                      Địa chỉ nhận hàng chi tiết
-                    </label>
+                      {copy("Địa chỉ nhận hàng chi tiết")}</label>
                     <div className="relative">
                       <textarea
                         rows={3}
                         value={editAddress}
                         onChange={(e) => setEditAddress(e.target.value)}
-                        placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"
+                        placeholder={copy("Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố")}
                         className="w-full text-xs p-3 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] focus:outline-none focus:ring-1 focus:ring-[#74584d] text-[#1c1c19] leading-relaxed font-medium"
                       />
                     </div>
@@ -1368,14 +1336,13 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                       onClick={() => setIsEditingProfile(false)}
                       className="flex-1 py-2.5 bg-[#f6f3ee] text-[#1c1c19] rounded-full text-xs font-medium hover:bg-[#ebe8e3] transition-colors"
                     >
-                      HỦY BỎ
-                    </button>
+                      {copy("HỦY BỎ")}</button>
                     <button
                       type="submit"
                       className="flex-1 py-2.5 bg-[#202022] hover:bg-black text-white rounded-full text-xs font-semibold tracking-wider transition-all shadow-md active:scale-98 flex items-center justify-center space-x-1.5"
                     >
                       <Check className="w-4 h-4" />
-                      <span>LƯU THÔNG TIN</span>
+                      <span>{copy("LƯU THÔNG TIN")}</span>
                     </button>
                   </div>
                 </form>
@@ -1385,34 +1352,34 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   <div className="flex items-center justify-between pb-2 border-b border-[#f0ede9]">
                     <div className="flex items-center space-x-2 text-[#1c1c19] font-medium text-xs min-w-0">
                       <MapPin className="w-4 h-4 text-[#74584d] shrink-0" />
-                      <span className="truncate whitespace-nowrap">Thông Tin Người Nhận & Địa Chỉ Mặc Định</span>
+                      <span className="truncate whitespace-nowrap">{copy("Thông Tin Người Nhận & Địa Chỉ Mặc Định")}</span>
                     </div>
                     <button
                       onClick={() => setIsEditingProfile(true)}
                       className="inline-flex items-center space-x-1 text-xs text-[#74584d] font-semibold hover:underline bg-[#fed8c9]/25 px-2.5 py-1 rounded-full whitespace-nowrap shrink-0 ml-2"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
-                      <span>Thay đổi</span>
+                      <span>{copy("Thay đổi")}</span>
                     </button>
                   </div>
 
                   <div className="space-y-2 text-xs">
                     <div className="flex items-start justify-between">
-                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">Họ và tên:</span>
+                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">{copy("Họ và tên:")}</span>
                       <span className="text-[#1c1c19] font-semibold text-right break-words">{user.name}</span>
                     </div>
 
                     <div className="flex items-start justify-between">
-                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">Số điện thoại:</span>
+                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">{copy("Số điện thoại:")}</span>
                       <span className="text-[#1c1c19] font-medium text-right tabular-nums whitespace-nowrap">
-                        {user.phone || <span className="text-[#77767b] font-normal italic">Chưa cập nhật</span>}
+                        {user.phone || <span className="text-[#77767b] font-normal italic">{copy("Chưa cập nhật")}</span>}
                       </span>
                     </div>
 
                     <div className="flex items-start justify-between">
-                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">Địa chỉ giao:</span>
+                      <span className="text-[#77767b] text-[11px] w-24 shrink-0 whitespace-nowrap">{copy("Địa chỉ giao:")}</span>
                       <span className="text-[#46464a] text-right max-w-[260px] leading-relaxed break-words">
-                        {user.address || <span className="text-[#77767b] font-normal italic">Chưa cập nhật địa chỉ</span>}
+                        {user.address || <span className="text-[#77767b] font-normal italic">{copy("Chưa cập nhật địa chỉ")}</span>}
                       </span>
                     </div>
                   </div>
@@ -1423,33 +1390,27 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white rounded-2xl p-3 border border-[#202022]/6 text-center">
                   <span className="text-[10px] text-[#77767b] uppercase tracking-wider block">
-                    ĐIỂM TÍCH LŨY
-                  </span>
+                    {copy("ĐIỂM TÍCH LŨY")}</span>
                   <span className="font-serif text-xl text-[#1c1c19] font-medium mt-0.5 block">
                     {user.points.toLocaleString('vi-VN')}
                   </span>
                   <span className="text-[10px] text-[#8a9a86]">
-                    Đổi {(user.points * 100).toLocaleString('vi-VN')}₫ ưu đãi
-                  </span>
+                    {copy("Đổi ")}{(user.points * 100).toLocaleString('vi-VN')}{copy("₫ ưu đãi")}</span>
                 </div>
                 <div className="bg-white rounded-2xl p-3 border border-[#202022]/6 text-center">
                   <span className="text-[10px] text-[#77767b] uppercase tracking-wider block">
-                    ĐƠN ĐÃ HOÀN TẤT
-                  </span>
+                    {copy("ĐƠN ĐÃ HOÀN TẤT")}</span>
                   <span className="font-serif text-xl text-[#74584d] font-medium mt-0.5 block">
-                    {orders.length} đơn
-                  </span>
-                  <span className="text-[10px] text-[#77767b]">Thành viên VIP</span>
+                    {copy(orders.length)} {copy(" đơn")}</span>
+                  <span className="text-[10px] text-[#77767b]">{copy("Thành viên VIP")}</span>
                 </div>
               </div>
 
               {/* Quality Guarantee note */}
               <div className="bg-[#f0ede9] rounded-2xl p-4 text-xs text-[#46464a] leading-relaxed border border-[#ebe8e3]">
                 <p className="font-serif font-medium text-[#1c1c19] mb-1">
-                  Cam kết giao hàng & bảo chứng Thụy Sĩ:
-                </p>
-                Đơn hàng sẽ được chuyển tới đúng địa chỉ của bạn trong 24-48 giờ với quy chuẩn vận chuyển bảo mật, miễn phí đổi trả trong 30 ngày nếu phát hiện bất kỳ kích ứng nào.
-              </div>
+                  {copy("Cam kết giao hàng & bảo chứng Thụy Sĩ:")}</p>
+                {copy("Đơn hàng sẽ được chuyển tới đúng địa chỉ của bạn trong 24-48 giờ với quy chuẩn vận chuyển bảo mật, miễn phí đổi trả trong 30 ngày nếu phát hiện bất kỳ kích ứng nào.")}</div>
 
               {/* Customer Care Banner */}
               {onOpenSupport && (
@@ -1457,13 +1418,12 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-1.5 font-semibold text-[#74584d] text-xs">
                       <Headphones className="w-4 h-4" />
-                      <span>Hỗ Trợ & Tư Vấn Da Liễu 24/7</span>
+                      <span>{copy("Hỗ Trợ & Tư Vấn Da Liễu 24/7")}</span>
                     </div>
-                    <span className="text-[10px] text-[#8a9a86] font-medium">0772 770 134</span>
+                    <span className="text-[10px] text-[#8a9a86] font-medium">{"0772 770 134"}</span>
                   </div>
                   <p className="text-[11px] text-[#77767b] leading-relaxed">
-                    Đội ngũ chuyên viên tư vấn da Alps luôn sẵn sàng hỗ trợ phác đồ sử dụng hoặc chính sách đổi trả hàng 30 ngày.
-                  </p>
+                    {copy("Đội ngũ chuyên viên tư vấn da Alps luôn sẵn sàng hỗ trợ phác đồ sử dụng hoặc chính sách đổi trả hàng 30 ngày.")}</p>
                   <button
                     onClick={() => {
                       onClose();
@@ -1472,7 +1432,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     className="w-full py-2 bg-[#f6f3ee] hover:bg-[#ebe8e3] text-[#1c1c19] text-xs font-semibold rounded-full border border-[#ebe8e3] transition-colors flex items-center justify-center space-x-1.5"
                   >
                     <Headphones className="w-3.5 h-3.5 text-[#74584d]" />
-                    <span>MỞ TRUNG TÂM CHĂM SÓC KHÁCH HÀNG</span>
+                    <span>{copy("MỞ TRUNG TÂM CHĂM SÓC KHÁCH HÀNG")}</span>
                   </button>
                 </div>
               )}
@@ -1483,7 +1443,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                 className="w-full py-3 bg-white hover:bg-[#fff5f5] text-[#ba1a1a] border border-[#ba1a1a]/20 rounded-full text-xs font-semibold tracking-wider flex items-center justify-center space-x-2 transition-colors shadow-2xs"
               >
                 <LogOut className="w-4 h-4" />
-                <span>ĐĂNG XUẤT TÀI KHOẢN</span>
+                <span>{copy("ĐĂNG XUẤT TÀI KHOẢN")}</span>
               </button>
             </div>
           )}

@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import {
   X,
@@ -40,6 +41,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
   initialPrompt,
   initialTab = 'ai_chat',
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const support = SUPPORT_I18N[language] || SUPPORT_I18N.vi;
 
@@ -93,22 +95,22 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
           <button
             onClick={onClose}
             className="absolute top-5 right-5 text-[#c7c6ca] hover:text-white p-1 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
-            title="Close"
+            title={copy("Close")}
           >
             <X className="w-5 h-5" />
           </button>
 
           <div className="flex items-center space-x-2 text-[#fed8c9] text-xs font-semibold uppercase tracking-[0.2em] mb-1.5">
             <Headphones className="w-4 h-4 text-[#fed8c9]" />
-            <span>{support.modalSubtitle}</span>
+            <span>{copy(support.modalSubtitle)}</span>
           </div>
 
           <h3 className="font-serif text-xl sm:text-2xl text-white font-normal">
-            {support.modalTitle}
+            {copy(support.modalTitle)}
           </h3>
 
           <p className="text-xs text-[#c7c6ca] mt-1.5 leading-relaxed max-w-lg">
-            {support.contact.workingHoursDesc}
+            {copy(support.contact.workingHoursDesc)}
           </p>
 
           {/* Sub Navigation Tabs */}
@@ -122,7 +124,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
               }`}
             >
               <Sparkles className="w-3.5 h-3.5 text-[#74584d]" />
-              <span>{support.tabs.aiChat}</span>
+              <span>{copy(support.tabs.aiChat)}</span>
             </button>
 
             {onOpenSkinQuiz && (
@@ -134,7 +136,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                 className="px-3.5 py-1.5 rounded-full font-medium transition-all whitespace-nowrap flex items-center space-x-1.5 bg-emerald-600/30 hover:bg-emerald-600/50 text-emerald-200 border border-emerald-400/40 cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
-                <span>{support.floatingBtn.skinQuizLabel}</span>
+                <span>{copy(support.floatingBtn.skinQuizLabel)}</span>
               </button>
             )}
 
@@ -147,7 +149,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
               }`}
             >
               <Phone className="w-3.5 h-3.5" />
-              <span>{support.tabs.contact}</span>
+              <span>{copy(support.tabs.contact)}</span>
             </button>
 
             <button
@@ -159,7 +161,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
               }`}
             >
               <Send className="w-3.5 h-3.5" />
-              <span>{support.tabs.ticket}</span>
+              <span>{copy(support.tabs.ticket)}</span>
             </button>
 
             <button
@@ -171,7 +173,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
               }`}
             >
               <HelpCircle className="w-3.5 h-3.5" />
-              <span>{support.tabs.faq}</span>
+              <span>{copy(support.tabs.faq)}</span>
             </button>
           </div>
         </div>
@@ -191,12 +193,11 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   </div>
                   <div>
                     <h5 className="font-semibold text-xs text-[#1c1c19] flex items-center gap-1.5">
-                      <span>Chat Trực Tiếp Với Tư Vấn Viên Qua Facebook Fanpage</span>
-                      <span className="text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.2 rounded-full uppercase">Online</span>
+                      <span>{copy("Chat Trực Tiếp Với Tư Vấn Viên Qua Facebook Fanpage")}</span>
+                      <span className="text-[9px] bg-emerald-600 text-white font-bold px-1.5 py-0.2 rounded-full uppercase">{copy("Online")}</span>
                     </h5>
                     <p className="text-[11px] text-[#5f5d58] mt-0.5">
-                      Nhắn tin Messenger trực tiếp với chuyên viên để nhận soi da, phác đồ điều trị và tư vấn quà 20/10
-                    </p>
+                      {copy("Nhắn tin Messenger trực tiếp với chuyên viên để nhận soi da, phác đồ điều trị và tư vấn quà 20/10")}</p>
                   </div>
                 </div>
 
@@ -206,8 +207,8 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center space-x-1.5 px-3.5 py-1.5 bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-semibold rounded-full shadow-xs transition-all shrink-0 cursor-pointer self-start sm:self-auto"
                 >
-                  <span>Chat Messenger Fanpage</span>
-                  <span className="text-[10px]">↗</span>
+                  <span>{copy("Chat Messenger Fanpage")}</span>
+                  <span className="text-[10px]">{"↗"}</span>
                 </a>
               </div>
 
@@ -234,19 +235,17 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                           <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                           </svg>
-                          <span>FANPAGE TƯ VẤN VIÊN 1-1</span>
+                          <span>{copy("FANPAGE TƯ VẤN VIÊN 1-1")}</span>
                         </span>
                         <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                          <span>Đang trực tuyến 24/7</span>
+                          <span>{copy("Đang trực tuyến 24/7")}</span>
                         </span>
                       </div>
                       <h4 className="font-serif text-base font-semibold text-[#1c1c19]">
-                        Kênh Fanpage Facebook Tư Vấn Da Liễu &amp; Quà Tặng 20/10
-                      </h4>
+                        {copy("Kênh Fanpage Facebook Tư Vấn Da Liễu & Quà Tặng 20/10")}</h4>
                       <p className="text-xs text-[#5f5d58]">
-                        Nhắn tin Messenger trực tiếp 1-1 để nhận chẩn đoán tình trạng da, phác đồ phục hồi hàng rào ẩm và tư vấn gói quà 20/10
-                      </p>
+                        {copy("Nhắn tin Messenger trực tiếp 1-1 để nhận chẩn đoán tình trạng da, phác đồ phục hồi hàng rào ẩm và tư vấn gói quà 20/10")}</p>
                     </div>
 
                     <div className="flex items-center space-x-3 shrink-0">
@@ -259,8 +258,8 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                         <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                           <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
-                        <span>Mở Chat Fanpage Messenger</span>
-                        <span>↗</span>
+                        <span>{copy("Mở Chat Fanpage Messenger")}</span>
+                        <span>{"↗"}</span>
                       </a>
                     </div>
                   </div>
@@ -271,32 +270,31 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   <div>
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] uppercase tracking-wider font-semibold text-[#74584d] bg-[#fed8c9]/30 px-2 py-0.5 rounded-full">
-                        24/7 SUPPORT
-                      </span>
+                        {copy("24/7 SUPPORT")}</span>
                       <span className="flex items-center text-[10px] text-[#8a9a86] font-medium">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#8a9a86] mr-1 animate-pulse" />
-                        {support.aiChat.online247}
+                        {copy(support.aiChat.online247)}
                       </span>
                     </div>
                     <h4 className="font-serif text-base font-semibold text-[#1c1c19] mt-2">
-                      {support.contact.hotlineTitle}
+                      {copy(support.contact.hotlineTitle)}
                     </h4>
                     <p className="text-xs text-[#77767b] mt-0.5">
-                      {support.contact.hotlineDesc}
+                      {copy(support.contact.hotlineDesc)}
                     </p>
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-[#f0ede9] flex items-center justify-between">
                     <div>
                       <span className="font-serif text-lg font-bold text-[#1c1c19] tracking-wider block">
-                        {support.contact.hotlineFree}
+                        {copy(support.contact.hotlineFree)}
                       </span>
                     </div>
                     <a
                       href="tel:0772770134"
                       className="px-3 py-1.5 bg-[#202022] hover:bg-black text-white text-xs font-medium rounded-full shadow-2xs transition-colors shrink-0"
                     >
-                      {support.contact.callNowBtn}
+                      {copy(support.contact.callNowBtn)}
                     </a>
                   </div>
                 </div>
@@ -306,32 +304,28 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   <div>
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] uppercase tracking-wider font-semibold text-[#74584d] bg-[#fed8c9]/30 px-2 py-0.5 rounded-full">
-                        EMAIL CARE
-                      </span>
+                        {copy("EMAIL CARE")}</span>
                       <span className="text-[10px] text-[#77767b]">
-                        {support.contact.emailDesc}
+                        {copy(support.contact.emailDesc)}
                       </span>
                     </div>
                     <h4 className="font-serif text-base font-semibold text-[#1c1c19] mt-2">
-                      {support.contact.emailTitle}
+                      {copy(support.contact.emailTitle)}
                     </h4>
                     <p className="text-xs text-[#77767b] mt-0.5">
-                      pure@alps.vn
-                    </p>
+                      {copy("pure@alps.vn")}</p>
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-[#f0ede9] flex items-center justify-between">
                     <div>
                       <span className="font-medium text-xs text-[#74584d] block">
-                        pure@alps.vn
-                      </span>
+                        {copy("pure@alps.vn")}</span>
                     </div>
                     <a
                       href="mailto:pure@alps.vn"
                       className="px-3 py-1.5 bg-[#f6f3ee] hover:bg-[#ede7df] text-[#1c1c19] text-xs font-medium rounded-full border border-[#202022]/10 transition-colors shrink-0"
                     >
-                      Email
-                    </a>
+                      {copy("Email")}</a>
                   </div>
                 </div>
 
@@ -344,18 +338,15 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                           <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                           </svg>
-                          <span>FACEBOOK FANPAGE CHÍNH THỨC</span>
+                          <span>{copy("FACEBOOK FANPAGE CHÍNH THỨC")}</span>
                         </span>
                         <span className="text-[10px] text-[#2e6930] bg-[#eef5ee] px-2 py-0.5 rounded-full font-medium">
-                          Phản hồi nhanh
-                        </span>
+                          {copy("Phản hồi nhanh")}</span>
                       </div>
                       <h4 className="font-serif text-base font-semibold text-[#1c1c19]">
-                        Kênh Fanpage Tư Vấn & CSKH Trực Tuyến
-                      </h4>
+                        {copy("Kênh Fanpage Tư Vấn & CSKH Trực Tuyến")}</h4>
                       <p className="text-xs text-[#77767b]">
-                        Nhắn tin Messenger trực tiếp với chuyên viên để nhận phác đồ chăm sóc da cá nhân hóa
-                      </p>
+                        {copy("Nhắn tin Messenger trực tiếp với chuyên viên để nhận phác đồ chăm sóc da cá nhân hóa")}</p>
                     </div>
 
                     <a
@@ -367,8 +358,8 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                       <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                         <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                       </svg>
-                      <span>Mở Trang Facebook</span>
-                      <span>↗</span>
+                      <span>{copy("Mở Trang Facebook")}</span>
+                      <span>{"↗"}</span>
                     </a>
                   </div>
                 </div>
@@ -378,32 +369,31 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
               <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#202022]/8 shadow-2xs space-y-3">
                 <h4 className="text-xs font-semibold uppercase tracking-wider text-[#1c1c19] flex items-center space-x-1.5 leading-snug">
                   <MapPin className="w-4 h-4 text-[#74584d] shrink-0" />
-                  <span>Trụ Sở & Văn Phòng Phân Phối TP.HCM</span>
+                  <span>{copy("Trụ Sở & Văn Phòng Phân Phối TP.HCM")}</span>
                 </h4>
 
                 <div className="pt-1 text-xs">
                   {/* Trụ Sở TP.HCM */}
                   <div className="p-3.5 bg-[#fcf9f4] rounded-xl border border-[#ebe8e3] space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-[#1c1c19]">{support.contact.hcmTitle}</span>
+                      <span className="font-semibold text-[#1c1c19]">{copy(support.contact.hcmTitle)}</span>
                       <span className="text-[10px] text-[#8a9a86] bg-[#8a9a86]/10 px-2 py-0.5 rounded-full font-medium whitespace-nowrap">
-                        TP.HCM
-                      </span>
+                        {copy("TP.HCM")}</span>
                     </div>
                     <p className="text-[#46464a] leading-relaxed text-[11px] text-pretty">
-                      {support.contact.hcmAddress}
+                      {copy(support.contact.hcmAddress)}
                     </p>
                     <p className="text-[11px] text-[#77767b] pt-1 text-pretty">
-                      {support.contact.hcmDesc}
+                      {copy(support.contact.hcmDesc)}
                     </p>
                   </div>
                 </div>
 
                 <div className="pt-2 flex items-center justify-between text-[11px] text-[#77767b] border-t border-[#f0ede9]">
                   <span className="flex items-center space-x-1">
-                    <span>✨ {support.contact.workingHoursTime}</span>
+                    <span>{"✨ "}{copy(support.contact.workingHoursTime)}</span>
                   </span>
-                  <span className="text-[#74584d] font-medium hidden sm:inline whitespace-nowrap">ISO 22716 Certified</span>
+                  <span className="text-[#74584d] font-medium hidden sm:inline whitespace-nowrap">{copy("ISO 22716 Certified")}</span>
                 </div>
               </div>
 
@@ -411,21 +401,19 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
               <div className="bg-[#f0ede9] rounded-2xl p-4 border border-[#ebe8e3] text-xs space-y-2">
                 <div className="flex items-center space-x-1.5 text-[#74584d] font-semibold">
                   <ShieldCheck className="w-4 h-4" />
-                  <span>Alps Skincare Pure Essence</span>
+                  <span>{copy("Alps Skincare Pure Essence")}</span>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-[11px] text-[#46464a]">
                   <div className="bg-white/80 rounded-xl p-2.5 border border-[#ebe8e3]">
-                    <strong className="text-[#1c1c19] block mb-0.5">✦ 15-Minute Reply</strong>
-                    {support.ticket.subtitle}
+                    <strong className="text-[#1c1c19] block mb-0.5">{copy("✦ 15-Minute Reply")}</strong>
+                    {copy(support.ticket.subtitle)}
                   </div>
                   <div className="bg-white/80 rounded-xl p-2.5 border border-[#ebe8e3]">
-                    <strong className="text-[#1c1c19] block mb-0.5">✦ 30-Day Guarantee</strong>
-                    100% money-back guarantee with zero return fee.
-                  </div>
+                    <strong className="text-[#1c1c19] block mb-0.5">{copy("✦ 30-Day Guarantee")}</strong>
+                    {copy("100% money-back guarantee with zero return fee.")}</div>
                   <div className="bg-white/80 rounded-xl p-2.5 border border-[#ebe8e3]">
-                    <strong className="text-[#1c1c19] block mb-0.5">✦ 1-on-1 Specialist</strong>
-                    Personalized Swiss dermatology support throughout your ritual.
-                  </div>
+                    <strong className="text-[#1c1c19] block mb-0.5">{copy("✦ 1-on-1 Specialist")}</strong>
+                    {copy("Personalized Swiss dermatology support throughout your ritual.")}</div>
                 </div>
               </div>
             </div>
@@ -440,17 +428,17 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                     <CheckCircle2 className="w-7 h-7" />
                   </div>
                   <h4 className="font-serif text-lg font-semibold text-[#1c1c19]">
-                    {support.ticket.successTitle}
+                    {copy(support.ticket.successTitle)}
                   </h4>
                   <p className="text-xs text-[#46464a] max-w-md mx-auto leading-relaxed">
-                    {support.ticket.successDesc(submittedTicket.id)}
+                    {copy(support.ticket.successDesc(submittedTicket.id))}
                   </p>
                   <div className="pt-3">
                     <button
                       onClick={resetTicketForm}
                       className="px-5 py-2.5 bg-[#202022] hover:bg-black text-white text-xs font-semibold rounded-full shadow-xs transition-colors cursor-pointer"
                     >
-                      {support.ticket.newTicketBtn}
+                      {copy(support.ticket.newTicketBtn)}
                     </button>
                   </div>
                 </div>
@@ -458,17 +446,17 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                 <form onSubmit={handleTicketSubmit} className="bg-white rounded-2xl p-5 border border-[#202022]/8 shadow-2xs space-y-4">
                   <div className="border-b border-[#f0ede9] pb-3">
                     <h4 className="font-serif text-base font-medium text-[#1c1c19]">
-                      {support.ticket.title}
+                      {copy(support.ticket.title)}
                     </h4>
                     <p className="text-xs text-[#77767b] mt-0.5">
-                      {support.ticket.subtitle}
+                      {copy(support.ticket.subtitle)}
                     </p>
                   </div>
 
                   {/* Topic selection */}
                   <div>
                     <label className="block text-xs font-medium text-[#1c1c19] mb-1.5">
-                      {support.ticket.topicLabel}
+                      {copy(support.ticket.topicLabel)}
                     </label>
                     <select
                       value={ticketTopic}
@@ -477,7 +465,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                     >
                       {support.ticket.topics.map((t, i) => (
                         <option key={i} value={t}>
-                          {t}
+                          {copy(t)}
                         </option>
                       ))}
                     </select>
@@ -487,26 +475,26 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-medium text-[#1c1c19] mb-1">
-                        {support.ticket.nameLabel}
+                        {copy(support.ticket.nameLabel)}
                       </label>
                       <input
                         type="text"
                         value={senderName}
                         onChange={(e) => setSenderName(e.target.value)}
-                        placeholder={support.ticket.nameLabel}
+                        placeholder={copy(support.ticket.nameLabel)}
                         className="w-full bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl px-3 py-2 text-xs text-[#1c1c19] focus:outline-none focus:border-[#74584d]"
                         required
                       />
                     </div>
                     <div>
                       <label className="block text-xs font-medium text-[#1c1c19] mb-1">
-                        {support.ticket.phoneLabel}
+                        {copy(support.ticket.phoneLabel)}
                       </label>
                       <input
                         type="tel"
                         value={senderPhone}
                         onChange={(e) => setSenderPhone(e.target.value)}
-                        placeholder={support.ticket.phoneLabel}
+                        placeholder={copy(support.ticket.phoneLabel)}
                         className="w-full bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl px-3 py-2 text-xs text-[#1c1c19] focus:outline-none focus:border-[#74584d]"
                         required
                       />
@@ -517,25 +505,25 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-medium text-[#1c1c19] mb-1">
-                        {support.ticket.emailLabel}
+                        {copy(support.ticket.emailLabel)}
                       </label>
                       <input
                         type="email"
                         value={senderEmail}
                         onChange={(e) => setSenderEmail(e.target.value)}
-                        placeholder="email@domain.com"
+                        placeholder={copy("email@domain.com")}
                         className="w-full bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl px-3 py-2 text-xs text-[#1c1c19] focus:outline-none focus:border-[#74584d]"
                       />
                     </div>
                     <div>
                       <label className="block text-xs font-medium text-[#1c1c19] mb-1">
-                        {support.ticket.orderCodeLabel}
+                        {copy(support.ticket.orderCodeLabel)}
                       </label>
                       <input
                         type="text"
                         value={orderCode}
                         onChange={(e) => setOrderCode(e.target.value)}
-                        placeholder={support.ticket.orderCodePlaceholder}
+                        placeholder={copy(support.ticket.orderCodePlaceholder)}
                         className="w-full bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl px-3 py-2 text-xs text-[#1c1c19] focus:outline-none focus:border-[#74584d]"
                       />
                     </div>
@@ -544,13 +532,13 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   {/* Message content */}
                   <div>
                     <label className="block text-xs font-medium text-[#1c1c19] mb-1">
-                      {support.ticket.messageLabel}
+                      {copy(support.ticket.messageLabel)}
                     </label>
                     <textarea
                       rows={4}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      placeholder={support.ticket.messagePlaceholder}
+                      placeholder={copy(support.ticket.messagePlaceholder)}
                       className="w-full bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl p-3 text-xs text-[#1c1c19] focus:outline-none focus:border-[#74584d] resize-none"
                       required
                     />
@@ -559,7 +547,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                   <div className="pt-2 flex items-center justify-between">
                     <span className="text-[11px] text-[#77767b] flex items-center space-x-1">
                       <Clock className="w-3.5 h-3.5 text-[#74584d]" />
-                      <span>{support.ticket.subtitle}</span>
+                      <span>{copy(support.ticket.subtitle)}</span>
                     </span>
 
                     <button
@@ -567,7 +555,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                       className="px-6 py-2.5 bg-[#202022] hover:bg-black text-white text-xs font-semibold rounded-full shadow-md transition-all active:scale-98 flex items-center space-x-2 cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
-                      <span>{support.ticket.submitBtn}</span>
+                      <span>{copy(support.ticket.submitBtn)}</span>
                     </button>
                   </div>
                 </form>
@@ -580,10 +568,10 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
             <div className="space-y-3 animate-fade-in">
               <div className="bg-white rounded-2xl p-4 border border-[#202022]/8 mb-2">
                 <h4 className="font-serif text-sm font-semibold text-[#1c1c19]">
-                  {support.faq.title}
+                  {copy(support.faq.title)}
                 </h4>
                 <p className="text-xs text-[#77767b] mt-0.5">
-                  {support.modalSubtitle}
+                  {copy(support.modalSubtitle)}
                 </p>
               </div>
 
@@ -599,8 +587,8 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                       className="w-full p-4 text-left flex items-center justify-between hover:bg-[#fcf9f4] transition-colors cursor-pointer"
                     >
                       <span className="font-medium text-xs sm:text-sm text-[#1c1c19] pr-3 flex items-center space-x-2">
-                        <span className="text-[#74584d] font-semibold">Q{index + 1}.</span>
-                        <span>{faq.question}</span>
+                        <span className="text-[#74584d] font-semibold">{copy("Q")}{copy(index + 1)}{"."}</span>
+                        <span>{copy(faq.question)}</span>
                       </span>
                       {isExpanded ? (
                         <ChevronUp className="w-4 h-4 text-[#74584d] shrink-0" />
@@ -610,7 +598,7 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
                     </button>
                     {isExpanded && (
                       <div className="px-4 pb-4 pt-1 text-xs text-[#46464a] leading-relaxed border-t border-[#f0ede9] bg-[#fcf9f4]/60">
-                        {faq.answer}
+                        {copy(faq.answer)}
                       </div>
                     )}
                   </div>
@@ -624,14 +612,14 @@ export const CustomerSupportModal: React.FC<CustomerSupportModalProps> = ({
         <div className="p-3 sm:p-4 bg-[#ffffff] border-t border-[#ebe8e3] flex flex-col sm:flex-row items-center justify-between text-xs text-[#77767b] gap-2 shrink-0">
           <div className="flex items-center space-x-2 text-[11px]">
             <Sparkles className="w-3.5 h-3.5 text-[#74584d]" />
-            <span>Alps Skincare Pure Essence • Swiss Vegan Dermatology</span>
+            <span>{copy("Alps Skincare Pure Essence • Swiss Vegan Dermatology")}</span>
           </div>
 
           <button
             onClick={onClose}
             className="px-5 py-1.5 bg-[#f6f3ee] hover:bg-[#ebe8e3] text-[#1c1c19] font-medium rounded-full text-xs transition-colors cursor-pointer"
           >
-            {language === 'vi' ? 'Đóng cửa sổ' : language === 'de' ? 'Schließen' : language === 'es' ? 'Cerrar' : language === 'zh' ? '关闭窗口' : 'Close'}
+            {copy(language === 'vi' ? 'Đóng cửa sổ' : language === 'de' ? 'Schließen' : language === 'es' ? 'Cerrar' : language === 'zh' ? '关闭窗口' : 'Close')}
           </button>
         </div>
       </div>

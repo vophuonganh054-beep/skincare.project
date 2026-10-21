@@ -7,11 +7,19 @@ interface SafeImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   className?: string;
 }
 
-export const SafeImage: React.FC<SafeImageProps> = ({
+// Each source pair owns its loading/fallback state. A product switch mounts a fresh
+// image, so late load/error events from the previous product cannot affect it.
+export const SafeImage: React.FC<SafeImageProps> = props => (
+  <SourceImage key={JSON.stringify([props.src, props.fallbackSrc])} {...props} />
+);
+
+const SourceImage: React.FC<SafeImageProps> = ({
   src,
   fallbackSrc,
   alt,
   className = '',
+  onLoad,
+  onError,
   ...props
 }) => {
   const [currentSrc, setCurrentSrc] = useState<string>(src);
@@ -34,8 +42,8 @@ export const SafeImage: React.FC<SafeImageProps> = ({
         src={currentSrc}
         alt={alt}
         referrerPolicy="no-referrer"
-        onLoad={() => setIsLoaded(true)}
-        onError={handleError}
+        onLoad={event => { setIsLoaded(true); onLoad?.(event); }}
+        onError={event => { handleError(); onError?.(event); }}
         className={`w-full h-full object-cover transition-opacity duration-300 ${
           isLoaded ? 'opacity-100' : 'opacity-0'
         } ${className}`}

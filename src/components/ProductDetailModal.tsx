@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import {
   X,
@@ -36,6 +37,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
   user,
   onShowToast,
 }) => {
+  const copy = useCopy();
   const { t, language } = useLanguage();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState<'usage' | 'benefits' | 'ingredients' | 'reviews'>('usage');
@@ -83,7 +85,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
         <button
           onClick={onClose}
           className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-white/80 backdrop-blur-md text-[#1c1c19] hover:bg-white flex items-center justify-center shadow-xs transition-transform active:scale-95 cursor-pointer"
-          title={t.productDetail.close}
+          title={copy(t.productDetail.close)}
         >
           <X className="w-5 h-5" />
         </button>
@@ -96,7 +98,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-white shadow-xs border border-[#202022]/6 flex items-center justify-center">
                 <img
                   src={product.image}
-                  alt={product.name}
+                  alt={copy(product.name)}
                   referrerPolicy="no-referrer"
                   onError={(e) => {
                     (e.target as HTMLImageElement).src = product.fallbackImage;
@@ -107,7 +109,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {/* Badge on photo */}
                 <div className="absolute top-3 left-3">
                   <span className="bg-[#1c1c19] text-white text-[11px] px-3 py-1 rounded-full font-medium tracking-wider uppercase shadow-sm">
-                    {displayTag}
+                    {copy(displayTag)}
                   </span>
                 </div>
               </div>
@@ -116,16 +118,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
               <div className="bg-[#f0ede9] rounded-2xl p-3 flex items-center justify-between text-xs">
                 <div className="flex items-center space-x-2">
                   <span className="w-6 h-6 rounded-full bg-[#74584d] text-white flex items-center justify-center font-serif text-[11px]">
-                    0{product.routineStepNumber}
+                    {"0"}{copy(product.routineStepNumber)}
                   </span>
                   <div>
-                    <span className="text-[#77767b] text-[10px] uppercase tracking-wider block">{t.productDetail.routineStepLabel}</span>
-                    <span className="font-medium text-[#1c1c19]">{displayRoutineStep}</span>
+                    <span className="text-[#77767b] text-[10px] uppercase tracking-wider block">{copy(t.productDetail.routineStepLabel)}</span>
+                    <span className="font-medium text-[#1c1c19]">{copy(displayRoutineStep)}</span>
                   </div>
                 </div>
                 <span className="text-[#8a9a86] font-medium text-[11px] flex items-center space-x-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Alps Pure Essence</span>
+                  <span>{copy("Alps Pure Essence")}</span>
                 </span>
               </div>
             </div>
@@ -136,16 +138,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 {/* Brand & Volume */}
                 <div className="flex items-center justify-between">
                   <span className="text-xs uppercase tracking-[0.2em] text-[#74584d] font-semibold">
-                    ALPS • {product.capacity}
+                    {copy("ALPS • ")}{copy(product.capacity)}
                   </span>
                   <span className="text-xs text-[#8a9a86] font-medium bg-[#8a9a86]/10 px-2.5 py-0.5 rounded-full">
-                    {displayStock}
+                    {copy(displayStock)}
                   </span>
                 </div>
 
                 {/* Name */}
                 <h2 className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19] tracking-tight mt-1">
-                  {displayName}
+                  {copy(displayName)}
                 </h2>
 
                 {/* Rating trigger */}
@@ -153,7 +155,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   type="button"
                   onClick={handleOpenReviews}
                   className="flex items-center space-x-2 mt-2 group text-left cursor-pointer focus:outline-none"
-                  title={t.productDetail.writeFirstReview}
+                  title={copy(t.productDetail.writeFirstReview)}
                 >
                   <div className="flex items-center text-[#d6d4cf]">
                     {[1, 2, 3, 4, 5].map((star) => (
@@ -161,16 +163,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     ))}
                   </div>
                   <span className="text-xs text-[#77767b] group-hover:text-[#74584d] transition-colors">
-                    {t.productDetail.noReviewsYet}
+                    {copy(t.productDetail.noReviewsYet)}
                   </span>
                   <span className="text-[10px] text-[#74584d] bg-[#fed8c9]/40 px-2 py-0.5 rounded-full font-medium hidden sm:inline-block">
-                    {t.productDetail.writeFirstReview}
+                    {copy(t.productDetail.writeFirstReview)}
                   </span>
                 </button>
 
                 {/* Subtitle */}
                 <p className="text-xs sm:text-sm text-[#77767b] font-light mt-2">
-                  {displaySubtitle}
+                  {copy(displaySubtitle)}
                 </p>
 
                 {/* Pricing Box */}
@@ -178,40 +180,37 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   <div>
                     <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                       <span className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19]">
-                        {(product.promoPrice ?? product.price).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                      </span>
+                        {(product.promoPrice ?? product.price).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                       {product.originalPrice && product.originalPrice > (product.promoPrice ?? product.price) && (
                         <span className="text-xs sm:text-sm text-[#77767b] line-through">
-                          {product.originalPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                        </span>
+                          {product.originalPrice.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                       )}
-                    {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">Sau mã {product.promoCode}</span>}
+                    {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">{copy("Sau mã ")}{copy(product.promoCode)}</span>}
                     </div>
                     {product.note && (
                       <p className="text-xs text-[#8a9a86] font-medium mt-0.5">
-                        ✦ {t.productDetail.privilege} {product.note}
+                        {"✦ "}{copy(t.productDetail.privilege)} {copy(product.note)}
                       </p>
                     )}
                   </div>
                   <div className="text-[11px] text-[#77767b] text-right">
-                    {t.productDetail.vatIncluded}<br />{t.productDetail.fastDelivery}
+                    {copy(t.productDetail.vatIncluded)}<br />{copy(t.productDetail.fastDelivery)}
                   </div>
                 </div>
 
                 {/* Description paragraph */}
                 <p className="text-xs sm:text-sm text-[#46464a] leading-relaxed mt-4 font-light">
-                  {displayDescription}
+                  {copy(displayDescription)}
                 </p>
 
                 {/* Quick Key Highlights preview */}
                 <div className="mt-4 pt-4 border-t border-[#202022]/6 space-y-1.5">
                   <span className="text-[11px] uppercase tracking-wider text-[#74584d] font-semibold block">
-                    {t.productDetail.tabIngredients}:
-                  </span>
+                    {copy(t.productDetail.tabIngredients)}{":"}</span>
                   <div className="flex flex-wrap gap-1.5">
                     {displayIngredients.slice(0, 3).map((ing, i) => (
                       <span key={i} className="text-[11px] bg-white px-2.5 py-1 rounded-lg border border-[#202022]/5 text-[#46464a]">
-                        • {ing}
+                        {"• "}{copy(ing)}
                       </span>
                     ))}
                   </div>
@@ -226,18 +225,16 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
                       className="text-base text-[#77767b] hover:text-[#1c1c19] px-2 py-0.5 transition-colors cursor-pointer"
                     >
-                      -
-                    </button>
+                      {"-"}</button>
                     <span className="font-semibold text-xs px-2 text-[#1c1c19]">{quantity}</span>
                     <button
                       onClick={() => setQuantity(quantity + 1)}
                       className="text-base text-[#77767b] hover:text-[#1c1c19] px-2 py-0.5 transition-colors cursor-pointer"
                     >
-                      +
-                    </button>
+                      {"+"}</button>
                   </div>
                   <span className="text-xs text-[#77767b]">
-                    {language === 'vi' ? 'Tạm tính trước mã:' : 'Subtotal before code:'} <strong className="text-[#1c1c19] font-serif text-sm">{(product.price * quantity).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫</strong>
+                    {copy(language === 'vi' ? 'Tạm tính trước mã:' : 'Subtotal before code:')} <strong className="text-[#1c1c19] font-serif text-sm">{(product.price * quantity).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</strong>
                   </span>
                 </div>
 
@@ -251,14 +248,14 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     }`}
                   >
                     <ShoppingBag className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                    <span className="truncate">{t.catalog.addToCart}</span>
+                    <span className="truncate">{copy(t.catalog.addToCart)}</span>
                   </button>
 
                   <button
                     onClick={() => onBuyNow && onBuyNow(product, quantity)}
                     className="py-3 px-2 sm:px-4 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider uppercase transition-all bg-[#1c1c19] hover:bg-black text-white active:scale-98 shadow-md flex items-center justify-center space-x-1 sm:space-x-1.5 cursor-pointer"
                   >
-                    <span className="truncate">{t.catalog.buyNow}</span>
+                    <span className="truncate">{copy(t.catalog.buyNow)}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-[#fed8c9] shrink-0" />
                   </button>
                 </div>
@@ -278,7 +275,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>{t.productDetail.tabUsage}</span>
+                <span>{copy(t.productDetail.tabUsage)}</span>
               </button>
 
               <button
@@ -289,7 +286,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     : 'text-[#77767b] hover:text-[#1c1c19]'
                 }`}
               >
-                {t.productDetail.tabBenefits}
+                {copy(t.productDetail.tabBenefits)}
               </button>
 
               <button
@@ -300,7 +297,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     : 'text-[#77767b] hover:text-[#1c1c19]'
                 }`}
               >
-                {t.productDetail.tabIngredients}
+                {copy(t.productDetail.tabIngredients)}
               </button>
 
               <button
@@ -312,10 +309,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 }`}
               >
                 <MessageSquare className="w-3.5 h-3.5" />
-                <span>{t.productDetail.tabReviews}</span>
+                <span>{copy(t.productDetail.tabReviews)}</span>
                 <span className="text-[10px] bg-[#f0ede9] text-[#77767b] px-2 py-0.5 rounded-full font-semibold">
-                  0
-                </span>
+                  {"0"}</span>
               </button>
             </div>
 
@@ -325,7 +321,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <div className="space-y-4 animate-fadeIn">
                   <div className="bg-white p-4 rounded-2xl border border-[#202022]/6 space-y-2">
                     <p className="text-xs text-[#1c1c19] leading-relaxed">
-                      {displayUsage}
+                      {copy(displayUsage)}
                     </p>
                   </div>
 
@@ -334,25 +330,25 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                       {displayDetailedUsage.timing && (
                         <div className="p-3 bg-[#f6f3ee] rounded-xl border border-[#202022]/6">
                           <span className="text-[10px] uppercase font-bold text-[#74584d] tracking-wider block">
-                            {language === 'vi' ? 'Thời Điểm' : language === 'de' ? 'Anwendung' : language === 'es' ? 'Momento' : language === 'zh' ? '使用时段' : 'Timing'}
+                            {copy(language === 'vi' ? 'Thời Điểm' : language === 'de' ? 'Anwendung' : language === 'es' ? 'Momento' : language === 'zh' ? '使用时段' : 'Timing')}
                           </span>
-                          <span className="text-xs text-[#1c1c19] font-medium mt-0.5 block">{displayDetailedUsage.timing}</span>
+                          <span className="text-xs text-[#1c1c19] font-medium mt-0.5 block">{copy(displayDetailedUsage.timing)}</span>
                         </div>
                       )}
                       {displayDetailedUsage.amount && (
                         <div className="p-3 bg-[#f6f3ee] rounded-xl border border-[#202022]/6">
                           <span className="text-[10px] uppercase font-bold text-[#74584d] tracking-wider block">
-                            {language === 'vi' ? 'Liều Lượng' : language === 'de' ? 'Menge' : language === 'es' ? 'Cantidad' : language === 'zh' ? '建议用量' : 'Amount'}
+                            {copy(language === 'vi' ? 'Liều Lượng' : language === 'de' ? 'Menge' : language === 'es' ? 'Cantidad' : language === 'zh' ? '建议用量' : 'Amount')}
                           </span>
-                          <span className="text-xs text-[#1c1c19] font-medium mt-0.5 block">{displayDetailedUsage.amount}</span>
+                          <span className="text-xs text-[#1c1c19] font-medium mt-0.5 block">{copy(displayDetailedUsage.amount)}</span>
                         </div>
                       )}
                       {displayDetailedUsage.suitableFor && (
                         <div className="p-3 bg-[#f6f3ee] rounded-xl border border-[#202022]/6 sm:col-span-1">
                           <span className="text-[10px] uppercase font-bold text-[#74584d] tracking-wider block">
-                            {language === 'vi' ? 'Phù Hợp' : language === 'de' ? 'Geeignet für' : language === 'es' ? 'Apto para' : language === 'zh' ? '适用肤质' : 'Suitable For'}
+                            {copy(language === 'vi' ? 'Phù Hợp' : language === 'de' ? 'Geeignet für' : language === 'es' ? 'Apto para' : language === 'zh' ? '适用肤质' : 'Suitable For')}
                           </span>
-                          <span className="text-xs text-[#1c1c19] font-medium mt-0.5 block">{displayDetailedUsage.suitableFor}</span>
+                          <span className="text-xs text-[#1c1c19] font-medium mt-0.5 block">{copy(displayDetailedUsage.suitableFor)}</span>
                         </div>
                       )}
                     </div>
@@ -361,7 +357,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                   {displayDetailedUsage?.steps && displayDetailedUsage.steps.length > 0 && (
                     <div className="space-y-2 pt-2">
                       <span className="text-xs font-semibold text-[#1c1c19] uppercase tracking-wider block">
-                        {language === 'vi' ? 'Các Bước Thực Hiện' : language === 'de' ? 'Anwendungsschritte' : language === 'es' ? 'Pasos de Aplicación' : language === 'zh' ? '护理步骤' : 'Step-by-Step Ritual'}
+                        {copy(language === 'vi' ? 'Các Bước Thực Hiện' : language === 'de' ? 'Anwendungsschritte' : language === 'es' ? 'Pasos de Aplicación' : language === 'zh' ? '护理步骤' : 'Step-by-Step Ritual')}
                       </span>
                       <div className="space-y-2">
                         {displayDetailedUsage.steps.map((st) => (
@@ -370,8 +366,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                               {st.step}
                             </span>
                             <div>
-                              <strong className="text-[#1c1c19] block">{st.title}</strong>
-                              <p className="text-[#5c5b5f] text-[11px] leading-relaxed mt-0.5 font-light">{st.description}</p>
+                              <strong className="text-[#1c1c19] block">{copy(st.title)}</strong>
+                              <p className="text-[#5c5b5f] text-[11px] leading-relaxed mt-0.5 font-light">{copy(st.description)}</p>
                             </div>
                           </div>
                         ))}
@@ -384,10 +380,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     <div className="p-4 rounded-2xl bg-[#f7f2ee] border border-[#ecdcd0] space-y-1.5 text-xs text-[#74584d]">
                       <div className="flex items-center space-x-2 font-semibold">
                         <Lightbulb className="w-4 h-4 text-[#74584d]" />
-                        <span>{t.productDetail.expertTip}</span>
+                        <span>{copy(t.productDetail.expertTip)}</span>
                       </div>
                       <p className="text-xs text-[#584137] leading-relaxed pl-6 font-light">
-                        {displayTip}
+                        {copy(displayTip)}
                       </p>
                     </div>
                   )}
@@ -397,7 +393,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     <div className="p-3.5 rounded-xl bg-white border border-[#202022]/6 text-xs text-[#77767b] flex items-start space-x-2">
                       <AlertCircle className="w-4 h-4 text-[#8a9a86] shrink-0 mt-0.5" />
                       <span className="leading-relaxed">
-                        <strong>{t.productDetail.precautions}</strong> {displayDetailedUsage?.precautions || product.detailedUsage?.precautions}
+                        <strong>{copy(t.productDetail.precautions)}</strong> {copy(displayDetailedUsage?.precautions || product.detailedUsage?.precautions)}
                       </span>
                     </div>
                   )}
@@ -411,7 +407,7 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                     {displayBenefits.map((benefit, idx) => (
                       <div key={idx} className="flex items-start space-x-2 bg-white p-3 rounded-xl border border-[#202022]/5">
                         <Check className="w-4 h-4 text-[#8a9a86] shrink-0 mt-0.5" />
-                        <span className="text-xs text-[#1c1c19]">{benefit}</span>
+                        <span className="text-xs text-[#1c1c19]">{copy(benefit)}</span>
                       </div>
                     ))}
                   </div>
@@ -423,8 +419,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                 <div className="space-y-3 animate-fadeIn">
                   <div className="mb-1 text-xs text-[#74584d] bg-[#fed8c9]/25 p-3 rounded-xl border border-[#fed8c9]/50 flex items-center justify-between">
                     <span className="font-medium flex items-center gap-1.5">
-                      <span className="text-sm">🇨🇭</span>
-                      <span>Mỗi sản phẩm chuẩn 1 thành phần hoạt chất cốt lõi Thụy Sĩ & các thành phần còn lại nhập tại Việt Nam</span>
+                      <span className="text-sm">{"🇨🇭"}</span>
+                      <span>{copy("Mỗi sản phẩm chuẩn 1 thành phần hoạt chất cốt lõi Thụy Sĩ & các thành phần còn lại nhập tại Việt Nam")}</span>
                     </span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -441,21 +437,21 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({
                           }`}
                         >
                           <div className="flex items-center justify-between gap-1">
-                            <span className="text-[10px] text-[#74584d] uppercase font-semibold">#{idx + 1}</span>
+                            <span className="text-[10px] text-[#74584d] uppercase font-semibold">{"#"}{copy(idx + 1)}</span>
                             {isSwiss && (
                               <span className="text-[10px] bg-[#74584d] text-white px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
-                                <span>🇨🇭</span>
-                                <span>Thành phần Thụy Sĩ</span>
+                                <span>{"🇨🇭"}</span>
+                                <span>{copy("Thành phần Thụy Sĩ")}</span>
                               </span>
                             )}
                             {isVN && !isSwiss && (
                               <span className="text-[10px] bg-[#eef5ee] text-[#2e6930] px-2 py-0.5 rounded-full font-medium flex items-center gap-1 border border-[#cfe2ce]">
-                                <span>🇻🇳</span>
-                                <span>Nhập tại Việt Nam</span>
+                                <span>{"🇻🇳"}</span>
+                                <span>{copy("Nhập tại Việt Nam")}</span>
                               </span>
                             )}
                           </div>
-                          <div className="text-xs font-medium text-[#1c1c19] mt-1.5 leading-snug">{ing}</div>
+                          <div className="text-xs font-medium text-[#1c1c19] mt-1.5 leading-snug">{copy(ing)}</div>
                         </div>
                       );
                     })}

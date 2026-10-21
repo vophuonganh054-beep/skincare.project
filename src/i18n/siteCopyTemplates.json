@@ -1,0 +1,128 @@
+{
+  "Đã thêm \"{0}\" vào giỏ hàng": [
+    "Added \"{0}\" to your cart",
+    "„{0}“ zum Warenkorb hinzugefügt",
+    "\"{0}\" añadido al carrito",
+    "已将“{0}”加入购物车"
+  ],
+  "🌸 Đã thêm \"{0}\" vào giỏ hàng!": [
+    "🌸 \"{0}\" added to cart!",
+    "🌸 „{0}“ hinzugefügt!",
+    "🌸 ¡\"{0}\" añadido!",
+    "🌸 已将“{0}”加入购物车！"
+  ],
+  "🌸 Đang mở thanh toán 20/10 cho \"{0}\"": [
+    "🌸 Opening 20/10 checkout for \"{0}\"",
+    "🌸 Zur Kasse für „{0}“",
+    "🌸 Abriendo pago 20/10 de \"{0}\"",
+    "🌸 正在打开“{0}”的 20/10 结算"
+  ],
+  "🌸 Đã lưu mã ưu đãi {0}! Giảm giá áp dụng ngay khi đặt hàng.": [
+    "🌸 Code {0} saved! Discount applied at checkout.",
+    "🌸 Code {0} gespeichert! Rabatt an der Kasse.",
+    "🌸 ¡Código {0} guardado! Descuento al pagar.",
+    "🌸 已保存优惠码 {0}！结算时立即优惠。"
+  ],
+  "Đã chọn mã {0}! Mã sẽ được áp dụng khi thanh toán.": [
+    "Code {0} selected! Applied at checkout.",
+    "Code {0} gewählt! Wird an der Kasse angewendet.",
+    "¡Código {0} seleccionado! Se aplicará al pagar.",
+    "已选择优惠码 {0}！将于结算时应用。"
+  ],
+  "Đăng nhập thành công! Chào mừng {0}": [
+    "Signed in! Welcome {0}",
+    "Angemeldet! Willkommen {0}",
+    "¡Sesión iniciada! Bienvenido/a {0}",
+    "登录成功！欢迎 {0}"
+  ],
+  "Đăng nhập Google thành công! Chào mừng {0}": [
+    "Signed in with Google! Welcome {0}",
+    "Mit Google angemeldet! Willkommen {0}",
+    "¡Acceso con Google! Bienvenido/a {0}",
+    "Google 登录成功！欢迎 {0}"
+  ],
+  "Chuyển đến thanh toán: {0}": [
+    "Proceeding to checkout: {0}",
+    "Zur Kasse: {0}",
+    "Ir al pago: {0}",
+    "前往结算：{0}"
+  ],
+  "Chuyển đến thanh toán cho {0} sản phẩm từ đơn #{1}": [
+    "Checkout for {0} products from order #{1}",
+    "Zur Kasse für {0} Produkte aus Bestellung #{1}",
+    "Pagar {0} productos del pedido #{1}",
+    "结算订单 #{1} 中的 {0} 件商品"
+  ],
+  "Đặt hàng #{0} thành công!": [
+    "Order #{0} placed successfully!",
+    "Bestellung #{0} erfolgreich aufgegeben!",
+    "¡Pedido #{0} realizado!",
+    "订单 #{0} 下单成功！"
+  ],
+  "Đã áp dụng {0}: giảm {1}% phần hàng phù hợp.": [
+    "Applied {0}: {1}% off eligible items.",
+    "{0} angewendet: {1}% auf passende Artikel.",
+    "{0} aplicado: {1}% en artículos elegibles.",
+    "已应用 {0}：对应商品优惠 {1}%。"
+  ],
+  "✓ Đã thanh toán • {0}": [
+    "✓ Paid • {0}",
+    "✓ Bezahlt • {0}",
+    "✓ Pagado • {0}",
+    "✓ 已付款 • {0}"
+  ],
+  "Chờ nhận chuyển khoản MB Bank ({0}₫)": [
+    "Waiting for MB Bank transfer ({0}₫)",
+    "Warten auf MB-Bank-Überweisung ({0}₫)",
+    "Esperando transferencia MB Bank ({0}₫)",
+    "等待 MB Bank 转账（{0}₫）"
+  ],
+  "✓ Đã nhận {0}₫ qua MB Bank (SePay) thành công! Nút đặt hàng đã được kích hoạt.": [
+    "✓ Received {0}₫ through MB Bank (SePay)! Ordering is enabled.",
+    "✓ {0}₫ über MB Bank (SePay) erhalten! Bestellung freigegeben.",
+    "✓ ¡Recibidos {0}₫ por MB Bank (SePay)! Pedido habilitado.",
+    "✓ 已通过 MB Bank（SePay）收到 {0}₫！下单按钮已启用。"
+  ],
+  "Thêm vào giỏ: {0}": [
+    "Add to cart: {0}",
+    "In den Warenkorb: {0}",
+    "Añadir al carrito: {0}",
+    "加入购物车：{0}"
+  ],
+  "Đã sao chép {0}: {1}": [
+    "Copied {0}: {1}",
+    "Kopiert {0}: {1}",
+    "Copiado {0}: {1}",
+    "已复制 {0}：{1}"
+  ],
+  "Đã tải / mở ảnh mã VietQR MB Bank ({0})": [
+    "Downloaded / opened MB Bank VietQR image ({0})",
+    "MB-Bank-VietQR heruntergeladen / geöffnet ({0})",
+    "Imagen VietQR MB Bank descargada / abierta ({0})",
+    "已下载／打开 MB Bank VietQR 图片（{0}）"
+  ],
+  "Mã VietQR động MB Bank {0}đ - {1}": [
+    "Dynamic MB Bank VietQR {0}đ – {1}",
+    "Dynamischer MB-Bank-VietQR {0}đ – {1}",
+    "VietQR dinámico MB Bank {0}đ – {1}",
+    "MB Bank 动态 VietQR {0}đ — {1}"
+  ],
+  "Đã đổi sang giao diện: {0}": [
+    "Style changed to: {0}",
+    "Stil geändert zu: {0}",
+    "Estilo cambiado a: {0}",
+    "已切换样式：{0}"
+  ],
+  "{0} SẢN PHẨM": [
+    "{0} PRODUCTS",
+    "{0} PRODUKTE",
+    "{0} PRODUCTOS",
+    "{0} 件商品"
+  ],
+  "Dạ chào {0}! Chào mừng đến với ALPS Pure Essence. Mình có thể hỗ trợ tìm hiểu sản phẩm, thành phần, cách sử dụng, ưu đãi và đặt hàng trên alps.id.vn. Bạn đang quan tâm sản phẩm nào hoặc muốn tìm chu trình chăm sóc da như thế nào?": [
+    "Hello {0}! Welcome to ALPS Pure Essence. I can help with products, ingredients, usage, offers and orders on alps.id.vn. What product or skincare routine would you like to explore?",
+    "Hallo {0}! Willkommen bei ALPS Pure Essence. Ich helfe bei Produkten, Inhaltsstoffen, Anwendung, Angeboten und Bestellungen auf alps.id.vn. Welches Produkt oder Pflegeritual interessiert Sie?",
+    "¡Hola {0}! Bienvenido a ALPS Pure Essence. Puedo ayudarte con productos, ingredientes, uso, ofertas y pedidos en alps.id.vn. ¿Qué producto o rutina te interesa?",
+    "您好，{0}！欢迎来到 ALPS Pure Essence。我可以协助了解 alps.id.vn 上的产品、成分、使用方法、优惠及下单。您想了解哪款商品或哪种护肤方案？"
+  ]
+}

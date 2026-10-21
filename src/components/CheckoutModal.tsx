@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import { getPromotionDiscount } from '../data/promotions';
 import { currentCartProduct } from '../data/cartProducts';
 import { auth } from '../firebase';
@@ -56,6 +57,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   onOpenLogin,
   initialPromoCode,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const cData = CHECKOUT_I18N[language]?.checkout || CHECKOUT_I18N.vi.checkout;
 
@@ -362,18 +364,17 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
             </div>
             <div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#74584d] font-semibold">
-                {cData.sslSecureText}
+                {copy(cData.sslSecureText)}
               </div>
               <h2 className="font-serif text-lg sm:text-xl font-normal text-[#1c1c19] tracking-tight">
-                {cData.modalTitle} ({orderNumber})
-              </h2>
+                {copy(cData.modalTitle)} {" ("}{copy(orderNumber)}{")"}</h2>
             </div>
           </div>
 
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full bg-[#f6f3ee] hover:bg-[#ebe8e3] text-[#1c1c19] flex items-center justify-center transition-colors cursor-pointer"
-            title="Close"
+            title={copy("Close")}
           >
             <X className="w-4 h-4" />
           </button>
@@ -386,7 +387,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <div className="flex items-center space-x-2">
                 <Sparkles className="w-4 h-4 text-[#74584d] shrink-0" />
                 <span>
-                  {cData.recipientHeader}
+                  {copy(cData.recipientHeader)}
                 </span>
               </div>
               {onOpenLogin && (
@@ -395,7 +396,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   onClick={onOpenLogin}
                   className="px-3 py-1 bg-[#1c1c19] text-white text-[11px] font-semibold rounded-full hover:bg-black transition-all shrink-0 ml-2 cursor-pointer"
                 >
-                  {language === 'vi' ? 'Đăng nhập' : language === 'de' ? 'Anmelden' : language === 'es' ? 'Iniciar sesión' : language === 'zh' ? '登录' : 'Sign in'}
+                  {copy(language === 'vi' ? 'Đăng nhập' : language === 'de' ? 'Anmelden' : language === 'es' ? 'Iniciar sesión' : language === 'zh' ? '登录' : 'Sign in')}
                 </button>
               )}
             </div>
@@ -404,7 +405,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           {formError && (
             <div className="mb-4 p-3 bg-red-50 border border-red-200 text-[#ba1a1a] rounded-xl text-xs flex items-center space-x-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>{formError}</span>
+              <span>{copy(formError)}</span>
             </div>
           )}
 
@@ -416,11 +417,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div className="flex items-center justify-between pb-2 border-b border-[#202022]/6">
                   <div className="flex items-center space-x-2 text-xs font-semibold text-[#1c1c19] uppercase tracking-wider whitespace-nowrap">
                     <User className="w-4 h-4 text-[#74584d] shrink-0" />
-                    <span>{cData.step1Title}</span>
+                    <span>{copy(cData.step1Title)}</span>
                   </div>
                   <span className="text-[10px] text-[#8a9a86] font-medium flex items-center space-x-1 whitespace-nowrap shrink-0">
                     <CheckCircle2 className="w-3 h-3" />
-                    <span>{cData.sslSecureText}</span>
+                    <span>{copy(cData.sslSecureText)}</span>
                   </span>
                 </div>
 
@@ -433,11 +434,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       </div>
                       <div className="min-w-0">
                         <div className="font-semibold text-[#1c1c19] truncate text-[11px] whitespace-nowrap">
-                          Tài khoản: {user.name}
+                          {copy("Tài khoản: ")}{user.name}
                         </div>
                         <div className="text-[10px] text-[#77767b] truncate whitespace-nowrap">
-                          Thông tin nhận hàng lưu riêng theo tài khoản này
-                        </div>
+                          {copy("Thông tin nhận hàng lưu riêng theo tài khoản này")}</div>
                       </div>
                     </div>
                     {(buyerName || address || phone) && (
@@ -445,10 +445,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         type="button"
                         onClick={handleClearSavedShipping}
                         className="text-[10.5px] text-[#74584d] hover:text-[#ba1a1a] hover:underline shrink-0 ml-2 font-medium whitespace-nowrap"
-                        title="Xóa sạch thông tin đã điền của tài khoản này"
+                        title={copy("Xóa sạch thông tin đã điền của tài khoản này")}
                       >
-                        Xóa thông tin
-                      </button>
+                        {copy("Xóa thông tin")}</button>
                     )}
                   </div>
                 ) : null}
@@ -456,7 +455,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                   <div>
                     <label className="block text-[11px] font-medium text-[#77767b] mb-1">
-                      {cData.nameLabel} <span className="text-red-500">*</span>
+                      {copy(cData.nameLabel)} <span className="text-red-500">{"*"}</span>
                     </label>
                     <input
                       type="text"
@@ -465,14 +464,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         setBuyerName(e.target.value);
                         persistShippingField('buyerName', e.target.value);
                       }}
-                      placeholder={cData.namePlaceholder}
+                      placeholder={copy(cData.namePlaceholder)}
                       className="w-full px-3 py-2 rounded-xl bg-[#fcf9f4] border border-[#ebe8e3] text-xs focus:outline-none focus:border-[#74584d]"
                     />
                   </div>
 
                   <div>
                     <label className="block text-[11px] font-medium text-[#77767b] mb-1">
-                      {cData.phoneLabel} <span className="text-red-500">*</span>
+                      {copy(cData.phoneLabel)} <span className="text-red-500">{"*"}</span>
                     </label>
                     <input
                       type="tel"
@@ -481,7 +480,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         setPhone(e.target.value);
                         persistShippingField('phone', e.target.value);
                       }}
-                      placeholder={cData.phonePlaceholder}
+                      placeholder={copy(cData.phonePlaceholder)}
                       className="w-full px-3 py-2 rounded-xl bg-[#fcf9f4] border border-[#ebe8e3] text-xs focus:outline-none focus:border-[#74584d]"
                     />
                   </div>
@@ -489,7 +488,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                 <div>
                   <label className="block text-[11px] font-medium text-[#77767b] mb-1">
-                    {cData.emailLabel}
+                    {copy(cData.emailLabel)}
                   </label>
                   <input
                     type="email"
@@ -498,14 +497,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       setEmail(e.target.value);
                       persistShippingField('email', e.target.value);
                     }}
-                    placeholder={cData.emailPlaceholder}
+                    placeholder={copy(cData.emailPlaceholder)}
                     className="w-full px-3 py-2 rounded-xl bg-[#fcf9f4] border border-[#ebe8e3] text-xs focus:outline-none focus:border-[#74584d]"
                   />
                 </div>
 
                 <div>
                   <label className="block text-[11px] font-medium text-[#77767b] mb-1">
-                    {cData.addressLabel} <span className="text-red-500">*</span>
+                    {copy(cData.addressLabel)} <span className="text-red-500">{"*"}</span>
                   </label>
                   <textarea
                     rows={2}
@@ -514,14 +513,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       setAddress(e.target.value);
                       persistShippingField('address', e.target.value);
                     }}
-                    placeholder={cData.addressPlaceholder}
+                    placeholder={copy(cData.addressPlaceholder)}
                     className="w-full px-3 py-2 rounded-xl bg-[#fcf9f4] border border-[#ebe8e3] text-xs focus:outline-none focus:border-[#74584d] resize-none"
                   />
                 </div>
 
                 <div>
                   <label className="block text-[11px] font-medium text-[#77767b] mb-1">
-                    {cData.noteLabel}
+                    {copy(cData.noteLabel)}
                   </label>
                   <input
                     type="text"
@@ -530,7 +529,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       setNote(e.target.value);
                       persistShippingField('note', e.target.value);
                     }}
-                    placeholder={cData.notePlaceholder}
+                    placeholder={copy(cData.notePlaceholder)}
                     className="w-full px-3 py-2 rounded-xl bg-[#fcf9f4] border border-[#ebe8e3] text-xs focus:outline-none focus:border-[#74584d]"
                   />
                 </div>
@@ -541,7 +540,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div className="flex items-center justify-between pb-2 border-b border-[#202022]/6">
                   <div className="flex items-center space-x-2 text-xs font-semibold text-[#1c1c19] uppercase tracking-wider">
                     <Truck className="w-4 h-4 text-[#74584d]" />
-                    <span>{cData.step2Title}</span>
+                    <span>{copy(cData.step2Title)}</span>
                   </div>
                   {onOpenPolicies && (
                     <button
@@ -549,8 +548,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       onClick={() => onOpenPolicies('shipping')}
                       className="text-[11px] text-[#74584d] hover:underline"
                     >
-                      Chính sách giao nhận
-                    </button>
+                      {copy("Chính sách giao nhận")}</button>
                   )}
                 </div>
 
@@ -558,7 +556,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div
                   onClick={() => setIsCarrierSelectorOpen(!isCarrierSelectorOpen)}
                   className="cursor-pointer p-3 sm:p-3.5 rounded-xl border border-[#d8c3b5] bg-[#fbf9f6] hover:bg-[#f6f2ec] transition-all flex items-center justify-between group"
-                  title={isCarrierSelectorOpen ? 'Bấm để thu gọn' : 'Bấm để đổi đơn vị vận chuyển'}
+                  title={copy(isCarrierSelectorOpen ? 'Bấm để thu gọn' : 'Bấm để đổi đơn vị vận chuyển')}
                 >
                   <div className="flex items-center space-x-3 min-w-0">
                     <div className="w-8 h-8 rounded-lg bg-white border border-[#202022]/8 flex items-center justify-center text-[#74584d] shrink-0 shadow-2xs">
@@ -567,26 +565,24 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     <div className="min-w-0">
                       <div className="flex items-center space-x-2">
                         <span className="font-semibold text-xs sm:text-sm text-[#1c1c19] truncate">
-                          {selectedCarrier.name}
+                          {copy(selectedCarrier.name)}
                         </span>
                         {isFreeShipping ? (
                           <span className="text-[9.5px] font-bold text-[#8a9a86] bg-[#8a9a86]/10 px-1.5 py-0.2 rounded">
-                            Miễn phí
-                          </span>
+                            {copy("Miễn phí")}</span>
                         ) : (
                           <span className="text-[10.5px] font-bold text-[#1c1c19]">
-                            {selectedCarrier.price.toLocaleString('vi-VN')}₫
-                          </span>
+                            {selectedCarrier.price.toLocaleString('vi-VN')}{"₫"}</span>
                         )}
                       </div>
                       <span className="text-[11px] text-[#77767b] block mt-0.5">
-                        Dự kiến: {selectedCarrier.estimatedTime}
+                        {copy("Dự kiến: ")}{copy(selectedCarrier.estimatedTime)}
                       </span>
                     </div>
                   </div>
 
                   <div className="flex items-center space-x-1.5 text-[#74584d] group-hover:text-[#5a3a30] text-xs font-medium shrink-0 ml-2">
-                    <span className="hidden xs:inline">{isCarrierSelectorOpen ? 'Thu gọn' : 'Đổi đơn vị'}</span>
+                    <span className="hidden xs:inline">{copy(isCarrierSelectorOpen ? 'Thu gọn' : 'Đổi đơn vị')}</span>
                     {isCarrierSelectorOpen ? (
                       <ChevronUp className="w-4 h-4 transition-transform" />
                     ) : (
@@ -599,14 +595,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 {isCarrierSelectorOpen && (
                   <div className="pt-2 space-y-2.5 animate-in fade-in duration-200">
                     <div className="flex items-center justify-between text-[11px] text-[#77767b] px-0.5">
-                      <span>Chọn đơn vị vận chuyển giao hàng:</span>
+                      <span>{copy("Chọn đơn vị vận chuyển giao hàng:")}</span>
                       <button
                         type="button"
                         onClick={() => setIsCarrierSelectorOpen(false)}
                         className="text-[#74584d] hover:underline font-medium text-[11px]"
                       >
-                        Thu gọn
-                      </button>
+                        {copy("Thu gọn")}</button>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -637,10 +632,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                                 />
                                 <div>
                                   <span className="font-semibold text-xs text-[#1c1c19] block">
-                                    {carrier.name}
+                                    {copy(carrier.name)}
                                   </span>
                                   <span className="text-[10px] text-[#77767b]">
-                                    Dự kiến: {carrier.estimatedTime}
+                                    {copy("Dự kiến: ")}{copy(carrier.estimatedTime)}
                                   </span>
                                 </div>
                               </div>
@@ -648,18 +643,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                               <div className="text-right">
                                 {isCarrierFree ? (
                                   <span className="text-[11px] font-bold text-[#8a9a86]">
-                                    MIỄN PHÍ
-                                  </span>
+                                    {copy("MIỄN PHÍ")}</span>
                                 ) : (
                                   <span className="text-xs font-bold text-[#1c1c19]">
-                                    {carrier.price.toLocaleString('vi-VN')}₫
-                                  </span>
+                                    {carrier.price.toLocaleString('vi-VN')}{"₫"}</span>
                                 )}
                               </div>
                             </div>
 
                             <p className="text-[10px] text-[#77767b] mt-1.5 line-clamp-2">
-                              {carrier.description}
+                              {copy(carrier.description)}
                             </p>
                           </label>
                         );
@@ -674,11 +667,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-[#202022]/6 gap-2">
                   <div className="flex items-center space-x-2 text-xs font-semibold text-[#1c1c19] uppercase tracking-wider">
                     <CreditCard className="w-4 h-4 text-[#74584d]" />
-                    <span>{cData.step3Title}</span>
+                    <span>{copy(cData.step3Title)}</span>
                   </div>
                   <div className="flex items-center space-x-1.5 overflow-x-auto py-0.5">
                     <span className="text-[10px] text-[#77767b] mr-0.5 hidden xs:inline">
-                      {language === 'vi' ? 'Chấp nhận:' : language === 'de' ? 'Akzeptiert:' : language === 'es' ? 'Aceptamos:' : language === 'zh' ? '支持：' : 'Accepted:'}
+                      {copy(language === 'vi' ? 'Chấp nhận:' : language === 'de' ? 'Akzeptiert:' : language === 'es' ? 'Aceptamos:' : language === 'zh' ? '支持：' : 'Accepted:')}
                     </span>
                     <VietQRBadge className="h-5" />
                   </div>
@@ -697,8 +690,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     }`}
                   >
                     <QrCode className="w-5 h-5 text-[#e02020]" />
-                    <span className="text-[11px]">{cData.payVietQRTitle}</span>
-                    <span className="text-[9px] text-[#8a9a86] font-medium">{cData.payVietQRDesc}</span>
+                    <span className="text-[11px]">{copy(cData.payVietQRTitle)}</span>
+                    <span className="text-[9px] text-[#8a9a86] font-medium">{copy(cData.payVietQRDesc)}</span>
                   </button>
 
                   {/* Option 2: COD */}
@@ -712,8 +705,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     }`}
                   >
                     <Banknote className="w-5 h-5 text-[#8a9a86]" />
-                    <span className="text-[11px]">{cData.payCODTitle}</span>
-                    <span className="text-[9px] text-[#77767b]">{cData.payCODDesc}</span>
+                    <span className="text-[11px]">{copy(cData.payCODTitle)}</span>
+                    <span className="text-[9px] text-[#77767b]">{copy(cData.payCODDesc)}</span>
                   </button>
 
                 </div>
@@ -724,11 +717,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     <div className="space-y-3">
                       <div className="p-3 bg-red-50/50 border border-red-100 rounded-xl text-xs text-[#1c1c19] space-y-1">
                         <p className="font-semibold text-[11px] text-[#ba1a1a] flex items-center space-x-1">
-                          <span>✦</span>
-                          <span>{cData.payVietQRTitle}</span>
+                          <span>{"✦"}</span>
+                          <span>{copy(cData.payVietQRTitle)}</span>
                         </p>
                         <p className="text-[11px] text-[#77767b]">
-                          {cData.payVietQRDesc}
+                          {copy(cData.payVietQRDesc)}
                         </p>
                       </div>
 
@@ -753,14 +746,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     <div className="p-4 bg-[#fcf9f4] border border-[#ebe8e3] rounded-2xl text-xs space-y-2">
                       <div className="flex items-center space-x-2 text-[#74584d] font-semibold">
                         <Banknote className="w-4 h-4" />
-                        <span>Thanh toán bằng tiền mặt khi nhận hàng (COD)</span>
+                        <span>{copy("Thanh toán bằng tiền mặt khi nhận hàng (COD)")}</span>
                       </div>
                       <p className="text-[#46464a] text-[11px]">
-                        Quý khách sẽ thanh toán đúng số tiền <strong>{totalAmount.toLocaleString('vi-VN')}₫</strong> cho nhân viên giao hàng sau khi mở hộp đồng kiểm sản phẩm. Không phát sinh thêm bất kỳ phụ phí nào.
-                      </p>
+                        {copy("Quý khách sẽ thanh toán đúng số tiền ")}<strong>{totalAmount.toLocaleString('vi-VN')}{"₫"}</strong> {copy(" cho nhân viên giao hàng sau khi mở hộp đồng kiểm sản phẩm. Không phát sinh thêm bất kỳ phụ phí nào.")}</p>
                       <div className="text-[10px] text-[#8a9a86] font-medium flex items-center space-x-1">
                         <CheckCircle2 className="w-3.5 h-3.5" />
-                        <span>Được quyền kiểm tra tem niêm phong và vòi pump trước khi trả tiền</span>
+                        <span>{copy("Được quyền kiểm tra tem niêm phong và vòi pump trước khi trả tiền")}</span>
                       </div>
                     </div>
                   )}
@@ -774,11 +766,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
               <div className="bg-white rounded-2xl p-4 sm:p-5 border border-[#202022]/8 shadow-xs space-y-4 sticky top-4">
                 <div className="flex items-center justify-between pb-2 border-b border-[#202022]/6">
                   <h3 className="font-serif text-sm font-semibold text-[#1c1c19]">
-                    {cData.orderSummaryTitle} ({safeItems.reduce((s, i) => s + (i.quantity || 1), 0)})
-                  </h3>
+                    {copy(cData.orderSummaryTitle)} {" ("}{copy(safeItems.reduce((s, i) => s + (i.quantity || 1), 0))}{")"}</h3>
                   <span className="text-[10px] text-[#74584d] font-semibold uppercase">
-                    ALPS
-                  </span>
+                    {copy("ALPS")}</span>
                 </div>
 
                 {/* Items List */}
@@ -796,21 +786,20 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       >
                         <img
                           src={prodImg}
-                          alt={prodName}
+                          alt={copy(prodName)}
                           className="w-12 h-12 object-cover rounded-xl border border-[#202022]/6 bg-[#f6f3ee] shrink-0"
                         />
                         <div className="flex-grow min-w-0">
                           <h4 className="font-serif text-xs text-[#1c1c19] truncate font-medium">
-                            {prodName}
+                            {copy(prodName)}
                           </h4>
                           <div className="text-[10px] text-[#77767b] flex items-center space-x-2">
-                            <span>{item.product?.capacity || 'Tiêu chuẩn'}</span>
-                            <span>•</span>
-                            <span>{language === 'vi' ? 'Số lượng' : language === 'de' ? 'Menge' : language === 'es' ? 'Cantidad' : language === 'zh' ? '数量' : 'Qty'}: {prodQty}</span>
+                            <span>{copy(item.product?.capacity || 'Tiêu chuẩn')}</span>
+                            <span>{"•"}</span>
+                            <span>{copy(language === 'vi' ? 'Số lượng' : language === 'de' ? 'Menge' : language === 'es' ? 'Cantidad' : language === 'zh' ? '数量' : 'Qty')}{": "}{copy(prodQty)}</span>
                           </div>
                           <div className="font-medium text-[#1c1c19] text-[11px] mt-0.5">
-                            {(prodPrice * prodQty).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                          </div>
+                            {(prodPrice * prodQty).toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</div>
                         </div>
                       </div>
                     );
@@ -824,7 +813,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       type="text"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      placeholder={language === 'vi' ? 'Nhập PHUNU20, ALPS2010 hoặc ALPS2025' : 'PHUNU20, ALPS2010 or ALPS2025'}
+                      placeholder={copy(language === 'vi' ? 'Nhập PHUNU20, ALPS2010 hoặc ALPS2025' : 'PHUNU20, ALPS2010 or ALPS2025')}
                       className="flex-grow px-3 py-2 bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl text-xs uppercase tracking-wider focus:outline-none focus:border-[#74584d]"
                     />
                     <button
@@ -832,14 +821,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       onClick={() => handleApplyPromo()}
                       className="px-3 py-2 bg-[#1c1c19] hover:bg-black text-white rounded-xl text-xs font-semibold tracking-wider transition-colors shrink-0 cursor-pointer"
                     >
-                      {language === 'vi' ? 'Áp Dụng' : language === 'de' ? 'Anwenden' : language === 'es' ? 'Aplicar' : language === 'zh' ? '应用' : 'Apply'}
+                      {copy(language === 'vi' ? 'Áp Dụng' : language === 'de' ? 'Anwenden' : language === 'es' ? 'Aplicar' : language === 'zh' ? '应用' : 'Apply')}
                     </button>
                   </div>
 
                   {/* 20/10 Quick Voucher Suggestions */}
                   <div className="mt-2 flex flex-wrap items-center gap-1.5">
                     <span className="text-[10px] text-[#74584d] font-semibold flex items-center space-x-1">
-                      <span>🌸 Mã 20/10:</span>
+                      <span>{copy("🌸 Mã 20/10:")}</span>
                     </span>
                     <button
                       type="button"
@@ -850,8 +839,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                           : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
                       }`}
                     >
-                      PHUNU20 · Hàng lẻ -20%
-                    </button>
+                      {copy("PHUNU20 · Hàng lẻ -20%")}</button>
                     <button
                       type="button"
                       onClick={() => handleApplyPromo('ALPS2010')}
@@ -861,16 +849,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                           : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
                       }`}
                     >
-                      ALPS2010 · Combo -15%
-                    </button>
+                      {copy("ALPS2010 · Combo -15%")}</button>
                   </div>
 
-                  <button type="button" onClick={() => handleApplyPromo('ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">ALPS2025 · Thành viên -10%</button>
-                  <p className="text-[10px] text-[#77767b] mt-2">Mỗi đơn dùng một mã. Không cộng dồn. Mã thành viên yêu cầu đăng nhập.</p>
-                  {(promoError || promotion.error) && <p role="alert" className="text-xs text-[#ba1a1a] mt-2">{promoError || promotion.error}</p>}
+                  <button type="button" onClick={() => handleApplyPromo('ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">{copy("ALPS2025 · Thành viên -10%")}</button>
+                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Mỗi đơn dùng một mã. Không cộng dồn. Mã thành viên yêu cầu đăng nhập.")}</p>
+                  {(promoError || promotion.error) && <p role="alert" className="text-xs text-[#ba1a1a] mt-2">{copy(promoError || promotion.error)}</p>}
                   {promoApplied && !promotion.error && (
                     <span className="text-[10px] text-[#2d4a36] font-medium block mt-1.5 flex items-center space-x-1">
-                      <span>✓ Đã áp dụng {effectivePromoCode}: giảm {discountPercent}% phần hàng phù hợp!</span>
+                      <span>{copy("✓ Đã áp dụng ")}{copy(effectivePromoCode)}{copy(": giảm ")}{discountPercent}{copy("% phần hàng phù hợp!")}</span>
                     </span>
                   )}
                 </div>
@@ -878,16 +865,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                 {/* Price Breakdown */}
                 <div className="pt-3 border-t border-[#202022]/6 space-y-2 text-xs">
                   <div className="flex justify-between text-[#77767b]">
-                    <span>{cData.subtotalLabel}:</span>
-                    <span>{subtotal.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫</span>
+                    <span>{copy(cData.subtotalLabel)}{":"}</span>
+                    <span>{subtotal.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                   </div>
 
                   <div className="flex justify-between text-[#77767b]">
-                    <span>{cData.shippingLabel} ({selectedCarrier.name}):</span>
+                    <span>{copy(cData.shippingLabel)} {" ("}{copy(selectedCarrier.name)}{"):"}</span>
                     <span>
                       {isFreeShipping ? (
                         <span className="text-[#8a9a86] font-bold">
-                          {language === 'vi' ? 'MIỄN PHÍ' : language === 'de' ? 'KOSTENLOS' : language === 'es' ? 'GRATIS' : language === 'zh' ? '免费' : 'FREE'}
+                          {copy(language === 'vi' ? 'MIỄN PHÍ' : language === 'de' ? 'KOSTENLOS' : language === 'es' ? 'GRATIS' : language === 'zh' ? '免费' : 'FREE')}
                         </span>
                       ) : (
                         `${shippingFee.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`
@@ -897,19 +884,18 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                   {discountAmount > 0 && (
                     <div className="flex justify-between text-[#8a9a86] font-medium">
-                      <span>{cData.discountLabel}:</span>
-                      <span>-{discountAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫</span>
+                      <span>{copy(cData.discountLabel)}{":"}</span>
+                      <span>{"-"}{discountAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                     </div>
                   )}
 
                   <div className="flex justify-between items-baseline pt-2 border-t border-[#202022]/10 text-sm">
-                    <span className="font-serif font-bold text-[#1c1c19]">{cData.totalLabel}:</span>
+                    <span className="font-serif font-bold text-[#1c1c19]">{copy(cData.totalLabel)}{":"}</span>
                     <span className="font-serif font-bold text-[#1c1c19] text-lg sm:text-xl">
-                      {totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫
-                    </span>
+                      {totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                   </div>
                   <div className="text-[10px] text-[#77767b] text-right">
-                    {cData.sslSecureText}
+                    {copy(cData.sslSecureText)}
                   </div>
                 </div>
 
@@ -918,7 +904,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   <div className="pt-2 border-t border-[#202022]/6 text-[11px] text-[#77767b] space-y-1">
                     <p className="flex items-center space-x-1 text-[#74584d] font-medium">
                       <ShieldCheck className="w-3.5 h-3.5" />
-                      <span>{cData.guarantee30Days}</span>
+                      <span>{copy(cData.guarantee30Days)}</span>
                     </p>
                     <div className="flex flex-wrap gap-2 text-[10px]">
                       <button
@@ -926,23 +912,23 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                         onClick={() => onOpenPolicies('returns')}
                         className="underline hover:text-[#1c1c19] cursor-pointer"
                       >
-                        {language === 'vi' ? 'Đổi trả 30 ngày' : language === 'de' ? '30 Tage Rückgabe' : language === 'es' ? 'Devolución 30 días' : language === 'zh' ? '30天退换' : '30-Day Returns'}
+                        {copy(language === 'vi' ? 'Đổi trả 30 ngày' : language === 'de' ? '30 Tage Rückgabe' : language === 'es' ? 'Devolución 30 días' : language === 'zh' ? '30天退换' : '30-Day Returns')}
                       </button>
-                      <span>•</span>
+                      <span>{"•"}</span>
                       <button
                         type="button"
                         onClick={() => onOpenPolicies('shipping')}
                         className="underline hover:text-[#1c1c19] cursor-pointer"
                       >
-                        {language === 'vi' ? 'Chính sách vận chuyển' : language === 'de' ? 'Versandrichtlinien' : language === 'es' ? 'Envíos' : language === 'zh' ? '配送政策' : 'Shipping Policy'}
+                        {copy(language === 'vi' ? 'Chính sách vận chuyển' : language === 'de' ? 'Versandrichtlinien' : language === 'es' ? 'Envíos' : language === 'zh' ? '配送政策' : 'Shipping Policy')}
                       </button>
-                      <span>•</span>
+                      <span>{"•"}</span>
                       <button
                         type="button"
                         onClick={() => onOpenPolicies('privacy')}
                         className="underline hover:text-[#1c1c19] cursor-pointer"
                       >
-                        {language === 'vi' ? 'Bảo mật thông tin' : language === 'de' ? 'Datenschutz' : language === 'es' ? 'Privacidad' : language === 'zh' ? '隐私政策' : 'Privacy'}
+                        {copy(language === 'vi' ? 'Bảo mật thông tin' : language === 'de' ? 'Datenschutz' : language === 'es' ? 'Privacidad' : language === 'zh' ? '隐私政策' : 'Privacy')}
                       </button>
                     </div>
                   </div>
@@ -953,7 +939,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   {formError && (
                     <div className="p-3 bg-red-50 border border-red-200 text-[#ba1a1a] rounded-xl text-xs flex items-center space-x-2 animate-pulse">
                       <AlertCircle className="w-4 h-4 shrink-0" />
-                      <span>{formError}</span>
+                      <span>{copy(formError)}</span>
                     </div>
                   )}
 
@@ -978,17 +964,17 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                           {isSubmitting ? (
                             <span className="flex items-center space-x-2">
                               <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                              <span>{cData.processingBtn}</span>
+                              <span>{copy(cData.processingBtn)}</span>
                             </span>
                           ) : (
                             <>
                               <Sparkles className="w-4 h-4 text-[#fed8c9]" />
                               <span>
-                                {paymentMethod === 'vietqr'
+                                {copy(paymentMethod === 'vietqr'
                                   ? paymentReceived
                                     ? `✓ Đã thanh toán • ${cData.placeOrderBtn}`
                                     : `Chờ nhận chuyển khoản MB Bank (${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫)`
-                                  : `${cData.placeOrderBtn} • ${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`}
+                                  : `${cData.placeOrderBtn} • ${totalAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`)}
                               </span>
                               {isPaymentReady && <ArrowRight className="w-4 h-4" />}
                             </>
@@ -997,7 +983,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
                         {!isPaymentReady && (
                           <p className="text-center text-[10.5px] text-[#ba1a1a] font-medium pt-1">
-                            {'⚠️ Hệ thống chỉ mở nút đặt hàng sau khi nhận được chuyển khoản thành công từ ngân hàng MB.'}
+                            {copy('⚠️ Hệ thống chỉ mở nút đặt hàng sau khi nhận được chuyển khoản thành công từ ngân hàng MB.')}
                           </p>
                         )}
                       </>
@@ -1005,7 +991,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   })()}
 
                   <div className="text-center text-[11px] text-[#77746f]">
-                    {cData.policyAgreeText}
+                    {copy(cData.policyAgreeText)}
                   </div>
                 </div>
               </div>

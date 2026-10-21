@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import {
   Sparkles,
@@ -31,6 +32,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
   onShowToast,
   isMobileFrame = false,
 }) => {
+  const copy = useCopy();
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
   const handleCopyCode = (code: string) => {
@@ -58,21 +60,20 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#fed8c9]/40 via-white to-[#fed8c9]/40 border border-[#e4c9bd] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider text-[#74584d] uppercase mb-4 shadow-2xs backdrop-blur-xs">
-            <span className="text-rose-500 animate-pulse">🌸</span>
-            <span>{CAMPAIGN_2010_DATA.themeTitle}</span>
+            <span className="text-rose-500 animate-pulse">{"🌸"}</span>
+            <span>{copy(CAMPAIGN_2010_DATA.themeTitle)}</span>
           </div>
 
           <h2 className="font-serif text-2xl sm:text-4xl lg:text-[42px] font-normal tracking-tight text-[#1c1c19] leading-snug sm:leading-tight">
-            Nâng Niu Nàng Thơ Với Làn Da Rạng Ngời Thuần Khiết
-          </h2>
+            {copy("Nâng Niu Nàng Thơ Với Làn Da Rạng Ngời Thuần Khiết")}</h2>
 
           <p className="mt-3.5 text-xs sm:text-sm md:text-base text-[#5f5d58] leading-relaxed font-light max-w-2xl mx-auto">
-            {CAMPAIGN_2010_DATA.subHeading}
+            {copy(CAMPAIGN_2010_DATA.subHeading)}
           </p>
 
           <div className="mt-4 inline-flex items-center space-x-2 text-xs font-medium text-[#74584d] bg-white/80 border border-[#e8dfd5] px-4 py-2 rounded-2xl shadow-2xs">
             <Gift className="w-4 h-4 text-[#8b5545] shrink-0" />
-            <span>{CAMPAIGN_2010_DATA.bannerNote}</span>
+            <span>{copy(CAMPAIGN_2010_DATA.bannerNote)}</span>
           </div>
         </div>
 
@@ -82,15 +83,13 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
             <div>
               <div className="flex items-center space-x-2 text-[11px] font-bold uppercase tracking-wider text-[#74584d]">
                 <Tag className="w-3.5 h-3.5" />
-                <span>TRUNG TÂM MÃ ƯU ĐÃI 20/10</span>
+                <span>{copy("TRUNG TÂM MÃ ƯU ĐÃI 20/10")}</span>
               </div>
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-[#1c1c19] mt-1">
-                Lấy Mã Giảm Giá Đặc Quyền Phái Đẹp
-              </h3>
+                {copy("Lấy Mã Giảm Giá Đặc Quyền Phái Đẹp")}</h3>
             </div>
             <p className="text-xs text-[#77746f]">
-              Nhấn <strong className="text-[#1c1c19]">"Sao Chép Mã"</strong> để tự động áp dụng vào giỏ hàng
-            </p>
+              {copy("Nhấn ")}<strong className="text-[#1c1c19]">{copy("\"Sao Chép Mã\"")}</strong> {copy(" để tự động áp dụng vào giỏ hàng")}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -102,32 +101,31 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                   className="relative p-4.5 rounded-2xl bg-gradient-to-br from-[#fcfbf9] to-[#f8f5ee] border border-dashed border-[#d8cbba] hover:border-[#74584d] transition-all hover:shadow-md flex flex-col justify-between group"
                 >
                   <div className="absolute -top-2.5 right-4 px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider bg-[#74584d] text-white shadow-xs">
-                    {voucher.badge}
+                    {copy(voucher.badge)}
                   </div>
 
                   <div>
                     <div className="flex items-center space-x-1.5 text-xs font-semibold text-[#8b5545] mb-1">
                       <Sparkles className="w-3 h-3" />
-                      <span>{voucher.title}</span>
+                      <span>{copy(voucher.title)}</span>
                     </div>
 
                     <div className="flex items-baseline space-x-1.5 my-1.5">
                       <span className="font-serif text-2xl font-bold text-[#1c1c19]">
-                        {voucher.discountPercent}% OFF
-                      </span>
+                        {copy(voucher.discountPercent)}{copy("% OFF")}</span>
                       {voucher.discountFixed && (
-                        <span className="text-[11px] text-[#74584d] font-medium">+100k</span>
+                        <span className="text-[11px] text-[#74584d] font-medium">{copy("+100k")}</span>
                       )}
                     </div>
 
                     <p className="text-[11px] text-[#5f5d58] leading-snug">
-                      {voucher.description}
+                      {copy(voucher.description)}
                     </p>
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-[#ebe4d8] flex items-center justify-between">
                     <div className="font-mono text-xs font-bold text-[#1c1c19] bg-white px-2.5 py-1 rounded-lg border border-[#e0d6c7]">
-                      {voucher.code}
+                      {copy(voucher.code)}
                     </div>
 
                     <button
@@ -138,17 +136,17 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                           ? 'bg-[#8a9a86] text-white'
                           : 'bg-[#1c1c19] hover:bg-[#74584d] text-white shadow-2xs active:scale-95'
                       }`}
-                      title={`Sao chép mã ${voucher.code}`}
+                      title={copy(`Sao chép mã ${voucher.code}`)}
                     >
                       {isCopied ? (
                         <>
                           <Check className="w-3 h-3" />
-                          <span>Đã Lưu!</span>
+                          <span>{copy("Đã Lưu!")}</span>
                         </>
                       ) : (
                         <>
                           <Copy className="w-3 h-3" />
-                          <span>Lấy Mã</span>
+                          <span>{copy("Lấy Mã")}</span>
                         </>
                       )}
                     </button>
@@ -163,14 +161,11 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
         <div className="mb-16">
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-[11px] font-bold uppercase tracking-widest text-[#74584d] block mb-1">
-              PHIÊN BẢN GIỚI HẠN • QUÀ TẶNG TRỌN VẸN
-            </span>
+              {copy("PHIÊN BẢN GIỚI HẠN • QUÀ TẶNG TRỌN VẸN")}</span>
             <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#1c1c19]">
-              3 Combo Quà Tặng 20/10 Dành Cho Nàng
-            </h3>
+              {copy("3 Combo Quà Tặng 20/10 Dành Cho Nàng")}</h3>
             <p className="text-xs sm:text-sm text-[#77746f] mt-2">
-              Mỗi combo đều được tặng kèm Hộp quà độc quyền của ALPS sang trọng phù hợp dành tặng cho phái nữ &amp; thiệp chúc mừng 20/10 viết tay miễn phí.
-            </p>
+              {copy("Mỗi combo đều được tặng kèm Hộp quà độc quyền của ALPS sang trọng phù hợp dành tặng cho phái nữ & thiệp chúc mừng 20/10 viết tay miễn phí.")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-6 lg:gap-8">
@@ -184,26 +179,24 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                   <div className="relative aspect-4/3 overflow-hidden bg-[#f4f0eb]">
                     <img
                       src={combo.image}
-                      alt={combo.name}
+                      alt={copy(combo.name)}
                       referrerPolicy="no-referrer"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
                     <div className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-white/90 backdrop-blur-md text-[#74584d] shadow-xs border border-[#fed8c9]">
-                      {combo.badge}
+                      {copy(combo.badge)}
                     </div>
 
                     <div className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#ba1a1a] text-white shadow-xs">
-                      Áp mã ALPS2010: -15%
-                    </div>
+                      {copy("Áp mã ALPS2010: -15%")}</div>
 
                     <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
                       <span className="text-[10px] text-amber-200 font-medium block">
-                        DÀNH TẶNG
-                      </span>
+                        {copy("DÀNH TẶNG")}</span>
                       <p className="text-xs font-medium text-white/95 line-clamp-1">
-                        {combo.recommendedFor}
+                        {copy(combo.recommendedFor)}
                       </p>
                     </div>
                   </div>
@@ -212,26 +205,25 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                   <div className="p-5 sm:p-6 space-y-4">
                     <div>
                       <h4 className="font-serif text-lg sm:text-xl font-medium text-[#1c1c19] group-hover:text-[#74584d] transition-colors leading-snug">
-                        {combo.name}
+                        {copy(combo.name)}
                       </h4>
                       <p className="text-xs text-[#74584d] font-medium mt-1">
-                        {combo.subTitle}
+                        {copy(combo.subTitle)}
                       </p>
                       <p className="text-xs text-[#5f5d58] mt-2 leading-relaxed font-light line-clamp-2">
-                        {combo.description}
+                        {copy(combo.description)}
                       </p>
                     </div>
 
                     {/* Includes Checklist */}
                     <div className="bg-[#fcfbf9] rounded-2xl p-3.5 border border-[#eee8dd] space-y-2">
                       <span className="text-[11px] font-semibold text-[#1c1c19] block">
-                        Sản phẩm trong Combo:
-                      </span>
+                        {copy("Sản phẩm trong Combo:")}</span>
                       <ul className="space-y-1.5">
                         {combo.includes.map((item, i) => (
                           <li key={i} className="flex items-start space-x-2 text-xs text-[#464542]">
                             <Check className="w-3.5 h-3.5 text-[#8a9a86] shrink-0 mt-0.5" />
-                            <span className="leading-tight">{item}</span>
+                            <span className="leading-tight">{copy(item)}</span>
                           </li>
                         ))}
                       </ul>
@@ -241,13 +233,13 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                     <div className="bg-[#fcf6f3] rounded-2xl p-3.5 border border-[#fed8c9]/60 space-y-1.5">
                       <div className="flex items-center space-x-1.5 text-[11px] font-bold text-[#8b5545] uppercase">
                         <Gift className="w-3.5 h-3.5 text-rose-500" />
-                        <span>Quà Tặng Kèm 20/10 (0₫):</span>
+                        <span>{copy("Quà Tặng Kèm 20/10 (0₫):")}</span>
                       </div>
                       <ul className="space-y-1">
                         {combo.freeGifts.map((gift, i) => (
                           <li key={i} className="text-[11px] text-[#5a4841] flex items-center space-x-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-rose-400 shrink-0" />
-                            <span>{gift}</span>
+                            <span>{copy(gift)}</span>
                           </li>
                         ))}
                       </ul>
@@ -260,27 +252,23 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                   <div className="flex items-baseline justify-between py-3">
                     <div>
                       <span className="text-[10px] text-[#77746f] block uppercase tracking-wider font-semibold">
-                        Giá Gốc Combo
-                      </span>
+                        {copy("Giá Gốc Combo")}</span>
                       <div className="flex items-baseline space-x-1">
                         <span className="font-serif text-2xl font-bold text-[#1c1c19]">
-                          {combo.originalPrice.toLocaleString('vi-VN')}₫
-                        </span>
+                          {combo.originalPrice.toLocaleString('vi-VN')}{"₫"}</span>
                       </div>
                     </div>
                     <div className="text-right">
                       <span className="text-[10px] text-[#74584d] font-medium block">
-                        Áp mã ALPS2010 (-15%)
-                      </span>
+                        {copy("Áp mã ALPS2010 (-15%)")}</span>
                       <span className="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
-                        Còn {Math.round(combo.originalPrice * 0.85).toLocaleString('vi-VN')}₫
-                      </span>
+                        {copy("Còn ")}{Math.round(combo.originalPrice * 0.85).toLocaleString('vi-VN')}{"₫"}</span>
                     </div>
                   </div>
 
                   <div className="text-[11px] text-[#74584d] bg-[#fcf5f1] border border-[#fed8c9] rounded-xl px-2.5 py-1.5 text-center mb-2.5 font-medium flex items-center justify-center space-x-1">
-                    <span>🌸</span>
-                    <span>Combo giữ giá gốc • Áp mã <strong>ALPS2010</strong> để giảm 15%!</span>
+                    <span>{"🌸"}</span>
+                    <span>{copy("Combo giữ giá gốc • Áp mã ")}<strong>{copy("ALPS2010")}</strong> {copy(" để giảm 15%!")}</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-1">
@@ -290,7 +278,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                       className="py-2.5 sm:py-3 px-2 sm:px-3 bg-[#f6f2eb] hover:bg-[#ebdccf] text-[#1c1c19] rounded-full text-[11px] sm:text-xs font-semibold tracking-wider flex items-center justify-center space-x-1 sm:space-x-1.5 transition-all shadow-2xs active:scale-95 cursor-pointer"
                     >
                       <ShoppingBag className="w-3.5 h-3.5 text-[#74584d] shrink-0" />
-                      <span className="truncate">Thêm Giỏ Hàng</span>
+                      <span className="truncate">{copy("Thêm Giỏ Hàng")}</span>
                     </button>
 
                     <button
@@ -299,7 +287,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                       className="py-2.5 sm:py-3 px-2 sm:px-3 bg-[#1c1c19] hover:bg-black text-white rounded-full text-[11px] sm:text-xs font-semibold tracking-wider flex items-center justify-center space-x-1 sm:space-x-1.5 transition-all shadow-xs active:scale-95 cursor-pointer"
                     >
                       <Zap className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-                      <span className="truncate">Mua Ngay</span>
+                      <span className="truncate">{copy("Mua Ngay")}</span>
                     </button>
                   </div>
                 </div>
@@ -315,14 +303,11 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
           <div className="relative z-10 max-w-4xl mx-auto">
             <div className="text-center mb-8">
               <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#fed8c9] block mb-1">
-                DỊCH VỤ QUÀ TẶNG CAO CẤP • MIỄN PHÍ 100%
-              </span>
+                {copy("DỊCH VỤ QUÀ TẶNG CAO CẤP • MIỄN PHÍ 100%")}</span>
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-white">
-                Trao Gửi Yêu Thương Trọn Vẹn Ngày 20/10
-              </h3>
+                {copy("Trao Gửi Yêu Thương Trọn Vẹn Ngày 20/10")}</h3>
               <p className="text-xs sm:text-sm text-white/70 mt-1 max-w-xl mx-auto">
-                Alps Skincare đồng hành cùng bạn để mang đến trải nghiệm mở quà tinh tế và xúc động nhất cho người nhận.
-              </p>
+                {copy("Alps Skincare đồng hành cùng bạn để mang đến trải nghiệm mở quà tinh tế và xúc động nhất cho người nhận.")}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
@@ -338,10 +323,10 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                       {idx === 2 && <Truck className="w-5 h-5" />}
                     </div>
                     <h4 className="font-serif text-sm font-semibold text-white mb-1.5">
-                      {service.title}
+                      {copy(service.title)}
                     </h4>
                     <p className="text-xs text-white/70 leading-relaxed font-light">
-                      {service.desc}
+                      {copy(service.desc)}
                     </p>
                   </div>
                 </div>
@@ -350,8 +335,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
 
             <div className="mt-8 text-center">
               <p className="text-xs text-white/80">
-                Cần tư vấn chọn quà riêng cho mẹ, người yêu hoặc đặt số lượng lớn cho doanh nghiệp?
-              </p>
+                {copy("Cần tư vấn chọn quà riêng cho mẹ, người yêu hoặc đặt số lượng lớn cho doanh nghiệp?")}</p>
               <a
                 href="https://www.facebook.com/alpspuressence/"
                 target="_blank"
@@ -363,7 +347,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                   </svg>
                 </span>
-                <span>Chat trực tiếp chuyên viên tư vấn quà tặng 20/10 qua Fanpage Facebook</span>
+                <span>{copy("Chat trực tiếp chuyên viên tư vấn quà tặng 20/10 qua Fanpage Facebook")}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </a>
             </div>

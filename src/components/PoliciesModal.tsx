@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import { X, ShieldCheck, RefreshCw, Truck, Check, Lock, AlertCircle, FileText, Phone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -18,6 +19,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
   initialTab = 'returns',
   onOpenSupport,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const pData = POLICIES_I18N[language] || POLICIES_I18N.vi;
   const [activeTab, setActiveTab] = useState<PolicyTabType>(initialTab);
@@ -48,10 +50,10 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
             </div>
             <div>
               <div className="text-[10px] uppercase tracking-[0.2em] text-[#74584d] font-semibold">
-                {pData.brandTag}
+                {copy(pData.brandTag)}
               </div>
               <h2 className="font-serif text-lg sm:text-xl font-normal text-[#1c1c19] tracking-tight">
-                {pData.modalTitle}
+                {copy(pData.modalTitle)}
               </h2>
             </div>
           </div>
@@ -59,7 +61,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
           <button
             onClick={onClose}
             className="w-9 h-9 rounded-full bg-[#f6f3ee] hover:bg-[#ebe8e3] text-[#1c1c19] flex items-center justify-center transition-colors cursor-pointer"
-            title={pData.closeBtn}
+            title={copy(pData.closeBtn)}
           >
             <X className="w-5 h-5" />
           </button>
@@ -76,7 +78,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
             }`}
           >
             <RefreshCw className="w-3.5 h-3.5" />
-            <span>{pData.tabs.returns}</span>
+            <span>{copy(pData.tabs.returns)}</span>
           </button>
 
           <button
@@ -88,7 +90,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
             }`}
           >
             <Truck className="w-3.5 h-3.5" />
-            <span>{pData.tabs.shipping}</span>
+            <span>{copy(pData.tabs.shipping)}</span>
           </button>
 
           <button
@@ -100,7 +102,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
             }`}
           >
             <Lock className="w-3.5 h-3.5" />
-            <span>{pData.tabs.privacy}</span>
+            <span>{copy(pData.tabs.privacy)}</span>
           </button>
         </div>
 
@@ -112,10 +114,10 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
               <IconComp className="w-6 h-6 text-[#74584d] shrink-0 mt-0.5" />
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-wider text-[#74584d] block">
-                  {currentPolicy.badge}
+                  {copy(currentPolicy.badge)}
                 </span>
                 <h4 className="font-semibold text-sm sm:text-base text-[#1c1c19] mt-0.5">
-                  {currentPolicy.title}
+                  {copy(currentPolicy.title)}
                 </h4>
               </div>
             </div>
@@ -126,10 +128,10 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
                 <div key={idx} className="bg-white rounded-2xl p-4 border border-[#202022]/6 space-y-1.5 shadow-xs">
                   <h5 className="font-semibold text-xs text-[#74584d] uppercase tracking-wider flex items-center space-x-1.5">
                     <Check className="w-3.5 h-3.5 text-[#8a9a86] shrink-0" />
-                    <span>{idx + 1}. {pt.title}</span>
+                    <span>{copy(idx + 1)}{". "}{copy(pt.title)}</span>
                   </h5>
                   <p className="text-[#46464a] text-xs leading-relaxed pl-5 font-light">
-                    {pt.desc}
+                    {copy(pt.desc)}
                   </p>
                 </div>
               ))}
@@ -138,7 +140,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
             {currentPolicy.note && (
               <div className="p-3.5 bg-[#f0ede9] rounded-xl text-[11px] text-[#77767b] flex items-center space-x-2">
                 <AlertCircle className="w-4 h-4 text-[#74584d] shrink-0" />
-                <span>{currentPolicy.note}</span>
+                <span>{copy(currentPolicy.note)}</span>
               </div>
             )}
           </div>
@@ -148,7 +150,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
         <div className="p-4 sm:p-5 bg-white border-t border-[#202022]/8 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center space-x-2 text-xs text-[#77767b]">
             <Phone className="w-3.5 h-3.5 text-[#74584d]" />
-            <span>{pData.supportHelpText} <strong className="text-[#1c1c19]">0772 770 134</strong></span>
+            <span>{copy(pData.supportHelpText)} <strong className="text-[#1c1c19]">{"0772 770 134"}</strong></span>
           </div>
 
           <div className="flex items-center space-x-2 w-full sm:w-auto">
@@ -161,7 +163,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
                 }}
                 className="flex-1 sm:flex-none py-2 px-4 rounded-full text-xs font-semibold bg-[#f6f3ee] hover:bg-[#ebe8e3] text-[#1c1c19] transition-colors cursor-pointer"
               >
-                {pData.openSupportBtn}
+                {copy(pData.openSupportBtn)}
               </button>
             )}
             <button
@@ -169,7 +171,7 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
               onClick={onClose}
               className="flex-1 sm:flex-none py-2 px-6 rounded-full text-xs font-semibold bg-[#1c1c19] text-white hover:bg-black transition-colors cursor-pointer"
             >
-              {pData.closeBtn}
+              {copy(pData.closeBtn)}
             </button>
           </div>
         </div>

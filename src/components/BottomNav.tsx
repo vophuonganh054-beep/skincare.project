@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React from 'react';
 import { Home, LayoutGrid, ShoppingBag, Sparkles, User, Info, Headphones } from 'lucide-react';
 import { ActiveTab } from '../types';
@@ -17,6 +18,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
   cartCount = 0,
   onOpenCart,
 }) => {
+  const copy = useCopy();
   const { t } = useLanguage();
   const { pathname } = useRouter();
 
@@ -32,7 +34,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         >
           <Home className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname === '/' ? 'stroke-[2.5] text-[#1c1c19]' : 'stroke-[1.8]'}`} />
           <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
-            {t.nav.home}
+            {copy(t.nav.home)}
           </span>
         </Link>
 
@@ -45,7 +47,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         >
           <LayoutGrid className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname.startsWith('/san-pham') ? 'stroke-[2.5] text-[#1c1c19]' : 'stroke-[1.8]'}`} />
           <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
-            {t.nav.catalog}
+            {copy(t.nav.catalog)}
           </span>
         </Link>
 
@@ -60,12 +62,12 @@ export const BottomNav: React.FC<BottomNavProps> = ({
               <ShoppingBag className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.8]" />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-2 min-w-[16px] h-[16px] px-1 bg-[#08080a] text-white text-[10px] font-bold rounded-full flex items-center justify-center pointer-events-none">
-                  {cartCount}
+                  {copy(cartCount)}
                 </span>
               )}
             </div>
             <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
-              {t.nav.cart}
+              {copy(t.nav.cart)}
             </span>
           </button>
         )}
@@ -79,8 +81,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         >
           <Info className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname === '/ve-alps' ? 'stroke-[2.5] text-[#74584d]' : 'stroke-[1.8]'}`} />
           <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
-            VỀ ALPS
-          </span>
+            {copy("VỀ ALPS")}</span>
         </Link>
 
         {/* Liên hệ */}
@@ -92,8 +93,7 @@ export const BottomNav: React.FC<BottomNavProps> = ({
         >
           <Headphones className={`w-5 h-5 sm:w-6 sm:h-6 ${pathname === '/lien-he' ? 'stroke-[2.5] text-[#74584d]' : 'stroke-[1.8]'}`} />
           <span className="text-[10px] xs:text-[11.5px] tracking-tight mt-1 font-semibold uppercase truncate max-w-full px-0.5">
-            LIÊN HỆ
-          </span>
+            {copy("LIÊN HỆ")}</span>
         </Link>
       </div>
     </nav>

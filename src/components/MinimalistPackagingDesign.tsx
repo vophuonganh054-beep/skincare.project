@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React from 'react';
 import { Sparkles, Droplets, Check, ArrowRight, ShoppingBag } from 'lucide-react';
 import duoImg from '../assets/images/alps_tube_mask_duo_1790672888481.jpg';
@@ -15,6 +16,7 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
   onAddDuoToCart,
   isMobileFrame = false,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const pkg = PACKAGING_I18N[language] || PACKAGING_I18N.vi;
 
@@ -32,15 +34,15 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
           <div className="inline-flex items-center space-x-2 bg-white/80 border border-[#e4ded5] px-3.5 py-1 rounded-full text-[11px] font-medium tracking-[0.2em] text-[#74584d] uppercase mb-3 shadow-2xs backdrop-blur-xs">
             <Sparkles className="w-3.5 h-3.5 text-[#8b5545]" />
-            <span>{pkg.badge}</span>
+            <span>{copy(pkg.badge)}</span>
           </div>
 
           <h2 className="font-serif text-2xl sm:text-4xl font-normal tracking-tight text-[#1c1c19] leading-snug">
-            {pkg.title}
+            {copy(pkg.title)}
           </h2>
 
           <p className="mt-3 text-xs sm:text-sm text-[#5f5d58] leading-relaxed font-light">
-            {pkg.subtitle}
+            {copy(pkg.subtitle)}
           </p>
         </div>
 
@@ -51,7 +53,7 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
             <div className="relative rounded-2xl overflow-hidden bg-[#f4f0eb] border border-[#e8e1d6] aspect-4/3 sm:aspect-16/10 group shadow-xs">
               <img
                 src={duoImg}
-                alt={pkg.imageAlt}
+                alt={copy(pkg.imageAlt)}
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-103"
               />
@@ -60,15 +62,15 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
               <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between text-white">
                 <div>
                   <span className="text-[10px] tracking-widest uppercase font-semibold text-amber-300 block">
-                    {pkg.imageBadge}
+                    {copy(pkg.imageBadge)}
                   </span>
                   <h3 className="font-serif text-lg sm:text-xl font-normal mt-0.5 text-amber-100">
-                    {pkg.imageTitle}
+                    {copy(pkg.imageTitle)}
                   </h3>
                 </div>
                 <div className="hidden sm:inline-flex items-center space-x-1.5 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[11px] border border-amber-300/30 text-amber-200">
                   <Droplets className="w-3 h-3 text-amber-300" />
-                  <span>{pkg.imageMetric}</span>
+                  <span>{copy(pkg.imageMetric)}</span>
                 </div>
               </div>
             </div>
@@ -78,20 +80,20 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
           <div className="lg:col-span-5 space-y-6">
             <div>
               <span className="text-[10px] uppercase tracking-[0.25em] text-[#8b5545] font-semibold block mb-1">
-                {pkg.philosophyBadge}
+                {copy(pkg.philosophyBadge)}
               </span>
               <h3 className="font-serif text-xl sm:text-2xl font-normal text-[#1c1c19] tracking-tight">
-                {pkg.duoTitle}
+                {copy(pkg.duoTitle)}
               </h3>
               <p className="text-xs sm:text-sm text-[#5f5d58] mt-2.5 leading-relaxed font-light">
-                {pkg.duoDescription}
+                {copy(pkg.duoDescription)}
               </p>
             </div>
 
             {/* Highlights List */}
             <div className="space-y-3 pt-2">
               <span className="text-xs font-semibold text-[#1c1c19] block tracking-wide">
-                {pkg.featuresTitle}
+                {copy(pkg.featuresTitle)}
               </span>
               <ul className="space-y-2.5">
                 {pkg.highlights.map((hl, idx) => (
@@ -99,7 +101,7 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
                     <div className="w-4 h-4 rounded-full bg-[#f2eae1] border border-[#dfd2c1] flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-2.5 h-2.5 text-[#8b5545]" />
                     </div>
-                    <span>{hl}</span>
+                    <span>{copy(hl)}</span>
                   </li>
                 ))}
               </ul>
@@ -109,8 +111,8 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
             <div className="grid grid-cols-3 gap-2.5 pt-2 border-t border-[#ebe5dc]">
               {pkg.metrics.map((m, idx) => (
                 <div key={idx} className="p-2.5 bg-[#fbf9f6] rounded-xl border border-[#efe7dd] text-center">
-                  <div className="font-serif text-sm font-semibold text-[#1c1c19]">{m.value}</div>
-                  <div className="text-[10px] text-[#77746f] mt-0.5 leading-tight">{m.label}</div>
+                  <div className="font-serif text-sm font-semibold text-[#1c1c19]">{copy(m.value)}</div>
+                  <div className="text-[10px] text-[#77746f] mt-0.5 leading-tight">{copy(m.label)}</div>
                 </div>
               ))}
             </div>
@@ -124,7 +126,7 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 bg-[#74584d] hover:bg-[#5e453c] text-white px-7 py-3.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all shadow-xs hover:shadow-md active:scale-98 cursor-pointer"
               >
                 <ShoppingBag className="w-4 h-4 shrink-0" />
-                <span>{pkg.buyDuoBtn}</span>
+                <span>{copy(pkg.buyDuoBtn)}</span>
               </button>
             )}
 
@@ -133,7 +135,7 @@ export const MinimalistPackagingDesign: React.FC<MinimalistPackagingDesignProps>
                 onClick={onOpenCollection}
                 className="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 bg-[#1c1c19] text-[#f7f5f0] hover:bg-[#323235] px-7 py-3.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all shadow-xs hover:shadow-md active:scale-98 cursor-pointer"
               >
-                <span>{pkg.exploreProductsBtn}</span>
+                <span>{copy(pkg.exploreProductsBtn)}</span>
                 <ArrowRight className="w-4 h-4 shrink-0" />
               </button>
             )}

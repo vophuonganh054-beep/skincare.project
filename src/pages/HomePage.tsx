@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useEffect, useRef, useState } from 'react';
 import { SensoryEditorial } from '../components/SensoryEditorial';
 import { BeautyRibbon, GiftEditorial } from '../components/GiftEditorial';
@@ -43,6 +44,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   onShowToast,
   searchQuery,
 }) => {
+  const copy = useCopy();
   const { navigate } = useRouter();
   const storefront = useRef<HTMLDivElement>(null);
   const [motionPaused, setMotionPaused] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -113,7 +115,7 @@ export const HomePage: React.FC<HomePageProps> = ({
         motionPaused={motionPaused}
       />
 
-      <div className="alps-motion-toolbar"><span>THE ALPS EDIT / VẺ ĐẸP CỦA NHỮNG KHOẢNG LẶNG</span><button onClick={() => setMotionPaused(value => !value)} aria-pressed={motionPaused}>{motionPaused ? <Play size={13} /> : <Pause size={13} />}{motionPaused ? 'Bật hiệu ứng' : 'Tạm dừng hiệu ứng'}</button></div>
+      <div className="alps-motion-toolbar"><span>{copy("THE ALPS EDIT / VẺ ĐẸP CỦA NHỮNG KHOẢNG LẶNG")}</span><button onClick={() => setMotionPaused(value => !value)} aria-pressed={motionPaused}>{motionPaused ? <Play size={13} /> : <Pause size={13} />}{copy(motionPaused ? 'Bật hiệu ứng' : 'Tạm dừng hiệu ứng')}</button></div>
       <BeautyRibbon />
       <GiftEditorial />
 
@@ -131,17 +133,16 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div>
             <div className="flex items-center space-x-2 text-[11px] uppercase tracking-widest text-[#74584d] font-semibold">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Tuyển tập Tinh Hoa</span>
+              <span>{copy("Tuyển tập Tinh Hoa")}</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-serif text-[#1c1c19] mt-1">
-              Bộ Sưu Tập Tế Bào Gốc Sông Băng Thụy Sĩ
-            </h2>
+              {copy("Bộ Sưu Tập Tế Bào Gốc Sông Băng Thụy Sĩ")}</h2>
           </div>
           <Link
             to="/san-pham"
             className="inline-flex items-center space-x-2 text-xs font-semibold tracking-wider text-[#74584d] hover:text-[#1c1c19] transition-colors group cursor-pointer"
           >
-            <span>XEM TẤT CẢ SẢN PHẨM TRÊN TRANG RIÊNG</span>
+            <span>{copy("XEM TẤT CẢ SẢN PHẨM TRÊN TRANG RIÊNG")}</span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>

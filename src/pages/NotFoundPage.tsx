@@ -1,8 +1,10 @@
+import { useCopy } from '../i18n/useCopy';
 import React from 'react';
 import { useRouter, Link } from '../context/RouterContext';
 import { Compass, ArrowLeft, Home, ShoppingBag } from 'lucide-react';
 
 export const NotFoundPage: React.FC = () => {
+  const copy = useCopy();
   const { pathname } = useRouter();
 
   return (
@@ -12,11 +14,10 @@ export const NotFoundPage: React.FC = () => {
           <Compass className="w-8 h-8" />
         </div>
         <div className="space-y-1">
-          <span className="text-4xl sm:text-5xl font-serif font-bold text-[#1c1c19]">404</span>
-          <h1 className="text-lg sm:text-xl font-serif text-[#1c1c19]">Trang Không Tồn Tại</h1>
+          <span className="text-4xl sm:text-5xl font-serif font-bold text-[#1c1c19]">{"404"}</span>
+          <h1 className="text-lg sm:text-xl font-serif text-[#1c1c19]">{copy("Trang Không Tồn Tại")}</h1>
           <p className="text-xs text-[#77767b] leading-relaxed pt-1">
-            Đường dẫn &quot;<span className="font-mono text-[#1c1c19]">{pathname}</span>&quot; không có trên hệ thống hoặc đã được di chuyển.
-          </p>
+            {copy("Đường dẫn \"")}<span className="font-mono text-[#1c1c19]">{pathname}</span>{copy("\" không có trên hệ thống hoặc đã được di chuyển.")}</p>
         </div>
 
         <div className="flex flex-col sm:flex-row gap-2.5 justify-center pt-2">
@@ -25,14 +26,14 @@ export const NotFoundPage: React.FC = () => {
             className="px-5 py-2.5 bg-[#202022] hover:bg-[#74584d] text-white text-xs font-semibold rounded-xl flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
           >
             <Home className="w-3.5 h-3.5" />
-            <span>Về Trang Chủ</span>
+            <span>{copy("Về Trang Chủ")}</span>
           </Link>
           <Link
             to="/san-pham"
             className="px-5 py-2.5 bg-[#f4ede4] hover:bg-[#ebdccf] text-[#74584d] text-xs font-semibold rounded-xl flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
-            <span>Xem Sản Phẩm</span>
+            <span>{copy("Xem Sản Phẩm")}</span>
           </Link>
         </div>
       </div>

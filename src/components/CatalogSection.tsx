@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import { CATEGORIES as DEFAULT_CATEGORIES } from '../data/products';
 import { Product } from '../types';
@@ -22,6 +23,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
   searchQuery = '',
   isMobileFrame = false,
 }) => {
+  const copy = useCopy();
   const { t, language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
@@ -106,17 +108,17 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3 sm:mb-4">
         <div>
           <h2 className="font-serif text-xl sm:text-2xl md:text-3xl font-normal text-[#1c1c19] tracking-tight">
-            {t.catalog.title}
+            {copy(t.catalog.title)}
           </h2>
           <p className="inline-flex items-center space-x-1.5 text-[11px] sm:text-xs text-[#77767b] font-light mt-0.5">
             <AlpsIcon className="w-3 h-3 text-[#74584d]" color="#74584d" />
-            <span>{t.catalog.subtitle}</span>
+            <span>{copy(t.catalog.subtitle)}</span>
           </p>
         </div>
 
         <div className="flex items-center space-x-3 text-xs">
           <span className="text-[11px] font-semibold tracking-wider text-[#77767b] uppercase whitespace-nowrap">
-            {language === 'vi'
+            {copy(language === 'vi'
               ? `${filteredProducts.length} SẢN PHẨM`
               : language === 'de'
               ? `${filteredProducts.length} PRODUKTE`
@@ -124,20 +126,20 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
               ? `${filteredProducts.length} PRODUCTOS`
               : language === 'zh'
               ? `${filteredProducts.length} 件产品`
-              : `${filteredProducts.length} PRODUCTS`}
+              : `${filteredProducts.length} PRODUCTS`)}
           </span>
-          <span className="text-[#c7c6ca]">|</span>
+          <span className="text-[#c7c6ca]">{"|"}</span>
           <div className="flex items-center space-x-1 text-[11px] text-[#46464a]">
-            <span className="text-[#77767b] hidden sm:inline">{sortLabel}</span>
+            <span className="text-[#77767b] hidden sm:inline">{copy(sortLabel)}</span>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              aria-label={sortLabel}
+              aria-label={copy(sortLabel)}
               className="bg-transparent border border-[#202022]/10 rounded-lg px-2 py-1 text-xs text-[#1c1c19] focus:outline-none cursor-pointer"
             >
               {sortOptions.map((opt) => (
                 <option key={opt.value} value={opt.value}>
-                  {opt.label}
+                  {copy(opt.label)}
                 </option>
               ))}
             </select>
@@ -159,7 +161,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
                   : 'bg-[#f0ede9] text-[#46464a] hover:text-[#1c1c19] hover:bg-[#ebe8e3]'
               }`}
             >
-              {cat.label}
+              {copy(cat.label)}
             </button>
           );
         })}
@@ -169,7 +171,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
       {filteredProducts.length === 0 ? (
         <div className="p-12 text-center bg-white rounded-3xl border border-[#202022]/6">
           <p className="font-serif text-base text-[#1c1c19]">
-            {language === 'vi'
+            {copy(language === 'vi'
               ? 'Không tìm thấy sản phẩm phù hợp'
               : language === 'de'
               ? 'Keine passenden Produkte gefunden'
@@ -177,10 +179,10 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
               ? 'No se encontraron productos coincidentes'
               : language === 'zh'
               ? '未找到匹配的产品'
-              : 'No matching products found'}
+              : 'No matching products found')}
           </p>
           <p className="text-xs text-[#77767b] mt-1">
-            {language === 'vi'
+            {copy(language === 'vi'
               ? 'Vui lòng thử tìm kiếm bằng từ khóa khác hoặc chọn danh mục khác.'
               : language === 'de'
               ? 'Bitte versuchen Sie eine andere Suche oder wählen Sie eine andere Kategorie.'
@@ -188,7 +190,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
               ? 'Intente buscar con otras palabras clave o elija otra categoría.'
               : language === 'zh'
               ? '请尝试其他搜索关键词或选择不同的分类。'
-              : 'Please try searching with different keywords or select another category.'}
+              : 'Please try searching with different keywords or select another category.')}
           </p>
         </div>
       ) : (

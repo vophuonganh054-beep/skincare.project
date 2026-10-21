@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState, useRef, useEffect } from 'react';
 import { Globe, Check, ChevronDown } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -12,6 +13,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
   variant = 'header',
   className = '',
 }) => {
+  const copy = useCopy();
   const { language, setLanguage, languages, currentLangOption } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -32,7 +34,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center space-x-1.5 text-[11px] text-[#fed8c9] hover:text-white transition-colors cursor-pointer py-0.5 px-2 rounded-full hover:bg-white/10"
-          title="Chọn ngôn ngữ / Select language"
+          title={copy("Chọn ngôn ngữ / Select language")}
         >
           <span className="text-xs">{currentLangOption.flag}</span>
           <span className="font-semibold uppercase tracking-wider">{currentLangOption.shortLabel}</span>
@@ -42,7 +44,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
         {isOpen && (
           <div className="absolute right-0 top-full mt-1.5 w-44 bg-[#202022] border border-white/15 rounded-xl shadow-2xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
             <div className="px-3 py-1 text-[9px] font-bold text-[#fed8c9] uppercase tracking-widest border-b border-white/10 mb-1">
-              Ngôn Ngữ / Language
+              {copy("Ngôn Ngữ / Language")}
             </div>
             {languages.map((item) => (
               <button
@@ -112,7 +114,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center space-x-1 sm:space-x-1.5 px-2 sm:px-2.5 py-1 text-xs rounded-full bg-[#f0ede9] hover:bg-[#e7e3dc] text-[#1c1c19] border border-[#202022]/10 transition-all cursor-pointer shadow-2xs shrink-0"
-        title="Ngôn ngữ / Language (VI • EN • DE • ES • ZH)"
+        title={copy("Ngôn ngữ / Language (VI • EN • DE • ES • ZH)")}
       >
         <Globe className="w-3.5 h-3.5 text-[#74584d] shrink-0" />
         <span className="text-xs shrink-0">{currentLangOption.flag}</span>
@@ -123,7 +125,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({
       {isOpen && (
         <div className="absolute right-0 top-full mt-2 w-48 bg-[#fcf9f4] border border-[#202022]/15 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in zoom-in-95 duration-150">
           <div className="px-3.5 py-1 text-[9px] font-bold text-[#74584d] uppercase tracking-widest border-b border-[#202022]/8 mb-1">
-            Chọn Ngôn Ngữ • Language
+            {copy("Chọn Ngôn Ngữ • Language")}
           </div>
           {languages.map((item) => (
             <button

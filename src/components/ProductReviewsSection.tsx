@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState, useEffect } from 'react';
 import {
   Star,
@@ -31,6 +32,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
   user,
   onShowToast,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const revI18n = REVIEWS_I18N[language] || REVIEWS_I18N.vi;
 
@@ -243,10 +245,10 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
           </div>
           <div className="space-y-1">
             <h4 className="font-serif text-lg font-medium text-[#1c1c19]">
-              {revI18n.noReviewsTitle}
+              {copy(revI18n.noReviewsTitle)}
             </h4>
             <p className="text-xs text-[#77767b] max-w-md mx-auto leading-relaxed">
-              {revI18n.noReviewsDesc}
+              {copy(revI18n.noReviewsDesc)}
             </p>
           </div>
           <div className="pt-2">
@@ -256,7 +258,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
               className="inline-flex items-center space-x-2 bg-[#1c1c19] hover:bg-black text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase transition-all shadow-sm active:scale-95 cursor-pointer"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#fed8c9]" />
-              <span>{isFormOpen ? revI18n.closeFormBtn.toUpperCase() : revI18n.writeReviewBtn.toUpperCase()}</span>
+              <span>{copy(isFormOpen ? revI18n.closeFormBtn.toUpperCase() : revI18n.writeReviewBtn.toUpperCase())}</span>
             </button>
           </div>
         </div>
@@ -266,13 +268,13 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
             {/* Average Rating Score */}
             <div className="md:col-span-4 text-center md:text-left md:border-r md:border-[#202022]/8 md:pr-6">
               <div className="text-[11px] uppercase tracking-wider text-[#74584d] font-semibold">
-                {language === 'vi' ? 'ĐÁNH GIÁ CHUNG' : language === 'de' ? 'GESAMTBEWERTUNG' : language === 'es' ? 'VALORACIÓN MEDIA' : language === 'zh' ? '综合评分' : 'OVERALL RATING'}
+                {copy(language === 'vi' ? 'ĐÁNH GIÁ CHUNG' : language === 'de' ? 'GESAMTBEWERTUNG' : language === 'es' ? 'VALORACIÓN MEDIA' : language === 'zh' ? '综合评分' : 'OVERALL RATING')}
               </div>
               <div className="flex items-baseline justify-center md:justify-start space-x-2 mt-1">
                 <span className="font-serif text-4xl sm:text-5xl font-bold text-[#1c1c19]">
-                  {averageRating}
+                  {copy(averageRating)}
                 </span>
-                <span className="text-[#77767b] text-base font-light">/ 5.0</span>
+                <span className="text-[#77767b] text-base font-light">{"/ 5.0"}</span>
               </div>
 
               {/* Stars row */}
@@ -290,12 +292,12 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
               </div>
 
               <div className="text-xs text-[#77767b] mt-2">
-                {language === 'vi' ? `Dựa trên ${totalCount} lượt đánh giá thực tế` : language === 'de' ? `Basierend auf ${totalCount} Kundenbewertungen` : language === 'es' ? `Basado en ${totalCount} opiniones verificadas` : language === 'zh' ? `基于 ${totalCount} 条真实用户评价` : `Based on ${totalCount} authentic reviews`}
+                {copy(language === 'vi' ? `Dựa trên ${totalCount} lượt đánh giá thực tế` : language === 'de' ? `Basierend auf ${totalCount} Kundenbewertungen` : language === 'es' ? `Basado en ${totalCount} opiniones verificadas` : language === 'zh' ? `基于 ${totalCount} 条真实用户评价` : `Based on ${totalCount} authentic reviews`)}
               </div>
 
               <div className="mt-3 flex items-center justify-center md:justify-start space-x-1 text-[11px] text-[#8a9a86] font-medium">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                <span>{revI18n.verifiedBuyerBadge}</span>
+                <span>{copy(revI18n.verifiedBuyerBadge)}</span>
               </div>
             </div>
 
@@ -319,7 +321,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                   >
                     <div className="flex items-center space-x-1 w-12 shrink-0">
                       <span className="font-medium text-[#1c1c19] group-hover:text-[#74584d]">
-                        {stars}
+                        {copy(stars)}
                       </span>
                       <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
                     </div>
@@ -332,7 +334,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                     </div>
 
                     <span className="text-[11px] text-[#77767b] w-9 text-right shrink-0">
-                      {count}
+                      {copy(count)}
                     </span>
                   </button>
                 );
@@ -347,7 +349,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                 className="px-5 py-3 rounded-full text-xs font-semibold tracking-wider bg-[#1c1c19] hover:bg-black text-white transition-all shadow-sm active:scale-98 flex items-center space-x-2 cursor-pointer"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#fed8c9]" />
-                <span>{isFormOpen ? revI18n.closeFormBtn.toUpperCase() : revI18n.writeReviewBtn.toUpperCase()}</span>
+                <span>{copy(isFormOpen ? revI18n.closeFormBtn.toUpperCase() : revI18n.writeReviewBtn.toUpperCase())}</span>
                 {isFormOpen ? (
                   <ChevronUp className="w-3.5 h-3.5" />
                 ) : (
@@ -355,7 +357,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                 )}
               </button>
               <span className="text-[10px] text-[#77767b] mt-1.5">
-                {language === 'vi' ? 'Nhận ngay 20 điểm Alps Pure Privileges' : language === 'de' ? '+20 Alps Treuepunkte' : language === 'es' ? '+20 Puntos Alps Privileges' : language === 'zh' ? '立享 20 尊享积分' : '+20 Alps Privileges Points'}
+                {copy(language === 'vi' ? 'Nhận ngay 20 điểm Alps Pure Privileges' : language === 'de' ? '+20 Alps Treuepunkte' : language === 'es' ? '+20 Puntos Alps Privileges' : language === 'zh' ? '立享 20 尊享积分' : '+20 Alps Privileges Points')}
               </span>
             </div>
           </div>
@@ -371,25 +373,24 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
           <div className="flex items-center justify-between pb-3 border-b border-[#202022]/8">
             <h3 className="font-serif text-base font-semibold text-[#1c1c19] flex items-center space-x-2">
               <Sparkles className="w-4 h-4 text-[#74584d]" />
-              <span>{revI18n.formTitle}: {product.name}</span>
+              <span>{copy(revI18n.formTitle)}{": "}{copy(product.name)}</span>
             </h3>
             <span className="text-[11px] text-[#8a9a86] font-medium flex items-center space-x-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>{revI18n.verifiedBuyerBadge}</span>
+              <span>{copy(revI18n.verifiedBuyerBadge)}</span>
             </span>
           </div>
 
           {formError && (
             <div className="p-3 bg-red-50 text-red-700 text-xs rounded-xl border border-red-200">
-              {formError}
+              {copy(formError)}
             </div>
           )}
 
           {/* Star selector */}
           <div>
             <label className="block text-xs font-semibold text-[#1c1c19] mb-1">
-              1. {revI18n.ratingLabel} *
-            </label>
+              {"1. "}{copy(revI18n.ratingLabel)} {" *"}</label>
             <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-1">
                 {[1, 2, 3, 4, 5].map((star) => (
@@ -412,7 +413,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                 ))}
               </div>
               <span className="text-xs font-medium text-[#74584d] ml-2">
-                {ratingDescriptions[hoverRating || ratingInput]}
+                {copy(ratingDescriptions[hoverRating || ratingInput])}
               </span>
             </div>
           </div>
@@ -421,20 +422,19 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
             <div>
               <label className="block text-xs font-semibold text-[#1c1c19] mb-1">
-                2. {revI18n.nameLabel} *
-              </label>
+                {"2. "}{copy(revI18n.nameLabel)} {" *"}</label>
               <input
                 type="text"
                 value={authorNameInput}
                 onChange={(e) => setAuthorNameInput(e.target.value)}
-                placeholder={revI18n.namePlaceholder}
+                placeholder={copy(revI18n.namePlaceholder)}
                 className="w-full px-3.5 py-2 rounded-xl border border-[#202022]/15 text-xs focus:outline-none focus:border-[#74584d] bg-[#fcf9f4]"
               />
             </div>
 
             <div>
               <label className="block text-xs font-semibold text-[#1c1c19] mb-1">
-                3. {revI18n.skinTypeLabel}
+                {"3. "}{copy(revI18n.skinTypeLabel)}
               </label>
               <select
                 value={skinTypeInput}
@@ -443,7 +443,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
               >
                 {SKIN_TYPES.map((st, i) => (
                   <option key={i} value={st}>
-                    {st}
+                    {copy(st)}
                   </option>
                 ))}
               </select>
@@ -453,13 +453,13 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
           {/* Review Title */}
           <div>
             <label className="block text-xs font-semibold text-[#1c1c19] mb-1">
-              4. {language === 'vi' ? 'Tiêu đề ngắn gọn' : language === 'de' ? 'Titel der Bewertung' : language === 'es' ? 'Título breve' : language === 'zh' ? '简短标题' : 'Review Title'}
+              {"4. "}{copy(language === 'vi' ? 'Tiêu đề ngắn gọn' : language === 'de' ? 'Titel der Bewertung' : language === 'es' ? 'Título breve' : language === 'zh' ? '简短标题' : 'Review Title')}
             </label>
             <input
               type="text"
               value={titleInput}
               onChange={(e) => setTitleInput(e.target.value)}
-              placeholder={language === 'vi' ? 'VD: Da căng mướt sau 2 tuần, mùi thảo mộc dịu êm...' : language === 'de' ? 'Z.B. Sehr angenehme Textur...' : language === 'es' ? 'Ej: Piel luminosa en 2 semanas...' : language === 'zh' ? '如：质地清爽好吸收，舒缓褪红...' : 'E.g. Hydrating and soothing...'}
+              placeholder={copy(language === 'vi' ? 'VD: Da căng mướt sau 2 tuần, mùi thảo mộc dịu êm...' : language === 'de' ? 'Z.B. Sehr angenehme Textur...' : language === 'es' ? 'Ej: Piel luminosa en 2 semanas...' : language === 'zh' ? '如：质地清爽好吸收，舒缓褪红...' : 'E.g. Hydrating and soothing...')}
               className="w-full px-3.5 py-2 rounded-xl border border-[#202022]/15 text-xs focus:outline-none focus:border-[#74584d] bg-[#fcf9f4]"
             />
           </div>
@@ -467,13 +467,12 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
           {/* Review Comment Body */}
           <div>
             <label className="block text-xs font-semibold text-[#1c1c19] mb-1">
-              5. {revI18n.commentLabel} *
-            </label>
+              {"5. "}{copy(revI18n.commentLabel)} {" *"}</label>
             <textarea
               rows={3}
               value={commentInput}
               onChange={(e) => setCommentInput(e.target.value)}
-              placeholder={revI18n.commentPlaceholder}
+              placeholder={copy(revI18n.commentPlaceholder)}
               className="w-full px-3.5 py-2.5 rounded-xl border border-[#202022]/15 text-xs focus:outline-none focus:border-[#74584d] bg-[#fcf9f4] leading-relaxed"
             />
           </div>
@@ -485,7 +484,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
               onClick={() => setIsFormOpen(false)}
               className="px-4 py-2 rounded-full text-xs text-[#77767b] hover:text-[#1c1c19] hover:bg-[#f0ede9] transition-colors cursor-pointer"
             >
-              {revI18n.closeFormBtn}
+              {copy(revI18n.closeFormBtn)}
             </button>
 
             <button
@@ -493,7 +492,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
               className="px-6 py-2.5 rounded-full text-xs font-semibold tracking-wider bg-[#1c1c19] hover:bg-black text-white shadow-sm transition-all flex items-center space-x-2 active:scale-95 cursor-pointer"
             >
               <Send className="w-3.5 h-3.5 text-[#fed8c9]" />
-              <span>{revI18n.submitBtn.toUpperCase()}</span>
+              <span>{copy(revI18n.submitBtn.toUpperCase())}</span>
             </button>
           </div>
         </form>
@@ -522,7 +521,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="w-9 h-9 rounded-full bg-[#f0ede9] text-[#74584d] flex items-center justify-center font-serif font-bold text-xs shrink-0 border border-[#202022]/5">
-                      {initials}
+                      {copy(initials)}
                     </div>
 
                     <div>
@@ -533,7 +532,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                         {review.isVerifiedBuyer && (
                           <span className="inline-flex items-center space-x-1 text-[10px] text-[#8a9a86] bg-[#8a9a86]/10 px-2 py-0.5 rounded-full font-medium">
                             <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                            <span>{revI18n.verifiedBuyerBadge}</span>
+                            <span>{copy(revI18n.verifiedBuyerBadge)}</span>
                           </span>
                         )}
                       </div>
@@ -576,7 +575,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                   <div className="p-3 bg-[#fbf9f6] rounded-xl border border-[#202022]/5 text-xs space-y-1">
                     <div className="flex items-center space-x-1.5 text-[#74584d] font-semibold text-[11px]">
                       <Sparkles className="w-3 h-3" />
-                      <span>{language === 'vi' ? 'Phản hồi từ Đội ngũ Chuyên viên Alps:' : language === 'de' ? 'Antwort vom Alps Expertenteam:' : language === 'es' ? 'Respuesta del equipo de especialistas Alps:' : language === 'zh' ? '来自 Alps 瑞士护肤专家的回复：' : 'Response from Alps Specialist Team:'}</span>
+                      <span>{copy(language === 'vi' ? 'Phản hồi từ Đội ngũ Chuyên viên Alps:' : language === 'de' ? 'Antwort vom Alps Expertenteam:' : language === 'es' ? 'Respuesta del equipo de especialistas Alps:' : language === 'zh' ? '来自 Alps 瑞士护肤专家的回复：' : 'Response from Alps Specialist Team:')}</span>
                     </div>
                     <p className="text-[#5f5d58] text-[11px] leading-relaxed">
                       {review.responseFromBrand}
@@ -586,7 +585,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
 
                 {/* Helpful count */}
                 <div className="flex items-center justify-between pt-1 border-t border-[#202022]/5 text-xs text-[#77767b]">
-                  <span className="text-[11px]">{language === 'vi' ? 'Đánh giá này có hữu ích với bạn?' : language === 'de' ? 'War diese Bewertung hilfreich?' : language === 'es' ? '¿Te resultó útil esta reseña?' : language === 'zh' ? '这条评价对您有帮助吗？' : 'Was this review helpful?'}</span>
+                  <span className="text-[11px]">{copy(language === 'vi' ? 'Đánh giá này có hữu ích với bạn?' : language === 'de' ? 'War diese Bewertung hilfreich?' : language === 'es' ? '¿Te resultó útil esta reseña?' : language === 'zh' ? '这条评价对您有帮助吗？' : 'Was this review helpful?')}</span>
                   <button
                     type="button"
                     onClick={() => handleToggleHelpful(review.id)}
@@ -597,7 +596,7 @@ export const ProductReviewsSection: React.FC<ProductReviewsSectionProps> = ({
                     }`}
                   >
                     <ThumbsUp className={`w-3.5 h-3.5 ${isLiked ? 'fill-current' : ''}`} />
-                    <span>{revI18n.helpfulBtn} ({review.helpfulCount})</span>
+                    <span>{copy(revI18n.helpfulBtn)} {" ("}{review.helpfulCount}{")"}</span>
                   </button>
                 </div>
               </div>

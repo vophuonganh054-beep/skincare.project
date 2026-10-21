@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, Sparkles, ChevronLeft, ChevronRight, ShieldCheck } from 'lucide-react';
 import collectionBannerImg from '../assets/images/alps_banner_champagne_1789839179884.jpg';
@@ -61,6 +62,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   isMobileFrame = false,
   motionPaused = false,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const heroData = HERO_I18N[language] || HERO_I18N.vi;
 
@@ -151,7 +153,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
             <div key={s.id} className="w-full h-full shrink-0 relative">
               <img
                 src={s.image}
-                alt={s.title}
+                alt={copy(s.title)}
                 referrerPolicy="no-referrer"
                 onError={(e) => {
                   (e.target as HTMLImageElement).src = s.fallbackImage;
@@ -172,21 +174,21 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
             <div className="flex flex-wrap items-center gap-2 mb-2 sm:mb-3">
               <div className="inline-flex items-center space-x-1.5 bg-white/95 backdrop-blur-md text-[#1c1c19] px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase shadow-xs">
                 <Sparkles className="w-3 h-3 text-[#74584d]" />
-                <span>{slide.badge}</span>
+                <span>{copy(slide.badge)}</span>
               </div>
             </div>
 
             {/* Slide Heading with Anti-Drop text-pretty and balanced proportions */}
             <h2 className="font-serif text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-[32px] font-normal text-white tracking-tight leading-snug drop-shadow-sm transition-all text-pretty max-w-xl">
-              {slide.title}
+              {copy(slide.title)}
             </h2>
 
             {/* Highlight & Subtitle */}
             <p className="text-amber-200/90 text-[11px] sm:text-sm font-medium mt-1 sm:mt-1.5">
-              ✦ {slide.highlight}
+              {"✦ "}{copy(slide.highlight)}
             </p>
             <p className="text-white/85 text-[11px] sm:text-sm md:text-base font-light mt-0.5 sm:mt-1 max-w-lg leading-relaxed line-clamp-2 sm:line-clamp-none text-pretty">
-              {slide.subtitle}
+              {copy(slide.subtitle)}
             </p>
 
             {/* Bottom Action Bar */}
@@ -197,7 +199,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                   onClick={() => handleSlideClick(slide)}
                   className="group inline-flex items-center space-x-1.5 sm:space-x-2 bg-white text-[#1c1c19] hover:bg-[#fcf9f4] px-3.5 sm:px-6 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-sm font-semibold tracking-wider transition-all transform active:scale-98 shadow-md cursor-pointer whitespace-nowrap"
                 >
-                  <span>{slide.buttonText}</span>
+                  <span>{copy(slide.buttonText)}</span>
                   <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-1 text-[#74584d]" />
                 </button>
 
@@ -207,20 +209,20 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                     className="inline-flex items-center space-x-1.5 bg-black/40 hover:bg-black/60 text-white backdrop-blur-xs border border-white/40 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider transition-all transform active:scale-98 cursor-pointer shadow-xs whitespace-nowrap"
                   >
                     <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#fed8c9]" />
-                    <span>{heroData.quizBtn}</span>
+                    <span>{copy(heroData.quizBtn)}</span>
                   </button>
                 )}
 
                 <div className="hidden lg:flex items-center space-x-1.5 text-xs text-white/70 whitespace-nowrap">
                   <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>{heroData.dermatologyBadge}</span>
+                  <span>{copy(heroData.dermatologyBadge)}</span>
                 </div>
               </div>
 
               {/* Slide Counter & Next Product Preview */}
               <div className="flex items-center space-x-2 sm:space-x-3 text-right">
                 <div className="text-white/80 text-[10px] sm:text-xs font-serif tracking-wide hidden sm:block">
-                  <span className="font-mono font-bold text-white">0{currentSlide + 1}</span> / 0{slides.length}
+                  <span className="font-mono font-bold text-white">{"0"}{copy(currentSlide + 1)}</span> {" / 0"}{copy(slides.length)}
                 </div>
 
                 {/* Clickable Indicator Bars */}
@@ -229,7 +231,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
                     <button
                       key={i}
                       onClick={() => setCurrentSlide(i)}
-                      aria-label={`Go to slide ${i + 1}`}
+                      aria-label={copy(`Go to slide ${i + 1}`)}
                       className={`h-1.5 rounded-full transition-all duration-300 ${
                         i === currentSlide
                           ? 'w-5 sm:w-8 bg-white'
@@ -247,7 +249,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
         <button
           id="hero-prev-slide-btn"
           onClick={handlePrev}
-          aria-label={heroData.prevSlideLabel}
+          aria-label={copy(heroData.prevSlideLabel)}
           className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -256,7 +258,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
         <button
           id="hero-next-slide-btn"
           onClick={handleNext}
-          aria-label={heroData.nextSlideLabel}
+          aria-label={copy(heroData.nextSlideLabel)}
           className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-md border border-white/20 hidden sm:flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -267,9 +269,9 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           onClick={handleNext}
           className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 hidden xs:inline-flex items-center space-x-1.5 bg-black/50 hover:bg-black/80 backdrop-blur-md border border-white/15 px-3 py-1 rounded-full text-[11px] text-white/90 transition-all hover:scale-102 cursor-pointer"
         >
-          <span className="text-white/60">{heroData.nextPeek}</span>
+          <span className="text-white/60">{copy(heroData.nextPeek)}</span>
           <span className="font-medium text-amber-200 truncate max-w-[130px]">
-            {slides[(currentSlide + 1) % slides.length].title.replace('Alps ', '')}
+            {copy(slides[(currentSlide + 1) % slides.length].title.replace('Alps ', ''))}
           </span>
           <ChevronRight className="w-3.5 h-3.5 text-white/80" />
         </button>

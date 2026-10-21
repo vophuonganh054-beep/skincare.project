@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   Send,
@@ -32,6 +33,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
   onOpenSkinQuiz,
   initialPrompt,
 }) => {
+  const copy = useCopy();
   const { language } = useLanguage();
   const supportTexts = SUPPORT_I18N[language]?.aiChat || SUPPORT_I18N.vi.aiChat;
 
@@ -179,14 +181,14 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
           <div>
             <div className="flex items-center space-x-1.5">
               <span className="font-serif font-semibold text-xs text-[#1c1c19]">
-                {supportTexts.title}
+                {copy(supportTexts.title)}
               </span>
               <span className="text-[9px] bg-[#fed8c9]/50 text-[#74584d] font-semibold px-1.5 py-0.2 rounded-full uppercase tracking-wider">
-                {supportTexts.aiSubtitle}
+                {copy(supportTexts.aiSubtitle)}
               </span>
             </div>
             <p className="text-[10px] text-[#77767b]">
-              {supportTexts.officialWebsite}
+              {copy(supportTexts.officialWebsite)}
             </p>
           </div>
         </div>
@@ -194,7 +196,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
         <button
           onClick={handleResetChat}
           className="p-1.5 text-[#77767b] hover:text-[#1c1c19] hover:bg-[#f6f3ee] rounded-full transition-colors cursor-pointer"
-          title={supportTexts.resetChat}
+          title={copy(supportTexts.resetChat)}
         >
           <RefreshCw className="w-3.5 h-3.5" />
         </button>
@@ -206,14 +208,14 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
           <div className="flex items-center space-x-2 truncate">
             <Activity className="w-4 h-4 text-emerald-600 shrink-0" />
             <span className="truncate">
-              {supportTexts.quizBannerText} <strong>{supportTexts.quizBannerBold}</strong>
+              {copy(supportTexts.quizBannerText)} <strong>{copy(supportTexts.quizBannerBold)}</strong>
             </span>
           </div>
           <button
             onClick={onOpenSkinQuiz}
             className="text-[11px] font-bold text-white bg-[#74584d] hover:bg-[#5b4339] px-2.5 py-1 rounded-full uppercase tracking-wider shrink-0 ml-2 shadow-2xs transition-colors flex items-center space-x-1 cursor-pointer"
           >
-            <span>{supportTexts.quizBannerBtn}</span>
+            <span>{copy(supportTexts.quizBannerBtn)}</span>
             <ChevronRight className="w-3 h-3" />
           </button>
         </div>
@@ -253,7 +255,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
                   msg.role === 'user' ? 'text-white/60' : 'text-[#77767b]'
                 }`}
               >
-                {msg.timestamp}
+                {copy(msg.timestamp)}
               </div>
             </div>
           </div>
@@ -269,7 +271,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
               <span className="w-1.5 h-1.5 rounded-full bg-[#74584d] animate-bounce [animation-delay:0.2s]" />
               <span className="w-1.5 h-1.5 rounded-full bg-[#74584d] animate-bounce [animation-delay:0.4s]" />
               <span className="text-[11px] text-[#74584d] font-medium ml-1">
-                {supportTexts.thinking}
+                {copy(supportTexts.thinking)}
               </span>
             </div>
           </div>
@@ -287,7 +289,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
             disabled={isLoading}
             className="text-[11px] bg-white border border-[#e4dfd7] hover:border-[#74584d] hover:text-[#74584d] px-3 py-1.5 rounded-full transition-colors shrink-0 text-[#5f5d58] shadow-2xs disabled:opacity-50 cursor-pointer"
           >
-            {prompt}
+            {copy(prompt)}
           </button>
         ))}
       </div>
@@ -306,7 +308,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
             maxLength={3000}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder={supportTexts.inputPlaceholder}
+            placeholder={copy(supportTexts.inputPlaceholder)}
             disabled={isLoading}
             className="flex-1 px-4 py-2.5 rounded-full border border-[#e4dfd7] text-xs focus:outline-none focus:border-[#74584d] focus:ring-1 focus:ring-[#74584d] bg-[#fbf9f6] text-[#1c1c19] placeholder:text-[#9e9a93]"
           />

@@ -1,3 +1,4 @@
+import { useCopy } from '../i18n/useCopy';
 import React, { useState, useEffect } from 'react';
 import { Type, Check, Sparkles, X } from 'lucide-react';
 
@@ -73,6 +74,7 @@ export const FontSwitcherModal: React.FC<FontSwitcherModalProps> = ({
   onClose,
   onShowToast,
 }) => {
+  const copy = useCopy();
   const [currentFont, setCurrentFont] = useState<FontPreset>('alps_luxury');
 
   useEffect(() => {
@@ -112,11 +114,9 @@ export const FontSwitcherModal: React.FC<FontSwitcherModalProps> = ({
             </div>
             <div>
               <h3 className="font-serif text-lg font-medium text-[#1c1c19]">
-                Tùy Chọn Kiểu Chữ (Typography)
-              </h3>
+                {copy("Tùy Chọn Kiểu Chữ (Typography)")}</h3>
               <p className="text-xs text-[#77746f]">
-                Lựa chọn font chữ thể hiện bản sắc thẩm mỹ thương hiệu ALPS
-              </p>
+                {copy("Lựa chọn font chữ thể hiện bản sắc thẩm mỹ thương hiệu ALPS")}</p>
             </div>
           </div>
           <button
@@ -145,14 +145,14 @@ export const FontSwitcherModal: React.FC<FontSwitcherModalProps> = ({
                   <div className="flex-1 pr-3">
                     <div className="flex items-center space-x-2">
                       <span className="font-medium text-sm text-[#1c1c19]">
-                        {opt.name}
+                        {copy(opt.name)}
                       </span>
                       <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#f0eae3] text-[#74584d] font-semibold">
-                        {opt.tag}
+                        {copy(opt.tag)}
                       </span>
                     </div>
                     <div className="text-[11px] text-[#77746f] mt-0.5">
-                      {opt.subtitle}
+                      {copy(opt.subtitle)}
                     </div>
 
                     {/* Live Preview Box */}
@@ -166,15 +166,15 @@ export const FontSwitcherModal: React.FC<FontSwitcherModalProps> = ({
                         className="text-base text-[#1c1c19] tracking-tight leading-snug"
                         style={{ fontFamily: opt.serifFont }}
                       >
-                        {opt.previewHeading}
+                        {copy(opt.previewHeading)}
                       </h4>
                       <p className="text-xs text-[#5f5d58] mt-1 leading-relaxed">
-                        {opt.previewBody}
+                        {copy(opt.previewBody)}
                       </p>
                     </div>
 
                     <p className="text-[11px] text-[#77746f] mt-2 italic">
-                      {opt.description}
+                      {copy(opt.description)}
                     </p>
                   </div>
 
@@ -197,14 +197,13 @@ export const FontSwitcherModal: React.FC<FontSwitcherModalProps> = ({
         <div className="p-4 bg-white border-t border-[#ece6dc] flex items-center justify-between text-xs text-[#77746f]">
           <div className="flex items-center space-x-1.5">
             <Sparkles className="w-3.5 h-3.5 text-[#74584d]" />
-            <span>Font chữ được lưu tự động trên trình duyệt của bạn</span>
+            <span>{copy("Font chữ được lưu tự động trên trình duyệt của bạn")}</span>
           </div>
           <button
             onClick={onClose}
             className="px-4 py-2 bg-[#74584d] text-white rounded-lg text-xs font-medium hover:bg-[#5e453c] transition-colors"
           >
-            Hoàn tất
-          </button>
+            {copy("Hoàn tất")}</button>
         </div>
       </div>
     </div>

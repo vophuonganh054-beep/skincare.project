@@ -24,6 +24,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return 'vi';
   });
 
+  useEffect(() => {
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : language;
+  }, [language]);
+
   const setLanguage = (lang: SupportedLanguage) => {
     setLanguageState(lang);
     try {

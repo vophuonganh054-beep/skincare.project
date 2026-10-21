@@ -1,3 +1,4 @@
+import { useCopy } from './i18n/useCopy';
 import './components/MobileCatalog.css';
 import { createComboProduct } from './data/cartProducts';
 import React, { useState, useEffect, useRef } from 'react';
@@ -53,6 +54,7 @@ import {
 } from './services/firebaseService';
 
 export default function App() {
+  const copy = useCopy();
   const { route, pathname, navigate } = useRouter();
 
   // Device view mode: 'desktop' | 'mobile' | 'responsive'
@@ -1122,14 +1124,13 @@ export default function App() {
       {toastMessage && (
         <div className="fixed bottom-20 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#202022] text-white text-xs px-4 py-2.5 rounded-full shadow-lg flex items-center space-x-2 animate-fade-in border border-[#46464a]">
           <Sparkles className="w-3.5 h-3.5 text-[#fed8c9] shrink-0" />
-          <span>{toastMessage}</span>
+          <span>{copy(toastMessage)}</span>
           {toastMessage.toLowerCase().includes('giỏ hàng') && (
             <button
               onClick={() => setIsCartOpen(true)}
               className="ml-2 px-2.5 py-0.5 rounded-full bg-[#fed8c9] text-[#1c1c19] font-semibold text-[11px] hover:bg-white transition-colors cursor-pointer whitespace-nowrap"
             >
-              Xem giỏ hàng
-            </button>
+              {copy("Xem giỏ hàng")}</button>
           )}
         </div>
       )}
