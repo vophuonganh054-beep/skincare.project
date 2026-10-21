@@ -136,7 +136,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                   {copy(t.cart.title)}
                 </h3>
                 <p className="text-[11px] text-[#77767b]">
-                  {copy(totalItemCount === 0 ? t.cart.emptyTitle : `${totalItemCount} ${totalItemCount === 1 ? 'item' : 'items'}`)}
+                  {copy(totalItemCount === 0 ? t.cart.emptyTitle : `${totalItemCount} sản phẩm`)}
                 </p>
               </div>
             </div>
@@ -154,7 +154,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
               <button
                 onClick={onClose}
                 className="w-8 h-8 rounded-full hover:bg-[#f6f3ee] text-[#1c1c19] flex items-center justify-center transition-colors cursor-pointer"
-                title={copy("Close")}
+                title={copy("Đóng")}
               >
                 <X className="w-5 h-5 stroke-[1.5]" />
               </button>

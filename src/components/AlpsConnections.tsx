@@ -18,7 +18,7 @@ export function AlpsConnections() {
       <h2 id="alps-connections-heading" className="text-sm font-semibold tracking-wider text-[#fed8c9] mb-4">{copy("KẾT NỐI VỚI ALPS")}</h2>
       <div className="grid grid-cols-1 min-[360px]:grid-cols-2 lg:grid-cols-5 gap-3">
         {channels.map(({label, detail, href, icon: Icon, color}) => (
-          <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={copy(`${label} – ${detail}`)}
+          <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${copy(label)} – ${copy(detail)}`}
             className="group flex items-center gap-3 min-w-0 p-3 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.08] hover:border-[#fed8c9]/40 transition-colors">
             <span className="w-9 h-9 shrink-0 rounded-full bg-white/5 flex items-center justify-center" style={{color}}><Icon className="w-5 h-5" aria-hidden="true" /></span>
             <span className="flex-1 min-w-0"><span className="block text-xs font-semibold text-white">{copy(label)}</span><span className="block text-[10px] text-[#c7c6ca] mt-0.5 break-words">{copy(detail)}</span></span>
