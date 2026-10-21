@@ -1,4 +1,4 @@
-import { MEMBER_PROMOTION_CODES } from '../data/promotions';
+import { MEMBER_PROMOTION_CODES, splitPromotionCodes } from '../data/promotions';
 import { useCopy } from '../i18n/useCopy';
 import React, { useEffect, useState } from 'react';
 import { Copy, Check, Download, ShieldCheck, Building, RefreshCw, CheckCircle2 } from 'lucide-react';
@@ -93,7 +93,7 @@ export const VietQRCard: React.FC<VietQRCardProps> = ({
     setPaymentError('');
     const initiate = async () => {
       const headers: Record<string, string> = {'Content-Type': 'application/json', 'X-Payment-Token': paymentToken};
-      if (MEMBER_PROMOTION_CODES.some(code => code === paymentRequest.promoCode)) {
+      if (MEMBER_PROMOTION_CODES.some(code => splitPromotionCodes(paymentRequest.promoCode).includes(code))) {
         const idToken = await auth.currentUser?.getIdToken();
         if (!idToken) throw new Error('Vui lòng đăng nhập để dùng mã thành viên.');
         headers.Authorization = `Bearer ${idToken}`;

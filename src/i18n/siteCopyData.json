@@ -9646,5 +9646,185 @@
     "Für einen Mitgliedercode bitte anmelden.",
     "Inicia sesión para usar un código de miembro.",
     "请登录会员账户后使用会员优惠码。"
+  ],
+  "Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.": [
+    "Signed-in members: ALPSMEMBER saves 10% of original prices on unmarked-down items; combine with ALPSFREESHIP.",
+    "Angemeldete Mitglieder: ALPSMEMBER spart 10% vom Originalpreis nicht reduzierter Artikel; mit ALPSFREESHIP kombinierbar.",
+    "Miembros: ALPSMEMBER descuenta un 10% del precio original en artículos sin rebaja; acumulable con ALPSFREESHIP.",
+    "登录会员使用 ALPSMEMBER 可享未降价商品原价九折；可叠加 ALPSFREESHIP。"
+  ],
+  "Chọn một mã giảm tiền hàng; có thể cộng thêm ALPSFREESHIP. Điều kiện đơn tối thiểu tính trước giảm giá, chưa gồm phí ship.": [
+    "Choose one merchandise code plus optional ALPSFREESHIP. Minimum spend is measured before voucher discounts, excluding shipping.",
+    "Ein Warenrabattcode plus optional ALPSFREESHIP. Mindestbestellwert vor Gutscheinrabatt, ohne Versand.",
+    "Elige un código de productos más ALPSFREESHIP opcional. Mínimo antes de cupones, sin envío.",
+    "每单限一张商品券，可叠加 ALPSFREESHIP。门槛按用券前商品金额计算，不含运费。"
+  ],
+  "Bỏ mã ưu đãi": [
+    "Remove vouchers",
+    "Gutscheine entfernen",
+    "Quitar cupones",
+    "移除优惠券"
+  ],
+  "Tổng ưu đãi": [
+    "Total savings",
+    "Gesamtersparnis",
+    "Ahorro total",
+    "优惠合计"
+  ],
+  "Áp mã": [
+    "Use code",
+    "Code verwenden",
+    "Usar código",
+    "使用优惠码"
+  ],
+  "để nhận ưu đãi!": [
+    "for savings!",
+    "zum Sparen!",
+    "¡para ahorrar!",
+    "享受优惠！"
+  ],
+  "đơn từ 800.000đ": [
+    "orders from 800,000₫",
+    "ab 800.000₫",
+    "pedidos desde 800.000₫",
+    "订单满800,000₫"
+  ],
+  "3 mã giảm 20% có giới hạn • Cộng thêm ALPSFREESHIP • Đặc quyền ALPSMEMBER": [
+    "3 capped 20% vouchers • Combine with ALPSFREESHIP • ALPSMEMBER benefits",
+    "3 begrenzte 20%-Gutscheine • Mit ALPSFREESHIP kombinierbar • ALPSMEMBER-Vorteile",
+    "3 cupones del 20% con límite • Acumulables con ALPSFREESHIP • Ventajas ALPSMEMBER",
+    "3张限额八折券 • 可叠加 ALPSFREESHIP • ALPSMEMBER 会员优惠"
+  ],
+  "giảm 20%, tối đa 25.000đ • Đơn từ 200.000đ • Cộng được ALPSFREESHIP": [
+    "20% off, up to 25,000₫ • Orders from 200,000₫ • Combine with ALPSFREESHIP",
+    "20% Rabatt, max. 25.000₫ • Ab 200.000₫ • Mit ALPSFREESHIP kombinierbar",
+    "20% de descuento, máximo 25.000₫ • Desde 200.000₫ • Acumulable con ALPSFREESHIP",
+    "满200,000₫享八折，最高减25,000₫ • 可叠加 ALPSFREESHIP"
+  ],
+  "Giá sau mã ALPS25K cho một sản phẩm • Giảm tối đa 25.000đ mỗi đơn • Ship tính tại thanh toán": [
+    "Price after ALPS25K for one item • Maximum 25,000₫ savings per order • Shipping at checkout",
+    "Preis nach ALPS25K für einen Artikel • Max. 25.000₫ pro Bestellung • Versand an der Kasse",
+    "Precio con ALPS25K para un artículo • Ahorro máximo 25.000₫ por pedido • Envío al pagar",
+    "单件商品使用 ALPS25K 后价格 • 每单最高减25,000₫ • 运费结算时计算"
+  ],
+  "Mã không hợp lệ. Vui lòng chọn mã ưu đãi ALPS hiện hành.": [
+    "Invalid code. Choose a current ALPS voucher.",
+    "Ungültiger Code. Bitte aktuellen ALPS-Gutschein wählen.",
+    "Código inválido. Elige un cupón ALPS vigente.",
+    "优惠码无效，请选择当前有效的 ALPS 优惠券。"
+  ],
+  "Chỉ dùng một mã giảm tiền hàng và một mã ALPSFREESHIP mỗi đơn.": [
+    "One merchandise voucher and one ALPSFREESHIP per order.",
+    "Ein Warenrabatt und ein ALPSFREESHIP pro Bestellung.",
+    "Un cupón de productos y un ALPSFREESHIP por pedido.",
+    "每单仅限一张商品券和一张 ALPSFREESHIP。"
+  ],
+  "Giỏ hàng chưa có sản phẩm chưa giảm giá phù hợp với mã thành viên.": [
+    "No eligible full-price items for the member voucher.",
+    "Keine geeigneten nicht reduzierten Artikel für den Mitgliedergutschein.",
+    "No hay artículos sin rebaja válidos para el cupón de miembro.",
+    "购物车中没有符合会员券条件的原价商品。"
+  ],
+  "Giảm 20%, tối đa 25.000đ, đơn từ 200.000đ": [
+    "20% off up to 25,000₫, orders from 200,000₫",
+    "20% Rabatt bis 25.000₫, ab 200.000₫",
+    "20% hasta 25.000₫, desde 200.000₫",
+    "满200,000₫享八折，最高减25,000₫"
+  ],
+  "Giảm tối đa 25.000đ": [
+    "Save up to 25,000₫",
+    "Bis zu 25.000₫ sparen",
+    "Ahorra hasta 25.000₫",
+    "最高减25,000₫"
+  ],
+  "ĐƠN TỪ 200.000đ": [
+    "ORDERS FROM 200,000₫",
+    "AB 200.000₫",
+    "DESDE 200.000₫",
+    "订单满200,000₫"
+  ],
+  "Giảm 20% tiền hàng, tối đa 25.000đ, đơn từ 200.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.": [
+    "20% off merchandise, up to 25,000₫, orders from 200,000₫. Singles and combos; combine with ALPSFREESHIP.",
+    "20% Warenrabatt bis 25.000₫, ab 200.000₫. Einzelartikel und Sets; mit ALPSFREESHIP kombinierbar.",
+    "20% en productos, máximo 25.000₫, desde 200.000₫. Artículos y combos; acumulable con ALPSFREESHIP.",
+    "商品满200,000₫享八折，最高减25,000₫。适用于单品和套装，可叠加 ALPSFREESHIP。"
+  ],
+  "Giảm 20%, tối đa 75.000đ, đơn từ 800.000đ": [
+    "20% off up to 75,000₫, orders from 800,000₫",
+    "20% Rabatt bis 75.000₫, ab 800.000₫",
+    "20% hasta 75.000₫, desde 800.000₫",
+    "满800,000₫享八折，最高减75,000₫"
+  ],
+  "Giảm tối đa 75.000đ": [
+    "Save up to 75,000₫",
+    "Bis zu 75.000₫ sparen",
+    "Ahorra hasta 75.000₫",
+    "最高减75,000₫"
+  ],
+  "ĐƠN TỪ 800.000đ": [
+    "ORDERS FROM 800,000₫",
+    "AB 800.000₫",
+    "DESDE 800.000₫",
+    "订单满800,000₫"
+  ],
+  "Giảm 20% tiền hàng, tối đa 75.000đ, đơn từ 800.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.": [
+    "20% off merchandise, up to 75,000₫, orders from 800,000₫. Singles and combos; combine with ALPSFREESHIP.",
+    "20% Warenrabatt bis 75.000₫, ab 800.000₫. Einzelartikel und Sets; mit ALPSFREESHIP kombinierbar.",
+    "20% en productos, máximo 75.000₫, desde 800.000₫. Artículos y combos; acumulable con ALPSFREESHIP.",
+    "商品满800,000₫享八折，最高减75,000₫。适用于单品和套装，可叠加 ALPSFREESHIP。"
+  ],
+  "Giảm 20%, tối đa 100.000đ, đơn từ 1.000.000đ": [
+    "20% off up to 100,000₫, orders from 1,000,000₫",
+    "20% Rabatt bis 100.000₫, ab 1.000.000₫",
+    "20% hasta 100.000₫, desde 1.000.000₫",
+    "满1,000,000₫享八折，最高减100,000₫"
+  ],
+  "Giảm tối đa 100.000đ": [
+    "Save up to 100,000₫",
+    "Bis zu 100.000₫ sparen",
+    "Ahorra hasta 100.000₫",
+    "最高减100,000₫"
+  ],
+  "ĐƠN TỪ 1.000.000đ": [
+    "ORDERS FROM 1,000,000₫",
+    "AB 1.000.000₫",
+    "DESDE 1.000.000₫",
+    "订单满1,000,000₫"
+  ],
+  "Giảm 20% tiền hàng, tối đa 100.000đ, đơn từ 1.000.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.": [
+    "20% off merchandise, up to 100,000₫, orders from 1,000,000₫. Singles and combos; combine with ALPSFREESHIP.",
+    "20% Warenrabatt bis 100.000₫, ab 1.000.000₫. Einzelartikel und Sets; mit ALPSFREESHIP kombinierbar.",
+    "20% en productos, máximo 100.000₫, desde 1.000.000₫. Artículos y combos; acumulable con ALPSFREESHIP.",
+    "商品满1,000,000₫享八折，最高减100,000₫。适用于单品和套装，可叠加 ALPSFREESHIP。"
+  ],
+  "Hỗ trợ phí ship thực tế tối đa 30.000đ, đơn từ 499.000đ tiền hàng trước giảm giá. Cộng được một mã giảm tiền hàng; không quy đổi phần dư thành tiền.": [
+    "Save up to 30,000₫ on actual shipping, merchandise from 499,000₫ before vouchers. Combine with one merchandise code; unused allowance has no cash value.",
+    "Bis zu 30.000₫ tatsächliche Versandkosten, Warenwert ab 499.000₫ vor Gutscheinen. Mit einem Warenrabatt kombinierbar; kein Restguthaben.",
+    "Hasta 30.000₫ del envío real, productos desde 499.000₫ antes de cupones. Acumulable con un cupón de productos; saldo sin valor en efectivo.",
+    "用券前商品满499,000₫，实际运费最高减30,000₫。可叠加一张商品券，剩余额度不折现。"
+  ],
+  "CỘNG ĐƯỢC MÃ GIẢM GIÁ": [
+    "STACK WITH A DISCOUNT CODE",
+    "MIT RABATTCODE KOMBINIERBAR",
+    "ACUMULABLE CON UN CUPÓN",
+    "可叠加商品优惠券"
+  ],
+  "Thành viên đã đăng nhập giảm 10% trên giá gốc của sản phẩm chưa giảm giá. Cộng được ALPSFREESHIP; không cộng mã giảm tiền hàng khác.": [
+    "Signed-in members save 10% of original prices on unmarked-down items. Combine with ALPSFREESHIP only.",
+    "Angemeldete Mitglieder sparen 10% vom Originalpreis nicht reduzierter Artikel. Nur mit ALPSFREESHIP kombinierbar.",
+    "Miembros: 10% del precio original en artículos sin rebaja. Solo acumulable con ALPSFREESHIP.",
+    "登录会员可享未降价商品原价九折。仅可叠加 ALPSFREESHIP，不可与其他商品券叠加。"
+  ],
+  "Ưu đãi ALPS giảm 20% có giới hạn với ALPS25K, ALPS75K, ALPS100K. Nhấn để xem điều kiện voucher.": [
+    "ALPS capped 20% offers with ALPS25K, ALPS75K and ALPS100K. View voucher terms.",
+    "Begrenzte 20%-Rabatte mit ALPS25K, ALPS75K und ALPS100K. Gutscheinbedingungen ansehen.",
+    "20% con límite con ALPS25K, ALPS75K y ALPS100K. Ver condiciones.",
+    "使用 ALPS25K、ALPS75K、ALPS100K 享限额八折优惠。点击查看条件。"
+  ],
+  "Kết hợp serum dưỡng sáng và kem dưỡng khóa ẩm trong set quà dành tặng nàng. Áp mã ALPS75K còn 765.000₫, kèm hộp quà ALPS, 1 miếng mặt nạ và 1 toner 10 ml miễn phí.": [
+    "Brightening serum and moisturizing cream gift set. Pay 765,000₫ with ALPS75K, including an ALPS gift box, one mask and one free 10 ml toner.",
+    "Geschenkset mit Serum und Feuchtigkeitscreme. Mit ALPS75K für 765.000₫, inklusive ALPS-Geschenkbox, einer Maske und einem kostenlosen 10-ml-Toner.",
+    "Set de sérum y crema hidratante. Con ALPS75K queda en 765.000₫ e incluye caja ALPS, una mascarilla y un tónico de 10 ml gratis.",
+    "亮肤精华与保湿面霜礼盒。使用 ALPS75K 后为765,000₫，赠ALPS礼盒、一片面膜和一瓶10毫升爽肤水。"
   ]
 }

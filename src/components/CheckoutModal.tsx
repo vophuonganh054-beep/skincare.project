@@ -1,5 +1,5 @@
 import { useCopy } from '../i18n/useCopy';
-import { getPromotionDiscount, PROMOTIONS, PROMOTION_CODES } from '../data/promotions';
+import { getPromotionDiscount, mergePromotionCodes, splitPromotionCodes, PROMOTIONS, PROMOTION_CODES } from '../data/promotions';
 import { currentCartProduct } from '../data/cartProducts';
 import { auth } from '../firebase';
 import React, { useState, useEffect, useMemo } from 'react';
@@ -166,12 +166,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [paymentToken] = useState(() => Array.from(crypto.getRandomValues(new Uint8Array(32)), b => b.toString(16).padStart(2, '0')).join(''));
 
   const handleApplyPromo = (directCode?: string) => {
-    const code = (directCode || promoCode).trim().toUpperCase();
+    const code = mergePromotionCodes(appliedPromoCode, directCode || promoCode);
     const next = getPromotionDiscount(code, promotionItems, isMember, shippingFee);
     if (next.error || !next.code) {
       setPromoError(next.error || 'Vui lòng nhập mã ưu đãi.');
-      setAppliedPromoCode('');
-      setPromoApplied(false);
       return;
     }
     setAppliedPromoCode(next.code);
@@ -828,13 +826,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                   <div className="mt-2 flex flex-wrap gap-1.5">
                     {PROMOTION_CODES.map(code => <button key={code} type="button" onClick={() => handleApplyPromo(code)}
                       title={copy(PROMOTIONS[code].label)}
-                      className={`text-[10px] px-2 py-1 rounded-full border cursor-pointer ${effectivePromoCode === code ? 'bg-[#74584d] text-white border-[#74584d]' : 'bg-[#f6f3ee] text-[#74584d] border-[#e2d7c9]'}`}>{code}</button>)}
+                      className={`text-[10px] px-2 py-1 rounded-full border cursor-pointer ${splitPromotionCodes(effectivePromoCode).includes(code) ? 'bg-[#74584d] text-white border-[#74584d]' : 'bg-[#f6f3ee] text-[#74584d] border-[#e2d7c9]'}`}>{code}</button>)}
                   </div>
-                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Mỗi đơn dùng một mã. Không cộng dồn. Mã thành viên yêu cầu đăng nhập.")}</p>
+                  <button type="button" className="text-xs underline mt-2" onClick={() => { setAppliedPromoCode(''); setPromoCode(''); setPromoApplied(false); setPromoError(''); }}>{copy("Bỏ mã ưu đãi")}</button>
+                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Chọn một mã giảm tiền hàng; có thể cộng thêm ALPSFREESHIP. Điều kiện đơn tối thiểu tính trước giảm giá, chưa gồm phí ship.")}</p>
                   {(promoError || promotion.error) && <p role="alert" className="text-xs text-[#ba1a1a] mt-2">{copy(promoError || promotion.error)}</p>}
                   {promoApplied && !promotion.error && (
                     <span className="text-[10px] text-[#2d4a36] font-medium block mt-1.5 flex items-center space-x-1">
-                      <span>{copy("✓ Đã áp dụng ")}{effectivePromoCode} · {copy(promotion.scope === 'shipping' ? 'Hỗ trợ phí ship' : 'Giảm tiền hàng')}: -{(discountAmount + shippingDiscountAmount).toLocaleString('vi-VN')}₫</span>
+                      <span>{copy("✓ Đã áp dụng ")}{effectivePromoCode} · {copy('Tổng ưu đãi')}: -{(discountAmount + shippingDiscountAmount).toLocaleString('vi-VN')}₫</span>
                     </span>
                   )}
                 </div>

@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
     vi: {
       openSupportBtn: 'MỞ TRUNG TÂM CSKH',
       newsletterTitle: 'ĐẶC QUYỀN THÀNH VIÊN',
-      newsletterDesc: 'Thành viên đăng nhập dùng mã ALPS2025 giảm 10%. Mỗi đơn dùng một mã, không cộng dồn.',
+      newsletterDesc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       emailPlaceholder: 'Email của bạn...',
       subscribeBtn: 'Đăng ký',
       workingHours: 'Phục vụ từ 8:00 đến 22:00 hàng ngày (kể cả Lễ, Tết).',
@@ -41,7 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
     en: {
       openSupportBtn: 'OPEN SUPPORT CENTER',
       newsletterTitle: 'MEMBER PRIVILEGES',
-      newsletterDesc: 'Signed-in members get 10% off with ALPS2025. One code per order; offers cannot be combined.',
+      newsletterDesc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       emailPlaceholder: 'Your email address...',
       subscribeBtn: 'Subscribe',
       workingHours: 'Available 8:00 - 22:00 daily (including holidays).',
@@ -56,7 +56,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
     de: {
       openSupportBtn: 'KUNDENZENTRUM ÖFFNEN',
       newsletterTitle: 'MITGLIEDERVORTEILE',
-      newsletterDesc: 'Angemeldete Mitglieder erhalten 10% Rabatt mit ALPS2025. Ein Code pro Bestellung, nicht kombinierbar.',
+      newsletterDesc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       emailPlaceholder: 'Ihre E-Mail-Adresse...',
       subscribeBtn: 'Abonnieren',
       workingHours: 'Täglich von 8:00 bis 22:00 Uhr erreichbar.',
@@ -71,7 +71,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
     es: {
       openSupportBtn: 'ABRIR CENTRO DE ATENCIÓN',
       newsletterTitle: 'PRIVILEGIOS EXCLUSIVOS',
-      newsletterDesc: 'Miembros con sesión iniciada: 10% con ALPS2025. Un código por pedido, sin acumular descuentos.',
+      newsletterDesc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       emailPlaceholder: 'Tu correo electrónico...',
       subscribeBtn: 'Suscribirse',
       workingHours: 'Atención diaria de 8:00 a 22:00 h.',
@@ -86,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
     zh: {
       openSupportBtn: '打开专属客户中心',
       newsletterTitle: '尊享会员特权',
-      newsletterDesc: '登录会员使用 ALPS2025 享九折。每单限用一个优惠码，不可叠加。',
+      newsletterDesc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       emailPlaceholder: '输入您的电子邮箱...',
       subscribeBtn: '订阅',
       workingHours: '每日 8:00 至 22:00 全年无休服务。',
@@ -101,7 +101,7 @@ export const Footer: React.FC<FooterProps> = ({ isMobileFrame = false, onOpenSup
   }[language] || {
     openSupportBtn: 'OPEN SUPPORT CENTER',
     newsletterTitle: 'MEMBER PRIVILEGES',
-    newsletterDesc: 'Signed-in members get 10% off with ALPS2025. One code per order; offers cannot be combined.',
+    newsletterDesc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
     emailPlaceholder: 'Your email address...',
     subscribeBtn: 'Subscribe',
     workingHours: 'Available 8:00 - 22:00 daily (including holidays).',

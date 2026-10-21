@@ -136,5 +136,11 @@
     "Als Mitglied anmelden, um {0} zu nutzen.",
     "Inicia sesión como miembro para usar {0}.",
     "请登录会员账户后使用 {0}。"
+  ],
+  "{0} áp dụng cho đơn từ {1}đ tiền hàng, chưa gồm phí ship.": [
+    "{0} requires {1}₫ in merchandise, excluding shipping.",
+    "{0} gilt ab {1}₫ Warenwert, ohne Versand.",
+    "{0} requiere {1}₫ en productos, sin envío.",
+    "{0} 要求商品金额满 {1}₫，不含运费。"
   ]
 }

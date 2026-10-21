@@ -29,55 +29,15 @@ export interface PromoVoucher {
 export const CAMPAIGN_2010_DATA = {
   themeTitle: 'CHIẾN DỊCH TRI ÂN 20/10 • TÔN VINH VẺ ĐẸP PHỤ NỮ VIỆT NAM',
   subHeading: 'Dành tặng người phụ nữ bạn yêu thương vẻ rạng ngời thuần khiết từ đỉnh tuyết Alps, Thụy Sĩ.',
-  bannerNote: '6 mã ưu đãi ALPS • Giảm tiền hàng hoặc hỗ trợ phí ship • Mỗi đơn dùng một mã',
+  bannerNote: '3 mã giảm 20% có giới hạn • Cộng thêm ALPSFREESHIP • Đặc quyền ALPSMEMBER',
   eventDate: 'Áp dụng từ 10/10 đến hết ngày 22/10/2026',
   
   vouchers: [
-    {
-      code: 'PHUNU20',
-      discountPercent: 20,
-      title: 'Mừng Ngày Phụ Nữ 20/10',
-      description: 'Giảm 20% sản phẩm bán lẻ; không áp dụng combo và không cộng dồn mã khác',
-      minOrder: 0,
-      badge: 'HOT NHẤT 20/10',
-      expiry: 'Hết hạn 22/10',
-    },
-    {
-      code: 'ALPS2010',
-      discountPercent: 15,
-      title: 'Ưu Đãi Combo Quà Tặng',
-      description: 'Giảm 15% sản phẩm combo; không áp dụng hàng lẻ và không cộng dồn mã khác',
-      minOrder: 0,
-      badge: 'GIẢM 15%',
-      expiry: 'Hết hạn 22/10',
-    },
-    {
-      code: 'ALPS2025',
-      discountPercent: 10,
-      title: 'Hội Viên Thân Thiết',
-      description: 'Giảm 10% cho tài khoản thành viên đã đăng nhập; không cộng dồn mã khác',
-      minOrder: 0,
-      badge: 'DÀNH CHO THÀNH VIÊN',
-      expiry: 'Áp dụng quanh năm',
-    },
-    {
-      code: 'ALPSCOMBO', discountPercent: 5,
-      title: 'Giảm thêm cho combo',
-      description: 'Giảm 5% trên giá combo đang bán, tối đa 50.000đ mỗi đơn. Chỉ áp dụng combo; không cộng dồn mã khác.',
-      minOrder: 0, badge: 'TỐI ĐA 50.000đ', expiry: 'Ưu đãi hiện hành',
-    },
-    {
-      code: 'ALPSFREESHIP', discountPercent: 0, discountFixed: 30000,
-      title: 'Hỗ trợ phí vận chuyển',
-      description: 'Hỗ trợ phí ship thực tế tối đa 30.000đ, đơn từ 499.000đ tiền hàng. Không quy đổi phần dư thành tiền; không cộng dồn mã khác.',
-      minOrder: 499000, badge: 'SHIP ĐẾN 30.000đ', expiry: 'Ưu đãi hiện hành',
-    },
-    {
-      code: 'ALPSMEMBER', discountPercent: 10,
-      title: 'Đặc quyền sản phẩm nguyên giá',
-      description: 'Thành viên đã đăng nhập giảm 10% trên giá gốc của sản phẩm chưa giảm giá. Không áp dụng món đang giảm giá; không cộng dồn mã khác.',
-      minOrder: 0, badge: 'CHỈ HÀNG NGUYÊN GIÁ', expiry: 'Ưu đãi hiện hành',
-    },
+    {code: 'ALPS25K', discountPercent: 20, title: 'Giảm tối đa 25.000đ', description: 'Giảm 20% tiền hàng, tối đa 25.000đ, đơn từ 200.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.', minOrder: 200000, badge: 'ĐƠN TỪ 200.000đ', expiry: 'Ưu đãi hiện hành'},
+    {code: 'ALPS75K', discountPercent: 20, title: 'Giảm tối đa 75.000đ', description: 'Giảm 20% tiền hàng, tối đa 75.000đ, đơn từ 800.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.', minOrder: 800000, badge: 'ĐƠN TỪ 800.000đ', expiry: 'Ưu đãi hiện hành'},
+    {code: 'ALPS100K', discountPercent: 20, title: 'Giảm tối đa 100.000đ', description: 'Giảm 20% tiền hàng, tối đa 100.000đ, đơn từ 1.000.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.', minOrder: 1000000, badge: 'ĐƠN TỪ 1.000.000đ', expiry: 'Ưu đãi hiện hành'},
+    {code: 'ALPSFREESHIP', discountPercent: 0, discountFixed: 30000, title: 'Hỗ trợ phí vận chuyển', description: 'Hỗ trợ phí ship thực tế tối đa 30.000đ, đơn từ 499.000đ tiền hàng trước giảm giá. Cộng được một mã giảm tiền hàng; không quy đổi phần dư thành tiền.', minOrder: 499000, badge: 'CỘNG ĐƯỢC MÃ GIẢM GIÁ', expiry: 'Ưu đãi hiện hành'},
+    {code: 'ALPSMEMBER', discountPercent: 10, title: 'Đặc quyền sản phẩm nguyên giá', description: 'Thành viên đã đăng nhập giảm 10% trên giá gốc của sản phẩm chưa giảm giá. Cộng được ALPSFREESHIP; không cộng mã giảm tiền hàng khác.', minOrder: 0, badge: 'CHỈ HÀNG NGUYÊN GIÁ', expiry: 'Ưu đãi hiện hành'},
   ] as PromoVoucher[],
 
   combos: [
@@ -90,7 +50,7 @@ export const CAMPAIGN_2010_DATA = {
       salePrice: 840000,
       savings: 0,
       image: '',
-      description: 'Kết hợp serum dưỡng sáng và kem dưỡng khóa ẩm trong set quà dành tặng nàng. Áp mã ALPS2010 còn 714.000₫, kèm hộp quà ALPS, 1 miếng mặt nạ và 1 toner 10 ml miễn phí.',
+      description: 'Kết hợp serum dưỡng sáng và kem dưỡng khóa ẩm trong set quà dành tặng nàng. Áp mã ALPS75K còn 765.000₫, kèm hộp quà ALPS, 1 miếng mặt nạ và 1 toner 10 ml miễn phí.',
       includes: [
         'Alps Radiance Glow Serum (30ml) - Trị giá 390.000₫',
         'Alps Regenerating Face Cream (50g) - Trị giá 450.000₫',

@@ -236,7 +236,7 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                     {product.promoCode && <span className="block w-full text-[10px] text-[#74584d] font-medium mt-1">{copy("Sau mã ")}{copy(product.promoCode)}</span>}
                   </div>
                   <p className="text-xs text-[#74584d] font-medium mt-1.5">
-                    {copy("Giá ưu đãi sau mã PHUNU20 • Phí vận chuyển tính tại thanh toán")}</p>
+                    {copy("Giá sau mã ALPS25K cho một sản phẩm • Giảm tối đa 25.000đ mỗi đơn • Ship tính tại thanh toán")}</p>
                 </div>
                 {discountPercent > 0 && (
                   <div className="text-right">

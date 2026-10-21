@@ -104,18 +104,23 @@ test('member code requires verified identity; category rules and gifts are enfor
   const server = app.listen(0, '127.0.0.1');
   await new Promise<void>(resolve => server.once('listening', resolve));
   const url = 'http://127.0.0.1:' + (server.address() as any).port + '/api/sepay/initiate';
-  const body = {orderNumber: 'ALPSAAAAAAAAAAAAAAAAAAAAAAAA', items: [{productId: 'combo-serum-kem-duong', quantity: 1}], carrierId: 'ghtk', promoCode: 'ALPS2025', amount: 756000, isMember: true};
+  const body = {orderNumber: 'ALPSAAAAAAAAAAAAAAAAAAAAAAAA', items: [{productId: 'combo-serum-kem-duong', quantity: 1}], carrierId: 'ghtk', promoCode: 'ALPSMEMBER', amount: 756000, isMember: true};
   const post = (data: any, token = '') => fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json', 'X-Payment-Token': 'a'.repeat(64), ...(token ? {Authorization: 'Bearer ' + token} : {})}, body: JSON.stringify(data)});
   try {
     for (const token of ['', 'fake', 'anonymous']) assert.equal((await post(body, token)).status, 401);
     assert.equal(storage.records.size, 0);
     assert.equal((await post({...body, promoCode: 'PHUNU20', amount: 672000})).status, 400);
     assert.equal((await post({...body, promoCode: 'COMBO20', amount: 714000})).status, 400);
-    const memberOnly = {...body, orderNumber: 'ALPSBBBBBBBBBBBBBBBBBBBBBBBB', promoCode: 'ALPSMEMBER'};
+    const memberOnly = {...body, orderNumber: 'ALPSBBBBBBBBBBBBBBBBBBBBBBBB', carrierId: 'express', promoCode: 'ALPSMEMBER + ALPSFREESHIP', amount: 771000};
     for (const token of ['', 'fake', 'anonymous']) assert.equal((await post(memberOnly, token)).status, 401);
     assert.equal((await post(memberOnly, 'valid-member')).status, 200);
     assert.equal(storage.records.get('paymentSessions/' + memberOnly.orderNumber).memberUid, 'member-123');
     assert.equal((await post(body, 'valid-member')).status, 200);
+    const stacked = {...body, orderNumber: 'ALPSCCCCCCCCCCCCCCCCCCCCCCCC', promoCode: 'ALPS75K + ALPSFREESHIP', carrierId: 'express', amount: 780000};
+    assert.equal((await post({...stacked, amount: 1})).status, 409);
+    assert.equal((await post({...stacked, promoCode: 'ALPS25K + ALPS75K + ALPSFREESHIP'})).status, 400);
+    assert.equal((await post(stacked)).status, 200);
+    assert.equal(storage.records.get('paymentSessions/' + stacked.orderNumber).amount, 780000);
     const record = storage.records.get('paymentSessions/' + body.orderNumber);
     assert.equal(record.memberUid, 'member-123');
     assert.equal(record.amount, 756000);

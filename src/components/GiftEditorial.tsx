@@ -12,7 +12,7 @@ export function GiftEditorial() {
         <span className="alps-editorial-label"><span /> {copy(" THE ART OF GIVING • 20/10")}</span>
         <h2 id="gift-editorial-title">{copy("Một chút nâng niu.")}<br /><em>{copy("Một món quà đẹp.")}</em></h2>
         <p>{copy("Gửi trao yêu thương qua những điều nhỏ bé. Khám phá các bộ quà chăm sóc da ALPS dành cho người phụ nữ bạn trân quý.")}</p>
-        <div className="alps-editorial-voucher"><Gift size={18} strokeWidth={1.3} /><span>{copy("Mã ")}<strong>{copy("ALPS2010")}</strong> <span aria-hidden="true">{"·"}</span> {copy(" Giảm ")}<strong>{"15%"}</strong> {copy(" combo")}</span></div>
+        <div className="alps-editorial-voucher"><Gift size={18} strokeWidth={1.3} /><span>{copy("Mã ")}<strong>{copy("ALPS75K")}</strong> <span aria-hidden="true">{"·"}</span> {copy(" Giảm ")}<strong>{"75.000đ"}</strong> {copy(" đơn từ 800.000đ")}</span></div>
         <Link to="/uu-dai-20-10" className="alps-editorial-link">{copy("Khám phá quà cho nàng ")}<span><ArrowUpRight size={19} /></span></Link>
         <span className="alps-gift-footnote">{copy("ALPS PURE ESSENCE / GIFT COLLECTION")}</span>
       </div>

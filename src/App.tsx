@@ -1,3 +1,4 @@
+import { getComboVoucher, mergePromotionCodes } from './data/promotions';
 import { useCopy } from './i18n/useCopy';
 import './components/MobileCatalog.css';
 import { createComboProduct } from './data/cartProducts';
@@ -683,7 +684,7 @@ export default function App() {
 
   const handleAddComboToCart = (combo: CampaignCombo) => {
     const comboProduct = createComboProduct(combo);
-    setActiveVoucherCode('ALPS2010');
+    setActiveVoucherCode(current => mergePromotionCodes(current, getComboVoucher(combo.salePrice)));
     setCart((prev) => {
       const idx = prev.findIndex((item) => item.product.id === comboProduct.id);
       if (idx > -1) {
@@ -699,14 +700,14 @@ export default function App() {
 
   const handleBuyNowCombo = (combo: CampaignCombo) => {
     const comboProduct = createComboProduct(combo);
-    setActiveVoucherCode('ALPS2010');
+    setActiveVoucherCode(current => mergePromotionCodes(current, getComboVoucher(combo.salePrice)));
     setCheckoutItems([{ product: comboProduct, quantity: 1 }]);
     setIsCheckoutOpen(true);
     showToast(`🌸 Đang mở thanh toán 20/10 cho "${combo.name}"`);
   };
 
   const handleApplyVoucherToCart = (code: string) => {
-    setActiveVoucherCode(code);
+    setActiveVoucherCode(current => mergePromotionCodes(current, code));
     showToast(`🌸 Đã lưu mã ưu đãi ${code}! Giảm giá áp dụng ngay khi đặt hàng.`);
   };
 

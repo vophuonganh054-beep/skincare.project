@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { applicationDefault, cert, getApps, initializeApp } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { getAuth } from 'firebase-admin/auth';
-import { MEMBER_PROMOTION_CODES } from '../src/data/promotions.ts';
+import { MEMBER_PROMOTION_CODES, splitPromotionCodes } from '../src/data/promotions.ts';
 import { equalSecret, extractOrder, quote, validateTransaction } from './payment-core.ts';
 import firebaseConfig from '../firebase-applet-config.json' with { type: 'json' };
 
@@ -37,7 +37,7 @@ export function registerPayments(app: Express, databaseOverride?: ReturnType<typ
       const token = access(req);
       if (!validId(orderNumber) || !/^[a-f0-9]{64}$/.test(token)) return res.status(400).json({error: 'Phiên thanh toán không hợp lệ'});
       let memberUid: string | undefined;
-      if (MEMBER_PROMOTION_CODES.some(code => code === String(req.body.promoCode || '').trim().toUpperCase())) {
+      if (MEMBER_PROMOTION_CODES.some(code => splitPromotionCodes(req.body.promoCode).includes(code))) {
         const idToken = /^Bearer (.+)$/.exec(req.get('Authorization') || '')?.[1];
         if (!idToken) return res.status(401).json({error: 'Vui lòng đăng nhập thành viên để dùng mã ưu đãi thành viên.'});
         try {

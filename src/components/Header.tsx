@@ -64,8 +64,8 @@ export const Header: React.FC<HeaderProps> = ({
       notifTitle: 'Thông báo thương hiệu',
       notif1Title: '✦ Ra mắt BST Pure Radiance 2026',
       notif1Desc: 'Tặng kèm thìa bạc cao cấp cho mọi đơn hàng có Alps Regenerating Cream.',
-      notif2Title: 'Ưu đãi mã ALPS2025',
-      notif2Desc: 'Thành viên đăng nhập dùng ALPS2025 giảm 10%. Không cộng dồn mã khác.',
+      notif2Title: 'Ưu đãi mã ALPSMEMBER',
+      notif2Desc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       accountLogin: 'Đăng nhập / Đăng ký',
       cartTitle: 'Giỏ hàng của bạn',
     },
@@ -82,8 +82,8 @@ export const Header: React.FC<HeaderProps> = ({
       notifTitle: 'Brand Notifications',
       notif1Title: '✦ Launching Pure Radiance 2026',
       notif1Desc: 'Complimentary luxury silver applicator spoon with every Alps Cream order.',
-      notif2Title: 'Privilege Code ALPS2025',
-      notif2Desc: 'Signed-in members save 10% with ALPS2025. Cannot be combined.',
+      notif2Title: 'Privilege Code ALPSMEMBER',
+      notif2Desc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       accountLogin: 'Sign In / Register',
       cartTitle: 'Your Shopping Bag',
     },
@@ -100,8 +100,8 @@ export const Header: React.FC<HeaderProps> = ({
       notifTitle: 'Marken-Mitteilungen',
       notif1Title: '✦ Kollektion Pure Radiance 2026',
       notif1Desc: 'Inklusive Schweizer Silber-Spatel bei jeder Gesichtscreme-Bestellung.',
-      notif2Title: 'Gutscheincode ALPS2025',
-      notif2Desc: 'Angemeldete Mitglieder sparen 10% mit ALPS2025. Nicht kombinierbar.',
+      notif2Title: 'Gutscheincode ALPSMEMBER',
+      notif2Desc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       accountLogin: 'Anmelden / Registrieren',
       cartTitle: 'Ihr Warenkorb',
     },
@@ -118,8 +118,8 @@ export const Header: React.FC<HeaderProps> = ({
       notifTitle: 'Avisos de la Marca',
       notif1Title: '✦ Colección Pure Radiance 2026',
       notif1Desc: 'Espátula de plata suiza de regalo con cada Alps Face Cream.',
-      notif2Title: 'Código ALPS2025',
-      notif2Desc: 'Miembros con sesión iniciada: 10% con ALPS2025. No acumulable.',
+      notif2Title: 'Código ALPSMEMBER',
+      notif2Desc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       accountLogin: 'Iniciar Sesión / Registro',
       cartTitle: 'Tu Bolsa de Compras',
     },
@@ -136,8 +136,8 @@ export const Header: React.FC<HeaderProps> = ({
       notifTitle: '品牌最新资讯',
       notif1Title: '✦ 2026 纯净焕彩新系列发布',
       notif1Desc: '随单赠送瑞士定制奢华银质面霜勺。',
-      notif2Title: '尊享礼券 ALPS2025',
-      notif2Desc: '已登录会员使用 ALPS2025 减 10%，不可叠加。',
+      notif2Title: '尊享礼券 ALPSMEMBER',
+      notif2Desc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
       accountLogin: '登录 / 注册会员',
       cartTitle: '您的专属购物袋',
     },
@@ -154,8 +154,8 @@ export const Header: React.FC<HeaderProps> = ({
     notifTitle: 'Brand Notifications',
     notif1Title: '✦ Launching Pure Radiance 2026',
     notif1Desc: 'Complimentary luxury silver applicator spoon with every Alps Cream order.',
-    notif2Title: 'Privilege Code ALPS2025',
-    notif2Desc: 'Signed-in members save 10% with ALPS2025. Cannot be combined.',
+    notif2Title: 'Privilege Code ALPSMEMBER',
+    notif2Desc: 'Thành viên đăng nhập dùng ALPSMEMBER giảm 10% giá gốc cho sản phẩm chưa giảm giá; cộng được ALPSFREESHIP.',
     accountLogin: 'Sign In / Register',
     cartTitle: 'Your Shopping Bag',
   };
@@ -447,7 +447,7 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="font-bold text-amber-200 uppercase tracking-wider text-[8.5px] sm:text-[10px] bg-black/25 px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
             {copy("20/10 TRI ÂN")}</span>
           <span className="truncate text-white/95 text-[10px] sm:text-xs">
-            {copy("Nhập mã ")}<strong className="text-amber-200 underline font-bold">{copy("PHUNU20")}</strong> {copy(" giảm 20% hàng lẻ • ALPS2010 giảm 15% combo")}</span>
+            {copy("Nhập mã ")}<strong className="text-amber-200 underline font-bold">{copy("ALPS25K")}</strong> {copy(" giảm 20%, tối đa 25.000đ • Đơn từ 200.000đ • Cộng được ALPSFREESHIP")}</span>
           <span className="text-amber-200 underline underline-offset-2 ml-1 hidden md:inline shrink-0 font-bold">
             {copy("Voucher & 3 Combo →")}</span>
         </button>

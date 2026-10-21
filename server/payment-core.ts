@@ -28,7 +28,7 @@ export function quote(body: any, context: { isMember?: boolean } = {}) {
   }));
   const promotion = getPromotionDiscount(code, promotionItems, context.isMember, shippingFee);
   if (promotion.error) throw new Error(promotion.error);
-  return { items, carrierId: body.carrierId, promoCode: code, amount: subtotal - promotion.discountAmount + shippingFee - promotion.shippingDiscountAmount };
+  return { items, carrierId: body.carrierId, promoCode: promotion.code, amount: subtotal - promotion.discountAmount + shippingFee - promotion.shippingDiscountAmount };
 }
 export function equalSecret(a: string, b: string) {
   const x = Buffer.from(a), y = Buffer.from(b);
