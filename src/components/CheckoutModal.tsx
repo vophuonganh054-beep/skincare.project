@@ -1,5 +1,5 @@
 import { useCopy } from '../i18n/useCopy';
-import { getPromotionDiscount } from '../data/promotions';
+import { getPromotionDiscount, PROMOTIONS, PROMOTION_CODES } from '../data/promotions';
 import { currentCartProduct } from '../data/cartProducts';
 import { auth } from '../firebase';
 import React, { useState, useEffect, useMemo } from 'react';
@@ -167,8 +167,8 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   const handleApplyPromo = (directCode?: string) => {
     const code = (directCode || promoCode).trim().toUpperCase();
-    const next = getPromotionDiscount(code, promotionItems, isMember);
-    if (next.error || !next.percent) {
+    const next = getPromotionDiscount(code, promotionItems, isMember, shippingFee);
+    if (next.error || !next.code) {
       setPromoError(next.error || 'Vui lòng nhập mã ưu đãi.');
       setAppliedPromoCode('');
       setPromoApplied(false);
@@ -178,7 +178,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
     setPromoCode(next.code);
     setPromoApplied(true);
     setPromoError('');
-    onShowToast?.(`Đã áp dụng ${next.code}: giảm ${next.percent}% phần hàng phù hợp.`);
+    onShowToast?.(`${copy('✓ Đã áp dụng ')}${next.code} · -${(next.discountAmount + next.shippingDiscountAmount).toLocaleString('vi-VN')}₫`);
   };
 
   useEffect(() => {
@@ -205,13 +205,13 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const isFreeShipping = selectedCarrier?.freeThreshold ? subtotal >= selectedCarrier.freeThreshold : false;
   const shippingFee = isFreeShipping ? 0 : (selectedCarrier?.price ?? 30000);
 
-  const promotionItems = safeItems.map(item => ({productId: item.product.id, unitPrice: item.product.price, quantity: item.quantity}));
+  const promotionItems = safeItems.map(item => ({productId: item.product.id, unitPrice: item.product.price, originalUnitPrice: item.product.originalPrice ?? item.product.price, quantity: item.quantity}));
   const isMember = Boolean(auth.currentUser && !auth.currentUser.isAnonymous);
-  const promotion = getPromotionDiscount(promoApplied ? appliedPromoCode : '', promotionItems, isMember);
-  const discountPercent = promotion.percent;
+  const promotion = getPromotionDiscount(promoApplied ? appliedPromoCode : '', promotionItems, isMember, shippingFee);
+  const shippingDiscountAmount = promotion.shippingDiscountAmount;
   const discountAmount = promotion.discountAmount;
   const effectivePromoCode = promotion.error ? '' : promotion.code;
-  const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee);
+  const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee - shippingDiscountAmount);
 
   const basketKey = JSON.stringify([safeItems.map(it => [it.product.id, it.quantity]), selectedCarrierId, effectivePromoCode, totalAmount, isOpen]);
   const orderNumber = useMemo(() => 'ALPS' + Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2, '0')).join('').toUpperCase(), [basketKey]);
@@ -319,7 +319,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           : 'Thanh toán khi nhận hàng (COD)',
       paymentMethodType: paymentMethod,
       shippingCarrier: selectedCarrier.fullName,
-      shippingFee: shippingFee,
+      shippingFee: shippingFee - shippingDiscountAmount,
       discountAmount: discountAmount,
       note: note.trim() || undefined,
     };
@@ -813,7 +813,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       type="text"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      placeholder={copy(language === 'vi' ? 'Nhập PHUNU20, ALPS2010 hoặc ALPS2025' : 'PHUNU20, ALPS2010 or ALPS2025')}
+                      placeholder={copy("Chọn hoặc nhập mã ưu đãi ALPS")}
                       className="flex-grow px-3 py-2 bg-[#fcf9f4] border border-[#ebe8e3] rounded-xl text-xs uppercase tracking-wider focus:outline-none focus:border-[#74584d]"
                     />
                     <button
@@ -825,39 +825,16 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     </button>
                   </div>
 
-                  {/* 20/10 Quick Voucher Suggestions */}
-                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                    <span className="text-[10px] text-[#74584d] font-semibold flex items-center space-x-1">
-                      <span>{copy("🌸 Mã 20/10:")}</span>
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleApplyPromo('PHUNU20')}
-                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
-                        effectivePromoCode === 'PHUNU20'
-                          ? 'bg-[#74584d] text-white border-[#74584d]'
-                          : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
-                      }`}
-                    >
-                      {copy("PHUNU20 · Hàng lẻ -20%")}</button>
-                    <button
-                      type="button"
-                      onClick={() => handleApplyPromo('ALPS2010')}
-                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
-                        effectivePromoCode === 'ALPS2010'
-                          ? 'bg-[#74584d] text-white border-[#74584d]'
-                          : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
-                      }`}
-                    >
-                      {copy("ALPS2010 · Combo -15%")}</button>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {PROMOTION_CODES.map(code => <button key={code} type="button" onClick={() => handleApplyPromo(code)}
+                      title={copy(PROMOTIONS[code].label)}
+                      className={`text-[10px] px-2 py-1 rounded-full border cursor-pointer ${effectivePromoCode === code ? 'bg-[#74584d] text-white border-[#74584d]' : 'bg-[#f6f3ee] text-[#74584d] border-[#e2d7c9]'}`}>{code}</button>)}
                   </div>
-
-                  <button type="button" onClick={() => handleApplyPromo('ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">{copy("ALPS2025 · Thành viên -10%")}</button>
                   <p className="text-[10px] text-[#77767b] mt-2">{copy("Mỗi đơn dùng một mã. Không cộng dồn. Mã thành viên yêu cầu đăng nhập.")}</p>
                   {(promoError || promotion.error) && <p role="alert" className="text-xs text-[#ba1a1a] mt-2">{copy(promoError || promotion.error)}</p>}
                   {promoApplied && !promotion.error && (
                     <span className="text-[10px] text-[#2d4a36] font-medium block mt-1.5 flex items-center space-x-1">
-                      <span>{copy("✓ Đã áp dụng ")}{copy(effectivePromoCode)}{copy(": giảm ")}{discountPercent}{copy("% phần hàng phù hợp!")}</span>
+                      <span>{copy("✓ Đã áp dụng ")}{effectivePromoCode} · {copy(promotion.scope === 'shipping' ? 'Hỗ trợ phí ship' : 'Giảm tiền hàng')}: -{(discountAmount + shippingDiscountAmount).toLocaleString('vi-VN')}₫</span>
                     </span>
                   )}
                 </div>
@@ -882,6 +859,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     </span>
                   </div>
 
+                  {shippingDiscountAmount > 0 && <div className="flex justify-between text-[#8a9a86]"><span>{copy('Hỗ trợ phí ship')}</span><span>-{shippingDiscountAmount.toLocaleString('vi-VN')}₫</span></div>}
                   {discountAmount > 0 && (
                     <div className="flex justify-between text-[#8a9a86] font-medium">
                       <span>{copy(cData.discountLabel)}{":"}</span>

@@ -29,7 +29,7 @@ export interface PromoVoucher {
 export const CAMPAIGN_2010_DATA = {
   themeTitle: 'CHIẾN DỊCH TRI ÂN 20/10 • TÔN VINH VẺ ĐẸP PHỤ NỮ VIỆT NAM',
   subHeading: 'Dành tặng người phụ nữ bạn yêu thương vẻ rạng ngời thuần khiết từ đỉnh tuyết Alps, Thụy Sĩ.',
-  bannerNote: 'Hàng lẻ giảm 20% với PHUNU20 • Combo giảm 15% với ALPS2010 • Thành viên giảm 10% với ALPS2025 • Mỗi đơn dùng một mã',
+  bannerNote: '6 mã ưu đãi ALPS • Giảm tiền hàng hoặc hỗ trợ phí ship • Mỗi đơn dùng một mã',
   eventDate: 'Áp dụng từ 10/10 đến hết ngày 22/10/2026',
   
   vouchers: [
@@ -59,6 +59,24 @@ export const CAMPAIGN_2010_DATA = {
       minOrder: 0,
       badge: 'DÀNH CHO THÀNH VIÊN',
       expiry: 'Áp dụng quanh năm',
+    },
+    {
+      code: 'ALPSCOMBO', discountPercent: 5,
+      title: 'Giảm thêm cho combo',
+      description: 'Giảm 5% trên giá combo đang bán, tối đa 50.000đ mỗi đơn. Chỉ áp dụng combo; không cộng dồn mã khác.',
+      minOrder: 0, badge: 'TỐI ĐA 50.000đ', expiry: 'Ưu đãi hiện hành',
+    },
+    {
+      code: 'ALPSFREESHIP', discountPercent: 0, discountFixed: 30000,
+      title: 'Hỗ trợ phí vận chuyển',
+      description: 'Hỗ trợ phí ship thực tế tối đa 30.000đ, đơn từ 499.000đ tiền hàng. Không quy đổi phần dư thành tiền; không cộng dồn mã khác.',
+      minOrder: 499000, badge: 'SHIP ĐẾN 30.000đ', expiry: 'Ưu đãi hiện hành',
+    },
+    {
+      code: 'ALPSMEMBER', discountPercent: 10,
+      title: 'Đặc quyền sản phẩm nguyên giá',
+      description: 'Thành viên đã đăng nhập giảm 10% trên giá gốc của sản phẩm chưa giảm giá. Không áp dụng món đang giảm giá; không cộng dồn mã khác.',
+      minOrder: 0, badge: 'CHỈ HÀNG NGUYÊN GIÁ', expiry: 'Ưu đãi hiện hành',
     },
   ] as PromoVoucher[],
 

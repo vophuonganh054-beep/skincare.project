@@ -1,5 +1,5 @@
 import { useCopy } from '../i18n/useCopy';
-import { getPromotionDiscount } from '../data/promotions';
+import { getPromotionDiscount, PROMOTIONS, PROMOTION_CODES } from '../data/promotions';
 import { currentCartProduct } from '../data/cartProducts';
 import { auth } from '../firebase';
 import React, { useState } from 'react';
@@ -91,21 +91,21 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
     0
   );
 
-  const promotionItems = safeItems.map(item => ({productId: item.product.id, unitPrice: item.product.price, quantity: item.quantity}));
+  const promotionItems = safeItems.map(item => ({productId: item.product.id, unitPrice: item.product.price, originalUnitPrice: item.product.originalPrice ?? item.product.price, quantity: item.quantity}));
   const isMember = Boolean(auth.currentUser && !auth.currentUser.isAnonymous);
-  const promotion = getPromotionDiscount(appliedVoucher, promotionItems, isMember);
-  const discountPercent = promotion.percent;
-  const discountAmount = promotion.discountAmount;
   const freeShippingThreshold = 500000;
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
   const shippingFee = subtotal === 0 || subtotal >= freeShippingThreshold ? 0 : 15000;
-  const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee);
+  const promotion = getPromotionDiscount(appliedVoucher, promotionItems, isMember, shippingFee);
+  const discountAmount = promotion.discountAmount;
+  const shippingDiscountAmount = promotion.shippingDiscountAmount;
+  const totalAmount = Math.max(0, subtotal - discountAmount + shippingFee - shippingDiscountAmount);
 
   const handleApplyVoucher = (e?: React.FormEvent, directCode?: string) => {
     if (e) e.preventDefault();
     const target = (directCode || voucherCode).trim().toUpperCase();
-    const next = getPromotionDiscount(target, promotionItems, isMember);
-    if (next.error || !next.percent) {
+    const next = getPromotionDiscount(target, promotionItems, isMember, shippingFee);
+    if (next.error || !next.code) {
       setVoucherError(next.error || 'Vui lòng nhập mã ưu đãi.');
       return;
     }
@@ -305,7 +305,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       <Tag className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#77767b]" />
                       <input
                         type="text"
-                        placeholder={copy(cData.voucherPlaceholder)}
+                        placeholder={copy("Chọn hoặc nhập mã ưu đãi ALPS")}
                         value={voucherCode}
                         onChange={(e) => setVoucherCode(e.target.value)}
                         className="w-full pl-8 pr-3 py-1.5 text-xs bg-[#fcf9f4] border border-[#202022]/10 rounded-xl focus:outline-hidden focus:border-[#74584d]"
@@ -318,38 +318,15 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       {copy(cData.voucherApplyBtn)}
                     </button>
                   </form>
-                  {/* 20/10 Quick Voucher Suggestions */}
-                  <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                    <span className="text-[10px] text-[#74584d] font-semibold flex items-center space-x-1">
-                      <span>{copy("🌸 Mã 20/10:")}</span>
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleApplyVoucher(undefined, 'PHUNU20')}
-                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
-                        appliedVoucher === 'PHUNU20'
-                          ? 'bg-[#74584d] text-white border-[#74584d]'
-                          : 'bg-[#fcf5f1] hover:bg-[#fed8c9]/60 text-[#74584d] border-[#fed8c9]'
-                      }`}
-                    >
-                      {copy("PHUNU20 · Hàng lẻ -20%")}</button>
-                    <button
-                      type="button"
-                      onClick={() => handleApplyVoucher(undefined, 'ALPS2010')}
-                      className={`text-[10px] px-2 py-0.5 rounded-full border transition-all cursor-pointer font-medium ${
-                        appliedVoucher === 'ALPS2010'
-                          ? 'bg-[#74584d] text-white border-[#74584d]'
-                          : 'bg-[#f6f3ee] hover:bg-[#ebdccf] text-[#1c1c19] border-[#e2d7c9]'
-                      }`}
-                    >
-                      {copy("ALPS2010 · Combo -15%")}</button>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {PROMOTION_CODES.map(code => <button key={code} type="button" onClick={() => handleApplyVoucher(undefined, code)}
+                      title={copy(PROMOTIONS[code].label)}
+                      className={`text-[10px] px-2 py-1 rounded-full border cursor-pointer ${appliedVoucher === code ? 'bg-[#74584d] text-white border-[#74584d]' : 'bg-[#f6f3ee] text-[#74584d] border-[#e2d7c9]'}`}>{code}</button>)}
                   </div>
-
-                  <button type="button" onClick={() => handleApplyVoucher(undefined, 'ALPS2025')} className="mt-2 text-[10px] text-[#74584d] underline">{copy("ALPS2025 · Thành viên -10%")}</button>
                   <p className="text-[10px] text-[#77767b] mt-2">{copy("Mỗi đơn dùng một mã. Mã hàng lẻ/combo chỉ giảm phần hàng phù hợp; mã thành viên yêu cầu đăng nhập.")}</p>
                   {appliedVoucher && !promotion.error && (
                     <p className="text-[11px] text-[#2d4a36] font-medium mt-2 flex items-center space-x-1">
-                      <span>{copy("✓ Đã áp dụng mã ")}{copy(appliedVoucher)} {" (-"}{discountPercent}{copy("% phần hàng áp dụng)")}</span>
+                      <span>{copy("✓ Đã áp dụng mã ")}{appliedVoucher} · {copy(promotion.scope === 'shipping' ? 'Hỗ trợ phí ship' : 'Giảm tiền hàng')}: -{(discountAmount + shippingDiscountAmount).toLocaleString('vi-VN')}₫</span>
                     </p>
                   )}
                   {(voucherError || promotion.error) && (
@@ -376,6 +353,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                     <span className="font-serif">{"-"}{discountAmount.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}{"₫"}</span>
                   </div>
                 )}
+                {shippingDiscountAmount > 0 && <div className="flex justify-between text-[#2d4a36]"><span>{copy('Hỗ trợ phí ship')}</span><span>-{shippingDiscountAmount.toLocaleString('vi-VN')}₫</span></div>}
                 <div className="flex justify-between text-[#77767b]">
                   <span>{copy(t.cart.shipping)}</span>
                   <span>{copy(shippingFee === 0 ? t.cart.freeShipping : `${shippingFee.toLocaleString(language === 'vi' ? 'vi-VN' : 'en-US')}₫`)}</span>

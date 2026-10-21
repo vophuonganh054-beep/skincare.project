@@ -111,6 +111,10 @@ test('member code requires verified identity; category rules and gifts are enfor
     assert.equal(storage.records.size, 0);
     assert.equal((await post({...body, promoCode: 'PHUNU20', amount: 672000})).status, 400);
     assert.equal((await post({...body, promoCode: 'COMBO20', amount: 714000})).status, 400);
+    const memberOnly = {...body, orderNumber: 'ALPSBBBBBBBBBBBBBBBBBBBBBBBB', promoCode: 'ALPSMEMBER'};
+    for (const token of ['', 'fake', 'anonymous']) assert.equal((await post(memberOnly, token)).status, 401);
+    assert.equal((await post(memberOnly, 'valid-member')).status, 200);
+    assert.equal(storage.records.get('paymentSessions/' + memberOnly.orderNumber).memberUid, 'member-123');
     assert.equal((await post(body, 'valid-member')).status, 200);
     const record = storage.records.get('paymentSessions/' + body.orderNumber);
     assert.equal(record.memberUid, 'member-123');

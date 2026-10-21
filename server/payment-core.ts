@@ -1,5 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import { getPromotionDiscount } from '../src/data/promotions.ts';
+import { PRODUCT_CATALOG } from '../src/data/productCatalog.ts';
 import { CAMPAIGN_2010_DATA } from '../src/data/campaignCatalog.ts';
 
 // Shared by the server and storefront: prices are never accepted from the browser.
@@ -19,11 +20,15 @@ export function quote(body: any, context: { isMember?: boolean } = {}) {
   });
   if (!Object.hasOwn(CARRIERS, body.carrierId)) throw new Error('Đơn vị vận chuyển không hợp lệ');
   const code = String(body.promoCode || '').trim().toUpperCase();
-  const promotion = getPromotionDiscount(code, items, context.isMember);
-  if (promotion.error) throw new Error(promotion.error);
   const subtotal = items.reduce((sum: number, i: any) => sum + i.quantity * i.unitPrice, 0);
   const shippingFee = body.carrierId === 'ghtk' && subtotal >= 500000 ? 0 : CARRIERS[body.carrierId];
-  return { items, carrierId: body.carrierId, promoCode: code, amount: subtotal - promotion.discountAmount + shippingFee };
+  const promotionItems = items.map((item: any) => ({ ...item,
+    originalUnitPrice: CAMPAIGN_2010_DATA.combos.find(c => c.id === item.productId)?.originalPrice
+      ?? PRODUCT_CATALOG.find(p => p.id === item.productId)?.originalPrice ?? item.unitPrice,
+  }));
+  const promotion = getPromotionDiscount(code, promotionItems, context.isMember, shippingFee);
+  if (promotion.error) throw new Error(promotion.error);
+  return { items, carrierId: body.carrierId, promoCode: code, amount: subtotal - promotion.discountAmount + shippingFee - promotion.shippingDiscountAmount };
 }
 export function equalSecret(a: string, b: string) {
   const x = Buffer.from(a), y = Buffer.from(b);

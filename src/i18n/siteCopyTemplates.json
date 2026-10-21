@@ -130,5 +130,11 @@
     "{0} Produkte",
     "{0} productos",
     "{0} 件商品"
+  ],
+  "Vui lòng đăng nhập tài khoản thành viên để dùng mã {0}.": [
+    "Sign in as a member to use {0}.",
+    "Als Mitglied anmelden, um {0} zu nutzen.",
+    "Inicia sesión como miembro para usar {0}.",
+    "请登录会员账户后使用 {0}。"
   ]
 }

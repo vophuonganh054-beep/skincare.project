@@ -112,10 +112,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
 
                     <div className="flex items-baseline space-x-1.5 my-1.5">
                       <span className="font-serif text-2xl font-bold text-[#1c1c19]">
-                        {copy(voucher.discountPercent)}{copy("% OFF")}</span>
-                      {voucher.discountFixed && (
-                        <span className="text-[11px] text-[#74584d] font-medium">{copy("+100k")}</span>
-                      )}
+                        {voucher.discountFixed ? `${voucher.discountFixed.toLocaleString('vi-VN')}₫` : `${voucher.discountPercent}% OFF`}</span>
                     </div>
 
                     <p className="text-[11px] text-[#5f5d58] leading-snug">

@@ -9514,5 +9514,137 @@
     "Gutscheine & 3 Sets →",
     "Cupones y 3 Combos →",
     "优惠券与三款套装 →"
+  ],
+  "Combo giảm 5%, tối đa 50.000đ": [
+    "Combos 5% off, up to 50,000₫",
+    "5% auf Sets, höchstens 50.000₫",
+    "5% en combos, hasta 50.000₫",
+    "套装减 5%，最高 50,000₫"
+  ],
+  "Hỗ trợ phí ship tối đa 30.000đ, đơn từ 499.000đ": [
+    "Shipping support up to 30,000₫ on orders from 499,000₫",
+    "Bis zu 30.000₫ Versandrabatt ab 499.000₫",
+    "Hasta 30.000₫ de envío desde 499.000₫",
+    "订单满 499,000₫，运费补贴最高 30,000₫"
+  ],
+  "Thành viên giảm 10% sản phẩm nguyên giá": [
+    "Members save 10% on full-price products",
+    "Mitglieder sparen 10% auf nicht reduzierte Produkte",
+    "Miembros: 10% en productos sin rebajar",
+    "会员原价商品减 10%"
+  ],
+  "Giảm thêm cho combo": [
+    "Extra combo savings",
+    "Zusätzlicher Setvorteil",
+    "Ahorro extra en combos",
+    "套装专享优惠"
+  ],
+  "Giảm 5% trên giá combo đang bán, tối đa 50.000đ mỗi đơn. Chỉ áp dụng combo; không cộng dồn mã khác.": [
+    "5% off the current combo price, capped at 50,000₫ per order. Combos only; cannot be combined with other codes.",
+    "5% auf den aktuellen Setpreis, höchstens 50.000₫ pro Bestellung. Nur Sets; nicht mit anderen Codes kombinierbar.",
+    "5% sobre el precio actual del combo, máximo 50.000₫ por pedido. Solo combos; no acumulable con otros códigos.",
+    "按套装当前售价减 5%，每单最高 50,000₫。仅限套装，不可叠加其他优惠码。"
+  ],
+  "TỐI ĐA 50.000đ": [
+    "UP TO 50,000₫",
+    "BIS ZU 50.000₫",
+    "HASTA 50.000₫",
+    "最高 50,000₫"
+  ],
+  "Ưu đãi hiện hành": [
+    "Current offer",
+    "Aktuelles Angebot",
+    "Oferta vigente",
+    "当前优惠"
+  ],
+  "Hỗ trợ phí vận chuyển": [
+    "Shipping support",
+    "Versandkostenzuschuss",
+    "Ayuda con el envío",
+    "运费补贴"
+  ],
+  "Hỗ trợ phí ship thực tế tối đa 30.000đ, đơn từ 499.000đ tiền hàng. Không quy đổi phần dư thành tiền; không cộng dồn mã khác.": [
+    "Up to 30,000₫ off actual shipping on merchandise orders from 499,000₫. Unused allowance has no cash value; cannot be combined with other codes.",
+    "Bis zu 30.000₫ auf tatsächliche Versandkosten ab 499.000₫ Warenwert. Restbetrag nicht auszahlbar; nicht kombinierbar.",
+    "Hasta 30.000₫ de los gastos reales de envío en compras desde 499.000₫. El saldo no se canjea por dinero; no acumulable.",
+    "商品金额满 499,000₫，实际运费最高补贴 30,000₫。剩余额度不可兑换现金，不可叠加优惠码。"
+  ],
+  "SHIP ĐẾN 30.000đ": [
+    "SHIPPING UP TO 30,000₫",
+    "VERSAND BIS 30.000₫",
+    "ENVÍO HASTA 30.000₫",
+    "运费最高补贴 30,000₫"
+  ],
+  "Đặc quyền sản phẩm nguyên giá": [
+    "Full-price member privilege",
+    "Mitgliedervorteil zum Originalpreis",
+    "Ventaja para productos sin rebajar",
+    "会员原价商品专享"
+  ],
+  "Thành viên đã đăng nhập giảm 10% trên giá gốc của sản phẩm chưa giảm giá. Không áp dụng món đang giảm giá; không cộng dồn mã khác.": [
+    "Signed-in members save 10% off the original price of full-price products. Sale items are excluded; cannot be combined with other codes.",
+    "Angemeldete Mitglieder sparen 10% vom Originalpreis nicht reduzierter Produkte. Reduzierte Artikel ausgeschlossen; nicht kombinierbar.",
+    "Miembros con sesión iniciada: 10% sobre el precio original de productos sin rebajar. Excluye artículos rebajados; no acumulable.",
+    "已登录会员购买未降价商品，按原价减 10%。不适用于促销商品，不可叠加优惠码。"
+  ],
+  "CHỈ HÀNG NGUYÊN GIÁ": [
+    "FULL-PRICE ONLY",
+    "NUR NICHT REDUZIERTE ARTIKEL",
+    "SOLO SIN REBAJAR",
+    "仅限原价商品"
+  ],
+  "6 mã ưu đãi ALPS • Giảm tiền hàng hoặc hỗ trợ phí ship • Mỗi đơn dùng một mã": [
+    "6 ALPS codes • Product savings or shipping support • One code per order",
+    "6 ALPS-Codes • Waren- oder Versandrabatt • Ein Code pro Bestellung",
+    "6 códigos ALPS • Descuento en productos o envío • Un código por pedido",
+    "6 个 ALPS 优惠码 • 商品优惠或运费补贴 • 每单限用一个码"
+  ],
+  "Mã không hợp lệ. Vui lòng chọn một trong 6 mã ưu đãi ALPS.": [
+    "Invalid code. Choose one of the 6 ALPS discount codes.",
+    "Ungültiger Code. Wählen Sie einen der 6 ALPS-Codes.",
+    "Código no válido. Elige uno de los 6 códigos ALPS.",
+    "无效优惠码。请选择 6 个 ALPS 优惠码之一。"
+  ],
+  "ALPSFREESHIP áp dụng cho đơn từ 499.000đ tiền hàng, chưa gồm phí ship.": [
+    "ALPSFREESHIP requires at least 499,000₫ in merchandise, excluding shipping.",
+    "ALPSFREESHIP gilt ab 499.000₫ Warenwert, ohne Versand.",
+    "ALPSFREESHIP requiere 499.000₫ en productos, sin incluir envío.",
+    "ALPSFREESHIP 要求商品金额满 499,000₫，不含运费。"
+  ],
+  "ALPSMEMBER chỉ áp dụng sản phẩm chưa giảm giá; giỏ hàng chưa có sản phẩm phù hợp.": [
+    "ALPSMEMBER applies to full-price products only; your cart has no eligible products.",
+    "ALPSMEMBER gilt nur für nicht reduzierte Produkte; keine passenden Artikel im Warenkorb.",
+    "ALPSMEMBER solo aplica a productos sin rebajar; no hay artículos elegibles.",
+    "ALPSMEMBER 仅适用于未降价商品；购物车暂无适用商品。"
+  ],
+  "Chọn hoặc nhập mã ưu đãi ALPS": [
+    "Choose or enter an ALPS discount code",
+    "ALPS-Code auswählen oder eingeben",
+    "Elige o introduce un código ALPS",
+    "选择或输入 ALPS 优惠码"
+  ],
+  "Hỗ trợ phí ship": [
+    "Shipping support",
+    "Versandrabatt",
+    "Ayuda con el envío",
+    "运费补贴"
+  ],
+  "Giảm tiền hàng": [
+    "Product discount",
+    "Warenrabatt",
+    "Descuento en productos",
+    "商品优惠"
+  ],
+  "ALPSCOMBO chỉ giảm 5% sản phẩm combo.": [
+    "ALPSCOMBO gives 5% off combos only.",
+    "ALPSCOMBO gibt 5% nur auf Sets.",
+    "ALPSCOMBO ofrece 5% solo en combos.",
+    "ALPSCOMBO 仅适用于套装减 5%。"
+  ],
+  "Vui lòng đăng nhập thành viên để dùng mã ưu đãi thành viên.": [
+    "Sign in as a member to use a member discount code.",
+    "Für einen Mitgliedercode bitte anmelden.",
+    "Inicia sesión para usar un código de miembro.",
+    "请登录会员账户后使用会员优惠码。"
   ]
 }
