@@ -45,7 +45,7 @@ export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onEx
         <button className="alps-launch-image-link" aria-label="Xem voucher ưu đãi ALPS" onClick={() => { dismiss(); onExplore(); }}>
           <img src={popupAd} alt="Ưu đãi ALPS giảm 20% hàng lẻ với PHUNU20. Nhấn để xem đầy đủ điều kiện voucher." />
         </button>
-        <p className="alps-launch-note">PHUNU20: giảm 20% hàng lẻ · ALPS2010: giảm 15% combo · ALPS2025: giảm 10% cho thành viên đăng nhập. Mỗi đơn dùng một mã.</p>
+        <p className="alps-launch-note">Ưu đãi tặng kèm quà số lượng có hạn</p>
       </div>
     </dialog>, document.body
   );
