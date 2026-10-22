@@ -829,7 +829,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                       className={`text-[10px] px-2 py-1 rounded-full border cursor-pointer ${splitPromotionCodes(effectivePromoCode).includes(code) ? 'bg-[#74584d] text-white border-[#74584d]' : 'bg-[#f6f3ee] text-[#74584d] border-[#e2d7c9]'}`}>{code}</button>)}
                   </div>
                   <button type="button" className="text-xs underline mt-2" onClick={() => { setAppliedPromoCode(''); setPromoCode(''); setPromoApplied(false); setPromoError(''); }}>{copy("Bỏ mã ưu đãi")}</button>
-                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Chọn một mã giảm tiền hàng; có thể cộng thêm ALPSFREESHIP. Điều kiện đơn tối thiểu tính trước giảm giá, chưa gồm phí ship.")}</p>
+                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Giá đã giảm 20% toàn sàn. Có thể thêm ALPSFREESHIP cho đơn đủ điều kiện; ALPSMEMBER chỉ áp dụng sản phẩm chưa giảm giá.")}</p>
                   {(promoError || promotion.error) && <p role="alert" className="text-xs text-[#ba1a1a] mt-2">{copy(promoError || promotion.error)}</p>}
                   {promoApplied && !promotion.error && (
                     <span className="text-[10px] text-[#2d4a36] font-medium block mt-1.5 flex items-center space-x-1">

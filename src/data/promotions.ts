@@ -1,9 +1,6 @@
 // Canonical shared rules: one merchandise voucher plus optional shipping voucher.
 type PromotionRule = { percent: number; scope: 'order' | 'shipping' | 'member-original'; label: string; maxDiscount?: number; minSubtotal?: number };
 export const PROMOTIONS = {
-  ALPS25K: {percent: 20, scope: 'order', minSubtotal: 200000, maxDiscount: 25000, label: 'Giảm 20%, tối đa 25.000đ, đơn từ 200.000đ'},
-  ALPS75K: {percent: 20, scope: 'order', minSubtotal: 800000, maxDiscount: 75000, label: 'Giảm 20%, tối đa 75.000đ, đơn từ 800.000đ'},
-  ALPS100K: {percent: 20, scope: 'order', minSubtotal: 1000000, maxDiscount: 100000, label: 'Giảm 20%, tối đa 100.000đ, đơn từ 1.000.000đ'},
   ALPSFREESHIP: {percent: 0, scope: 'shipping', maxDiscount: 30000, minSubtotal: 499000, label: 'Hỗ trợ phí ship tối đa 30.000đ, đơn từ 499.000đ'},
   ALPSMEMBER: {percent: 10, scope: 'member-original', label: 'Thành viên giảm 10% sản phẩm nguyên giá'},
 } as const satisfies Record<string, PromotionRule>;
@@ -41,4 +38,3 @@ export function getPromotionDiscount(input: string | null | undefined, items: Pr
   const canonical = [...codes].sort((a,b) => Number(a === 'ALPSFREESHIP')-Number(b === 'ALPSFREESHIP')).join(' + ');
   return {...empty,code: canonical,scope: codes.length > 1 ? 'combined' : codes[0] === 'ALPSFREESHIP' ? 'shipping' : 'order',percent,eligibleSubtotal,discountAmount,shippingDiscountAmount};
 }
-export function getComboVoucher(price: number) { return price >= 1000000 ? 'ALPS100K' : price >= 800000 ? 'ALPS75K' : 'ALPS25K'; }

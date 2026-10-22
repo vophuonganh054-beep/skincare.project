@@ -4,12 +4,10 @@ import { PRODUCT_CATALOG } from '../src/data/productCatalog.ts';
 import { CAMPAIGN_2010_DATA } from '../src/data/campaignCatalog.ts';
 
 // Shared by the server and storefront: prices are never accepted from the browser.
-export const PRICES: Record<string, number> = {
-  'cleanser-gentle-purifying': 250000, 'toner-botanical': 220000,
-  'serum-radiance': 390000, 'cream-regenerating': 450000,
-  'mask-hydro-lifting': 280000, 'combo-toner-mat-na': 500000,
-  'combo-toan-dien': 1590000, 'combo-serum-kem-duong': 840000,
-};
+export const PRICES: Record<string, number> = Object.fromEntries([
+  ...PRODUCT_CATALOG.map(p => [p.id, p.price]),
+  ...CAMPAIGN_2010_DATA.combos.map(c => [c.id, c.salePrice]),
+]);
 export const CARRIERS: Record<string, number> = { ghtk: 15000, ghn: 25000, express: 45000, viettel: 20000 };
 export function quote(body: any, context: { isMember?: boolean } = {}) {
   if (!Array.isArray(body.items) || !body.items.length || body.items.length > 50) throw new Error('Giỏ hàng không hợp lệ');

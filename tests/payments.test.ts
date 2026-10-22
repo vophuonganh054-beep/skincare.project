@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {quote, equalSecret, extractOrder, validateTransaction} from '../server/payment-core.ts';
-const body = {items: [{productId: 'serum-radiance', quantity: 1}], carrierId: 'ghtk', promoCode: 'ALPS25K'};
+const body = {items: [{productId: 'serum-radiance', quantity: 1}], carrierId: 'ghtk', promoCode: ''};
 test('server prices include shipping and discount, ignoring client prices', () => {
-  assert.equal(quote({...body, amount: 1}).amount, 380000);
-  assert.equal(quote({...body, promoCode: 'ALPS100K', items: [{productId: 'combo-toan-dien', quantity: 1}]}).amount, 1490000);
+  assert.equal(quote({...body, amount: 1}).amount, 327000);
+  assert.equal(quote({...body, promoCode: '', items: [{productId: 'combo-toan-dien', quantity: 1}]}).amount, 1272000);
 });
 test('rejects tampered baskets and unsupported coupons', () => {
   for (const input of [{...body, items: []}, {...body, items: [{productId: 'nope', quantity: 1}]}, {...body, items: [{productId: 'serum-radiance', quantity: -1}]}, {...body, promoCode: '__proto__'}, {...body, carrierId: 'constructor'}]) assert.throws(() => quote(input));

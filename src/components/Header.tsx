@@ -447,7 +447,7 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="font-bold text-amber-200 uppercase tracking-wider text-[8.5px] sm:text-[10px] bg-black/25 px-1.5 sm:px-2 py-0.5 rounded-full shrink-0">
             {copy("20/10 TRI ÂN")}</span>
           <span className="truncate text-white/95 text-[10px] sm:text-xs">
-            {copy("Nhập mã ")}<strong className="text-amber-200 underline font-bold">{copy("ALPS25K")}</strong> {copy(" giảm 20%, tối đa 25.000đ • Đơn từ 200.000đ • Cộng được ALPSFREESHIP")}</span>
+            {copy("Ưu đãi ")}<strong className="text-amber-200 underline font-bold">{copy("GIẢM 20% TOÀN SÀN")}</strong> {copy(" tự động áp dụng • Không cần mã • Không giới hạn mức giảm")}</span>
           <span className="text-amber-200 underline underline-offset-2 ml-1 hidden md:inline shrink-0 font-bold">
             {copy("Voucher & 3 Combo →")}</span>
         </button>

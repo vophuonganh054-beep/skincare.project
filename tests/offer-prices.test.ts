@@ -1,36 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { PRODUCT_CATALOG } from '../src/data/productCatalog.ts';
-import { quote } from '../server/payment-core.ts';
-import { CAMPAIGN_2010_DATA } from '../src/data/campaignCatalog.ts';
-
-test('serum and cream gift combo discounts with the per-order 75k cap and includes mask plus mini toner', () => {
-  const combo = CAMPAIGN_2010_DATA.combos.find(c => c.id === 'combo-serum-kem-duong')!;
-  assert.deepEqual(combo.productIds, ['serum-radiance', 'cream-regenerating']);
-  assert.equal(combo.salePrice, 840000);
-  assert.ok(combo.freeGifts.some(g => g.includes('1 miếng')));
-  const order = quote({items: [{productId: combo.id, quantity: 1, unitPrice: 1}], carrierId: 'ghtk', promoCode: 'ALPS75K'});
-  assert.equal(order.items[0].unitPrice, combo.salePrice);
-  assert.equal(order.amount, 765000);
-  const two = quote({items: [{productId: combo.id, quantity: 2}], carrierId: 'ghtk', promoCode: 'ALPS75K'});
-  assert.equal(two.amount, 1605000);
-});
-
-test('single-item offer prices are applied once with the ALPS25K cap at checkout',()=>{
-  const expected: Record<string,[number,number]>={
-    'cleanser-gentle-purifying':[250000,225000],
-    'toner-botanical':[220000,195000],
-    'serum-radiance':[390000,365000],
-    'cream-regenerating':[450000,425000],
-    'mask-hydro-lifting':[280000,255000],
-  };
-  for(const [id,[original,offer]] of Object.entries(expected)){
-    const product=PRODUCT_CATALOG.find(p=>p.id===id)!;
-    assert.equal(product.price,original);
-    assert.equal(product.originalPrice,original);
-    assert.equal(product.promoPrice,offer);
-    assert.equal(product.promoCode,'ALPS25K');
-    const result=quote({items:[{productId:id,quantity:1}],carrierId:'ghtk',promoCode:'ALPS25K'});
-    assert.equal(result.amount,offer+15000);
+import {PRODUCT_CATALOG} from '../src/data/productCatalog.ts';
+import {CAMPAIGN_2010_DATA} from '../src/data/campaignCatalog.ts';
+import {quote, PRICES} from '../server/payment-core.ts';
+test('all retail products sell at exactly 80% of original price with no voucher required',()=>{
+  for(const p of PRODUCT_CATALOG){
+    assert.equal(p.price,Math.round(p.originalPrice!*.8));
+    assert.equal(PRICES[p.id],p.price);
+    assert.equal(p.promoCode,undefined);assert.equal(p.promoPrice,undefined);
+    assert.equal(quote({items:[{productId:p.id,quantity:1,unitPrice:1}],carrierId:'ghtk'}).amount,p.price+15000);
   }
+});
+test('all combos automatically save 20% without an order cap; gift contents are preserved',()=>{
+  const expected=[672000,400000,1272000];
+  CAMPAIGN_2010_DATA.combos.forEach((c,index)=>{
+    assert.equal(c.salePrice,expected[index]);assert.equal(c.savings,c.originalPrice*.2);
+    const result=quote({items:[{productId:c.id,quantity:2,freeGifts:['fake']}],carrierId:'ghtk'});
+    assert.equal(result.amount,c.salePrice*2);assert.deepEqual(result.items[0].freeGifts,c.freeGifts);
+  });
 });

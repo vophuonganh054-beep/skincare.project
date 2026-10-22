@@ -29,14 +29,11 @@ export interface PromoVoucher {
 export const CAMPAIGN_2010_DATA = {
   themeTitle: 'CHIẾN DỊCH TRI ÂN 20/10 • TÔN VINH VẺ ĐẸP PHỤ NỮ VIỆT NAM',
   subHeading: 'Dành tặng người phụ nữ bạn yêu thương vẻ rạng ngời thuần khiết từ đỉnh tuyết Alps, Thụy Sĩ.',
-  bannerNote: '3 mã giảm 20% có giới hạn • Cộng thêm ALPSFREESHIP • Đặc quyền ALPSMEMBER',
+  bannerNote: 'Giảm 20% toàn sàn • Tự động áp dụng • Không cần nhập mã • Không giới hạn mức giảm',
   eventDate: 'Áp dụng từ 10/10 đến hết ngày 22/10/2026',
   
   vouchers: [
-    {code: 'ALPS25K', discountPercent: 20, title: 'Giảm tối đa 25.000đ', description: 'Giảm 20% tiền hàng, tối đa 25.000đ, đơn từ 200.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.', minOrder: 200000, badge: 'ĐƠN TỪ 200.000đ', expiry: 'Ưu đãi hiện hành'},
-    {code: 'ALPS75K', discountPercent: 20, title: 'Giảm tối đa 75.000đ', description: 'Giảm 20% tiền hàng, tối đa 75.000đ, đơn từ 800.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.', minOrder: 800000, badge: 'ĐƠN TỪ 800.000đ', expiry: 'Ưu đãi hiện hành'},
-    {code: 'ALPS100K', discountPercent: 20, title: 'Giảm tối đa 100.000đ', description: 'Giảm 20% tiền hàng, tối đa 100.000đ, đơn từ 1.000.000đ. Áp dụng hàng lẻ và combo; cộng được ALPSFREESHIP.', minOrder: 1000000, badge: 'ĐƠN TỪ 1.000.000đ', expiry: 'Ưu đãi hiện hành'},
-    {code: 'ALPSFREESHIP', discountPercent: 0, discountFixed: 30000, title: 'Hỗ trợ phí vận chuyển', description: 'Hỗ trợ phí ship thực tế tối đa 30.000đ, đơn từ 499.000đ tiền hàng trước giảm giá. Cộng được một mã giảm tiền hàng; không quy đổi phần dư thành tiền.', minOrder: 499000, badge: 'CỘNG ĐƯỢC MÃ GIẢM GIÁ', expiry: 'Ưu đãi hiện hành'},
+    {code: 'ALPSFREESHIP', discountPercent: 0, discountFixed: 30000, title: 'Hỗ trợ phí vận chuyển', description: 'Hỗ trợ phí ship thực tế tối đa 30.000đ, đơn từ 499.000đ tiền hàng sau giảm 20%, trước mã vận chuyển. Áp dụng cùng giá đã giảm 20%; không quy đổi phần dư thành tiền.', minOrder: 499000, badge: 'CỘNG ĐƯỢC MÃ GIẢM GIÁ', expiry: 'Ưu đãi hiện hành'},
     {code: 'ALPSMEMBER', discountPercent: 10, title: 'Đặc quyền sản phẩm nguyên giá', description: 'Thành viên đã đăng nhập giảm 10% trên giá gốc của sản phẩm chưa giảm giá. Cộng được ALPSFREESHIP; không cộng mã giảm tiền hàng khác.', minOrder: 0, badge: 'CHỈ HÀNG NGUYÊN GIÁ', expiry: 'Ưu đãi hiện hành'},
   ] as PromoVoucher[],
 
@@ -47,10 +44,10 @@ export const CAMPAIGN_2010_DATA = {
       subTitle: 'Bộ đôi dưỡng sáng & khóa ẩm • Tặng hộp quà, 1 miếng mặt nạ và toner 10 ml',
       badge: 'COMBO MỚI 20/10',
       originalPrice: 840000,
-      salePrice: 840000,
-      savings: 0,
+      salePrice: 672000,
+      savings: 168000,
       image: '',
-      description: 'Kết hợp serum dưỡng sáng và kem dưỡng khóa ẩm trong set quà dành tặng nàng. Áp mã ALPS75K còn 765.000₫, kèm hộp quà ALPS, 1 miếng mặt nạ và 1 toner 10 ml miễn phí.',
+      description: 'Kết hợp serum dưỡng sáng và kem dưỡng khóa ẩm trong set quà dành tặng nàng. Tự động giảm 20% còn 672.000₫, kèm hộp quà ALPS, 1 miếng mặt nạ và 1 toner 10 ml miễn phí.',
       includes: [
         'Alps Radiance Glow Serum (30ml) - Trị giá 390.000₫',
         'Alps Regenerating Face Cream (50g) - Trị giá 450.000₫',
@@ -65,8 +62,8 @@ export const CAMPAIGN_2010_DATA = {
       subTitle: 'Bộ đôi Nước hoa hồng cân bằng pH 5.5 & Mặt nạ thạch nâng cơ',
       badge: 'BÁN CHẠY NHẤT 20/10',
       originalPrice: 500000,
-      salePrice: 500000,
-      savings: 0,
+      salePrice: 400000,
+      savings: 100000,
       image: '',
       description:
         'Bộ đôi kết hợp cấp ẩm cân bằng độ pH chuẩn 5.5 và mặt nạ thạch sinh học nuôi dưỡng làn da căng mọng, mềm mịn chuẩn glass-skin.',
@@ -87,8 +84,8 @@ export const CAMPAIGN_2010_DATA = {
       subTitle: 'Trọn bộ 5 bước chăm sóc & tái sinh làn da chuẩn hoàng gia Thụy Sĩ',
       badge: 'ĐẲNG CẤP HOÀNG GIA',
       originalPrice: 1590000,
-      salePrice: 1590000,
-      savings: 0,
+      salePrice: 1272000,
+      savings: 318000,
       image: '',
       description:
         'Liệu trình chăm sóc và trẻ hóa da toàn diện 5 bước khép kín từ làm sạch sâu, cân bằng khoáng chất, huyết thanh tái sinh, kem khóa ẩm 72H đến mặt nạ thạch sinh học nâng cơ.',

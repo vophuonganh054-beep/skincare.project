@@ -42,14 +42,14 @@ test('HTTP payment flow: authenticated, immutable, durable, idempotent, fail-clo
   const id = 'ALPS0123456789ABCDEF01234567';
   const token = 'a'.repeat(64);
   const headers = {'Content-Type': 'application/json', 'X-Payment-Token': token};
-  const basket = {orderNumber: id, amount: 265000, carrierId: 'ghtk', items: [{productId: 'cleanser-gentle-purifying', quantity: 1}]};
+  const basket = {orderNumber: id, amount: 215000, carrierId: 'ghtk', items: [{productId: 'cleanser-gentle-purifying', quantity: 1}]};
   const request = (path: string, body: any, h: Record<string, string> = headers) => fetch(base + path, {method: 'POST', headers: h, body: JSON.stringify(body)});
-  const webhook = {id: 100, accountNumber: '0772770134', transferType: 'in', transferAmount: 265000, content: 'MB ' + id};
+  const webhook = {id: 100, accountNumber: '0772770134', transferType: 'in', transferAmount: 215000, content: 'MB ' + id};
   const auth = {'Content-Type': 'application/json', Authorization: 'Apikey test-webhook-key'};
   try {
     assert.equal((await request('/api/sepay/initiate', {...basket, amount: 1})).status, 409);
     assert.equal((await request('/api/sepay/initiate', basket)).status, 200);
-    assert.equal((await request('/api/sepay/initiate', {...basket, items: [{productId: 'toner-botanical', quantity: 1}], amount: 235000})).status, 503);
+    assert.equal((await request('/api/sepay/initiate', {...basket, items: [{productId: 'toner-botanical', quantity: 1}], amount: 191000})).status, 503);
     assert.equal((await request('/api/sepay/webhook', webhook)).status, 401);
     assert.equal((await fetch(base + '/api/sepay/payment-status/' + id)).status, 404);
     assert.equal((await request('/api/sepay/webhook', {...webhook, transferAmount: 10}, auth)).status, 200);
@@ -113,17 +113,16 @@ test('member code requires verified identity; category rules and gifts are enfor
     assert.equal((await post({...body, promoCode: 'COMBO20', amount: 714000})).status, 400);
     const memberOnly = {...body, orderNumber: 'ALPSBBBBBBBBBBBBBBBBBBBBBBBB', carrierId: 'express', promoCode: 'ALPSMEMBER + ALPSFREESHIP', amount: 771000};
     for (const token of ['', 'fake', 'anonymous']) assert.equal((await post(memberOnly, token)).status, 401);
-    assert.equal((await post(memberOnly, 'valid-member')).status, 200);
-    assert.equal(storage.records.get('paymentSessions/' + memberOnly.orderNumber).memberUid, 'member-123');
-    assert.equal((await post(body, 'valid-member')).status, 200);
-    const stacked = {...body, orderNumber: 'ALPSCCCCCCCCCCCCCCCCCCCCCCCC', promoCode: 'ALPS75K + ALPSFREESHIP', carrierId: 'express', amount: 780000};
+    assert.equal((await post(memberOnly, 'valid-member')).status, 400);
+    assert.equal((await post(body, 'valid-member')).status, 400);
+    const stacked = {...body, orderNumber: 'ALPSCCCCCCCCCCCCCCCCCCCCCCCC', promoCode: 'ALPSFREESHIP', carrierId: 'express', amount: 687000};
     assert.equal((await post({...stacked, amount: 1})).status, 409);
     assert.equal((await post({...stacked, promoCode: 'ALPS25K + ALPS75K + ALPSFREESHIP'})).status, 400);
     assert.equal((await post(stacked)).status, 200);
-    assert.equal(storage.records.get('paymentSessions/' + stacked.orderNumber).amount, 780000);
-    const record = storage.records.get('paymentSessions/' + body.orderNumber);
-    assert.equal(record.memberUid, 'member-123');
-    assert.equal(record.amount, 756000);
+    assert.equal(storage.records.get('paymentSessions/' + stacked.orderNumber).amount, 687000);
+    const record = storage.records.get('paymentSessions/' + stacked.orderNumber);
+    assert.equal(record.memberUid, undefined);
+    assert.equal(record.amount, 687000);
     assert.ok(record.items[0].freeGifts.some((gift: string) => gift.includes('toner ALPS 10 ml')));
   } finally { server.close(); }
 });

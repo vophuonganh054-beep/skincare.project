@@ -324,7 +324,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({
                       className={`text-[10px] px-2 py-1 rounded-full border cursor-pointer ${splitPromotionCodes(appliedVoucher).includes(code) ? 'bg-[#74584d] text-white border-[#74584d]' : 'bg-[#f6f3ee] text-[#74584d] border-[#e2d7c9]'}`}>{code}</button>)}
                   </div>
                   <button type="button" className="text-xs underline mt-2" onClick={() => { setAppliedVoucher(null); setVoucherCode(''); setVoucherError(null); onVoucherApplied?.(null); }}>{copy("Bỏ mã ưu đãi")}</button>
-                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Chọn một mã giảm tiền hàng; có thể cộng thêm ALPSFREESHIP. Điều kiện đơn tối thiểu tính trước giảm giá, chưa gồm phí ship.")}</p>
+                  <p className="text-[10px] text-[#77767b] mt-2">{copy("Giá đã giảm 20% toàn sàn. Có thể thêm ALPSFREESHIP cho đơn đủ điều kiện; ALPSMEMBER chỉ áp dụng sản phẩm chưa giảm giá.")}</p>
                   {appliedVoucher && !promotion.error && (
                     <p className="text-[11px] text-[#2d4a36] font-medium mt-2 flex items-center space-x-1">
                       <span>{copy("✓ Đã áp dụng mã ")}{appliedVoucher} · {copy('Tổng ưu đãi')}: -{(discountAmount + shippingDiscountAmount).toLocaleString('vi-VN')}₫</span>

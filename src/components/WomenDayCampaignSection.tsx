@@ -1,4 +1,3 @@
-import { getComboVoucher, getPromotionDiscount } from '../data/promotions';
 import { useCopy } from '../i18n/useCopy';
 import React, { useState } from 'react';
 import {
@@ -188,7 +187,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                     </div>
 
                     <div className="absolute top-3.5 right-3.5 px-2.5 py-1 rounded-full text-[10px] font-bold bg-[#ba1a1a] text-white shadow-xs">
-                      {getComboVoucher(combo.salePrice)}</div>
+                      {copy('Giảm 20%')}</div>
 
                     <div className="absolute bottom-3 left-3.5 right-3.5 text-white">
                       <span className="text-[10px] text-amber-200 font-medium block">
@@ -258,15 +257,15 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
                     </div>
                     <div className="text-right">
                       <span className="text-[10px] text-[#74584d] font-medium block">
-                        {copy('Áp mã ') + getComboVoucher(combo.salePrice)}</span>
+                        {copy('Tự động giảm 20%')}</span>
                       <span className="text-xs font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full border border-rose-200">
-                        {copy("Còn ")}{(combo.salePrice - getPromotionDiscount(getComboVoucher(combo.salePrice), [{productId: combo.id, quantity: 1, unitPrice: combo.salePrice}]).discountAmount).toLocaleString('vi-VN')}{"₫"}</span>
+                        {copy("Còn ")}{combo.salePrice.toLocaleString('vi-VN')}{"₫"}</span>
                     </div>
                   </div>
 
                   <div className="text-[11px] text-[#74584d] bg-[#fcf5f1] border border-[#fed8c9] rounded-xl px-2.5 py-1.5 text-center mb-2.5 font-medium flex items-center justify-center space-x-1">
                     <span>{"🌸"}</span>
-                    <span>{copy("Combo giữ giá gốc • Áp mã ")}<strong>{getComboVoucher(combo.salePrice)}</strong> {copy(" để nhận ưu đãi!")}</span>
+                    <span>{copy("Giảm 20% toàn sàn • Đã trừ trực tiếp vào giá • Không cần mã")}</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2 sm:gap-2.5 pt-1">

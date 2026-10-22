@@ -45,7 +45,7 @@ export function NewProductPopup({ enabled, onExplore }: { enabled: boolean; onEx
       <div className="alps-launch-ad">
         <button className="alps-launch-close" aria-label={copy("Đóng quảng cáo")} onClick={dismiss} autoFocus><X size={20} /></button>
         <button className="alps-launch-image-link" aria-label={copy("Xem voucher ưu đãi ALPS")} onClick={() => { dismiss(); onExplore(); }}>
-          <img src={popupAd} alt={copy("Ưu đãi ALPS giảm 20% có giới hạn với ALPS25K, ALPS75K, ALPS100K. Nhấn để xem điều kiện voucher.")} />
+          <img src={popupAd} alt={copy("ALPS giảm 20% toàn sàn, tự động áp dụng không cần mã. Nhấn để xem ưu đãi.")} />
         </button>
         <p className="alps-launch-note">{copy("Ưu đãi tặng kèm quà số lượng có hạn")}</p>
       </div>
