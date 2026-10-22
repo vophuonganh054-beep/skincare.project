@@ -241,11 +241,10 @@ export const ProductsPage: React.FC<ProductsPageProps> = ({
                   {/* Product Info */}
                   <div className="alps-tile-body p-5 flex-1 flex flex-col justify-between space-y-4">
                     <div>
-                      {/* Brand tag & Sold count */}
+                      {/* Brand tag */}
                       <div className="alps-tile-secondary flex items-center justify-between text-xs text-[#77767b] mb-2">
                         <span className="text-[11px] uppercase tracking-wider text-[#74584d] font-bold bg-[#f7f2ee] px-2.5 py-0.5 rounded-full border border-[#74584d]/15">
                           {copy("ALPS • Pure Essence")}</span>
-                        <span className="font-medium">{copy("Đã bán ")}{product.soldCount}</span>
                       </div>
 
                       {/* Product Name with Link */}

@@ -213,10 +213,8 @@ export const ProductDetailPage: React.FC<ProductDetailPageProps> = ({
                 <p className="text-sm text-[#77767b] mt-1">{copy("Dung tích: ")}<span className="font-semibold text-[#1c1c19]">{copy(product.capacity)}</span></p>
               </div>
 
-              {/* Social Proof */}
+              {/* Stock availability */}
               <div className="flex items-center space-x-3 text-sm text-[#77767b] pb-2.5 border-b border-[#202022]/6">
-                <span className="font-semibold text-[#1c1c19]">{copy("Đã bán ")}{product.soldCount}</span>
-                <span>{"•"}</span>
                 <span className="text-[#0d8459] font-semibold flex items-center space-x-1.5">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>{copy("Còn hàng tại kho TP.HCM")}</span>
