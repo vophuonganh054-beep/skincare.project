@@ -1,6 +1,6 @@
 import { CHAT_PRODUCT_IDS, sanitizeRecommendationIds } from '../src/data/chatRecommendations.ts';
 import type { Express } from 'express';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI, ThinkingLevel } from '@google/genai';
 import { PRODUCT_CATALOG } from '../src/data/productCatalog.ts';
 import { CAMPAIGN_2010_DATA } from '../src/data/campaignCatalog.ts';
 import { SHIPPING_CARRIERS } from '../src/data/shippingCarriers.ts';
@@ -67,13 +67,15 @@ export function registerAdvisor(app: Express, generateOverride?: Generator) {
     let failureStatus = 0;
     for (const model of models) {
       try {
-        const response = await generate({model,contents,config:{systemInstruction:advisorInstruction(lang),temperature:0.3,maxOutputTokens:1800,responseMimeType:'application/json',responseJsonSchema:advisorResponseSchema,httpOptions:{timeout:11000,retryOptions:{attempts:1}}}});
+        const thinkingConfig = /^gemini-3/.test(model) ? {thinkingLevel: ThinkingLevel.LOW}
+          : /^gemini-2\.5-flash/.test(model) ? {thinkingBudget: 0} : undefined;
+        const response = await generate({model,contents,config:{systemInstruction:advisorInstruction(lang),temperature:0.3,maxOutputTokens:1800,responseMimeType:'application/json',responseJsonSchema:advisorResponseSchema,...(thinkingConfig ? {thinkingConfig} : {}),httpOptions:{timeout:20000,retryOptions:{attempts:1}}}});
         if (!response.text?.trim()) throw new Error('EMPTY_RESPONSE');
         return res.json({...parseAdvisorResponse(response.text), source:'gemini'});
       } catch (error: any) {
         failureStatus = Number(error?.status || 0);
         // Never log provider payloads or credentials.
-        console.warn('[Advisor] generation failed', {status:failureStatus || 'unavailable'});
+        console.warn('[Advisor] generation failed', {model, status:failureStatus || 'unavailable'});
         if ([400,401,403,429].includes(failureStatus)) break;
       }
     }

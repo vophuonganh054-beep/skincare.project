@@ -61,6 +61,9 @@ test('structured recommendations return only known unique catalogue ids, never m
     assert.deepEqual(data.recommendedProductIds,['serum-radiance','cream-regenerating']);
     assert.equal(data.price,undefined);assert.equal(data.url,undefined);
     assert.equal(request.config.responseMimeType,'application/json');
+    assert.equal(request.config.thinkingConfig.thinkingLevel,'LOW');
+    assert.equal(request.config.httpOptions.timeout,20000);
+    assert.equal(request.config.httpOptions.retryOptions.attempts,1);
     assert.equal(request.config.responseJsonSchema.properties.recommendedProductIds.maxItems,5);
   });
 });
