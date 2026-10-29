@@ -1,3 +1,5 @@
+import { ChatProductRecommendations } from './ChatProductRecommendations';
+import { sanitizeRecommendationIds } from '../data/chatRecommendations';
 import { useCopy } from '../i18n/useCopy';
 import React, { useState, useRef, useEffect } from 'react';
 import {
@@ -18,6 +20,7 @@ interface Message {
   role: 'user' | 'model';
   text: string;
   timestamp: string;
+  recommendedProductIds?: string[];
 }
 
 interface AICustomerSupportChatProps {
@@ -110,7 +113,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
       // Build history for context
       const history = messages.filter(m => !m.id.startsWith('welcome') && !m.id.startsWith('error')).slice(-12).map((m) => ({
         role: m.role,
-        text: m.text,
+        text: m.text + (m.role === 'model' && m.recommendedProductIds?.length ? '\nSản phẩm đã hiển thị theo thứ tự: ' + m.recommendedProductIds.join(', ') : ''),
       }));
 
       const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
@@ -133,6 +136,7 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
         id: `ai-${Date.now()}`,
         role: 'model',
         text: aiReply,
+        recommendedProductIds: sanitizeRecommendationIds(data.recommendedProductIds),
         timestamp: new Date().toLocaleTimeString(language === 'vi' ? 'vi-VN' : 'en-US', {
           hour: '2-digit',
           minute: '2-digit',
@@ -243,13 +247,14 @@ export const AICustomerSupportChat: React.FC<AICustomerSupportChatProps> = ({
 
             {/* Bubble */}
             <div
-              className={`max-w-[85%] sm:max-w-[80%] rounded-2xl px-4 py-3 text-xs leading-relaxed shadow-2xs ${
+              className={`max-w-[90%] sm:max-w-[88%] min-w-0 rounded-2xl px-4 py-3 text-xs leading-relaxed shadow-2xs ${
                 msg.role === 'user'
                   ? 'bg-[#1c1c19] text-white rounded-tr-xs'
                   : 'bg-white text-[#1c1c19] border border-[#202022]/8 rounded-tl-xs'
               }`}
             >
               <div className="whitespace-pre-line break-words space-y-1">{msg.text}</div>
+              {msg.role === 'model' && <ChatProductRecommendations productIds={msg.recommendedProductIds} />}
               <div
                 className={`text-[9px] mt-1.5 text-right ${
                   msg.role === 'user' ? 'text-white/60' : 'text-[#77767b]'

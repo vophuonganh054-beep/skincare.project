@@ -1,3 +1,5 @@
+import { ChatProductRecommendations } from './ChatProductRecommendations';
+import { sanitizeRecommendationIds } from '../data/chatRecommendations';
 import { useLanguage } from '../context/LanguageContext';
 import { useCopy } from '../i18n/useCopy';
 import React, { useState, useRef, useEffect } from 'react';
@@ -21,6 +23,7 @@ interface Message {
   role: 'user' | 'model';
   text: string;
   timestamp: string;
+  recommendedProductIds?: string[];
 }
 
 interface FloatingAIChatWidgetProps {
@@ -127,7 +130,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
     try {
       const history = messages.map((m) => ({
         role: m.role,
-        text: m.text,
+        text: m.text + (m.role === 'model' && m.recommendedProductIds?.length ? '\nSản phẩm đã hiển thị theo thứ tự: ' + m.recommendedProductIds.join(', ') : ''),
       }));
 
       const apiBase = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/+$/, '');
@@ -156,6 +159,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
         id: `ai-${Date.now()}`,
         role: 'model',
         text: aiReply,
+        recommendedProductIds: sanitizeRecommendationIds(data.recommendedProductIds),
         timestamp: new Date().toLocaleTimeString(({vi:'vi-VN',en:'en-GB',de:'de-DE',es:'es-ES',zh:'zh-CN'})[language], {
           hour: '2-digit',
           minute: '2-digit',
@@ -377,7 +381,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
                       key={msg.id}
                       className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'}`}
                     >
-                      <div className="flex items-start gap-2 max-w-[88%] sm:max-w-[85%]">
+                      <div className="flex items-start gap-2 max-w-[96%] sm:max-w-[95%] min-w-0">
                         {msg.role === 'model' && (
                           <div className="w-7 h-7 rounded-full bg-[#202022] text-[#fed8c9] flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
                             <Sparkles className="w-3.5 h-3.5" />
@@ -385,7 +389,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
                         )}
 
                         <div
-                          className={`p-3.5 rounded-2xl leading-relaxed ${
+                          className={`p-3.5 rounded-2xl leading-relaxed min-w-0 ${
                             msg.role === 'user'
                               ? 'bg-[#202022] text-[#fcf9f4] rounded-tr-xs'
                               : 'bg-white text-[#1c1c19] border border-[#202022]/10 shadow-xs rounded-tl-xs'
@@ -394,6 +398,7 @@ export const FloatingAIChatWidget: React.FC<FloatingAIChatWidgetProps> = ({
                           <div className="text-xs sm:text-[13.5px]">
                             {msg.role === 'model' ? renderFormattedText(copy(msg.text)) : msg.text}
                           </div>
+                          {msg.role === 'model' && <ChatProductRecommendations productIds={msg.recommendedProductIds} />}
                           <span
                             className={`block text-[10px] mt-1.5 ${
                               msg.role === 'user' ? 'text-[#c7c6ca] text-right' : 'text-[#77767b]'

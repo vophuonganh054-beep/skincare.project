@@ -169,6 +169,7 @@ export const WomenDayCampaignSection: React.FC<WomenDayCampaignSectionProps> = (
             {CAMPAIGN_2010_DATA.combos.map((combo: CampaignCombo) => (
               <div
                 key={combo.id}
+                id={combo.id}
                 className="bg-white rounded-3xl overflow-hidden border border-[#ebe5dc] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
                 {/* Image and Badge */}

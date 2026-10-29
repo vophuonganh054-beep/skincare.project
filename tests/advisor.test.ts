@@ -50,3 +50,32 @@ test('missing Gemini credentials returns a clear setup error without blocking pa
     assert.equal(response.status,503);assert.equal((await response.json()).error,'AI_NOT_CONFIGURED');
   });}finally{if(previous===undefined)delete process.env.GEMINI_API_KEY;else process.env.GEMINI_API_KEY=previous;}
 });
+
+test('structured recommendations return only known unique catalogue ids, never model prices or links', async()=>{
+  let request: any;
+  await withChat(async(r:any)=>{request=r;return {text:JSON.stringify({reply:'Em gợi ý bộ đôi dưỡng ẩm bên dưới.',recommendedProductIds:['serum-radiance','unknown','cream-regenerating','serum-radiance','javascript:alert(1)'],price:1,url:'https://example.com/fake'})};},async post=>{
+    const response=await post({message:'Gợi ý serum và kem dưỡng',language:'vi'});
+    const data=await response.json();
+    assert.equal(response.status,200);
+    assert.equal(data.reply,'Em gợi ý bộ đôi dưỡng ẩm bên dưới.');
+    assert.deepEqual(data.recommendedProductIds,['serum-radiance','cream-regenerating']);
+    assert.equal(data.price,undefined);assert.equal(data.url,undefined);
+    assert.equal(request.config.responseMimeType,'application/json');
+    assert.equal(request.config.responseJsonSchema.properties.recommendedProductIds.maxItems,5);
+  });
+});
+test('policy answers have no product cards and follow-up context preserves previously displayed ids',async()=>{
+  let request:any;
+  await withChat(async(r:any)=>{request=r;return {text:JSON.stringify({reply:'Em giải thích cách dùng món thứ hai nhé.',recommendedProductIds:[]})};},async post=>{
+    const response=await post({message:'Món thứ hai dùng sao?',history:[{role:'user',text:'Tư vấn bộ đôi'},{role:'model',text:'Bộ đôi phù hợp.\nSản phẩm đã hiển thị theo thứ tự: serum-radiance, cream-regenerating'}]});
+    assert.deepEqual((await response.json()).recommendedProductIds,[]);
+    assert.match(request.contents[1].parts[0].text,/serum-radiance, cream-regenerating/);
+  });
+});
+test('invalid structured responses fail visibly instead of leaking JSON or inventing products',async()=>{
+  await withChat(async()=>({text:'{"reply":"Đây là lựa chọn", "recommendedProductIds":['}),async post=>{
+    const response=await post({message:'Tư vấn serum'});
+    assert.equal(response.status,503);
+    assert.equal((await response.json()).error,'AI_UNAVAILABLE');
+  });
+});

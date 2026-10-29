@@ -5952,9 +5952,9 @@
     "探索 ALPS 高端护肤系列。"
   ],
   "Xem sản phẩm": [
-    "View products",
-    "Produkte ansehen",
-    "Ver productos",
+    "View product",
+    "Produkt ansehen",
+    "Ver producto",
     "查看商品"
   ],
   "Đổi địa chỉ": [
@@ -9910,5 +9910,11 @@
     "Automatisch • Ohne Code • Ohne Rabattlimit",
     "Automático • Sin código • Sin límite de ahorro",
     "自动生效 • 无需优惠码 • 优惠无上限"
+  ],
+  "Sản phẩm gợi ý": [
+    "Recommended products",
+    "Empfohlene Produkte",
+    "Productos recomendados",
+    "推荐商品"
   ]
 }
