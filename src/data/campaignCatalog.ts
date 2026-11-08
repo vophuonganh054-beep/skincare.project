@@ -80,7 +80,7 @@ export const CAMPAIGN_2010_DATA = {
     },
     {
       id: 'combo-toan-dien',
-      name: 'Combo Toàn Diện: Nghi Thức Hoàng Gia Alps',
+      name: 'Combo Toàn Diện',
       subTitle: 'Trọn bộ 5 bước chăm sóc & tái sinh làn da chuẩn hoàng gia Thụy Sĩ',
       badge: 'ĐẲNG CẤP HOÀNG GIA',
       originalPrice: 1590000,
