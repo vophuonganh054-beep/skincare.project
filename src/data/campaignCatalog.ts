@@ -68,7 +68,7 @@ export const CAMPAIGN_2010_DATA = {
       description:
         'Bộ đôi kết hợp cấp ẩm cân bằng độ pH chuẩn 5.5 và mặt nạ thạch sinh học nuôi dưỡng làn da căng mọng, mềm mịn chuẩn glass-skin.',
       includes: [
-        'Alps Botanical Balancing Toner (100ml) - Trị giá 220,000₫',
+        'Alps Botanical Balancing Toner (120ml) - Trị giá 220,000₫',
         'Alps Hydro-Lifting Sheet Mask (Hộp 5 miếng 29g) - Trị giá 280,000₫',
       ],
       freeGifts: [
@@ -91,7 +91,7 @@ export const CAMPAIGN_2010_DATA = {
         'Liệu trình chăm sóc và trẻ hóa da toàn diện 5 bước khép kín từ làm sạch sâu, cân bằng khoáng chất, huyết thanh tái sinh, kem khóa ẩm 72H đến mặt nạ thạch sinh học nâng cơ.',
       includes: [
         'Alps Gentle Purifying Cleanser (120ml) - Trị giá 250,000₫',
-        'Alps Botanical Balancing Toner (100ml) - Trị giá 220,000₫',
+        'Alps Botanical Balancing Toner (120ml) - Trị giá 220,000₫',
         'Alps Radiance Glow Serum (30ml) - Trị giá 390,000₫',
         'Alps Regenerating Face Cream (50g) - Trị giá 450,000₫',
         'Alps Hydro-Lifting Sheet Mask (Hộp 5 miếng 29g) - Trị giá 280,000₫',

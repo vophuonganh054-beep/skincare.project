@@ -73,7 +73,7 @@ export const PRODUCT_CATALOG: Product[] = [
     id: 'toner-botanical',
     name: 'Alps Botanical Balancing Toner',
     shortName: 'Botanical Balancing Toner',
-    capacity: '100ML • 3.4 FL. OZ',
+    capacity: '120ML • 4.06 FL. OZ',
     category: 'toner',
     categoryLabel: 'NƯỚC CÂN BẰNG',
     tag: 'CẤP ẨM',
