@@ -35,7 +35,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
     },
     returnsPolicy: {
       title: 'Cam Kết Vàng: 30 Ngày Đổi Trả Miễn Phí Hoàn Tiền 100%',
-      badge: 'BẢO CHỨNG Y KHOA KHÔNG RỦI RO',
       points: [
         {
           title: 'Đổi trả ngay cả khi đã mở nắp dùng thử',
@@ -44,10 +43,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         {
           title: 'Quy trình hoàn tiền siêu tốc trong 24 giờ',
           desc: 'Ngay khi tiếp nhận yêu cầu qua Hotline 0772 770 134 hoặc Chat CSKH, chuyên viên sẽ cử nhân viên bưu tá đến tận nhà thu hồi sản phẩm và hoàn tiền trực tiếp qua chuyển khoản ngân hàng trong vòng 24 giờ làm việc.',
-        },
-        {
-          title: 'Hỗ trợ 1:1 từ Bác sĩ Da liễu Zurich',
-          desc: 'Quý khách được chuyên viên da liễu theo dõi sát sao, tư vấn phác đồ phục hồi hàng rào ẩm và gửi tặng mẫu thử tương thích hoàn toàn miễn phí.',
         },
       ],
       note: 'Áp dụng cho mọi đơn hàng đặt trực tiếp trên website chính thức alps.id.vn hoặc các kênh phân phối chính hãng.',
@@ -105,7 +100,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
     },
     returnsPolicy: {
       title: 'Our Golden Commitment: 30-Day 100% Money-Back Guarantee',
-      badge: 'RISK-FREE MEDICAL ASSURANCE',
       points: [
         {
           title: 'Eligible even if opened and sampled',
@@ -114,10 +108,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         {
           title: 'Rapid 24-hour refund processing',
           desc: 'Upon receiving your request via phone or 24/7 chat, our courier will collect the product from your doorstep and wire funds back within 24 business hours.',
-        },
-        {
-          title: 'Dedicated Swiss dermatologist consultation',
-          desc: 'Receive 1-on-1 skin barrier recovery guidance and personalized samples curated by our Zurich dermatological team.',
         },
       ],
       note: 'Valid on all purchases completed through alps.id.vn and official flagship boutiques.',
@@ -175,7 +165,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
     },
     returnsPolicy: {
       title: 'Unser Qualitätsversprechen: 30 Tage 100% Geld-zurück-Garantie',
-      badge: 'RISIKOLOSE SCHWEIZER GARANTIE',
       points: [
         {
           title: 'Gültig auch bei geöffnetem und getestetem Produkt',
@@ -184,10 +173,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         {
           title: 'Express-Rückerstattung innerhalb von 24 Stunden',
           desc: 'Nach Ihrer Anfrage veranlassen wir die Abholung bei Ihnen zu Hause und überweisen den Betrag innerhalb von 24 Arbeitsstunden.',
-        },
-        {
-          title: 'Persönliche dermatologische Beratung aus Zürich',
-          desc: 'Unsere Spezialisten begleiten Sie auf Wunsch mit alternativen Schweizer Pflegeempfehlungen.',
         },
       ],
       note: 'Gültig für alle Einkäufe über die offizielle Website alps.id.vn.',
@@ -245,7 +230,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
     },
     returnsPolicy: {
       title: 'Compromiso de Excelencia: 30 Días de Reembolso del 100%',
-      badge: 'GARANTÍA MÉDICA SIN RIESGO',
       points: [
         {
           title: 'Válido incluso tras haber probado el producto',
@@ -254,10 +238,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         {
           title: 'Reembolso rápido en 24 horas laborables',
           desc: 'Tras contactar con nuestro equipo, gestionamos la recogida a domicilio y procesamos la devolución del importe de inmediato.',
-        },
-        {
-          title: 'Seguimiento con dermatólogos de Zúrich',
-          desc: 'Ponemos a su disposición asesoramiento clínico gratuito para encontrar la rutina ideal para su barrera cutánea.',
         },
       ],
       note: 'Válido para compras en el sitio web oficial alps.id.vn.',
@@ -315,7 +295,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
     },
     returnsPolicy: {
       title: '黄金承诺：30天安心试用 100% 全额退款保证',
-      badge: '医研级零风险安心保证',
       points: [
         {
           title: '即使已开封使用，依然尊享退换特权',
@@ -324,10 +303,6 @@ export const POLICIES_I18N: Record<SupportedLanguage, PoliciesI18n> = {
         {
           title: '24 小时内极速原路返还款项',
           desc: '通过热线 0772 770 134 或在线 客服提交需求后，顺丰小哥将上门取件，款项将在 24 个工作小时内核实并原路退回。',
-        },
-        {
-          title: '苏黎世皮肤专研团队 1 对 1 指导',
-          desc: '资深护肤顾问将全程关注您的皮脂膜修复状态，并免费提供更适宜您肤质的瑞士纯素体验装。',
         },
       ],
       note: '适用于在官方旗舰网站 alps.id.vn 及授权专柜购买的所有订单。',

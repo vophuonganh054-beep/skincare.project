@@ -113,9 +113,11 @@ export const PoliciesModal: React.FC<PoliciesModalProps> = ({
             <div className="bg-gradient-to-r from-[#fed8c9]/30 to-[#f6f3ee] border border-[#fed8c9] rounded-2xl p-4 flex items-start space-x-3">
               <IconComp className="w-6 h-6 text-[#74584d] shrink-0 mt-0.5" />
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-wider text-[#74584d] block">
-                  {copy(currentPolicy.badge)}
-                </span>
+                {currentPolicy.badge && (
+                  <span className="text-[10px] uppercase font-bold tracking-wider text-[#74584d] block">
+                    {copy(currentPolicy.badge)}
+                  </span>
+                )}
                 <h4 className="font-semibold text-sm sm:text-base text-[#1c1c19] mt-0.5">
                   {copy(currentPolicy.title)}
                 </h4>
